@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/componentesInternos/movimientoCtrl/imp/HebraMonitorizacionLlegada.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/componentesInternos/movimientoCtrl/imp/RobotBloqueado.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/agenteAplicacionrobotIgualitarioNCognitivo/tareas/InterpretarOrdenDelCC.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/Rosace/tareasComunes/MoverseAsalvarVictima.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/componentesInternos/movimientoCtrl/imp/EstadoAbstractoMovRobot.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/componentesInternos/movimientoCtrl/imp/FactoriaRIntMovimientoCtrl.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/recursos/recursoVisualizadorEntornosSimulacion/imp/NotificadorInfoUsuarioSimulador.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/agenteAplicacionrobotIgualitarioNCognitivo/procesoResolucionObjetivos/reglasIgualitarioNC1.drl</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/Rosace/informacion/VictimsToRescue.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/componentesInternos/movimientoCtrl/InfoCompMovimiento.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/agenteAplicacionrobotIgualitarioNCognitivo/tareas/EliminarObjetivoyDecisionInfoActualizarFoco.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/Rosace/informacion/RobotStatus.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/infraestructura/entidadesBasicas/procesadorCognitivo/Objetivo.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/infraestructura/entidadesBasicas/procesadorCognitivo/Focus.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/componentesInternos/movimientoCtrl/imp/RobotEnMovimiento.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/Rosace/objetivosComunes/AyudarVictima.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/recursos/recursoVisualizadorEntornosSimulacion/imp/VisorEscenariosRosace.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/Rosace/informacion/ControlConsecucionObjetivos.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/componentesInternos/movimientoCtrl/imp/MaquinaEstadoMovimientoCtrl.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/componentesInternos/InfoCompInterno.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/agenteAplicacionrobotIgualitarioNCognitivo/tareas/EncolarObjetivoActualizarFocoIGN1.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/Rosace/informacion/Victim.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/componentesInternos/movimientoCtrl/imp/RobotParado.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/infraestructura/entidadesBasicas/procesadorCognitivo/FocusOld.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/agenteAplicacionrobotIgualitarioNCognitivo/procesoResolucionObjetivos/reglasIgualitarioNC.drl</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/recursos/recursoVisualizadorEntornosSimulacion/imp/ClaseGeneradoraRecursoVisualizadorEntornosSimulacion.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/agenteAplicacionrobotIgualitarioNCognitivo/tareas/EncolarObjetivoActualizarFocoIGN.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/infraestructura/patronAgenteCognitivo/procesadorObjetivos/motorDeReglas/imp/MotorDeReglasDroolsImp5.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/infraestructura/entidadesBasicas/procesadorCognitivo/MisObjetivos.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/Rosace/tareasComunes/CrearComponentesInternos.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/infraestructura/clasesGeneradorasOrganizacion/ArranqueSistemaConCrtlGestorO.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/agenteAplicacionrobotIgualitarioNCognitivo/tareas/ProcesarInformeLlegadaDestino.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/agenteAplicacionrobotIgualitarioNCognitivo/tareas/EliminarObjetivoyDecisionInfoActualizarFoco1.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/componentesInternos/movimientoCtrl/ItfUsoMovimientoCtrl.java</file>
+            <file>file:/E:/FicheroRed/Github/rosaceSIM/src/icaro/aplicaciones/agentes/agenteAplicacionrobotIgualitarioNCognitivo/tareas/InicializarInfoParaDecidir.java</file>
+        </group>
+    </open-files>
+</project-private>
