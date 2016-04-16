@@ -85,6 +85,9 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	//public void mostrarIdentsEquipoRobots(identsAgtesEquipo);
 	
 	
+	// Cuando una victima es rescatada, es decir, alguien inserta el evento/mensaje
+	// en la cola de eventos, se notifica a la interfaz mediante este método
+	public void mostrarVictimaRescatada(string VictimaId)
 	
 	
 }
