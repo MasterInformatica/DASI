@@ -1,6 +1,5 @@
 package icaro.aplicaciones.agentes.agenteAplicacionAgteControladorSimuladorRosaceReactivo.comportamiento;
 
-//import icaro.infraestructura.entidadesBasicas.EventoRecAgte;
 import icaro.aplicaciones.Rosace.informacion.*;
 import icaro.aplicaciones.Rosace.utils.ConstantesRutasEstadisticas;
 import icaro.aplicaciones.recursos.recursoCreacionEntornosSimulacion.ItfUsoRecursoCreacionEntornosSimulacion;

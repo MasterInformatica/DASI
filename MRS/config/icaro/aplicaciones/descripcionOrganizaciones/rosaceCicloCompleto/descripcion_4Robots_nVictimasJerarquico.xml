@@ -61,7 +61,7 @@
 	******************   Descripcion de los recursos de aplicacion                          ******************
 	********************************************************************************************************-->
 <icaro:DescRecursosAplicacion>
-        <icaro:DescRecursoAplicacion nombre="RecursoVisualizadorEntornosSimulacion" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.imp.ClaseGeneradoraRecursoVisualizadorEntornosSimulacion"/>			            		
+    <icaro:DescRecursoAplicacion nombre="RecursoVisualizadorEntornosSimulacion" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.imp.ClaseGeneradoraRecursoVisualizadorEntornosSimulacion"/>			            		
 	<icaro:DescRecursoAplicacion nombre="RecursoPersistenciaEntornosSimulacion" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPersistenciaEntornosSimulacion.imp.ClaseGeneradoraRecursoPersistenciaEntornosSimulacion"/>			            		
 	<icaro:DescRecursoAplicacion nombre="RecursoCreacionEntornosSimulacion" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoCreacionEntornosSimulacion.imp.ClaseGeneradoraRecursoCreacionEntornosSimulacion"/>		
 </icaro:DescRecursosAplicacion>
