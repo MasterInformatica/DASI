@@ -22,8 +22,8 @@ public class VisorEscenario extends JFrame {
 	
 	// Logica (Modelo)
 	private boolean[][] Map;
-	private int cols = 20;
-	private int rows = 20;
+	private int cols = 5;
+	private int rows = 5;
 	private boolean isVisible;
 	public VisorEscenario() throws IOException{
 		isVisible = false;
