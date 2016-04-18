@@ -5,9 +5,9 @@ public class ControladorVisorSimulador {
 	private VisorControl visorControl;
 	private VisorEscenario visorEscenario;
 	
-	public ControladorVisorSimulador(){
-		visorControl = new VisorControl(this);
-		/*visorEscenario = new VisorEscenario(this);*/
+	public ControladorVisorSimulador() throws Exception{
+		/*visorControl = new VisorControl(this);*/
+		visorEscenario = new VisorEscenario(this);
 	}
 
 	

@@ -107,13 +107,13 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	
 	
 	@Override
-	public void mostrarVictimaRescatada(String VictimaId) {
+	public void mostrarVictimaRescatada(String VictimaId) throws Exception{
 		// TODO Auto-generated method stub
 		
 	}
 	
 	@Override
-	public boolean mueveAgente(String idAgente, Coords coord){
+	public boolean mueveAgente(String idAgente, Coords coord) throws Exception{
 		return controladorUI.mueveAgente(idAgente,coord);
 		
 	}
@@ -123,16 +123,16 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		// trazas.aceptaNuevaTraza(new InfoTraza(this.idRecurso,"Mensaje mostrado en
 		// la ventana de trazas del recurso ....",InfoTraza.NivelTraza.debug));
 		@Override
-		public void mostrarEscenarioMovimiento() {
+		public void mostrarEscenarioMovimiento() throws Exception{
 			controladorUI.mostrarEscenarioMovimiento();
 			//-controladorIUSimulador.peticionMostrarEscenarioMovimiento(infoEscenario);
 		}
-		@Override
-		public void setIdentAgenteAReportar(String identAgenteAReportar) {
+/*		@Override
+		public void setIdentAgenteAReportar(String identAgenteAReportar){
 			super.setIdentAgenteAReportar(identAgenteAReportar);
 			//notifEvt.setIdentAgenteAReportar(identAgenteAReportar);
 		}
-	
+	*/
 	
 /*
 	@Override

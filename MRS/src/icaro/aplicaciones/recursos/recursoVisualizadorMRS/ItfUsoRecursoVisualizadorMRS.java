@@ -36,7 +36,7 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	 */
 	
 	// El agante iniciador se registra a si mismo (lo llamo con this.nombreAgente)
-	public void setIdentAgenteAReportar(String nombreAgente);
+	//public void setIdentAgenteAReportar(String nombreAgente);
 	
 	
 	// Esta es la forma en la que te pasan el recurso de persistencia. En el primer prototipo no se si sería necesario
@@ -79,7 +79,7 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	/* TODO eliminar la funcion sin parametros por esta
 	 * public void mostrarEscenarioMovimiento(escenarioActual);
 	 */
-	public void mostrarEscenarioMovimiento();
+	public void mostrarEscenarioMovimiento() throws Exception;
 	
 	
 	
@@ -93,7 +93,7 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	
 	// Cuando una victima es rescatada, es decir, alguien inserta el evento/mensaje
 	// en la cola de eventos, se notifica a la interfaz mediante este método
-	public void mostrarVictimaRescatada(String VictimaId);
+	public void mostrarVictimaRescatada(String VictimaId) throws Exception;
 
 
 	/**
@@ -103,7 +103,7 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	 * @param coord coordenadas donde se quiere mover
 	 * @return Devuelve un boolean indicando si ha podido realizar el movimiento.
 	 */
-	public boolean mueveAgente(String idAgente, Coords coord);
+	public boolean mueveAgente(String idAgente, Coords coord) throws Exception;
 	
 	
 }
