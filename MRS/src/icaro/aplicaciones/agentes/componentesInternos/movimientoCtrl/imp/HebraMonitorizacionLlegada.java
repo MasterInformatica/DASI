@@ -265,9 +265,16 @@ public class HebraMonitorizacionLlegada extends Thread {
 	}
 	
 	private void calcularNuevasCoordenadasDiscretas() {
-		this.coordActuales.setX(coordActuales.getX() + dirX);
+		if(count < 2){
+			this.coordActuales.setX(coordActuales.getX() + dirX);
+			count++;
+		}else{
+			this.coordActuales.setY(coordActuales.getY() + dirX);
+			count++;
+		}
+		if(count == 4)count =0;
 	}
 	
-	
+	private int count= 0;
 
 }
