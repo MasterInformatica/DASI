@@ -27,8 +27,8 @@ public class VisorEscenario extends JFrame {
 	private boolean[][] Map;
 	private ComponenteBotonMapa botonesMapa[][];
 	private HashMap<String, Coordinate> posicionAgentes;
-	private int cols = 5;
-	private int rows = 5;
+	private int cols = 25;
+	private int rows = 25;
 	private boolean isVisible;
 
 	private ControladorVisorSimulador controlador;
@@ -68,21 +68,26 @@ public class VisorEscenario extends JFrame {
 			eliminaAgente(idAgente,org_coord);
 		}
 		// Set y draw new position
-		dibujaAgente(idAgente,coord);
-		return false;
+		
+		return dibujaAgente(idAgente,coord);
 	}
 	
-	private void dibujaAgente(String idAgente, Coordinate coord){
+	private boolean dibujaAgente(String idAgente, Coordinate coord){
 		int x = (int) coord.getX();
 		int y = (int) coord.getY();
+		if( x < 0 || y < 0 || x >= rows || y >= cols)
+			return false;
 		botonesMapa[x][y].dibujaAgente(idAgente);
 		posicionAgentes.put(idAgente, coord);
+		return true;
 	}
 	
 	
 	private void eliminaAgente(String idAgente, Coordinate coord){
 		int x = (int) coord.getX();
 		int y = (int) coord.getY();
+		if( x < 0 || y < 0 || x >= rows || y >= cols)
+			return;
 		botonesMapa[x][y].eliminaAgente(idAgente);
 		posicionAgentes.remove(idAgente);
 	}

@@ -167,7 +167,7 @@ public class ControladorVisualizacionSimulRosace {
 		// System.out.println("Desde Peticion Lista de capacidades definidas del robot  : "
 		// + robotInfo.getIdRobot()+" Robot Info : "+ robotInfo.toString() );
 		visorEditorEscen.visualizarEscenario(escenarioEdicionComp);
-		visorEditorEscen.setVisible(true);
+		//visorEditorEscen.setVisible(true);
 		// ArrayList<String> robotNombres =
 		// escenarioActualComp.getListIdentsRobots();
 		// for (String ideRobot:robotNombres){
@@ -363,7 +363,7 @@ public class ControladorVisualizacionSimulRosace {
 		// throw new UnsupportedOperationException("Not supported yet."); //To
 		// change body of generated methods, choose Tools | Templates.
 		if (escenarioSimulComp != null)
-			visorMovimientoEscen.setVisible(true);
+			;//visorMovimientoEscen.setVisible(true);
 		else if (escenarioEdicionComp == null)
 			visorControlSim.visualizarConsejo(tituloAvisoEscenarioNoDefinido,
 					mensajeEscenarioNoDefinido, recomendacionDefinirEscenario);

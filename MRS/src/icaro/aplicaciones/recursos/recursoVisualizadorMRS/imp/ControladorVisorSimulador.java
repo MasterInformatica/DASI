@@ -14,12 +14,12 @@ public class ControladorVisorSimulador {
 	
 	
 	public void mostrarEscenarioMovimiento() {
-		if(visorEscenario!= null)
+		if(visorEscenario != null)
 			visorEscenario.mostrar();
 	}
 
 	public boolean mueveAgente(String idAgente, Coordinate coord) {
-		if(visorEscenario!= null)
+		if(visorEscenario == null)
 			return false;
 		else{
 			return visorEscenario.mueveAgente(idAgente,coord);	

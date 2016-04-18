@@ -460,7 +460,7 @@ public class VisorMovimientoEscenario extends javax.swing.JFrame {
 			label.setHorizontalTextPosition(SwingConstants.RIGHT);
 			label.setText(idEntidad);
 			this.add(label);
-			label.setVisible(true);
+			//label.setVisible(true);
 			label.setIcon(new ImageIcon(rutaIcono));
 			label.setLocation(puntoLoc);
 			this.listaEntidadesEnEscenario.add(label);
@@ -544,7 +544,7 @@ public class VisorMovimientoEscenario extends javax.swing.JFrame {
 				}
 			}
 			this.setLocation(100, 100);
-			this.setVisible(true);
+			//this.setVisible(true);
 			escenarioActualAbierto = true;
 		}
 	}
