@@ -43,8 +43,8 @@
             <competency>25</competency>
          </requiredCompetencies>
          <victimCoordinateP>
-            <x>7</x>
-            <y>7</y>
+            <x>100</x>
+            <y>100</y>
          </victimCoordinateP>
       </victim>
    </victimas>

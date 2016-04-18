@@ -189,7 +189,6 @@ public class HebraMonitorizacionLlegada extends Thread {
 		
 		while (!this.finalizar && (!enDestino)) {
 			try {
-				/*
 				 Thread.sleep(intervaloEnvioInformesMs); 
 				 calcularNuevasCoordenadas(distanciaRecorridaEnIntervaloInformes);
 				 
@@ -203,7 +202,7 @@ public class HebraMonitorizacionLlegada extends Thread {
 								
 				this.itfusoRecVisSimulador.mostrarPosicionRobot(identRobot,	coordActuales);
 				this.itfusoRecVisMRS.mueveAgente(identDestino, coordActuales);
-				*/
+				/*/
 				
 				Thread.sleep((long) (2.0*1e3));
 				
@@ -211,8 +210,11 @@ public class HebraMonitorizacionLlegada extends Thread {
 				enDestino = (coordActuales.getX() == coordDestino.getX()) &&
 						    (coordActuales.getY() == coordDestino.getY());
 				finalizar = enDestino;
+				
 				this.controladorMovimiento.setCoordenadasActuales(coordActuales);
 				this.itfusoRecVisMRS.mueveAgente(identDestino, coordActuales);
+				this.itfusoRecVisSimulador.mostrarPosicionRobot(identRobot, coordActuales);
+				*/
 				
 			} catch (Exception e) {
 				e.printStackTrace();
