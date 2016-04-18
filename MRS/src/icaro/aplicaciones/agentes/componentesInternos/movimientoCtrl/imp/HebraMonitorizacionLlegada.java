@@ -286,13 +286,13 @@ public class HebraMonitorizacionLlegada extends Thread {
 			ruta = itfusoRecPlanRuta.getRuta(c1, c2);
 			
 		} catch (Exception e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 
-		System.out.println("---->" + ruta.get(1));
-		this.coordActuales.setX(this.coordActuales.getX() +1);
-//		this.coordActuales.setX(ruta.get(1).getX());
-//		this.coordActuales.setY(ruta.get(1).getY());
+		System.out.println("---->" + ruta);
+//		this.coordActuales.setX(this.coordActuales.getX() +1);
+		this.coordActuales.setX(ruta.get(1).getX());
+		this.coordActuales.setY(ruta.get(1).getY());
 		
 	
 	}
