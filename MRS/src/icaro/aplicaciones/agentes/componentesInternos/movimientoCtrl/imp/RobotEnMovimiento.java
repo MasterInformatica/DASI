@@ -12,13 +12,11 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
  * 
  * @author FGarijo
  */
-// public class RobotEnMovimiento extends MovimientoCtrlImp implements
-// ItfUsoMovimientoCtrl{
+
 public class RobotEnMovimiento extends EstadoAbstractoMovRobot implements
 		ItfUsoMovimientoCtrl {
 
 	public RobotEnMovimiento(MaquinaEstadoMovimientoCtrl maquinaEstados) {
-		// this.inicializarMovimientoCtrl(robotId);
 		super(
 				maquinaEstados,
 				MaquinaEstadoMovimientoCtrl.EstadoMovimientoRobot.RobotEnMovimiento);
@@ -31,8 +29,7 @@ public class RobotEnMovimiento extends EstadoAbstractoMovRobot implements
 	}
 
 	@Override
-	public synchronized void moverAdestino(String identdest,
-			Coordinate coordDestino, float velocidadCrucero) {
+	public synchronized void moverAdestino(String identdest, Coordinate coordDestino, float velocidadCrucero) {
 		if (identdest.equals(identDestino)) {
 			this.trazas.trazar(this.identComponente,
 					" Se esta avanzando hacia el destino ",
@@ -45,17 +42,6 @@ public class RobotEnMovimiento extends EstadoAbstractoMovRobot implements
 			else
 				this.velocidadCrucero = velocidadCrucero;
 		} else { // cambair destino
-		// if (monitorizacionLlegadaDestino !=
-		// null)this.monitorizacionLlegadaDestino.finalizar();
-		// this.velocidadCrucero = velocidadCrucero;
-		// this.destinoCoord = coordDestino;
-		// this.identDestino = identdest;
-		// this.robotposicionActual =
-		// this.maquinaEstados.getCoordenadasActuales();
-		// this.monitorizacionLlegadaDestino = new HebraMonitorizacionLlegada
-		// (this.identAgente,maquinaEstados,this.itfusoRecVisSimulador);
-		// monitorizacionLlegadaDestino.inicializarDestino(identdest,this.robotposicionActual,coordDestino,velocidadCrucero);
-		// monitorizacionLlegadaDestino.start();
 			maquinaEstados.cambiaDestino(identdest, coordDestino);
 		}
 	}
@@ -68,32 +54,20 @@ public class RobotEnMovimiento extends EstadoAbstractoMovRobot implements
 	@Override
 	public synchronized void cambiaDestino(String identdest,
 			Coordinate coordDestino) {
-		// Habria que obtener la posicion actual y recalcular la distancia y el
-		// tiempo
-		// lo dejamos con mover a destino desde la posicion inicial
+
 		if (identdest.equals(identDestino))
 			this.trazas.trazar(this.identComponente,
 					" Se esta avanzando hacia el destino ",
 					InfoTraza.NivelTraza.debug);
 		else
 			maquinaEstados.cambiaDestino(identdest, coordDestino);
-		// this.destinoCoord = coordDestino;
-		// this.identDestino = identdest;
-		// this.monitorizacionLlegadaDestino.finalizar();
-		// moverAdestino(identDestino,destinoCoord,this.velocidadCrucero);
 	}
 
 	@Override
 	public void parar() {
-		// if (monitorizacionLlegadaDestino!=null )
-		// this.monitorizacionLlegadaDestino.finalizar();
 		this.maquinaEstados.parar();
 		this.maquinaEstados
 				.cambiarEstado(MaquinaEstadoMovimientoCtrl.EstadoMovimientoRobot.RobotParado);
-		// this.trazas.trazar (this.identAgente
-		// +"."+this.getClass().getSimpleName(), " transito al estado parado ",
-		// InfoTraza.NivelTraza.debug);
-		// this.maquinaEstados.getEstadoActual().parar();
 	}
 
 	@Override
@@ -124,24 +98,8 @@ public class RobotEnMovimiento extends EstadoAbstractoMovRobot implements
 				.name();
 	}
 
-	// @Override
-	// public EstadoAbstractoMovRobot getEstadoActual() {
-	// // throw new UnsupportedOperationException("Not supported yet."); //To
-	// change body of generated methods, choose Tools | Templates.
-	// return maquinaEstados.getEstadoActual();
-	// }
-
 	@Override
 	public boolean paradoEnDestino(String identDestino) {
-		throw new UnsupportedOperationException("Not supported yet."); // To
-																		// change
-																		// body
-																		// of
-																		// generated
-																		// methods,
-																		// choose
-																		// Tools
-																		// |
-																		// Templates.
+		throw new UnsupportedOperationException("Not supported yet."); 
 	}
 }

@@ -8,6 +8,7 @@ import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.Rosace.informacion.VocabularioRosace;
 import icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.ItfUsoMovimientoCtrl;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.ItfUsoRecursoVisualizadorEntornosSimulacion;
+import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Informe;
 import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.factoriaEInterfacesPrObj.ItfProcesadorObjetivos;
@@ -43,6 +44,7 @@ public abstract class EstadoAbstractoMovRobot implements ItfUsoMovimientoCtrl {
 	public String identEstadoActual;
 	public String identDestino;
 	public ItfUsoRecursoVisualizadorEntornosSimulacion itfusoRecVisSimulador;
+	public ItfUsoRecursoVisualizadorMRS itfusoRecVisMRS;
 
 	public EstadoAbstractoMovRobot(MaquinaEstadoMovimientoCtrl maquinaEstds,
 			MaquinaEstadoMovimientoCtrl.EstadoMovimientoRobot identEstadoAcrear) {
@@ -68,13 +70,15 @@ public abstract class EstadoAbstractoMovRobot implements ItfUsoMovimientoCtrl {
 	}
 
 	public void inicializar(ItfProcesadorObjetivos itfProcObj,
-			ItfUsoRecursoVisualizadorEntornosSimulacion itfVisSimul) {
+			ItfUsoRecursoVisualizadorEntornosSimulacion itfVisSimul,
+			ItfUsoRecursoVisualizadorMRS itfVisualMRS) {
 		identAgente = itfProcObj.getAgentId();
 		itfProcObjetivos = itfProcObj;
 		identComponente = identAgente + "." + this.getClass().getSimpleName();
 		trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
 		itfusoRecVisSimulador = itfVisSimul;
-		maquinaEstados.inicializar(itfProcObj, itfVisSimul);
+		itfusoRecVisMRS = itfVisualMRS;
+		maquinaEstados.inicializar(itfProcObj, itfVisSimul, itfVisualMRS);
 
 	}
 
@@ -95,7 +99,6 @@ public abstract class EstadoAbstractoMovRobot implements ItfUsoMovimientoCtrl {
 			float velocidadCrucero) {
 		estadoActual.moverAdestino(identDest, coordDestino, velocidadCrucero);
 		this.identDestino = identDest;
-		// identDestino = identDest;
 	}
 
 	public abstract void cambiaVelocidad(float nuevaVelocidadCrucero);

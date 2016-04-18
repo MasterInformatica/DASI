@@ -45,7 +45,6 @@ public class InfoCompMovimiento extends InfoCompInterno {
 	}
 
 	public String getidentEstadoRobot() {
-		// identEstadoRobot = itfAccesoComponente.getIdentEstadoMovRobot();
 		return identEstadoRobot;
 	}
 
@@ -62,7 +61,4 @@ public class InfoCompMovimiento extends InfoCompInterno {
 		identDestino = destinoId;
 
 	}
-	// public void actualizarEstadoMovRobot(){
-	// this.estadoRobot = itfAccesoComponente.getIdentEstadoMovRobot();
-	// }
 }

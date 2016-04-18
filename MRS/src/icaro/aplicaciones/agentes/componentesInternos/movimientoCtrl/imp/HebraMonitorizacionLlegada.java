@@ -2,10 +2,9 @@ package icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.imp;
 
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.Rosace.informacion.VocabularioRosace;
-import icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.ItfUsoMovimientoCtrl;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.ItfUsoRecursoVisualizadorEntornosSimulacion;
+import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Informe;
-import icaro.infraestructura.patronAgenteCognitivo.percepcion.imp.PercepcionAgenteCognitivoImp;
 import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.factoriaEInterfacesPrObj.ItfProcesadorObjetivos;
 import org.apache.log4j.Logger;
 import org.openide.util.Exceptions;
@@ -48,7 +47,7 @@ public class HebraMonitorizacionLlegada extends Thread {
 	private String identDestino, identRobot;
 	private volatile Coordinate coordActuales;
 	private volatile Coordinate coordDestino;
-	private volatile Coordinate coordIncremento;
+	
 	private double velocidadRobot; // en metros por segundo
 	// protected int intervaloEnvioInformacion = 1000; // por defecto en ms .
 	// Deberia ser configurable
@@ -67,21 +66,26 @@ public class HebraMonitorizacionLlegada extends Thread {
 	private int distanciaRecorridaEnIntervaloInformes;
 	private long tiempoParaAlcanzarDestino = 3000;
 	public ItfUsoRecursoVisualizadorEntornosSimulacion itfusoRecVisSimulador;
+	public ItfUsoRecursoVisualizadorMRS                itfusoRecVisMRS;
 	public ItfProcesadorObjetivos itfProcObjetivos;
 
 	// private int numeroPuntos = 20;
 	/**
 	 * Constructor
+	 * @param itfUsoRecVisMRS 
 	 * 
 	 * @param milis
 	 *            Milisegundos a esperar entre cada monitorizacion
 	 */
 	public HebraMonitorizacionLlegada(String idRobot,
 			MaquinaEstadoMovimientoCtrl contrMovimiento,
-			ItfUsoRecursoVisualizadorEntornosSimulacion itfRecVisSimulador) {
+			ItfUsoRecursoVisualizadorEntornosSimulacion itfRecVisSimulador, 
+			ItfUsoRecursoVisualizadorMRS itfRecVisMRS) {
+		
 		super("HebraMonitorizacion " + idRobot);
 		controladorMovimiento = contrMovimiento;
 		this.itfusoRecVisSimulador = itfRecVisSimulador;
+		this.itfusoRecVisMRS = itfRecVisMRS;
 		identRobot = idRobot;
 		itfProcObjetivos = contrMovimiento.itfProcObjetivos;
 	}
@@ -134,25 +138,11 @@ public class HebraMonitorizacionLlegada extends Thread {
 					* coordActuales.x);
 
 		}
-		// this.incrementoDistancia= (int)distanciaArecorrer/numeroPuntos;
-		// tiempoParaAlcanzarDestino =
-		// (long)(distanciaArecorrer/velocidadRobot); // en milisegundos
-		// int intervaloEnvioInformesMs =
-		// (int)tiempoParaAlcanzarDestino/numeroPuntos;
-		// intervaloEnvioInformesMs = 40;
-		// distanciaRecorridaEnIntervaloInformes =
-		// (long)(1+velocidadRobot*intervaloEnvioInformesMs/50);
-		// coordIncremento =
-		// this.calcularIncrementosCoordenadasAvelocidadConstante(intervaloEnvioInformacion);
+		
 		intervaloEnvioInformesMs = (int) velocidadRobot * 50;
 		distanciaRecorridaEnIntervaloInformes = 1;
 
-		// try {
-		// this.itfusoRecVisSimulador.inicializarDestinoRobot(identRobot,
-		// coordActuales, identDestino,coordDestino, velocidadRobot);
-		// } catch (Exception ex) {
-		// Exceptions.printStackTrace(ex);
-		// }
+
 	}
 
 	/**
@@ -175,10 +165,14 @@ public class HebraMonitorizacionLlegada extends Thread {
 	public synchronized void setCoordDestino(Coordinate destCoord) {
 		try {
 			this.coordDestino = destCoord;
-			if (itfusoRecVisSimulador != null)
+			if (itfusoRecVisSimulador != null){
 				this.itfusoRecVisSimulador.inicializarDestinoRobot(identRobot,
 						coordActuales, identDestino, coordDestino,
 						velocidadRobot);
+				this.itfusoRecVisMRS.inicializarDestinoRobot(identRobot,
+						coordActuales, identDestino, coordDestino,
+						velocidadRobot);
+			}
 		} catch (Exception ex) {
 			Exceptions.printStackTrace(ex);
 		}
@@ -192,60 +186,46 @@ public class HebraMonitorizacionLlegada extends Thread {
 		this.velocidadRobot = velRobot;
 	}
 
-	// se informa al control de que estamos en el destino. Se cambia el estado a
-	// parar
-	// estadoActual =
-	// this.cambiarEstado(MaquinaEstadoMovimientoCtrl.EstadoMovimientoRobot.RobotParado);
-	// this.estadoActual.identDestino = identDest;
-	// Informe informeLlegada = new Informe (identComponente,identDest,
-	// VocabularioRosace.MsgeLlegadaDestino);
-	// Temporizador informeTemp = new Temporizador
-	// (500,itfProcObjetivos,informeLlegada);
-	// robotposicionActual = monitorizacionLlegadaDestino.getCoordDestino();
+	
 
 	@Override
 	public synchronized void run() {
 
-		// double espacioRecorridoEnIntervalo =
-		// velocidadRobot*intervaloEnvioInformacion;
 		log.debug("Coord Robot " + identRobot + " iniciales -> ("
 				+ this.coordActuales.getX() + " , " + this.coordActuales.getY()
 				+ ")");
 		log.debug("Coord Robot " + identRobot + " destino -> ("
 				+ this.coordDestino.getX() + " , " + this.coordDestino.getY()
 				+ ")");
-		// System.out.println("Coord Robot " + identRobot +
-		// " iniciales -> ("+this.coordActuales.x + " , " + this.coordActuales.y
-		// + ")");
-		// this.itfusoRecVisSimulador.mostrarMovimientoAdestino(identRobot,identDestino,
-		// coordActuales,velocidadRobot);
+		
+
 		log.debug("Inicio ciclo de envio de coordenadas  " + identRobot
 				+ " en destino -> (" + this.coordActuales.getX() + " , "
 				+ this.coordActuales.getY() + ")");
+		
+		
 		while (!this.finalizar && (!enDestino)) {
 			try {
-				// Thread.sleep(intervaloEnvioInformesMs);
 				Thread.sleep(intervaloEnvioInformesMs);
 				calcularNuevasCoordenadas(distanciaRecorridaEnIntervaloInformes);
-				// log.debug("Coord Robot " + identRobot +
-				// " calculadas -> ("+this.coordActuales.getX() + " , " +
-				// this.coordActuales.getY() + ")");
+
 				enDestino = ((coordActuales.getX() - coordDestino.getX())
 						* dirX >= 0 && (coordActuales.getY() - coordDestino
 						.getY()) * dirY >= 0);
 				finalizar = (coordActuales.x < 0.5 || coordActuales.y < 0.5);
+				
 				if (itfusoRecVisSimulador != null)
-					this.controladorMovimiento
-							.setCoordenadasActuales(coordActuales);
-				this.itfusoRecVisSimulador.mostrarPosicionRobot(identRobot,
-						coordActuales);
-
-				// this.notifyAll();
+					this.controladorMovimiento.setCoordenadasActuales(coordActuales);
+								
+				this.itfusoRecVisSimulador.mostrarPosicionRobot(identRobot,	coordActuales);
+				this.itfusoRecVisMRS.mueveAgente(identDestino, coordActuales);
+				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		
+		
 		if (enDestino) {
 			finalizar = true;
 			try {
@@ -258,14 +238,14 @@ public class HebraMonitorizacionLlegada extends Thread {
 				System.out.println("Coord Robot En thread  " + identRobot
 						+ " en destino -> (" + this.coordActuales.x + " , "
 						+ this.coordActuales.y + ")");
+
 				this.controladorMovimiento.setCoordenadasActuales(coordDestino);
 				// se informa al control de que estamos en el destino. Se cambia
 				// el estado a parar
 
 				Informe informeLlegada = new Informe(this.identRobot,
 						this.identDestino, VocabularioRosace.MsgeLlegadaDestino);
-				// Temporizador informeTemp = new Temporizador
-				// (500,itfProcObjetivos,informeLlegada);
+
 				itfProcObjetivos.insertarHecho(informeLlegada);
 				this.notifyAll();
 			} catch (Exception ex) {
@@ -273,16 +253,12 @@ public class HebraMonitorizacionLlegada extends Thread {
 			}
 		}
 	}
+	
+	
 
 	private void calcularNuevasCoordenadas(long incrementoDistancia) {
-		// suponemos avance en linea recta
-		// formula aplicada x1 = xo + sqrt( espacioRecorrido**2 / (1 +
-		// pendienteRecta**2))
-		// y1 = y0 +(x1-x0)*pendienteRecta
-
 		if (pendienteInfinita) {
-			// constIncrX = 0;
-			// constIncrY= incrementoDistancia;
+
 			this.coordActuales.setY(coordActuales.getY() + incrementoDistancia
 					* dirY);
 		} else {
@@ -291,26 +267,8 @@ public class HebraMonitorizacionLlegada extends Thread {
 					* incrementoDistancia * dirY);
 			this.coordActuales.setX(coordActuales.getX() + incrementoDistancia
 					* dirX);
-			// if ((coordActuales.getX()-coordDestino.getX())*dirX>=0
-			// &&(coordActuales.getY()-coordDestino.getY())*dirY>=0){
-			// enDestino = true;
-			// // System.out.println("Coord Robot En Calculo  " + identRobot +
-			// " en destino -> ("+this.coordActuales.x + " , " +
-			// this.coordActuales.y + ")");
-			// log.debug("Coord Robot En Calculo  " + identRobot +
-			// " en destino -> ("+this.coordActuales.x + " , " +
-			// this.coordActuales.y + ")");
-			// }
-			// i
+		
 		}
 	}
-
-	// public synchronized boolean getOrdenInicio() {
-	// return iniciar;
-	// }
-	//
-	// public void setOrdenInicio(boolean ordenInicio) {
-	// iniciar= ordenInicio;
-	// }
 
 }

@@ -14,7 +14,6 @@ public interface ItfUsoMovimientoCtrl {
 
 	public void cambiaDestino(String identDest, Coordinate coordDestino);
 
-	// public void actualizarCoordenadas(Coordinate nuevasCoordenadas) ;
 	public Coordinate getCoordenadasActuales();
 
 	public String getIdentEstadoMovRobot();

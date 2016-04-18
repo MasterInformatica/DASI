@@ -1,5 +1,6 @@
 package icaro.aplicaciones.recursos.recursoVisualizadorMRS;
 
+import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.recursos.recursoPersistenciaEntornosSimulacion.ItfUsoRecursoPersistenciaEntornosSimulacion;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.imp.EscenarioSimulacionRobtsVictms;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.Coords;
@@ -100,10 +101,19 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	 * Intenta mover un agente desde donde este hasta la posicion indicada,
 	 * devuelve false si no puede moverse ahi ¿Eso me toca a mi o al controlador? 
 	 * @param idAgente id del agente a mover
-	 * @param coord coordenadas donde se quiere mover
+	 * @param coordActuales coordenadas donde se quiere mover
 	 * @return Devuelve un boolean indicando si ha podido realizar el movimiento.
 	 */
-	public boolean mueveAgente(String idAgente, Coords coord) throws Exception;
+	public boolean mueveAgente(String idAgente, Coordinate coordActuales) throws Exception;
 	
+	
+	
+	/* ESTOS SON LOS MÉTODOS NECESARIOS QUE APARECEN DE CARA A PINTAR EN LA INTERFAZ.
+	 */
+	// Cuando un robot se le asigna un objetivo, se llama a ete método para informar a la interfaz.
+	// A lo mejor no queremos que se muestre la decisión por pantalla, o a lo mejor si.
+	//Según lo que se quiera, dejar el cuerpo vacío o no.
+	public void inicializarDestinoRobot(String id, Coordinate coordsAct, String idDest, Coordinate coordsDestino, double VelocidadRobot);
+	 
 	
 }

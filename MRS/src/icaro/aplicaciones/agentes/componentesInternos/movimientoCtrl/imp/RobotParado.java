@@ -23,22 +23,11 @@ public class RobotParado extends EstadoAbstractoMovRobot implements
 
 	public RobotParado(MaquinaEstadoMovimientoCtrl maquinaEstados) {
 
-		// this.Inicializar(itfProcObjetivos);
-		// MovimientoCtrlImp estado =
-		// estadosCreados.get(EstadoMovimientoRobot.RobotParado);
 		super(maquinaEstados,
 				MaquinaEstadoMovimientoCtrl.EstadoMovimientoRobot.RobotParado);
 		semaforo = new Semaphore(1);
-		// estadoActual = this;
-		// this.Inicializar(itfProcObjetivos) ;
-
 	}
 
-	// @Override
-	// public void inicializarInfoMovimiento(Coordinate coordInicial, Integer
-	// velocidadInicial){
-
-	// }
 	@Override
 	public void inicializarInfoMovimiento(Coordinate coordInicial,
 			float velocidadInicial) {
@@ -53,9 +42,9 @@ public class RobotParado extends EstadoAbstractoMovRobot implements
 		try {
 			semaforo.acquire();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		if (coordDestino != null) {
 			if (identDest.equals(identDestino))
 				this.trazas.trazar(this.identComponente,
@@ -67,16 +56,10 @@ public class RobotParado extends EstadoAbstractoMovRobot implements
 				this.identDestino = identDest;
 				if (velocidadCrucero > 0) {
 					this.velocidadCrucero = velocidadCrucero;
-					// this.distanciaDestino =
-					// this.distanciaEuclidC1toC2(this.robotposicionActual,
-					// destinoCoord);
-					// long tiempoParaAlcanzarDestino =
-					// (long)(distanciaDestino/velocidadCrucero);
-					// int intervaloEnvioInformes =
-					// (int)tiempoParaAlcanzarDestino/10; // 10 informes maximo
+		
 					this.robotposicionActual = this.maquinaEstados
 							.getCoordenadasActuales();
-					// this.robotposicionActual = this.getCoordenadasActuales();
+
 					if (monitorizacionLlegadaDestino != null)
 						monitorizacionLlegadaDestino.finalizar();
 					trazas.trazar(identComponente,
@@ -87,7 +70,8 @@ public class RobotParado extends EstadoAbstractoMovRobot implements
 									+ destinoCoord, InfoTraza.NivelTraza.error);
 					this.monitorizacionLlegadaDestino = new HebraMonitorizacionLlegada(
 							this.identAgente, maquinaEstados,
-							this.itfusoRecVisSimulador);
+							this.itfusoRecVisSimulador, this.itfusoRecVisMRS);
+					
 					monitorizacionLlegadaDestino.inicializarDestino(
 							this.identDestino, robotposicionActual,
 							this.destinoCoord, this.velocidadCrucero);
@@ -108,7 +92,6 @@ public class RobotParado extends EstadoAbstractoMovRobot implements
 
 	@Override
 	public synchronized boolean estamosEnDestino(String destinoId) {
-		// if(identDestino==null)return false;
 		return (destinoId.equals(identDestino));
 	}
 
@@ -125,12 +108,6 @@ public class RobotParado extends EstadoAbstractoMovRobot implements
 
 	@Override
 	public void parar() {
-		// if (monitorizacionLlegadaDestino !=
-		// null)monitorizacionLlegadaDestino.finalizar();
-		// Informe informeParada = new Informe
-		// (identComponente,this.identDestino,
-		// VocabularioRosace.MsgeRobotParado);
-		// this.itfProcObjetivos.insertarHecho(informeParada);
 		trazas.trazar(identAgente,
 				"Se recibe orden de parada cuando El robot esta en el estado :"
 						+ identEstadoActual, InfoTraza.NivelTraza.debug);
@@ -139,8 +116,6 @@ public class RobotParado extends EstadoAbstractoMovRobot implements
 
 	@Override
 	public void bloquear() {
-		// if (monitorizacionLlegadaDestino!=null )
-		// this.monitorizacionLlegadaDestino.finalizar();
 		this.maquinaEstados
 				.cambiarEstado(MaquinaEstadoMovimientoCtrl.EstadoMovimientoRobot.RobotBloqueado);
 	}
@@ -148,8 +123,6 @@ public class RobotParado extends EstadoAbstractoMovRobot implements
 	@Override
 	public void continuar() {
 		if (distanciaDestino > 0) {
-			// calcular el tiempo al destino y poner en marcha el reloj de
-			// llegada
 			estadoActual = this.maquinaEstados
 					.cambiarEstado(MaquinaEstadoMovimientoCtrl.EstadoMovimientoRobot.RobotEnMovimiento);
 			this.maquinaEstados.moverAdestino(identDestino, destinoCoord,
@@ -177,23 +150,12 @@ public class RobotParado extends EstadoAbstractoMovRobot implements
 
 	@Override
 	public EstadoAbstractoMovRobot getEstadoActual() {
-		// throw new UnsupportedOperationException("Not supported yet."); //To
-		// change body of generated methods, choose Tools | Templates.
 		return maquinaEstados.getEstadoActual();
 
 	}
 
 	@Override
 	public boolean paradoEnDestino(String identDestino) {
-		throw new UnsupportedOperationException("Not supported yet."); // To
-																		// change
-																		// body
-																		// of
-																		// generated
-																		// methods,
-																		// choose
-																		// Tools
-																		// |
-																		// Templates.
+		throw new UnsupportedOperationException("Not supported yet."); 
 	}
 }

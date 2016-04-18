@@ -22,15 +22,8 @@ public abstract class FactoriaAbstrCompInterno {
 				instance = new FactoriaRIntMovimientoCtrl();
 			return instance;
 		} catch (Exception e) {
-			// logger.fatal("\n\nError al comprobar los comportamientos de los gestores, agentes y recursos descritos en el fichero de descripcion del XML "
-			// + xmlDescripcion.getAbsolutePath() + ".",
-			// e);
 			throw new ExcepcionEnComponente(
 					"\n\nError al comprobar los comportamientos de los gestores, agentes y recursos descritos en el fichero de descripcion del XML ");
 		}
 	}
-	/*
-	 * { if (instance == null) instance = new
-	 * RecursoTrazasImp(NombresPredefinidos.RECURSO_TRAZAS); return instance; }
-	 */
 }

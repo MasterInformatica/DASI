@@ -9,6 +9,7 @@ import icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.FactoriaAbs
 import icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.InfoCompMovimiento;
 import icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.ItfUsoMovimientoCtrl;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.ItfUsoRecursoVisualizadorEntornosSimulacion;
+import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.factoriaEInterfacesPrObj.ItfProcesadorObjetivos;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.ItfUsoRecursoTrazas;
@@ -23,7 +24,9 @@ import java.util.logging.Logger;
 public class FactoriaRIntMovimientoCtrl extends FactoriaAbstrCompInterno {
 	private ItfUsoRecursoTrazas trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
 	private ItfUsoRecursoVisualizadorEntornosSimulacion itfUsoRecVisEntornosSimul;
+	private ItfUsoRecursoVisualizadorMRS itfUsoRecVisMRS;
 
+	
 	public FactoriaRIntMovimientoCtrl() {
 
 	}
@@ -33,21 +36,29 @@ public class FactoriaRIntMovimientoCtrl extends FactoriaAbstrCompInterno {
 			String identComponenteInterno, ItfProcesadorObjetivos procObj) {
 		// se crea un componente movimiento en estado parado
 
-		String identComponenteAcrear = procObj.getAgentId()
-				+ identComponenteInterno;
+		String identComponenteAcrear = procObj.getAgentId() + identComponenteInterno;
+		
 		MaquinaEstadoMovimientoCtrl maquinaEstados = new MaquinaEstadoMovimientoCtrl();
 		maquinaEstados.SetComponentId(identComponenteAcrear);
 		maquinaEstados.SetInfoContexto(procObj);
+		
 		try {
 			ItfUsoRepositorioInterfaces repoItfs = NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ;
 			itfUsoRecVisEntornosSimul = (ItfUsoRecursoVisualizadorEntornosSimulacion) repoItfs
 					.obtenerInterfazUso(VocabularioRosace.IdentRecursoVisualizadorEntornosSimulacion);
+			itfUsoRecVisMRS = (ItfUsoRecursoVisualizadorMRS) repoItfs
+					.obtenerInterfazUso(VocabularioRosace.IdentRecursoVisualizadorMRS); 
+			
 			maquinaEstados
 					.SetItfUsoRecursoVisualizadorEntornosSimulacion(itfUsoRecVisEntornosSimul);
+			maquinaEstados
+					.SetItfUsoRecursoVisualizadorMRS(itfUsoRecVisMRS);
+	
 		} catch (Exception ex) {
 			Logger.getLogger(FactoriaRIntMovimientoCtrl.class.getName()).log(
 					Level.SEVERE, null, ex);
 		}
+
 		maquinaEstados
 				.cambiarEstado(MaquinaEstadoMovimientoCtrl.EstadoMovimientoRobot.RobotParado);
 		ItfUsoMovimientoCtrl itfMov = (ItfUsoMovimientoCtrl) maquinaEstados
@@ -56,8 +67,9 @@ public class FactoriaRIntMovimientoCtrl extends FactoriaAbstrCompInterno {
 		InfoCompMovimiento infoCompCreado = new InfoCompMovimiento(
 				identComponenteAcrear);
 		infoCompCreado.setitfAccesoComponente(itfMov);
-		// infoCompCreado.setitfAccesoComponente ((ItfUsoMovimientoCtrl)
-		// maquinaEstados);
+
+		
+		
 		return infoCompCreado;
 
 	}

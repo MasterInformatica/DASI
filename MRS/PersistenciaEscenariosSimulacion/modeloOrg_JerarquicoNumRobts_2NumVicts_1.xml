@@ -9,8 +9,8 @@
          <idRobotRol>indefinido</idRobotRol>
          <availableEnergy>100000</availableEnergy>
          <robotCoordinateActualP>
-            <x>182</x>
-            <y>35</y>
+            <x>0</x>
+            <y>0</y>
          </robotCoordinateActualP>
          <robotCapabilities class="java.util.ArrayList">
             <robotCapability nombre="radar">
@@ -25,8 +25,8 @@
          <idRobotRol>indefinido</idRobotRol>
          <availableEnergy>100000</availableEnergy>
          <robotCoordinateActualP>
-            <x>17</x>
-            <y>29</y>
+            <x>0</x>
+            <y>0</y>
          </robotCoordinateActualP>
          <robotCapabilities class="java.util.ArrayList">
             <robotCapability nombre="radar">
@@ -43,8 +43,8 @@
             <competency>25</competency>
          </requiredCompetencies>
          <victimCoordinateP>
-            <x>886</x>
-            <y>63</y>
+            <x>7</x>
+            <y>7</y>
          </victimCoordinateP>
       </victim>
    </victimas>

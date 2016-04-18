@@ -37,17 +37,16 @@ public class RobotBloqueado extends EstadoAbstractoMovRobot implements
 	@Override
 	public void moverAdestino(String identdest, Coordinate coordDestino,
 			float velocidadCrucero) {
-		// this.distanciaDestino =
-		// this.distanciaEuclidC1toC2(this.robotposicionActual, coordDestino);
-		// double tiempoParaAlcanzarDestino = distanciaDestino/velocidadCrucero;
 		this.identDestino = identdest;
 	}
 
+	
 	@Override
 	public void cambiaVelocidad(float nuevaVelocidadCrucero) {
 		this.velocidadCrucero = nuevaVelocidadCrucero;
 	}
 
+	
 	@Override
 	public void cambiaDestino(String identdest, Coordinate coordDestino) {
 		this.destinoCoord = coordDestino;
@@ -58,19 +57,18 @@ public class RobotBloqueado extends EstadoAbstractoMovRobot implements
 	public void parar() {
 		if (monitorizacionLlegadaDestino != null)
 			this.monitorizacionLlegadaDestino.finalizar();
-		this.trazas.trazar(this.identAgente + "."
-				+ this.getClass().getSimpleName(),
-				" ignoro la operacion porque estoy parado ",
-				InfoTraza.NivelTraza.debug);
+
+		this.trazas.trazar(this.identAgente + "."+  this.getClass().getSimpleName(),
+				" ignoro la operacion porque estoy parado ", InfoTraza.NivelTraza.debug);
 	}
 
 	@Override
 	public void bloquear() {
 		if (monitorizacionLlegadaDestino != null)
 			this.monitorizacionLlegadaDestino.finalizar();
+		
 		this.trazas.trazar(this.identAgente + "."
-				+ this.getClass().getSimpleName(),
-				" ignoro la operacion porque estoy bloqueado ",
+				+ this.getClass().getSimpleName(), " ignoro la operacion porque estoy bloqueado ",
 				InfoTraza.NivelTraza.debug);
 	}
 
