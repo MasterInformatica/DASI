@@ -9,7 +9,11 @@ public class Mapa {
 	}
 	
 	
-	Mapa(){
+	public TipoCelda getCoord(int x, int y){
+		return this.mapa[x][y];
+	}
+	
+	public Mapa(){
 		this.mapa = new TipoCelda[this.sx][this.sy];
 	
 		for(int i=0; i<sx; i++)

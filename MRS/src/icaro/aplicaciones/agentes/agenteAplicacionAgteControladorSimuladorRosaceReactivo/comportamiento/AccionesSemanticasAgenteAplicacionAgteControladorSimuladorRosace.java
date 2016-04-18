@@ -1,5 +1,6 @@
 package icaro.aplicaciones.agentes.agenteAplicacionAgteControladorSimuladorRosaceReactivo.comportamiento;
 
+import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.Rosace.informacion.*;
 import icaro.aplicaciones.Rosace.utils.ConstantesRutasEstadisticas;
 import icaro.aplicaciones.recursos.recursoCreacionEntornosSimulacion.ItfUsoRecursoCreacionEntornosSimulacion;
@@ -7,6 +8,7 @@ import icaro.aplicaciones.recursos.recursoPersistenciaEntornosSimulacion.ItfUsoR
 import icaro.aplicaciones.recursos.recursoPersistenciaEntornosSimulacion.imp.ReadXMLTestSequence;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.ItfUsoRecursoVisualizadorEntornosSimulacion;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.imp.EscenarioSimulacionRobtsVictms;
+import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.patronAgenteReactivo.control.acciones.AccionesSemanticasAgenteReactivo;
 import icaro.infraestructura.recursosOrganizacion.configuracion.ItfUsoConfiguracion;
@@ -39,11 +41,10 @@ public class AccionesSemanticasAgenteAplicacionAgteControladorSimuladorRosace
 	private NodeList nodeLst; // estructura en memoria con todos los nodos de
 	// las victimas que hay en el fichero xml
 	private int numMensajesEnviar; // numero total de nodos que hay en nodeLst
-	private ItfUsoRecursoVisualizadorEntornosSimulacion itfUsoRecursoVisualizadorEntornosSimulacion; // Para
-																										// visualizar
-																										// graficas
-																										// de
-																										// estadisticas
+	private ItfUsoRecursoVisualizadorEntornosSimulacion itfUsoRecursoVisualizadorEntornosSimulacion;
+	private ItfUsoRecursoVisualizadorMRS                itfUsoRecursoVisualizadorMRS;
+	
+	
 	private InfoEquipo equipo;
 	private String identificadorEquipo;
 	private String modeloOrganizativo;
@@ -109,6 +110,10 @@ public class AccionesSemanticasAgenteAplicacionAgteControladorSimuladorRosace
 	private boolean robotEstatusEquipoInicializado = false;
 	private EscenarioSimulacionRobtsVictms escenarioActual;
 	private String identFicheroEscenario;
+	
+	/*@   */
+	private Mapa mapa;
+	/*@ */
 
 	// AccionA is the action initial executed when agent manager sends the
 	// comenzar event
@@ -132,6 +137,16 @@ public class AccionesSemanticasAgenteAplicacionAgteControladorSimuladorRosace
 			itfUsoRecursoPersistenciaEntornosSimulacion = (ItfUsoRecursoPersistenciaEntornosSimulacion) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_USO
 							+ "RecursoPersistenciaEntornosSimulacion1");
+
+			
+			/*@  */
+			itfUsoRecursoVisualizadorMRS = (ItfUsoRecursoVisualizadorMRS) this.itfUsoRepositorio
+					.obtenerInterfaz(NombresPredefinidos.ITF_USO
+							+ "RecursoVisualizadorMRS1");
+			itfUsoRecursoVisualizadorMRS.setIdentAgenteAReportar(this.nombreAgente);
+			/*@  */
+			
+			
 			itfUsoRecursoVisualizadorEntornosSimulacion = (ItfUsoRecursoVisualizadorEntornosSimulacion) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_USO
 							+ "RecursoVisualizadorEntornosSimulacion1");
@@ -224,6 +239,13 @@ public class AccionesSemanticasAgenteAplicacionAgteControladorSimuladorRosace
 					escenarioActual.renombrarIdentRobts(identsAgtesEquipo);
 					itfUsoRecursoVisualizadorEntornosSimulacion
 							.mostrarEscenarioMovimiento(escenarioActual);
+					
+					/*@ */
+					this.mapa = new Mapa();
+					itfUsoRecursoVisualizadorMRS.mostrarEscenarioMovimiento(this.mapa);
+					/*@ */
+					
+					
 					this.informaraMiAutomata("escenarioDefinidoValido", null);
 				}
 			}
