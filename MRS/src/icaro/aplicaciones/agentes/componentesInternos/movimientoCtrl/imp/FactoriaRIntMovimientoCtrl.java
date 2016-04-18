@@ -8,6 +8,7 @@ import icaro.aplicaciones.Rosace.informacion.VocabularioRosace;
 import icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.FactoriaAbstrCompInterno;
 import icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.InfoCompMovimiento;
 import icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.ItfUsoMovimientoCtrl;
+import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.ItfUsoRecursoVisualizadorEntornosSimulacion;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
@@ -25,6 +26,7 @@ public class FactoriaRIntMovimientoCtrl extends FactoriaAbstrCompInterno {
 	private ItfUsoRecursoTrazas trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
 	private ItfUsoRecursoVisualizadorEntornosSimulacion itfUsoRecVisEntornosSimul;
 	private ItfUsoRecursoVisualizadorMRS itfUsoRecVisMRS;
+	private ItfUsoRecursoPlanificadorRuta itfUsoRecPlanRuta;
 
 	
 	public FactoriaRIntMovimientoCtrl() {
@@ -48,11 +50,16 @@ public class FactoriaRIntMovimientoCtrl extends FactoriaAbstrCompInterno {
 					.obtenerInterfazUso(VocabularioRosace.IdentRecursoVisualizadorEntornosSimulacion);
 			itfUsoRecVisMRS = (ItfUsoRecursoVisualizadorMRS) repoItfs
 					.obtenerInterfazUso(VocabularioRosace.IdentRecursoVisualizadorMRS); 
+			itfUsoRecPlanRuta = (ItfUsoRecursoPlanificadorRuta) repoItfs
+					.obtenerInterfazUso(VocabularioRosace.IdenRecursoPlanificadorRuta);
 			
 			maquinaEstados
 					.SetItfUsoRecursoVisualizadorEntornosSimulacion(itfUsoRecVisEntornosSimul);
 			maquinaEstados
 					.SetItfUsoRecursoVisualizadorMRS(itfUsoRecVisMRS);
+			
+			maquinaEstados
+					.SetItfUsoRecursoPlanificadorRuta(itfUsoRecPlanRuta);
 	
 		} catch (Exception ex) {
 			Logger.getLogger(FactoriaRIntMovimientoCtrl.class.getName()).log(

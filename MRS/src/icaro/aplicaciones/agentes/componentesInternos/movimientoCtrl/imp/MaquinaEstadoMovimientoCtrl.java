@@ -7,6 +7,7 @@ package icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.imp;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.Rosace.informacion.VocabularioRosace;
 import icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.ItfUsoMovimientoCtrl;
+import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.ItfUsoRecursoVisualizadorEntornosSimulacion;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
@@ -55,6 +56,9 @@ public class MaquinaEstadoMovimientoCtrl {
 	protected HebraMonitorizacionLlegada monitorizacionLlegadaDestino;
 	ItfUsoRecursoVisualizadorEntornosSimulacion itfUsoRecVisEntornosSimul;
 	ItfUsoRecursoVisualizadorMRS itfUsoRecVisMRS;
+	ItfUsoRecursoPlanificadorRuta itfUsoRecPlanRuta;
+	
+	
 	private org.apache.log4j.Logger log = org.apache.log4j.Logger
 			.getLogger(this.getClass().getSimpleName());
 
@@ -85,7 +89,8 @@ public class MaquinaEstadoMovimientoCtrl {
 
 	public synchronized void inicializar(ItfProcesadorObjetivos itfProcObj,
 			ItfUsoRecursoVisualizadorEntornosSimulacion itfVisSimul, 
-			ItfUsoRecursoVisualizadorMRS itfVisualMRS) {
+			ItfUsoRecursoVisualizadorMRS itfVisualMRS,
+			ItfUsoRecursoPlanificadorRuta itfPlanRuta) {
 		identAgente = itfProcObj.getAgentId();
 		if (identComponente == null)
 			identComponente = identAgente + "."
@@ -93,6 +98,7 @@ public class MaquinaEstadoMovimientoCtrl {
 		itfProcObjetivos = itfProcObj;
 		itfUsoRecVisEntornosSimul = itfVisSimul;
 		itfUsoRecVisMRS = itfVisualMRS;
+		this.itfUsoRecPlanRuta = itfPlanRuta;
 	}
 
 	public MaquinaEstadoMovimientoCtrl() {
@@ -112,6 +118,12 @@ public class MaquinaEstadoMovimientoCtrl {
 	public void SetItfUsoRecursoVisualizadorEntornosSimulacion(
 			ItfUsoRecursoVisualizadorEntornosSimulacion itfVisualEntSim) {
 		itfUsoRecVisEntornosSimul = itfVisualEntSim;
+	}
+	
+	public void SetItfUsoRecursoPlanificadorRuta(
+			ItfUsoRecursoPlanificadorRuta itfPlanRuta) {
+		itfUsoRecPlanRuta = itfPlanRuta;
+		
 	}
 	
 	public void SetItfUsoRecursoVisualizadorMRS(
@@ -182,7 +194,7 @@ public class MaquinaEstadoMovimientoCtrl {
 		else
 			estadoActual = new RobotEnMovimiento(this);
 		estadoActual.inicializar(itfProcObjetivos, itfUsoRecVisEntornosSimul,
-								 itfUsoRecVisMRS);
+								 itfUsoRecVisMRS, itfUsoRecPlanRuta);
 		identEstadoActual = estadoId.name();
 		estadoActual.identComponente = identComponente;
 		estadosCreados.put(estadoId, estadoActual);
@@ -233,7 +245,8 @@ public class MaquinaEstadoMovimientoCtrl {
 				this.identDestino = identdest;
 				this.monitorizacionLlegadaDestino = new HebraMonitorizacionLlegada(
 						this.identAgente, this, this.itfUsoRecVisEntornosSimul,
-						this.itfUsoRecVisMRS);
+						this.itfUsoRecVisMRS,
+						this.itfUsoRecPlanRuta);
 				
 				monitorizacionLlegadaDestino.inicializarDestino(identdest,
 						this.robotposicionActual, coordDestino,
@@ -260,7 +273,8 @@ public class MaquinaEstadoMovimientoCtrl {
 					monitorizacionLlegadaDestino = new HebraMonitorizacionLlegada(
 							this.identAgente, this,
 							this.itfUsoRecVisEntornosSimul,
-							this.itfUsoRecVisMRS);
+							this.itfUsoRecVisMRS,
+							this.itfUsoRecPlanRuta);
 					monitorizacionLlegadaDestino.inicializarDestino(identdest,
 							this.robotposicionActual, coordDestino,
 							velocidadCrucero);
@@ -357,6 +371,7 @@ public class MaquinaEstadoMovimientoCtrl {
 	public String getIdentEstadoMovRobot() {
 		return identEstadoActual;
 	}
+
 
 	
 

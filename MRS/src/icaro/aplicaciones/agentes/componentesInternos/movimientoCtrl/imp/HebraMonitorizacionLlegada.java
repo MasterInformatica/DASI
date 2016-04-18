@@ -1,11 +1,16 @@
 package icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.imp;
 
+import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.Rosace.informacion.VocabularioRosace;
+import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.ItfUsoRecursoVisualizadorEntornosSimulacion;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Informe;
 import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.factoriaEInterfacesPrObj.ItfProcesadorObjetivos;
+
+import java.util.ArrayList;
+
 import org.apache.log4j.Logger;
 import org.openide.util.Exceptions;
 
@@ -61,6 +66,7 @@ public class HebraMonitorizacionLlegada extends Thread {
 	public ItfUsoRecursoVisualizadorEntornosSimulacion itfusoRecVisSimulador;
 	public ItfUsoRecursoVisualizadorMRS                itfusoRecVisMRS;
 	public ItfProcesadorObjetivos itfProcObjetivos;
+	public ItfUsoRecursoPlanificadorRuta itfusoRecPlanRuta;
 
 
 	/**
@@ -73,12 +79,15 @@ public class HebraMonitorizacionLlegada extends Thread {
 	public HebraMonitorizacionLlegada(String idRobot,
 			MaquinaEstadoMovimientoCtrl contrMovimiento,
 			ItfUsoRecursoVisualizadorEntornosSimulacion itfRecVisSimulador, 
-			ItfUsoRecursoVisualizadorMRS itfRecVisMRS) {
+			ItfUsoRecursoVisualizadorMRS itfRecVisMRS,
+			ItfUsoRecursoPlanificadorRuta itfRecPlanRuta) {
 		
 		super("HebraMonitorizacion " + idRobot);
 		controladorMovimiento = contrMovimiento;
 		this.itfusoRecVisSimulador = itfRecVisSimulador;
 		this.itfusoRecVisMRS = itfRecVisMRS;
+		this.itfusoRecPlanRuta = itfRecPlanRuta;
+		
 		identRobot = idRobot;
 		itfProcObjetivos = contrMovimiento.itfProcObjetivos;
 	}
@@ -265,7 +274,27 @@ public class HebraMonitorizacionLlegada extends Thread {
 	}
 	
 	private void calcularNuevasCoordenadasDiscretas() {
-		this.coordActuales.setX(coordActuales.getX() + dirX);
+		ArrayList<Coordenada> ruta = null;
+		Coordenada c1 = new Coordenada(coordActuales);
+		Coordenada c2 = new Coordenada(coordDestino);
+		
+		
+		try {
+			
+			System.out.println("====================================\n" + c1);
+			System.out.println("====================================\n" + c2);
+			ruta = itfusoRecPlanRuta.getRuta(c1, c2);
+			
+		} catch (Exception e) {
+			//e.printStackTrace();
+		}
+
+		System.out.println("---->" + ruta.get(1));
+		this.coordActuales.setX(this.coordActuales.getX() +1);
+//		this.coordActuales.setX(ruta.get(1).getX());
+//		this.coordActuales.setY(ruta.get(1).getY());
+		
+	
 	}
 	
 	

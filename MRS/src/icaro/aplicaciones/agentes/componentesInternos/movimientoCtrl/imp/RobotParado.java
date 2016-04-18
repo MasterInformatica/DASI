@@ -70,7 +70,8 @@ public class RobotParado extends EstadoAbstractoMovRobot implements
 									+ destinoCoord, InfoTraza.NivelTraza.error);
 					this.monitorizacionLlegadaDestino = new HebraMonitorizacionLlegada(
 							this.identAgente, maquinaEstados,
-							this.itfusoRecVisSimulador, this.itfusoRecVisMRS);
+							this.itfusoRecVisSimulador, this.itfusoRecVisMRS,
+							this.itfusoRecPlanRuta);
 					
 					monitorizacionLlegadaDestino.inicializarDestino(
 							this.identDestino, robotposicionActual,

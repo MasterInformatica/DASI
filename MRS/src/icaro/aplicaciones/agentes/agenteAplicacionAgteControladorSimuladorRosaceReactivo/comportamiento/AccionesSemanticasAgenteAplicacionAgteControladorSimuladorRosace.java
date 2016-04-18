@@ -6,6 +6,7 @@ import icaro.aplicaciones.Rosace.utils.ConstantesRutasEstadisticas;
 import icaro.aplicaciones.recursos.recursoCreacionEntornosSimulacion.ItfUsoRecursoCreacionEntornosSimulacion;
 import icaro.aplicaciones.recursos.recursoPersistenciaEntornosSimulacion.ItfUsoRecursoPersistenciaEntornosSimulacion;
 import icaro.aplicaciones.recursos.recursoPersistenciaEntornosSimulacion.imp.ReadXMLTestSequence;
+import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.ItfUsoRecursoVisualizadorEntornosSimulacion;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.imp.EscenarioSimulacionRobtsVictms;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
@@ -43,6 +44,7 @@ public class AccionesSemanticasAgenteAplicacionAgteControladorSimuladorRosace
 	private int numMensajesEnviar; // numero total de nodos que hay en nodeLst
 	private ItfUsoRecursoVisualizadorEntornosSimulacion itfUsoRecursoVisualizadorEntornosSimulacion;
 	private ItfUsoRecursoVisualizadorMRS                itfUsoRecursoVisualizadorMRS;
+	private ItfUsoRecursoPlanificadorRuta               itfusoRecursoPlanificadorRuta;
 	
 	
 	private InfoEquipo equipo;
@@ -144,6 +146,10 @@ public class AccionesSemanticasAgenteAplicacionAgteControladorSimuladorRosace
 					.obtenerInterfaz(NombresPredefinidos.ITF_USO
 							+ "RecursoVisualizadorMRS1");
 			itfUsoRecursoVisualizadorMRS.setIdentAgenteAReportar(this.nombreAgente);
+			
+			itfusoRecursoPlanificadorRuta = (ItfUsoRecursoPlanificadorRuta) this.itfUsoRepositorio
+					.obtenerInterfaz(NombresPredefinidos.ITF_USO
+							+ "RecursoPlanificadorRuta1");
 			/*@  */
 			
 			
@@ -243,6 +249,7 @@ public class AccionesSemanticasAgenteAplicacionAgteControladorSimuladorRosace
 					/*@ */
 					this.mapa = new Mapa();
 					itfUsoRecursoVisualizadorMRS.mostrarEscenarioMovimiento(this.mapa);
+					itfusoRecursoPlanificadorRuta.setMapa(mapa);
 					/*@ */
 					
 					

@@ -112,6 +112,7 @@ public class VocabularioRosace extends NombresPredefinidos {
 	static public final String IdentRecursoCreacionEntornosSimulacion = "RecursoCreacionEntornosSimulacion1";
 	static public final String IdentRecursoVisualizadorEntornosSimulacion = "RecursoVisualizadorEntornosSimulacion1";
 	static public final String IdentRecursoVisualizadorMRS = "RecursoVisualizadorMRS1";	
+	static public final String IdenRecursoPlanificadorRuta = "RecursoPlanificadorRuta1";
 	static public final String IdentPersistenciaEntornosSimulacion = "RecursoPersistenciaEntornosSimulacion1";
 	static public final String IdentDirectorioPersistenciaSimulacion = "PersistenciaResultadosSimulacion";
 	static public final String NombreDirectorioPersistenciaEscenarios = "PersistenciaEscenariosSimulacion";

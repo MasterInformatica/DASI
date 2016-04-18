@@ -44,15 +44,19 @@ public class ClaseGeneradoraRecursoPlanificadorRuta extends ImplRecursoSimple
 	}
 	
 	public ArrayList<Coordenada> getRuta(Coordenada start, Coordenada finish) throws Exception{
+		
 		TipoCelda[][] map = this.mapa.getMapa();
 		int sizeX = map.length;
 		int sizeY = map[0].length;
         boolean[][] visited = new boolean[sizeX][sizeY];
         for (int i=0; i<20; i++)
             Arrays.fill(visited[i], false);
+
 		return this._getRuta(map, start, finish, visited);
 		
 	}
+	
+	
 	private ArrayList<Coordenada> _getRuta(TipoCelda[][] map, Coordenada start, Coordenada finish, boolean[][] visited){
         if(start.x == finish.x && start.y == finish.y){
             ArrayList<Coordenada> to_return = new ArrayList<Coordenada>();
@@ -105,6 +109,7 @@ public class ClaseGeneradoraRecursoPlanificadorRuta extends ImplRecursoSimple
             if(aux.get(i).size() < min){
                 theChosenOne = i;
                 min = aux.get(i).size();}
+
 
         ArrayList<Coordenada> to_return = new ArrayList<Coordenada>();
         to_return.add(start);
