@@ -50,14 +50,7 @@ public class VisorEscenario extends JFrame {
 	private void build() throws Exception{
 		isVisible = false;
 		setTitle("MRS - Simulator");
-		// TODO remove random Map build
-		/*Random  rnd = new Random();
-		Map = new boolean[rows][cols];
-		for(int i = 0; i < rows; i++){
-			for(int j = 0; j < cols; j++){
-				Map[i][j] =  (rnd.nextInt()>0);
-			}
-		}*/
+
 		posicionAgentes = new HashMap<String,Coordinate>();
 		//initComponentes();
 		//setVisible(true);
@@ -66,8 +59,10 @@ public class VisorEscenario extends JFrame {
 	
 	public boolean mueveAgente(String idAgente, Coordinate coord) {
 		// Get y remove Current position
+		System.out.println(posicionAgentes);
 		if(posicionAgentes.containsKey(idAgente)){
 			Coordinate org_coord = posicionAgentes.get(idAgente);
+			System.out.println(posicionAgentes+" - "+coord+" -- "+org_coord);
 			eliminaAgente(idAgente,org_coord);
 		}
 		// Set y draw new position
@@ -81,7 +76,7 @@ public class VisorEscenario extends JFrame {
 		if( x < 0 || y < 0 || x >= rows || y >= cols)
 			return false;
 		botonesMapa[x][y].dibujaAgente(idAgente);
-		posicionAgentes.put(idAgente, coord);
+		posicionAgentes.put(idAgente, new Coordinate(coord));
 		return true;
 	}
 	
