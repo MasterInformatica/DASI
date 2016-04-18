@@ -6,6 +6,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import icaro.aplicaciones.MRS.informacion.Mapa;
+import icaro.aplicaciones.MRS.informacion.TipoCelda;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 
 import java.awt.*;
@@ -24,7 +26,8 @@ public class VisorEscenario extends JFrame {
 	private JPanel MapaPanel;
 	
 	// Logica (Modelo)
-	private boolean[][] Map;
+	//private boolean[][] Map;
+	private Mapa Map;
 	private ComponenteBotonMapa botonesMapa[][];
 	private HashMap<String, Coordinate> posicionAgentes;
 	private int cols = 25;
@@ -48,16 +51,16 @@ public class VisorEscenario extends JFrame {
 		isVisible = false;
 		setTitle("MRS - Simulator");
 		// TODO remove random Map build
-		Random  rnd = new Random();
+		/*Random  rnd = new Random();
 		Map = new boolean[rows][cols];
 		for(int i = 0; i < rows; i++){
 			for(int j = 0; j < cols; j++){
 				Map[i][j] =  (rnd.nextInt()>0);
 			}
-		}
+		}*/
 		posicionAgentes = new HashMap<String,Coordinate>();
-		initComponentes();
-		setVisible(true);
+		//initComponentes();
+		//setVisible(true);
 	}
 	
 	
@@ -92,27 +95,30 @@ public class VisorEscenario extends JFrame {
 		posicionAgentes.remove(idAgente);
 	}
 	
-	public void mostrar(){
+	public void mostrar(Mapa mapa){
+		Map = mapa;
+		initComponentes();
 		if(isVisible)
 			return;
 		isVisible = true;
 		setVisible(true);
-		
 	}
 	
 	private void printMap(){
 		for (int i =  0; i < rows; i++){
 			for (int j = 0; j < cols; j++){
-				if(Map[i][j])
-					System.out.print("#");
+				if(Map.getCoord(i,j) == TipoCelda.ESCOMBRO)
+					System.out.print("*");
+				else if(Map.getCoord(i,j) == TipoCelda.PASILLO)
+					System.out.print("·");
 				else
-					System.out.print(".");
+					System.out.print("#");
 			}
 			System.out.print("\n");
 		}
 	}
 	
-	private void initComponentes() throws IOException{
+	private void initComponentes() {
 		setLayout(new BorderLayout());
 		MapaPanel = new JPanel();
 		MapaPanel.setLayout(new GridLayout(rows,cols,0,0));
@@ -138,15 +144,17 @@ public class VisorEscenario extends JFrame {
 	
 	private int getType(int i, int j){
 		int t = 0b0000;	
-		if(!Map[i][j])
+		if(Map.getCoord(i,j)==TipoCelda.PARED)
 			return t;
-		if(i > 0 && Map[i-1][j])
+		if(Map.getCoord(i,j)==TipoCelda.PARED)
+			return t;
+		if(i > 0 && Map.getCoord(i-1,j)!=TipoCelda.PARED)
 			t|=0b0001;
-		if(j > 0 && Map[i][j-1])
+		if(j > 0 && Map.getCoord(i,j-1)!=TipoCelda.PARED)
 			t|=0b0010;
-		if(i < rows-1 && Map[i+1][j])
+		if(i < rows-1 && Map.getCoord(i+1,j)!=TipoCelda.PARED)
 			t|=0b0100;
-		if(j < cols-1 && Map[i][j+1])
+		if(j < cols-1 && Map.getCoord(i,j+1)!=TipoCelda.PARED)
 			t|=0b1000;
 		if(t==0)
 			t = 16;
@@ -178,5 +186,10 @@ public class VisorEscenario extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -418573958565443751L;
+
+
+	public void setMapa(Mapa mapa) {
+		Map = mapa;
+	}
 
 }

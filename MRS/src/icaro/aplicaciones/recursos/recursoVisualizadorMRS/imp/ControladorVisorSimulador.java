@@ -1,5 +1,6 @@
 package icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp;
 
+import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 
 public class ControladorVisorSimulador {
@@ -13,17 +14,15 @@ public class ControladorVisorSimulador {
 	}
 	
 	
-	public void mostrarEscenarioMovimiento() {
+	public void mostrarEscenarioMovimiento(Mapa mapa) {
 		if(visorEscenario != null)
-			visorEscenario.mostrar();
+			visorEscenario.mostrar(mapa);
 	}
 
 	public boolean mueveAgente(String idAgente, Coordinate coord) {
-		if(visorEscenario == null)
-			return false;
-		else{
+		if(visorEscenario != null)
 			return visorEscenario.mueveAgente(idAgente,coord);	
-		}
+		return false;
 	}
 
 	public void termina() {
@@ -31,6 +30,13 @@ public class ControladorVisorSimulador {
 			visorEscenario.termina();
 		if ( visorControl != null )
 			visorControl.termina();
+		
+	}
+
+
+	public void setMapa(Mapa mapa) {
+		if ( visorEscenario != null )
+			visorEscenario.setMapa(mapa);
 		
 	}
 	

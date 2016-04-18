@@ -1,5 +1,6 @@
 package icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp;
 
+import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.Rosace.informacion.PuntoEstadistica;
 import icaro.aplicaciones.Rosace.informacion.VocabularioRosace;
@@ -121,8 +122,8 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	// un mensaje trazas.aceptaNuevaTraza(new InfoTraza(this.idRecurso,"Mensaje mostrado en
 	// la ventana de trazas del recurso ....",InfoTraza.NivelTraza.debug));
 	@Override
-	public void mostrarEscenarioMovimiento() throws Exception{
-		controladorUI.mostrarEscenarioMovimiento();
+	public void mostrarEscenarioMovimiento(Mapa mapa) throws Exception{
+		controladorUI.mostrarEscenarioMovimiento(mapa);
 		//-controladorIUSimulador.peticionMostrarEscenarioMovimiento(infoEscenario);
 	}
 		
@@ -138,10 +139,13 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	@Override
 	public void inicializarDestinoRobot(String id, Coordinate coordsAct, String idDest, Coordinate coordsDestino,
 			double VelocidadRobot) {
-		/*
-		 * No queremos que haga nada!
-		 */
+		controladorUI.mueveAgente(id,coordsAct);
 		
+	}
+
+	@Override
+	public void setMapa(Mapa mapa) throws Exception {
+		controladorUI.setMapa(mapa);
 	}
 	
 }

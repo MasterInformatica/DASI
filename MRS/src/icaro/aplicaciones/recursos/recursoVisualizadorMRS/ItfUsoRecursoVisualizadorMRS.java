@@ -81,7 +81,7 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	/* TODO eliminar la funcion sin parametros por esta
 	 * public void mostrarEscenarioMovimiento(escenarioActual);
 	 */
-	public void mostrarEscenarioMovimiento() throws Exception;
+	public void mostrarEscenarioMovimiento(Mapa mapa) throws Exception;
 	
 	
 	
@@ -117,5 +117,5 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	public void inicializarDestinoRobot(String id, Coordinate coordsAct, String idDest, Coordinate coordsDestino, double VelocidadRobot) throws Exception;
 	 
 	
-	public void setMapa(Mapa mapa);
+	public void setMapa(Mapa mapa) throws Exception;
 }
