@@ -32,7 +32,7 @@ public class ClaseGeneradoraRecursoVisualizadorEntornosSimulacion extends
 		ImplRecursoSimple implements
 		ItfUsoRecursoVisualizadorEntornosSimulacion {
 
-	private VisorMovimientoEscenario visorEscenarioMov;
+	//private VisorMovimientoEscenario visorEscenarioMov;
 	private VisualizacionJfreechart visualizadorJFchart;
 	private NotificadorInfoUsuarioSimulador notifEvt;
 	private String recursoId;
@@ -304,11 +304,11 @@ public class ClaseGeneradoraRecursoVisualizadorEntornosSimulacion extends
 		// throw new UnsupportedOperationException("Not supported yet.");
 		// verificar que el agente a reportar esta definido , si no lo esta los
 		// eventos no se envian a nadie
-		if (visorEscenarioMov == null) {
+		/*if (visorEscenarioMov == null) {
 			try {
 				if (controladorIUSimulador
 						.abrirVisorMovimientoConEscenario(rutaEscenario)) {
-					visorEscenarioMov.setVisible(true);
+					//visorEscenarioMov.setVisible(true);
 					escenarioMovAbierto = true;
 				}
 				;
@@ -319,7 +319,7 @@ public class ClaseGeneradoraRecursoVisualizadorEntornosSimulacion extends
 								.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
-		visorEscenarioMov.setVisible(true);
+		visorEscenarioMov.setVisible(true);*/
 		// else {
 		// trazas.trazar(this.id,
 		// "El identificador del agente controlador no esta definido. El agente controlador debe definirlo"
@@ -409,7 +409,7 @@ public class ClaseGeneradoraRecursoVisualizadorEntornosSimulacion extends
 		// (500,itfProcObjetivos,informeLlegada);
 		// }
 		// else {
-		if (visorEscenarioMov == null) {
+		/*if (visorEscenarioMov == null) {
 			visorEscenarioMov = controladorIUSimulador.getVisorMovimiento();
 			if (visorEscenarioMov == null)
 				controladorIUSimulador.peticionAbrirEscenario();
@@ -418,7 +418,7 @@ public class ClaseGeneradoraRecursoVisualizadorEntornosSimulacion extends
 			visorEscenarioMov.cambiarPosicionRobot(identRobot, coordX, coordY);
 			// controladorIUSimulador.peticionCambiarPosicionRobot(identRobot,
 			// coordX, coordY);
-		}
+		}*/
 
 		// visorEscenarios.moverRobot(identRobot, coordX, coordX);
 

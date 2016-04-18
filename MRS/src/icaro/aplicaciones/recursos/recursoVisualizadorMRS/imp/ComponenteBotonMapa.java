@@ -65,11 +65,12 @@ public class ComponenteBotonMapa extends JButton {
 	}
 	public void removeElement(String id){
 		ci.removeIcon(id);
+		repaint();
 	}
 	public void addIcon(String id,ImageIcon ic, Dimension dimension){
 		Image img = ic.getImage().getScaledInstance(dimension.width, dimension.height, Image.SCALE_FAST);
 		ci.addIcon(id, new ImageIcon(img));
-		setIcon(ci);
+		repaint();
 	}
 	
 	public void addElement(String id,String Type){
@@ -84,10 +85,11 @@ public class ComponenteBotonMapa extends JButton {
 			ci.addIcon(id, pie);
 			break;
 		}
+		repaint();
 	}
 	public void rescale(int w, int h){
 		ci.rescale(w,h);
-		setIcon(ci);
+		repaint();
 	}
 	
 	public void dibujaAgente(String idAgente) {
@@ -100,10 +102,12 @@ public class ComponenteBotonMapa extends JButton {
 	public class CombineIcon implements Icon {
 	    private Vector<ImageIcon> list;
 	    private Vector<String> listId;
+	    private Dimension lastSize;
 
 	    public CombineIcon(){
 	    	list = new Vector<ImageIcon>();
 	    	listId = new Vector<String>();
+	    	lastSize = new Dimension(10,10);
 	    }
 	    public CombineIcon(String id, ImageIcon ic) {
 	    	this();
@@ -123,16 +127,19 @@ public class ComponenteBotonMapa extends JButton {
 	    		im = list.get(i).getImage().getScaledInstance(w,hg,Image.SCALE_FAST);
 	    		list.set(i, new ImageIcon(im));
 	    	}
+	    	lastSize = new Dimension(wd,hg);
 	    	
 	    }
 	    
 	    public void addIcon(String id,ImageIcon ic){
-	    	list.addElement(ic);
+	    	Image im = ic.getImage().getScaledInstance(lastSize.width,lastSize.height,Image.SCALE_FAST);
+	    	list.addElement(new ImageIcon(im));
 	    	listId.addElement(id);
 	    }
 	    
 	    public void addIcon(int idx, String id,ImageIcon ic){
-	    	list.add(idx,ic);
+	    	Image im = ic.getImage().getScaledInstance(lastSize.width,lastSize.height,Image.SCALE_FAST);
+	    	list.add(idx,new ImageIcon(im));
 	    	listId.add(idx,id);
 	    }
 	    
