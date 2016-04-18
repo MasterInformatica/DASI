@@ -1,0 +1,113 @@
+package icaro.aplicaciones.recursos.recursoPlanificadorRuta.imp;
+
+import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
+import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
+import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
+import icaro.aplicaciones.MRS.informacion.Mapa;
+import icaro.aplicaciones.MRS.informacion.Coordenada;
+import icaro.aplicaciones.MRS.informacion.TipoCelda;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Arrays;
+
+
+/**
+ * 
+ * @author Hristo
+ *
+ */
+
+public class ClaseGeneradoraRecursoPlanificadorRuta extends ImplRecursoSimple
+		implements ItfUsoRecursoPlanificadorRuta {
+
+	private static final long serialVersionUID = -7272037961162939091L;
+	private String recursoId;
+	private Mapa mapa;
+	
+	public ClaseGeneradoraRecursoPlanificadorRuta(String idRecurso) throws Exception {
+		super(idRecurso);
+		recursoId = idRecurso;
+		try {
+			trazas.aceptaNuevaTraza(new InfoTraza(idRecurso, "El constructor de la clase generadora del recurso "
+					+ idRecurso + " ha completado su ejecucion ....", InfoTraza.NivelTraza.debug));
+		} catch (Exception e) {
+			this.trazas.trazar(recursoId, "-----> Se ha producido un error en la creacion del recurso : " + e.getMessage(),
+					InfoTraza.NivelTraza.error);
+			this.itfAutomata.transita("error");
+			throw e;
+		}
+	}
+	
+	public void setMapa(Mapa mapa){
+		this.mapa = mapa;
+	}
+	public ArrayList<Coordenada> getRuta(Coordenada start, Coordenada finish){
+		TipoCelda[][] map = this.mapa.getMapa();
+		int sizeX = map.length;
+		int sizeY = map[0].length;
+        boolean[][] visited = new boolean[sizeX][sizeY];
+        for (int i=0; i<20; i++)
+            Arrays.fill(visited[i], false);
+		return this._getRuta(map, start, finish, visited);
+		
+	}
+	private ArrayList<Coordenada> _getRuta(TipoCelda[][] map, Coordenada start, Coordenada finish, boolean[][] visited){
+        if(start.x == finish.x && start.y == finish.y){
+            ArrayList<Coordenada> to_return = new ArrayList<Coordenada>();
+            to_return.add(finish);
+            return to_return;
+        }
+
+        visited[start.x][start.y] = true;
+
+        ArrayList<ArrayList<Coordenada>> aux = new ArrayList<ArrayList<Coordenada>>();
+        if(start.x-1 >= 0)
+            if(!visited[start.x-1][start.y])
+                if(map[start.x-1][start.y] == TipoCelda.PASILLO)
+                    aux.add(_getRuta(map, new Coordenada(start.x-1, start.y), finish, visited));
+
+        if(start.x+1 < map.length)
+            if(!visited[start.x+1][start.y])
+                if(map[start.x+1][start.y] == TipoCelda.PASILLO)
+                    aux.add(_getRuta(map, new Coordenada(start.x+1, start.y), finish, visited));
+
+        if(start.y-1 >= 0)
+            if(!visited[start.x][start.y-1])
+                if(map[start.x][start.y-1] == TipoCelda.PASILLO)
+                    aux.add(_getRuta(map, new Coordenada(start.x, start.y-1), finish, visited));
+
+        if(start.y+1 < map[0].length)
+            if(!visited[start.x][start.y+1])
+                if(map[start.x][start.y+1] == TipoCelda.PASILLO)
+                    aux.add(_getRuta(map, new Coordenada(start.x, start.y+1), finish, visited));
+
+        visited[start.x][start.y] = false;
+
+        Iterator<ArrayList<Coordenada>> y = aux.iterator();
+        while (y.hasNext()) {
+            ArrayList<Coordenada> z = y.next();
+            if(z.size() != 0){
+                Coordenada last = z.get(z.size()-1);
+                if(last.x == finish.x && last.y == finish.y)
+                    continue;
+            }
+            y.remove();
+        }
+
+        if(aux.size() == 0)
+            return new ArrayList<Coordenada>();
+
+        int theChosenOne = 0;
+        int min = aux.get(0).size();
+        for(int i=1; i<aux.size(); i++)
+            if(aux.get(i).size() < min){
+                theChosenOne = i;
+                min = aux.get(i).size();}
+
+        ArrayList<Coordenada> to_return = new ArrayList<Coordenada>();
+        to_return.add(start);
+        to_return.addAll(aux.get(theChosenOne));
+        return to_return;
+	}
+}
