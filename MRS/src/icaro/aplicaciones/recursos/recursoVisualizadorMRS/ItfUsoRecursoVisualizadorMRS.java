@@ -2,6 +2,7 @@ package icaro.aplicaciones.recursos.recursoVisualizadorMRS;
 
 import icaro.aplicaciones.recursos.recursoPersistenciaEntornosSimulacion.ItfUsoRecursoPersistenciaEntornosSimulacion;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.imp.EscenarioSimulacionRobtsVictms;
+import icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.Coords;
 import icaro.infraestructura.patronRecursoSimple.ItfUsoRecursoSimple;
 
 public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
@@ -55,7 +56,9 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	//Para mi es el input que desencadena una transición entre estados.
 	// Si se quiere para el prototipo, se puede llamar con el nombre de otroa función/cosa, de la misma manera
 	//que se hacía el anterior. solamente dimelo que hay que cambiarlo en un xml.
-	public void mostrarVentanaControlSimulador(TipoRaro escenarioActual);
+	/*
+	 * public void mostrarVentanaControlSimulador(TipoRaro escenarioActual);
+	 */
 	
 	
 	//Si no consigo cargar el escenario desde el recurso de persistencia, llamo a este 
@@ -73,7 +76,10 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	// un array de []x[] de booleanos, que es como lo tiene Hristo si te es más fácil.
 	//Otra opción es que te pase una referencia al recurso de Mapa de Hristo y lo cojas tu,
 	//o incluso en un futuro al recurso de Persistencia que es el que lee de un xml el mapa.
-	public void mostrarEscenarioMovimiento(escenarioActual);
+	/* TODO eliminar la funcion sin parametros por esta
+	 * public void mostrarEscenarioMovimiento(escenarioActual);
+	 */
+	public void mostrarEscenarioMovimiento();
 	
 	
 	
@@ -87,7 +93,17 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	
 	// Cuando una victima es rescatada, es decir, alguien inserta el evento/mensaje
 	// en la cola de eventos, se notifica a la interfaz mediante este método
-	public void mostrarVictimaRescatada(string VictimaId)
+	public void mostrarVictimaRescatada(String VictimaId);
+
+
+	/**
+	 * Intenta mover un agente desde donde este hasta la posicion indicada,
+	 * devuelve false si no puede moverse ahi ¿Eso me toca a mi o al controlador? 
+	 * @param idAgente id del agente a mover
+	 * @param coord coordenadas donde se quiere mover
+	 * @return Devuelve un boolean indicando si ha podido realizar el movimiento.
+	 */
+	public boolean mueveAgente(String idAgente, Coords coord);
 	
 	
 }

@@ -26,14 +26,20 @@ import javax.swing.JOptionPane;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.openide.util.Exceptions;
-
+/**
 //Other imports used by this Resource
 //#start_nodespecialImports:specialImports <--specialImports-- DO NOT REMOVE THIS
 //#end_nodespecialImports:specialImports <--specialImports-- DO NOT REMOVE THIS
+ * 
+ * @author friker
+ *
+ */
 public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		implements ItfUsoRecursoVisualizadorMRS {
 
-	private VisorEscenario visorMRS;
+	private ControladorVisorSimulador controladorUI;
+	
+	
 	private VisualizacionJfreechart visualizadorJFchart;
 	//private NotificadorInfoUsuarioSimulador notifEvt;
 	private String recursoId;
@@ -71,7 +77,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 			// visorEscenarios = new VisorEscenariosRosace();
 			// ventanaControlCenterGUI = new ControlCenterGUI4(notifEvt);
 			//-controladorIUSimulador = new ControladorVisualizacionSimulRosace(notifEvt);
-			visorMRS = new VisorEscenario();
+			controladorUI = new ControladorVisorSimulador();
 
 		} catch (Exception e) {
 			this.trazas.trazar(recursoId, "-----> Se ha producido un error en la creacion del recurso : " + e.getMessage(),
@@ -80,6 +86,54 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 			throw e;
 		}
 	}
+	
+	@Override
+	//public void obtenerEscenarioSimulacion(String modOrganizativo, int numRobots) throws Exception {
+	public void obtenerEscenarioSimulacion() throws Exception {
+		//this.controladorIUSimulador.peticionObtenerEscenarioSimulacion(modOrganizativo, numRobots);
+		// EscenarioSimulacionRobtsVictms escenarioActual= null;
+		// int numerointentos = 0;int maxIntentos = 2;
+		// while ( numerointentos<maxIntentos && escenarioActual==null ){
+		// escenarioActual =
+		// controladorIUSimulador.obtenerEscenarioSimulacion(modOrganizativo,numRobots
+		// );
+		//
+		// numerointentos++;
+		// }
+		// this.notifEvt.informaraOtroAgenteReactivo(new
+		// InfoContEvtMsgAgteReactivo("escenarioDefinidoPorUsuario",
+		// escenarioActual), identAgenteaReportar);
+	}
+	
+	
+	@Override
+	public void mostrarVictimaRescatada(String VictimaId) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public boolean mueveAgente(String idAgente, Coords coord){
+		return controladorUI.mueveAgente(idAgente,coord);
+		
+	}
+	
+	// Fragmento de codigo para mostrar por la ventana de trazas de este recurso
+		// un mensaje
+		// trazas.aceptaNuevaTraza(new InfoTraza(this.idRecurso,"Mensaje mostrado en
+		// la ventana de trazas del recurso ....",InfoTraza.NivelTraza.debug));
+		@Override
+		public void mostrarEscenarioMovimiento() {
+			controladorUI.mostrarEscenarioMovimiento();
+			//-controladorIUSimulador.peticionMostrarEscenarioMovimiento(infoEscenario);
+		}
+		@Override
+		public void setIdentAgenteAReportar(String identAgenteAReportar) {
+			super.setIdentAgenteAReportar(identAgenteAReportar);
+			//notifEvt.setIdentAgenteAReportar(identAgenteAReportar);
+		}
+	
+	
 /*
 	@Override
 	public void mostrarVentanaControlSimulador(String rutaFicheroEscenario) throws Exception {
@@ -114,23 +168,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		return controladorIUSimulador.hayEscenarioAbierto();
 	}
 */
-	@Override
-	//public void obtenerEscenarioSimulacion(String modOrganizativo, int numRobots) throws Exception {
-	public void obtenerEscenarioSimulacion() throws Exception {
-		//this.controladorIUSimulador.peticionObtenerEscenarioSimulacion(modOrganizativo, numRobots);
-		// EscenarioSimulacionRobtsVictms escenarioActual= null;
-		// int numerointentos = 0;int maxIntentos = 2;
-		// while ( numerointentos<maxIntentos && escenarioActual==null ){
-		// escenarioActual =
-		// controladorIUSimulador.obtenerEscenarioSimulacion(modOrganizativo,numRobots
-		// );
-		//
-		// numerointentos++;
-		// }
-		// this.notifEvt.informaraOtroAgenteReactivo(new
-		// InfoContEvtMsgAgteReactivo("escenarioDefinidoPorUsuario",
-		// escenarioActual), identAgenteaReportar);
-	}
+
 /*
 	@Override
 	public void notificarRecomendacion(String titulo, String motivo, String recomendacion) throws Exception {
@@ -161,7 +199,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 
 	}
 */
-	;
+	
 /*
 	@Override
 	public void crearVisorGraficasLlegadaYasignacionVictimas(int numeroRobotsSimulacion,
@@ -255,18 +293,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		super.termina();
 	}
 */
-	// Fragmento de codigo para mostrar por la ventana de trazas de este recurso
-	// un mensaje
-	// trazas.aceptaNuevaTraza(new InfoTraza(this.idRecurso,"Mensaje mostrado en
-	// la ventana de trazas del recurso ....",InfoTraza.NivelTraza.debug));
-	@Override
-	public void mostrarEscenarioMovimiento() {
-		visorMRS.mostrar();
-		// throw new UnsupportedOperationException("Not supported yet.");
-		// verificar que el agente a reportar esta definido , si no lo esta los
-		// eventos no se envian a nadie
-		//-controladorIUSimulador.peticionMostrarEscenarioMovimiento(infoEscenario);
-	}
+	
 /*
 	public void mostrarEscenarioMovimiento(String rutaEscenario) {
 		// throw new UnsupportedOperationException("Not supported yet.");
@@ -294,11 +321,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		// }
 	}
 */
-	@Override
-	public void setIdentAgenteAReportar(String identAgenteAReportar) {
-		super.setIdentAgenteAReportar(identAgenteAReportar);
-		//notifEvt.setIdentAgenteAReportar(identAgenteAReportar);
-	}
+
 /*
 	@Override
 	public void mostrarEscenario() throws Exception {
@@ -463,4 +486,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		this.controladorIUSimulador.setIftRecPersistencia(itfUsopersistencia);
 		this.controladorIUSimulador.initModelosYvistas();
 	}
-*/}
+*/
+	
+	
+}

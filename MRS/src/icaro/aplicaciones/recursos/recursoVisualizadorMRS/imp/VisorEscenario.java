@@ -1,4 +1,5 @@
 package icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp;
+import java.util.HashMap;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -22,12 +23,29 @@ public class VisorEscenario extends JFrame {
 	
 	// Logica (Modelo)
 	private boolean[][] Map;
+	private ComponenteBotonMapa botonesMapa[][];
+	private HashMap<String, Coords> posicionAgentes;
 	private int cols = 5;
 	private int rows = 5;
 	private boolean isVisible;
-	public VisorEscenario() throws IOException{
+
+	private ControladorVisorSimulador controlador;
+	
+	
+	public VisorEscenario() throws Exception{
+		build();
+	}
+	
+	//TODO : Constructor VisorControlSimu recibiendo Controladora del visor
+	public VisorEscenario(ControladorVisorSimulador control)throws Exception{
+		controlador = control;
+		build();
+	}
+	
+	private void build() throws Exception{
 		isVisible = false;
 		setTitle("MRS - Simulator");
+		// TODO remove random Map build
 		Random  rnd = new Random();
 		Map = new boolean[rows][cols];
 		for(int i = 0; i < rows; i++){
@@ -35,16 +53,39 @@ public class VisorEscenario extends JFrame {
 				Map[i][j] =  (rnd.nextInt()>0);
 			}
 		}
+		posicionAgentes = new HashMap<String,Coords>();
 		initComponentes();
 		setVisible(true);
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
+	
+	
+	public boolean mueveAgente(String idAgente, Coords coord) {
+		// Get y remove Current position
+		if(posicionAgentes.containsKey(idAgente)){
+			Coords org_coord = posicionAgentes.get(idAgente);
+			eliminaAgente(idAgente,org_coord);
+		}
+		// Set y draw new position
+		dibujaAgente(idAgente,coord);
+		return false;
+	}
+	
+	private void dibujaAgente(String idAgente, Coords coord){
+		botonesMapa[coord.getX()][coord.getY()].dibujaAgente(idAgente);
+	}
+	
+	
+	private void eliminaAgente(String idAgente, Coords coord){
+		botonesMapa[coord.getX()][coord.getY()].eliminaAgente(idAgente);
+	}
+	
 	public void mostrar(){
 		if(isVisible)
 			return;
 		isVisible = true;
 		setVisible(true);
 	}
+	
 	private void printMap(){
 		for (int i =  0; i < rows; i++){
 			for (int j = 0; j < cols; j++){
@@ -56,21 +97,20 @@ public class VisorEscenario extends JFrame {
 			System.out.print("\n");
 		}
 	}
+	
 	private void initComponentes() throws IOException{
 		setLayout(new BorderLayout());
 		MapaPanel = new JPanel();
 		MapaPanel.setLayout(new GridLayout(rows,cols,0,0));
 		String path; 
 
-		ComponenteBotonMapa labels[][] = new ComponenteBotonMapa[rows][cols];
-		printMap();
+		botonesMapa = new ComponenteBotonMapa[rows][cols];
 		for (int i =  0; i < rows; i++){
 			for (int j = 0; j < cols; j++){
 				int t = getType(i,j);
 				path = getIcono(t);
-				//iconoFondo.setBorder(BorderFactory.createEmptyBorder());
-				labels[i][j] = new ComponenteBotonMapa(path);
-				MapaPanel.add(labels[i][j]);
+				botonesMapa[i][j] = new ComponenteBotonMapa(path);
+				MapaPanel.add(botonesMapa[i][j]);
 			}
 		}
 		Container c = getContentPane();
@@ -80,6 +120,8 @@ public class VisorEscenario extends JFrame {
 		add(MapaPanel,BorderLayout.CENTER);
 		pack();
 	}
+	
+	
 	private int getType(int i, int j){
 		int t = 0b0000;	
 		if(!Map[i][j])
@@ -94,39 +136,20 @@ public class VisorEscenario extends JFrame {
 			t|=0b1000;
 		if(t==0)
 			t = 16;
-		System.out.println("("+i+", "+j+") ->"+t);
 		return t;
 	}
+	
 	private String getIcono(int type){
-		switch (type){
-		case 0://nada
-		case 1://
-		case 2:
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		case 7:
-		case 8:
-		case 9:
-		case 10:
-		case 11:
-		case 12:
-		case 13:
-		case 14:
-		case 15:
-		case 16:
+		if(type >=0 && type <=16)
 			return rutaArteEscenario+"mapa/"+type+".png";
-		default:
+		else
 			return rutaArteEscenario+"error.png";
-		}
 	}
-	
-	
 	
 	public static void main(String args[]){
 		try {
 			VisorEscenario ve = new VisorEscenario();
+			ve.printMap();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -137,4 +160,7 @@ public class VisorEscenario extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -418573958565443751L;
+
+
+
 }

@@ -29,8 +29,12 @@ public class ComponenteBotonMapa extends JButton {
 	private ImageIcon min,rob,pie;
 	private CombineIcon ci;
 	private int prof;
+	
+	private HashMap<String,Integer> agentes;
+	
 	public ComponenteBotonMapa(String file) {
 		super();
+		agentes = new HashMap<String,Integer>();
 		prof = 1;
 		bg = new ImageIcon(file);
 		min = new ImageIcon("images/miner.png");
@@ -40,7 +44,7 @@ public class ComponenteBotonMapa extends JButton {
 		setIcon(ci);
 		setMargin(new Insets(0, 0, 0, 0));
 		setBorder(new EmptyBorder(0,0,0,0));
-		addActionListener(new ActionListener()
+		/*addActionListener(new ActionListener()
 		{
 		  public void actionPerformed(ActionEvent e)
 		  {
@@ -48,7 +52,7 @@ public class ComponenteBotonMapa extends JButton {
 		    cbm.addIcon("min"+cbm.prof, cbm.min,cbm.getSize());
 		    cbm.prof++;
 		  }
-		});
+		});*/
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
@@ -84,6 +88,13 @@ public class ComponenteBotonMapa extends JButton {
 	public void rescale(int w, int h){
 		ci.rescale(w,h);
 		setIcon(ci);
+	}
+	
+	public void dibujaAgente(String idAgente) {
+		addElement(idAgente,"Robot");
+	}
+	public void eliminaAgente(String idAgente) {
+		removeElement(idAgente);
 	}
 	
 	public class CombineIcon implements Icon {
@@ -178,4 +189,6 @@ public class ComponenteBotonMapa extends JButton {
 
 		
 	}
+
+	
 }
