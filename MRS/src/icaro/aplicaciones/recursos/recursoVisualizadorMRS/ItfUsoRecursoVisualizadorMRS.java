@@ -113,7 +113,7 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	// Cuando un robot se le asigna un objetivo, se llama a ete método para informar a la interfaz.
 	// A lo mejor no queremos que se muestre la decisión por pantalla, o a lo mejor si.
 	//Según lo que se quiera, dejar el cuerpo vacío o no.
-	public void inicializarDestinoRobot(String id, Coordinate coordsAct, String idDest, Coordinate coordsDestino, double VelocidadRobot);
+	public void inicializarDestinoRobot(String id, Coordinate coordsAct, String idDest, Coordinate coordsDestino, double VelocidadRobot) throws Exception;
 	 
 	
 }

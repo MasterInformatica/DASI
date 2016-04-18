@@ -6,6 +6,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import icaro.aplicaciones.Rosace.informacion.Coordinate;
+
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -24,7 +26,7 @@ public class VisorEscenario extends JFrame {
 	// Logica (Modelo)
 	private boolean[][] Map;
 	private ComponenteBotonMapa botonesMapa[][];
-	private HashMap<String, Coords> posicionAgentes;
+	private HashMap<String, Coordinate> posicionAgentes;
 	private int cols = 5;
 	private int rows = 5;
 	private boolean isVisible;
@@ -37,7 +39,7 @@ public class VisorEscenario extends JFrame {
 	}
 	
 	//TODO : Constructor VisorControlSimu recibiendo Controladora del visor
-	public VisorEscenario(ControladorVisorSimulador control)throws Exception{
+	public VisorEscenario(ControladorVisorSimulador control) throws Exception{
 		controlador = control;
 		build();
 	}
@@ -53,16 +55,16 @@ public class VisorEscenario extends JFrame {
 				Map[i][j] =  (rnd.nextInt()>0);
 			}
 		}
-		posicionAgentes = new HashMap<String,Coords>();
+		posicionAgentes = new HashMap<String,Coordinate>();
 		initComponentes();
 		setVisible(true);
 	}
 	
 	
-	public boolean mueveAgente(String idAgente, Coords coord) {
+	public boolean mueveAgente(String idAgente, Coordinate coord) {
 		// Get y remove Current position
 		if(posicionAgentes.containsKey(idAgente)){
-			Coords org_coord = posicionAgentes.get(idAgente);
+			Coordinate org_coord = posicionAgentes.get(idAgente);
 			eliminaAgente(idAgente,org_coord);
 		}
 		// Set y draw new position
@@ -70,13 +72,19 @@ public class VisorEscenario extends JFrame {
 		return false;
 	}
 	
-	private void dibujaAgente(String idAgente, Coords coord){
-		botonesMapa[coord.getX()][coord.getY()].dibujaAgente(idAgente);
+	private void dibujaAgente(String idAgente, Coordinate coord){
+		int x = (int) coord.getX();
+		int y = (int) coord.getY();
+		botonesMapa[x][y].dibujaAgente(idAgente);
+		posicionAgentes.put(idAgente, coord);
 	}
 	
 	
-	private void eliminaAgente(String idAgente, Coords coord){
-		botonesMapa[coord.getX()][coord.getY()].eliminaAgente(idAgente);
+	private void eliminaAgente(String idAgente, Coordinate coord){
+		int x = (int) coord.getX();
+		int y = (int) coord.getY();
+		botonesMapa[x][y].eliminaAgente(idAgente);
+		posicionAgentes.remove(idAgente);
 	}
 	
 	public void mostrar(){
@@ -84,6 +92,7 @@ public class VisorEscenario extends JFrame {
 			return;
 		isVisible = true;
 		setVisible(true);
+		
 	}
 	
 	private void printMap(){
@@ -146,6 +155,10 @@ public class VisorEscenario extends JFrame {
 			return rutaArteEscenario+"error.png";
 	}
 	
+	public void termina() {
+		this.dispose();
+	}
+	
 	public static void main(String args[]){
 		try {
 			VisorEscenario ve = new VisorEscenario();
@@ -160,7 +173,5 @@ public class VisorEscenario extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -418573958565443751L;
-
-
 
 }

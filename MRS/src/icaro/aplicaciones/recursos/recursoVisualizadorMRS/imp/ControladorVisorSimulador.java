@@ -1,5 +1,7 @@
 package icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp;
 
+import icaro.aplicaciones.Rosace.informacion.Coordinate;
+
 public class ControladorVisorSimulador {
 
 	private VisorControl visorControl;
@@ -9,9 +11,6 @@ public class ControladorVisorSimulador {
 		/*visorControl = new VisorControl(this);*/
 		visorEscenario = new VisorEscenario(this);
 	}
-
-	
-	
 	
 	
 	public void mostrarEscenarioMovimiento() {
@@ -19,18 +18,20 @@ public class ControladorVisorSimulador {
 			visorEscenario.mostrar();
 	}
 
-
-
-
-
-	public boolean mueveAgente(String idAgente, Coords coord) {
+	public boolean mueveAgente(String idAgente, Coordinate coord) {
 		if(visorEscenario!= null)
 			return false;
 		else{
 			return visorEscenario.mueveAgente(idAgente,coord);	
 		}
 	}
-	
-	
+
+	public void termina() {
+		if ( visorEscenario != null )
+			visorEscenario.termina();
+		if ( visorControl != null )
+			visorControl.termina();
+		
+	}
 	
 }

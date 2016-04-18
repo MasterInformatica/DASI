@@ -52,9 +52,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	//private ControladorVisualizacionSimulRosace controladorIUSimulador;
 	// para prueba de integracion
 	private String directorioPersistencia = VocabularioRosace.NombreDirectorioPersistenciaEscenarios + File.separator;
-	// private String
-	// identFicheroEscenarioSimulacion=directorioPersistencia+"modeloOrg_JerarquicoNumRobts_4NumVicts_2.xml"
-	// ;
+	// private String identFicheroEscenarioSimulacion=directorioPersistencia+"modeloOrg_JerarquicoNumRobts_4NumVicts_2.xml";
 	private String identFicheroEscenarioSimulacion;
 	private Coordinate coordDestino;
 	private String identDestino;
@@ -68,8 +66,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		super(idRecurso);
 		recursoId = idRecurso;
 		try {
-			trazas.aceptaNuevaTraza(new InfoTraza(idRecurso, "El constructor de la clase generadora del recurso "
-					+ idRecurso + " ha completado su ejecucion ....", InfoTraza.NivelTraza.debug));
+			
 			//-notifEvt = new NotificadorInfoUsuarioSimulador(recursoId, identAgenteaReportar);
 			// un agente debe decirle al recurso a quien debe reportar . Se
 			// puede poner el agente a reportar fijo
@@ -78,6 +75,8 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 			// ventanaControlCenterGUI = new ControlCenterGUI4(notifEvt);
 			//-controladorIUSimulador = new ControladorVisualizacionSimulRosace(notifEvt);
 			controladorUI = new ControladorVisorSimulador();
+			trazas.aceptaNuevaTraza(new InfoTraza(idRecurso, "El constructor de la clase generadora del recurso "
+					+ idRecurso + " ha completado su ejecucion ....", InfoTraza.NivelTraza.debug));
 
 		} catch (Exception e) {
 			this.trazas.trazar(recursoId, "-----> Se ha producido un error en la creacion del recurso : " + e.getMessage(),
@@ -113,20 +112,40 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	}
 	
 	@Override
-	public boolean mueveAgente(String idAgente, Coords coord) throws Exception{
+	public boolean mueveAgente(String idAgente, Coordinate coord) throws Exception{
 		return controladorUI.mueveAgente(idAgente,coord);
 		
 	}
 	
 	// Fragmento de codigo para mostrar por la ventana de trazas de este recurso
-		// un mensaje
-		// trazas.aceptaNuevaTraza(new InfoTraza(this.idRecurso,"Mensaje mostrado en
-		// la ventana de trazas del recurso ....",InfoTraza.NivelTraza.debug));
-		@Override
-		public void mostrarEscenarioMovimiento() throws Exception{
-			controladorUI.mostrarEscenarioMovimiento();
-			//-controladorIUSimulador.peticionMostrarEscenarioMovimiento(infoEscenario);
-		}
+	// un mensaje trazas.aceptaNuevaTraza(new InfoTraza(this.idRecurso,"Mensaje mostrado en
+	// la ventana de trazas del recurso ....",InfoTraza.NivelTraza.debug));
+	@Override
+	public void mostrarEscenarioMovimiento() throws Exception{
+		controladorUI.mostrarEscenarioMovimiento();
+		//-controladorIUSimulador.peticionMostrarEscenarioMovimiento(infoEscenario);
+	}
+		
+		
+	@Override
+	public void termina() {
+		trazas.aceptaNuevaTraza(
+				new InfoTraza(this.id, "Terminando recurso" + this.id + " ....", InfoTraza.NivelTraza.debug));
+		controladorUI.termina();
+		super.termina();
+	}
+
+	@Override
+	public void inicializarDestinoRobot(String id, Coordinate coordsAct, String idDest, Coordinate coordsDestino,
+			double VelocidadRobot) {
+		/*
+		 * No queremos que haga nada!
+		 */
+		
+	}
+	
+}
+		
 /*		@Override
 		public void setIdentAgenteAReportar(String identAgenteAReportar){
 			super.setIdentAgenteAReportar(identAgenteAReportar);
@@ -273,26 +292,9 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 
 	}
 */
-	// End methods that implement VisualizadorEstadisticas resource use
-	// interface
 
-	// #start_nodeterminaMethod:terminaMethod <--terminaMethod-- DO NOT REMOVE
-	// THIS
-/*
-	@Override
-	public void termina() {
-		trazas.aceptaNuevaTraza(
-				new InfoTraza(this.id, "Terminando recurso" + this.id + " ....", InfoTraza.NivelTraza.debug));
 
-		// Si es un recurso de visualizacion es necesaria una llamar a dispose
-		// de la ventana de visualizacion. Algo parecido a lo siguiente
-		// this.jvariableLocalReferenciaVisualizador.dispose(); //Destruye los
-		// componentes utilizados por este JFrame y devuelve la memoria
-		// utilizada al Sistema Operativo
 
-		super.termina();
-	}
-*/
 	
 /*
 	public void mostrarEscenarioMovimiento(String rutaEscenario) {
@@ -488,5 +490,4 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	}
 */
 	
-	
-}
+

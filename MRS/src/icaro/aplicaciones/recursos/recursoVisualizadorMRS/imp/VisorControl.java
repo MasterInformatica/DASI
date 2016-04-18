@@ -62,7 +62,9 @@ public class VisorControl extends JFrame{
 		add(boton_file,BorderLayout.CENTER);
 	}
 	
-	
+	public void termina() {
+		this.dispose();
+	}
 	
 	
 	
@@ -85,11 +87,6 @@ public class VisorControl extends JFrame{
 			return null; // no ha seleccionado nada
 	}
 	
-	
-	
-	private static final long serialVersionUID = -4664803528791128411L;
-
-	
 	public static void main(String args[]){
 		try {
 			VisorControl vc = new VisorControl();
@@ -97,4 +94,11 @@ public class VisorControl extends JFrame{
 			e.printStackTrace();
 		}
 	}
+
+
+	
+	private static final long serialVersionUID = -4664803528791128411L;
+
+	
+
 }
