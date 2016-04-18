@@ -36,7 +36,6 @@ public class HebraMonitorizacionLlegada extends Thread {
 	 * @uml.property name="agente"
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 */
-	// protected ItfUsoMovimientoCtrl controladorMovimiento;
 	public MaquinaEstadoMovimientoCtrl controladorMovimiento;
 	private Logger log = Logger.getLogger(this.getClass().getSimpleName());
 	/**
@@ -49,19 +48,13 @@ public class HebraMonitorizacionLlegada extends Thread {
 	private volatile Coordinate coordDestino;
 	
 	private double velocidadRobot; // en metros por segundo
-	// protected int intervaloEnvioInformacion = 1000; // por defecto en ms .
-	// Deberia ser configurable
+	
 	private volatile double pendienteRecta;
-	private volatile boolean estamosEnDestino;
-	private double espacioRecorrido;
-	// protected double distanciaDestino ;
+
 	private boolean pendienteInfinita = false;
-	private volatile boolean parar = false;
-	// private volatile boolean iniciar = false ;
+
 	private volatile boolean enDestino = false;
-	private float distanciaArecorrer;
-	private float b; // punto corte recta con eje Y
-	private int dirX = 0, dirY = 0, incrementoDistancia = 0;
+	private int dirX = 0, dirY = 0;
 	private int intervaloEnvioInformesMs;
 	private int distanciaRecorridaEnIntervaloInformes;
 	private long tiempoParaAlcanzarDestino = 3000;
@@ -69,7 +62,7 @@ public class HebraMonitorizacionLlegada extends Thread {
 	public ItfUsoRecursoVisualizadorMRS                itfusoRecVisMRS;
 	public ItfProcesadorObjetivos itfProcObjetivos;
 
-	// private int numeroPuntos = 20;
+
 	/**
 	 * Constructor
 	 * @param itfUsoRecVisMRS 
@@ -89,18 +82,16 @@ public class HebraMonitorizacionLlegada extends Thread {
 		identRobot = idRobot;
 		itfProcObjetivos = contrMovimiento.itfProcObjetivos;
 	}
+	
 
 	public synchronized void inicializarDestino(String idDestino,
 			Coordinate coordRobot, Coordinate coordDest, double velocidad) {
-		// this.finalizar= false;
+	
 		coordActuales = coordRobot;
 		coordDestino = coordDest;
-		velocidadRobot = velocidad; //
-		// intervaloEnvioInformacion= intervEnvioInformacion;
-		espacioRecorrido = 0;
+		velocidadRobot = velocidad;
 		identDestino = idDestino;
-		// this. pendienteRecta = (float)
-		// ((coordDestino.y-coordActuales.y)/(coordDestino.x-coordActuales.x));
+
 		log.debug("Coord Robot " + identRobot + " iniciales -> ("
 				+ this.coordActuales.getX() + " , " + this.coordActuales.getY()
 				+ ")");
@@ -108,34 +99,23 @@ public class HebraMonitorizacionLlegada extends Thread {
 				+ this.coordDestino.getX() + " , " + this.coordDestino.getY()
 				+ ")");
 		this.setDaemon(true);
-		// coordIncremento =
-		// this.calcularIncrementosCoordenadasAvelocidadConstante(intervaloEnvioInformacion);
-		// this.evento = notificacionAProducir;
+
+		
 		this.finalizar = false;
 		this.enDestino = false;
-		// distanciaDestino = this.distanciaEuclidC1toC2(coordActuales,
-		// coordDestino);
+
 		double incrX = (coordDestino.getX() - coordActuales.getX());
 		double incrY = (coordDestino.getY() - coordActuales.getY());
-		if (incrX > 0)
-			dirX = 1;
-		else
-			dirX = -1;
-		if (incrY > 0)
-			dirY = 1;
-		else
-			dirY = -1;
+	
+		dirX = (incrX > 0) ? 1 : -1;
+		dirY = (incrY > 0) ? 1 : -1;
+
 		if (incrX == 0 && incrY != 0) {
 			pendienteInfinita = true;
-			distanciaArecorrer = (float) incrY;
 		} else if (incrX == 0 && incrY == 0)
 			finalizar = true;
 		else {
 			pendienteRecta = (float) Math.abs(incrY / incrX);
-			this.distanciaArecorrer = (float) Math.sqrt(incrX * incrX + incrY
-					* incrY);
-			this.b = (float) (coordActuales.y - pendienteRecta
-					* coordActuales.x);
 
 		}
 		
@@ -154,6 +134,7 @@ public class HebraMonitorizacionLlegada extends Thread {
 
 	}
 
+	
 	public synchronized void setCoordRobot(Coordinate robotCoord) {
 		this.coordActuales = robotCoord;
 	}
@@ -162,6 +143,7 @@ public class HebraMonitorizacionLlegada extends Thread {
 		return coordActuales;
 	}
 
+	
 	public synchronized void setCoordDestino(Coordinate destCoord) {
 		try {
 			this.coordDestino = destCoord;
@@ -178,6 +160,7 @@ public class HebraMonitorizacionLlegada extends Thread {
 		}
 	}
 
+	
 	public synchronized Coordinate getCoordDestino() {
 		return coordDestino;
 	}
@@ -206,9 +189,10 @@ public class HebraMonitorizacionLlegada extends Thread {
 		
 		while (!this.finalizar && (!enDestino)) {
 			try {
-				Thread.sleep(intervaloEnvioInformesMs);
-				calcularNuevasCoordenadas(distanciaRecorridaEnIntervaloInformes);
-
+				/*
+				 Thread.sleep(intervaloEnvioInformesMs); 
+				 calcularNuevasCoordenadas(distanciaRecorridaEnIntervaloInformes);
+				 
 				enDestino = ((coordActuales.getX() - coordDestino.getX())
 						* dirX >= 0 && (coordActuales.getY() - coordDestino
 						.getY()) * dirY >= 0);
@@ -218,6 +202,16 @@ public class HebraMonitorizacionLlegada extends Thread {
 					this.controladorMovimiento.setCoordenadasActuales(coordActuales);
 								
 				this.itfusoRecVisSimulador.mostrarPosicionRobot(identRobot,	coordActuales);
+				this.itfusoRecVisMRS.mueveAgente(identDestino, coordActuales);
+				*/
+				
+				Thread.sleep((long) (2.0*1e3));
+				
+				calcularNuevasCoordenadasDiscretas();
+				enDestino = (coordActuales.getX() == coordDestino.getX()) &&
+						    (coordActuales.getY() == coordDestino.getY());
+				finalizar = enDestino;
+				this.controladorMovimiento.setCoordenadasActuales(coordActuales);
 				this.itfusoRecVisMRS.mueveAgente(identDestino, coordActuales);
 				
 			} catch (Exception e) {
@@ -232,16 +226,13 @@ public class HebraMonitorizacionLlegada extends Thread {
 				Thread.sleep(tiempoParaAlcanzarDestino);
 				this.controladorMovimiento.estamosEnDestino(identDestino,
 						coordDestino);
+				
 				log.debug("Coord Robot En thread  " + identRobot
 						+ " en destino -> (" + this.coordActuales.getX()
 						+ " , " + this.coordActuales.getY() + ")");
-				System.out.println("Coord Robot En thread  " + identRobot
-						+ " en destino -> (" + this.coordActuales.x + " , "
-						+ this.coordActuales.y + ")");
 
 				this.controladorMovimiento.setCoordenadasActuales(coordDestino);
-				// se informa al control de que estamos en el destino. Se cambia
-				// el estado a parar
+
 
 				Informe informeLlegada = new Informe(this.identRobot,
 						this.identDestino, VocabularioRosace.MsgeLlegadaDestino);
@@ -270,5 +261,11 @@ public class HebraMonitorizacionLlegada extends Thread {
 		
 		}
 	}
+	
+	private void calcularNuevasCoordenadasDiscretas() {
+		this.coordActuales.setX(coordActuales.getX() + dirX);
+	}
+	
+	
 
 }

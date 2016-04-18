@@ -82,15 +82,11 @@ public abstract class EstadoAbstractoMovRobot implements ItfUsoMovimientoCtrl {
 
 	}
 
-	// private EstadoAbstractoMovRobot setEstadoActual(EstadoAbstractoMovRobot
-	// estadoMovCtrl) {
-	// return estadoActual = maquinaEstados.estadoActual;
-	// }
+
 
 	public void inicializarInfoMovimiento(Coordinate coordInicial,
 			float velocidadInicial) {
-		// robotposicionActual =coordInicial;
-		// velocidadCrucero = velocidadInicial;
+
 		maquinaEstados
 				.inicializarInfoMovimiento(coordInicial, velocidadInicial);
 	}
@@ -101,13 +97,15 @@ public abstract class EstadoAbstractoMovRobot implements ItfUsoMovimientoCtrl {
 		this.identDestino = identDest;
 	}
 
+	
 	public abstract void cambiaVelocidad(float nuevaVelocidadCrucero);
 
+	
 	public synchronized void cambiaDestino(String identDest,
 			Coordinate coordDestino) {
+		
 		maquinaEstados.getEstadoActual().cambiaDestino(identDest, coordDestino);
 		this.identDestino = identDest;
-		// identDestino = identDest;
 	}
 
 	public synchronized void parar() {
@@ -120,25 +118,10 @@ public abstract class EstadoAbstractoMovRobot implements ItfUsoMovimientoCtrl {
 
 	public abstract boolean estamosEnDestino(String identDest);
 
-	// {
-	// // se informa al control de que estamos en el destino. Se cambia el
-	// estado a parar
-	// Informe informeLlegada = new Informe (identComponente,identDest,
-	// VocabularioRosace.MsgeLlegadaDestino);
-	// this.itfProcObjetivos.insertarHecho(informeLlegada);
-	// trazas.trazar(identAgente, "Se informa de llegada al  destino: "
-	// +informeLlegada + " El robot esta en el estado :"+ identEstadoActual,
-	// InfoTraza.NivelTraza.debug);
-	// estadoActual =
-	// maquinaEstados.cambiarEstado(MaquinaEstadoMovimientoCtrl.EstadoMovimientoRobot.RobotParado);
-	// this.identDestino = identDest;
-	//
-	// }
 
 	public synchronized void imposibleAvanzarADestino() {
 		maquinaEstados
 				.cambiarEstado(MaquinaEstadoMovimientoCtrl.EstadoMovimientoRobot.RobotBloqueado);
-		// estadoActual=maquinaEstados.getEstadoActual();
 	}
 
 	public synchronized Coordinate getCoordenadasActuales() {
