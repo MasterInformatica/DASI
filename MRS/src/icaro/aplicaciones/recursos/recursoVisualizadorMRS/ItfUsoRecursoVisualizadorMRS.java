@@ -1,5 +1,6 @@
 package icaro.aplicaciones.recursos.recursoVisualizadorMRS;
 
+import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.recursos.recursoPersistenciaEntornosSimulacion.ItfUsoRecursoPersistenciaEntornosSimulacion;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.imp.EscenarioSimulacionRobtsVictms;
@@ -116,4 +117,5 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	public void inicializarDestinoRobot(String id, Coordinate coordsAct, String idDest, Coordinate coordsDestino, double VelocidadRobot) throws Exception;
 	 
 	
+	public void setMapa(Mapa mapa);
 }
