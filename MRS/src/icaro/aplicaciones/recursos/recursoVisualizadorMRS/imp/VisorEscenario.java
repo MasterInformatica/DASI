@@ -71,7 +71,6 @@ public class VisorEscenario extends JFrame {
 			eliminaAgente(idAgente,org_coord);
 		}
 		// Set y draw new position
-		
 		return dibujaAgente(idAgente,coord);
 	}
 	
@@ -96,7 +95,7 @@ public class VisorEscenario extends JFrame {
 	}
 	
 	public void mostrar(Mapa mapa){
-		Map = mapa;
+		setMapa(mapa);
 		initComponentes();
 		if(isVisible)
 			return;
@@ -190,6 +189,8 @@ public class VisorEscenario extends JFrame {
 
 	public void setMapa(Mapa mapa) {
 		Map = mapa;
+		rows = Map.getNumRows();
+		cols = Map.getNumCols();
 	}
 
 }
