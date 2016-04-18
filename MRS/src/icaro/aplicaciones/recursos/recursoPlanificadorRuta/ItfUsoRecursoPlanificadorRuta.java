@@ -8,6 +8,6 @@ import java.util.ArrayList;
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 
 public interface ItfUsoRecursoPlanificadorRuta extends ItfUsoRecursoSimple{
-	public void setMapa(Mapa mapa);
-	public ArrayList<Coordenada> getRuta(Coordenada start, Coordenada finish);
+	public void setMapa(Mapa mapa) throws Exception;
+	public ArrayList<Coordenada> getRuta(Coordenada start, Coordenada finish) throws Exception;
 }
