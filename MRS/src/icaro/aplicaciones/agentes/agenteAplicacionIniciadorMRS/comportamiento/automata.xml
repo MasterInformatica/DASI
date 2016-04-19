@@ -9,14 +9,14 @@
     ******************     Declaracion del estado inicial y su transicion             	******************
     ******************************************************************************************************-->
   <estadoInicial idInicial="estadoInicial">
-     <transicion input="comenzar" accion="AccionComenzar" estadoSiguiente="esperandoDefinicionEscenario" modoDeTransicion="bloqueante"/>
+     <transicion input="comenzar" accion="AccionComenzar" estadoSiguiente="esperandoEscenario" modoDeTransicion="bloqueante"/>
   </estadoInicial>
 
 <!--******************************************************************************************************
     ******************     Declaracion de estados intermedios y sus transiciones        ******************
     ******************************************************************************************************-->  
   <estado idIntermedio="esperandoEscenario">
-  	<transicion input=""
+  	<transicion input="prueba" accion="leerFicheroTimeOut" estadoSiguiente="getFicheroTimeOut" modoDeTransicion="bloqueante"/> 
   </estado>
 <!-- 
   <estado idIntermedio="esperandoPlay">

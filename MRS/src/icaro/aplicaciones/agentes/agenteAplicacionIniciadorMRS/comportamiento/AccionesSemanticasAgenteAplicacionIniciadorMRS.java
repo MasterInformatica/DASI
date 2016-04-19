@@ -40,21 +40,32 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 					.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoPlanificadorRuta1");
 			
 			
-			
-			//1 - mostrarVisorControl
-			//2 - dame fichero
-			//3 - (si error, avisar).
+			this.itfVisualizadorMRS.muestraVentanaControl();
+
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-		
+				
 		trazas.trazar(this.getNombreAgente(),
-					  "Accion AccionCOmenzar completada", NivelTraza.debug);
+					  "Accion AccionComenzar completada", NivelTraza.debug);
+		
+		
+		
+		// Esta pequeña chapuza hace que se ejecute la accion de solicitar fichero
+		// de manera automatica
+		this.informaraMiAutomata("leerFicheroTimeOut", null);
 	}
 	
 	
+	public void getFicheroTimeOut(){
+		trazas.trazar(this.getNombreAgente(), "Recoge fichero Timeout", NivelTraza.debug);
+	}
+
 	
-	/* --- METODOS AUXILIARES --- */
+	
+	/*--------------------------
+	  --- METODOS AUXILIARES ---
+	  --------------------------*/ 
 	@Override
 	public void clasificaError() {
 		// TODO Auto-generated method stub

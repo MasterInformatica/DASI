@@ -118,4 +118,7 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	 
 	
 	public void setMapa(Mapa mapa) throws Exception;
+
+
+	public void muestraVentanaControl() throws Exception;
 }
