@@ -30,12 +30,6 @@ public class ControladorVisorSimulador {
 			return visorEscenario.mueveAgente(idAgente,coord,tipo);	
 		return false;
 	}
-	
-	public boolean mueveAgente2(String idAgente, Coordinate coord) {
-		if(visorEscenario != null)
-			return visorEscenario.mueveAgente2(idAgente,coord);	
-		return false;
-	}
 
 	public void termina() {
 		if ( visorEscenario != null )
