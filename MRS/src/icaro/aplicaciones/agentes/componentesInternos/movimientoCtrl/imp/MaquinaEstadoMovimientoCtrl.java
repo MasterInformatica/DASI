@@ -240,6 +240,7 @@ public class MaquinaEstadoMovimientoCtrl {
 					this.monitorizacionLlegadaDestino.finalizar();
 				robotposicionActual = monitorizacionLlegadaDestino
 						.getCoordRobot();
+				
 				this.velocidadRobot = velocidadCrucero;
 				this.destinoCoord = coordDestino;
 				this.identDestino = identdest;
@@ -253,6 +254,7 @@ public class MaquinaEstadoMovimientoCtrl {
 						velocidadCrucero);
 				monitorizacionLlegadaDestino.start();
 			}
+		
 		if (this.identEstadoActual.equals(EstadoMovimientoRobot.RobotParado
 				.name()))
 			if (identdest.equals(identDestino))

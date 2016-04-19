@@ -139,9 +139,8 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 
 	@Override
 	public void inicializarDestinoRobot(String id, Coordinate coordsAct, String idDest, Coordinate coordsDestino,
-			double VelocidadRobot) {
-		controladorUI.mueveAgente(id,coordsAct);
-		
+			double VelocidadRobot) {	
+		controladorUI.mueveAgente(id,coordsAct);	
 	}
 
 	@Override
