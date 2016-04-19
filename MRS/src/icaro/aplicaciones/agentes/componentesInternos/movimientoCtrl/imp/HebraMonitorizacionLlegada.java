@@ -131,6 +131,8 @@ public class HebraMonitorizacionLlegada extends Thread {
 		intervaloEnvioInformesMs = (int) velocidadRobot * 50;
 		distanciaRecorridaEnIntervaloInformes = 1;
 
+		
+		this.setCoordDestino(coordDestino);
 
 	}
 
@@ -155,15 +157,19 @@ public class HebraMonitorizacionLlegada extends Thread {
 	
 	public synchronized void setCoordDestino(Coordinate destCoord) {
 		try {
+			
+			
 			this.coordDestino = destCoord;
 			if (itfusoRecVisSimulador != null){
 				this.itfusoRecVisSimulador.inicializarDestinoRobot(identRobot,
 						coordActuales, identDestino, coordDestino,
 						velocidadRobot);
-				this.itfusoRecVisMRS.inicializarDestinoRobot(identRobot,
-						coordActuales, identDestino, coordDestino,
-						velocidadRobot);
 			}
+			
+			this.itfusoRecVisMRS.inicializarDestinoRobot(identRobot,
+					coordActuales, identDestino, coordDestino,
+					velocidadRobot);
+
 		} catch (Exception ex) {
 			Exceptions.printStackTrace(ex);
 		}

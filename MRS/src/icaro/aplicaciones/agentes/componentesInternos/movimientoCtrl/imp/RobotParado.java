@@ -62,22 +62,30 @@ public class RobotParado extends EstadoAbstractoMovRobot implements
 
 					if (monitorizacionLlegadaDestino != null)
 						monitorizacionLlegadaDestino.finalizar();
+					
+					
 					trazas.trazar(identComponente,
 							"Estoy parado en la posicion : "
 									+ robotposicionActual
 									+ "  Me muevo al destino  : "
 									+ identDestino + " Coordenadas:  "
 									+ destinoCoord, InfoTraza.NivelTraza.error);
+					
+					
 					this.monitorizacionLlegadaDestino = new HebraMonitorizacionLlegada(
 							this.identAgente, maquinaEstados,
 							this.itfusoRecVisSimulador, this.itfusoRecVisMRS,
 							this.itfusoRecPlanRuta);
 					
+					
 					monitorizacionLlegadaDestino.inicializarDestino(
 							this.identDestino, robotposicionActual,
 							this.destinoCoord, this.velocidadCrucero);
-					// monitorizacionLlegadaDestino.start();
+
+					
 					monitorizacionLlegadaDestino.start();
+					
+					
 					this.maquinaEstados
 							.cambiarEstado(MaquinaEstadoMovimientoCtrl.EstadoMovimientoRobot.RobotEnMovimiento);
 				} else

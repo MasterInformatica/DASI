@@ -38,7 +38,7 @@ public class ComponenteBotonMapa extends JButton {
 		prof = 1;
 		bg = new ImageIcon(file);
 		min = new ImageIcon("images/miner.png");
-		rob = new ImageIcon("images/miner.png");
+		rob = new ImageIcon("images/robot.png");
 		pie = new ImageIcon("images/miner.png");
 		ci = new CombineIcon("background",bg);
 		setIcon(ci);
@@ -92,8 +92,8 @@ public class ComponenteBotonMapa extends JButton {
 		repaint();
 	}
 	
-	public void dibujaAgente(String idAgente) {
-		addElement(idAgente,"Robot");
+	public void dibujaAgente(String idAgente,String tipo) {
+		addElement(idAgente,tipo);
 	}
 	public void dibujaAgente2(String idAgente) {
 		addElement(idAgente,"Miner");
