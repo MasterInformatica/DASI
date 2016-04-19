@@ -7,9 +7,10 @@
 # *.jar
 *.war
 *.ear
-./MRS/log/
-./.metadata
-./MRS/serieInfoAsignacionVictimas.tmp
+MRS/log/
+.metadata
+MRS/serieInfoAsignacionVictimas.tmp
+MRS/Persistencia*.xml
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
