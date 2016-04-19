@@ -1,14 +1,20 @@
 package icaro.aplicaciones.MRS.informacion;
 
 public class Mapa {
-	private int sx=25, sy=25;
+	private int sx=5, sy=5;
 	private TipoCelda[][] mapa;
 
 	public TipoCelda[][] getMapa(){
 		return mapa;
 	}
 	
+	public int getNumCols(){
+		return sx;
+	}
 	
+	public int getNumRows(){
+		return sy;
+	}
 	public TipoCelda getCoord(int x, int y){
 		return this.mapa[x][y];
 	}

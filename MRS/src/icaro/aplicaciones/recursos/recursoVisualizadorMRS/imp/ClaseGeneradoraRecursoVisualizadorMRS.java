@@ -124,14 +124,15 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	@Override
 	public void mostrarEscenarioMovimiento(Mapa mapa) throws Exception{
 		controladorUI.mostrarEscenarioMovimiento(mapa);
-		//-controladorIUSimulador.peticionMostrarEscenarioMovimiento(infoEscenario);
+		trazas.aceptaNuevaTraza(new InfoTraza(this.recursoId,
+				"Escenario (Mapa) añadido al visor",InfoTraza.NivelTraza.debug));
 	}
 		
 		
 	@Override
 	public void termina() {
 		trazas.aceptaNuevaTraza(
-				new InfoTraza(this.id, "Terminando recurso" + this.id + " ....", InfoTraza.NivelTraza.debug));
+				new InfoTraza(this.recursoId, "Terminando recurso" + this.recursoId + " ....", InfoTraza.NivelTraza.debug));
 		controladorUI.termina();
 		super.termina();
 	}

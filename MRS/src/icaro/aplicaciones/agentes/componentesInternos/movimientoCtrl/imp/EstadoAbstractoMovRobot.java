@@ -7,6 +7,7 @@ package icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.imp;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.Rosace.informacion.VocabularioRosace;
 import icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.ItfUsoMovimientoCtrl;
+import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.ItfUsoRecursoVisualizadorEntornosSimulacion;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
@@ -45,6 +46,7 @@ public abstract class EstadoAbstractoMovRobot implements ItfUsoMovimientoCtrl {
 	public String identDestino;
 	public ItfUsoRecursoVisualizadorEntornosSimulacion itfusoRecVisSimulador;
 	public ItfUsoRecursoVisualizadorMRS itfusoRecVisMRS;
+	public ItfUsoRecursoPlanificadorRuta itfusoRecPlanRuta;
 
 	public EstadoAbstractoMovRobot(MaquinaEstadoMovimientoCtrl maquinaEstds,
 			MaquinaEstadoMovimientoCtrl.EstadoMovimientoRobot identEstadoAcrear) {
@@ -71,14 +73,16 @@ public abstract class EstadoAbstractoMovRobot implements ItfUsoMovimientoCtrl {
 
 	public void inicializar(ItfProcesadorObjetivos itfProcObj,
 			ItfUsoRecursoVisualizadorEntornosSimulacion itfVisSimul,
-			ItfUsoRecursoVisualizadorMRS itfVisualMRS) {
+			ItfUsoRecursoVisualizadorMRS itfVisualMRS,
+			ItfUsoRecursoPlanificadorRuta itfPlanRuta) {
 		identAgente = itfProcObj.getAgentId();
 		itfProcObjetivos = itfProcObj;
 		identComponente = identAgente + "." + this.getClass().getSimpleName();
 		trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
 		itfusoRecVisSimulador = itfVisSimul;
 		itfusoRecVisMRS = itfVisualMRS;
-		maquinaEstados.inicializar(itfProcObj, itfVisSimul, itfVisualMRS);
+		itfusoRecPlanRuta = itfPlanRuta;
+		maquinaEstados.inicializar(itfProcObj, itfVisSimul, itfVisualMRS,itfPlanRuta);
 
 	}
 
