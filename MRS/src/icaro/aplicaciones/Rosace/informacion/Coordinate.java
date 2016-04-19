@@ -12,6 +12,12 @@ public class Coordinate implements Serializable {
 		this.z = z;
 	}
 
+	public Coordinate(Coordinate coord) {
+		this.x = coord.x;
+		this.y = coord.y;
+		this.z = coord.z;
+	}
+
 	public synchronized void setX(double XCoord) {
 		this.x = XCoord;
 	}
