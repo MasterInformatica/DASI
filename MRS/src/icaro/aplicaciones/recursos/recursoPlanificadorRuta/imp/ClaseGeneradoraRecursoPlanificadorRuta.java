@@ -47,76 +47,76 @@ public class ClaseGeneradoraRecursoPlanificadorRuta extends ImplRecursoSimple
 	@Override
 	public ArrayList<Coordenada> getRuta(Coordenada start, Coordenada finish) throws Exception{
 		TipoCelda[][] map = this.mapa.getMapa();
+		if (map[finish.x][finish.y] != TipoCelda.PASILLO)
+			return new ArrayList<Coordenada>();
 		int sizeX = map.length;
 		int sizeY = map[0].length;
-        boolean[][] visited = new boolean[sizeX][sizeY];
-        for (int i=0; i<sizeX; i++)
-            Arrays.fill(visited[i], false);
-
-		ArrayList<Coordenada> tt = this._getRuta(map, start, finish, visited);
-		System.out.println(">>" + tt);
-		return tt;
-		
+		boolean[][] visited = new boolean[sizeX][sizeY];
+		for (int i=0; i<sizeX; i++)
+			Arrays.fill(visited[i], false);
+		return this._getRuta(map, start, finish, visited, 0, new int[]{-1});
 	}
-	
-	
-	private ArrayList<Coordenada> _getRuta(TipoCelda[][] map, Coordenada start, Coordenada finish, boolean[][] visited){
-        if(start.x == finish.x && start.y == finish.y){
-            ArrayList<Coordenada> to_return = new ArrayList<Coordenada>();
-            to_return.add(finish);
-            return to_return;
-        }
 
-        visited[start.x][start.y] = true;
+	private ArrayList<Coordenada> _getRuta(TipoCelda[][] map, Coordenada start, Coordenada finish, boolean[][] visited, int count, int[] minRuta){
+		if(minRuta[0] != -1)
+			if(minRuta[0] < count)
+				return new ArrayList<Coordenada>();
 
-        ArrayList<ArrayList<Coordenada>> aux = new ArrayList<ArrayList<Coordenada>>();
-        if(start.x-1 >= 0)
-            if(!visited[start.x-1][start.y])
-                if(map[start.x-1][start.y] == TipoCelda.PASILLO)
-                    aux.add(_getRuta(map, new Coordenada(start.x-1, start.y), finish, visited));
+		if(start.x == finish.x && start.y == finish.y){
+			minRuta[0] = count;
+			ArrayList<Coordenada> to_return = new ArrayList<Coordenada>();
+			to_return.add(finish);
+			return to_return;}
 
-        if(start.x+1 < map.length)
-            if(!visited[start.x+1][start.y])
-                if(map[start.x+1][start.y] == TipoCelda.PASILLO)
-                    aux.add(_getRuta(map, new Coordenada(start.x+1, start.y), finish, visited));
+		visited[start.x][start.y] = true;
 
-        if(start.y-1 >= 0)
-            if(!visited[start.x][start.y-1])
-                if(map[start.x][start.y-1] == TipoCelda.PASILLO)
-                    aux.add(_getRuta(map, new Coordenada(start.x, start.y-1), finish, visited));
+		ArrayList<ArrayList<Coordenada>> aux = new ArrayList<ArrayList<Coordenada>>();
+		if(start.x-1 >= 0)
+			if(!visited[start.x-1][start.y])
+				if(map[start.x-1][start.y] == TipoCelda.PASILLO)
+					aux.add(_getRuta(map, new Coordenada(start.x-1, start.y), finish, visited, count+1, minRuta));
 
-        if(start.y+1 < map[0].length)
-            if(!visited[start.x][start.y+1])
-                if(map[start.x][start.y+1] == TipoCelda.PASILLO)
-                    aux.add(_getRuta(map, new Coordenada(start.x, start.y+1), finish, visited));
+		if(start.x+1 < map.length)
+			if(!visited[start.x+1][start.y])
+				if(map[start.x+1][start.y] == TipoCelda.PASILLO)
+					aux.add(_getRuta(map, new Coordenada(start.x+1, start.y), finish, visited, count+1, minRuta));
 
-        visited[start.x][start.y] = false;
+		if(start.y-1 >= 0)
+			if(!visited[start.x][start.y-1])
+				if(map[start.x][start.y-1] == TipoCelda.PASILLO)
+					aux.add(_getRuta(map, new Coordenada(start.x, start.y-1), finish, visited, count+1, minRuta));
 
-        Iterator<ArrayList<Coordenada>> y = aux.iterator();
-        while (y.hasNext()) {
-            ArrayList<Coordenada> z = y.next();
-            if(z.size() != 0){
-                Coordenada last = z.get(z.size()-1);
-                if(last.x == finish.x && last.y == finish.y)
-                    continue;
-            }
-            y.remove();
-        }
+		if(start.y+1 < map[0].length)
+			if(!visited[start.x][start.y+1])
+				if(map[start.x][start.y+1] == TipoCelda.PASILLO)
+					aux.add(_getRuta(map, new Coordenada(start.x, start.y+1), finish, visited, count+1, minRuta));
 
-        if(aux.size() == 0)
-            return new ArrayList<Coordenada>();
+		visited[start.x][start.y] = false;
 
-        int theChosenOne = 0;
-        int min = aux.get(0).size();
-        for(int i=1; i<aux.size(); i++)
-            if(aux.get(i).size() < min){
-                theChosenOne = i;
-                min = aux.get(i).size();}
+		Iterator<ArrayList<Coordenada>> y = aux.iterator();
+		while (y.hasNext()) {
+			ArrayList<Coordenada> z = y.next();
+			if(z.size() != 0){
+				Coordenada last = z.get(z.size()-1);
+				if(last.x == finish.x && last.y == finish.y)
+					continue;
+			}
+			y.remove();
+		}
 
+		if(aux.size() == 0)
+			return new ArrayList<Coordenada>();
 
-        ArrayList<Coordenada> to_return = new ArrayList<Coordenada>();
-        to_return.add(start);
-        to_return.addAll(aux.get(theChosenOne));
-        return to_return;
+		int theChosenOne = 0;
+		int min = aux.get(0).size();
+		for(int i=1; i<aux.size(); i++)
+			if(aux.get(i).size() < min){
+				theChosenOne = i;
+				min = aux.get(i).size();}
+
+		ArrayList<Coordenada> to_return = new ArrayList<Coordenada>();
+		to_return.add(start);
+		to_return.addAll(aux.get(theChosenOne));
+		return to_return;
 	}
 }
