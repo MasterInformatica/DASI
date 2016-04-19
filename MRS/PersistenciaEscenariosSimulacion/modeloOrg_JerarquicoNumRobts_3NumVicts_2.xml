@@ -1,0 +1,80 @@
+<escenarioSimulacion>
+   <identEscenario>modeloOrg_JerarquicoNumRobts_2NumVicts_1</identEscenario>
+   <modeloOrganizativo>Jerarquico</modeloOrganizativo>
+   <numRobots>3</numRobots>
+   <numVictimas>2</numVictimas>
+   <robots key="JerarquicoRobotSubordinado1">
+      <robotStatus1>
+         <idRobot>JerarquicoRobotSubordinado1</idRobot>
+         <idRobotRol>indefinido</idRobotRol>
+         <availableEnergy>100000</availableEnergy>
+         <robotCoordinateActualP>
+            <x>0</x>
+            <y>0</y>
+         </robotCoordinateActualP>
+         <robotCapabilities class="java.util.ArrayList">
+            <robotCapability nombre="radar">
+               <descripcion>radar del robot</descripcion>
+            </robotCapability>
+         </robotCapabilities>
+      </robotStatus1>
+   </robots>
+   <robots key="JerarquicoRobotSubordinado2">
+      <robotStatus1>
+         <idRobot>JerarquicoRobotSubordinado2</idRobot>
+         <idRobotRol>indefinido</idRobotRol>
+         <availableEnergy>100000</availableEnergy>
+         <robotCoordinateActualP>
+            <x>1</x>
+            <y>0</y>
+         </robotCoordinateActualP>
+         <robotCapabilities class="java.util.ArrayList">
+            <robotCapability nombre="radar">
+               <descripcion>radar del robot</descripcion>
+            </robotCapability>
+         </robotCapabilities>
+      </robotStatus1>
+   </robots>
+   <robots key="JerarquicoRobotAsignador">
+      <robotStatus1>
+         <idRobot>JerarquicoRobotAsignador</idRobot>
+         <idRobotRol>indefinido</idRobotRol>
+         <availableEnergy>100000</availableEnergy>
+         <robotCoordinateActualP>
+            <x>0</x>
+            <y>0</y>
+         </robotCoordinateActualP>
+         <robotCapabilities class="java.util.ArrayList">
+            <robotCapability nombre="radar">
+               <descripcion>radar del robot</descripcion>
+            </robotCapability>
+         </robotCapabilities>
+      </robotStatus1>
+   </robots>
+   <victimas key="Victima1">
+      <victim>
+         <name>Victima1</name>
+         <priority>100</priority>
+         <requiredCompetencies class="java.util.ArrayList">
+            <competency>25</competency>
+         </requiredCompetencies>
+         <victimCoordinateP>
+            <x>4</x>
+            <y>14</y>
+         </victimCoordinateP>
+      </victim>
+   </victimas>
+   <victimas key="Victima2">
+      <victim>
+         <name>Victima2</name>
+         <priority>100</priority>
+         <requiredCompetencies class="java.util.ArrayList">
+            <competency>25</competency>
+         </requiredCompetencies>
+         <victimCoordinateP>
+            <x>12</x>
+            <y>4</y>
+         </victimCoordinateP>
+      </victim>
+   </victimas>
+</escenarioSimulacion>
