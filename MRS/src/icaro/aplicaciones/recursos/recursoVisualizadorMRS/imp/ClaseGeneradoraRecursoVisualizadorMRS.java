@@ -108,7 +108,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	
 	@Override
 	public void mostrarVictimaRescatada(String VictimaId) throws Exception{
-		// TODO Auto-generated method stub
+		throw new Error("NO SE LLAMA A mostrarVictimaRescatada!");
 		
 	}
 	
@@ -140,15 +140,15 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	@Override
 	public void inicializarDestinoRobot(String id, Coordinate coordsAct, String idDest, Coordinate coordsDestino,
 			double VelocidadRobot) {
-		controladorUI.mueveAgente(id,coordsAct);
-		
+		throw new Error("NO SE LLAMA A inicializarDestinoRobot");
+		//controladorUI.mueveAgente(id,coordsAct);
+		//controladorUI.mueveAgente2(idDest,coordsDestino);
 	}
 
 	@Override
 	public void setMapa(Mapa mapa) throws Exception {
 		controladorUI.setMapa(mapa);
-	}
-	
+	}	
 }
 		
 /*		@Override

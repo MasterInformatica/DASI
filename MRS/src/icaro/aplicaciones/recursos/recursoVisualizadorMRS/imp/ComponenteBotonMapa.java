@@ -95,6 +95,9 @@ public class ComponenteBotonMapa extends JButton {
 	public void dibujaAgente(String idAgente) {
 		addElement(idAgente,"Robot");
 	}
+	public void dibujaAgente2(String idAgente) {
+		addElement(idAgente,"Miner");
+	}
 	public void eliminaAgente(String idAgente) {
 		removeElement(idAgente);
 	}
