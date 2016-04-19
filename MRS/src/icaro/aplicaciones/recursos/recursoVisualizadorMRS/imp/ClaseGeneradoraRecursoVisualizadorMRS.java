@@ -114,7 +114,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	
 	@Override
 	public boolean mueveAgente(String idAgente, Coordinate coord) throws Exception{
-		return controladorUI.mueveAgente(idAgente,coord);
+		return controladorUI.mueveRobot(idAgente,coord);
 		
 	}
 	
@@ -140,7 +140,8 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	@Override
 	public void inicializarDestinoRobot(String id, Coordinate coordsAct, String idDest, Coordinate coordsDestino,
 			double VelocidadRobot) {	
-		controladorUI.mueveAgente(id,coordsAct);	
+		controladorUI.mueveVictima(id,new Coordinate(coordsDestino));	
+		controladorUI.mueveRobot(idDest,new Coordinate(coordsAct));	
 	}
 
 	@Override

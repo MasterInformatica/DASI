@@ -57,7 +57,7 @@ public class VisorEscenario extends JFrame {
 	}
 	
 	
-	public boolean mueveAgente(String idAgente, Coordinate coord) {
+	public boolean mueveAgente(String idAgente, Coordinate coord, String tipo) {
 		// Get y remove Current position
 		System.out.println(posicionAgentes);
 		if(posicionAgentes.containsKey(idAgente)){
@@ -66,15 +66,15 @@ public class VisorEscenario extends JFrame {
 			eliminaAgente(idAgente,org_coord);
 		}
 		// Set y draw new position
-		return dibujaAgente(idAgente,coord);
+		return dibujaAgente(idAgente,coord, tipo);
 	}
 	
-	private boolean dibujaAgente(String idAgente, Coordinate coord){
+	private boolean dibujaAgente(String idAgente, Coordinate coord, String tipo){
 		int x = (int) coord.getX();
 		int y = (int) coord.getY();
 		if( x < 0 || y < 0 || x >= rows || y >= cols)
 			return false;
-		botonesMapa[x][y].dibujaAgente(idAgente);
+		botonesMapa[x][y].dibujaAgente(idAgente,tipo);
 		posicionAgentes.put(idAgente, new Coordinate(coord));
 		return true;
 	}

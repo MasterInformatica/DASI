@@ -19,9 +19,15 @@ public class ControladorVisorSimulador {
 			visorEscenario.mostrar(mapa);
 	}
 
-	public boolean mueveAgente(String idAgente, Coordinate coord) {
+	public boolean mueveRobot(String idAgente,Coordinate coord){
+		return mueveAgente(idAgente,coord,"Robot");
+	}
+	public boolean mueveVictima(String idAgente,Coordinate coord){
+		return mueveAgente(idAgente,coord,"Miner");
+	}
+	public boolean mueveAgente(String idAgente, Coordinate coord, String tipo) {
 		if(visorEscenario != null)
-			return visorEscenario.mueveAgente(idAgente,coord);	
+			return visorEscenario.mueveAgente(idAgente,coord,tipo);	
 		return false;
 	}
 
