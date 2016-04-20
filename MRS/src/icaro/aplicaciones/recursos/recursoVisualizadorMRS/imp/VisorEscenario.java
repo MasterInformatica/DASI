@@ -69,6 +69,7 @@ public class VisorEscenario extends JFrame {
 		return dibujaAgente(idAgente,coord, tipo);
 	}
 	
+
 	private boolean dibujaAgente(String idAgente, Coordinate coord, String tipo){
 		int x = (int) coord.getX();
 		int y = (int) coord.getY();

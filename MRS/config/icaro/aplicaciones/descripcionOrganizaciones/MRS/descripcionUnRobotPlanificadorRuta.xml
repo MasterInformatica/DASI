@@ -87,8 +87,8 @@
                             <icaro:componenteGestionado refId="AgenteControladorSimuladorRosaceReactivo1" tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="rescate1RobotAsignador" tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="rescate1RobotSubordinado1" tipoComponente="AgenteAplicacion"/>
-<!--                        <icaro:componenteGestionado refId="rescate1RobotSubordinado2" tipoComponente="AgenteAplicacion"/>
-                            <icaro:componenteGestionado refId="rescate1RobotSubordinado3" tipoComponente="AgenteAplicacion"/>
+                            <icaro:componenteGestionado refId="rescate1RobotSubordinado2" tipoComponente="AgenteAplicacion"/>
+<!--                            <icaro:componenteGestionado refId="rescate1RobotSubordinado3" tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="rescate1RobotSubordinado4" tipoComponente="AgenteAplicacion"/>
  -->                   </icaro:componentesGestionados>
                 </icaro:InstanciaGestor>
@@ -115,9 +115,9 @@
                 </icaro:Instancia>
                 <icaro:Instancia id="rescate1RobotSubordinado1" refDescripcion="AgenteAplicacionSubordinado">
                 </icaro:Instancia>
- <!--           <icaro:Instancia id="rescate1RobotSubordinado2" refDescripcion="AgenteAplicacionSubordinado">
+                <icaro:Instancia id="rescate1RobotSubordinado2" refDescripcion="AgenteAplicacionSubordinado">
                 </icaro:Instancia>
-                <icaro:Instancia id="rescate1RobotSubordinado3" refDescripcion="AgenteAplicacionSubordinado">
+<!--                <icaro:Instancia id="rescate1RobotSubordinado3" refDescripcion="AgenteAplicacionSubordinado">
                 </icaro:Instancia> 
                 <icaro:Instancia id="rescate1RobotSubordinado4" refDescripcion="AgenteAplicacionSubordinado">
                 </icaro:Instancia> 

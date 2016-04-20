@@ -1,7 +1,7 @@
 package icaro.aplicaciones.MRS.informacion;
 
 public class Mapa {
-	private int sx=5, sy=5;
+	private int sx=15, sy=15;
 	private TipoCelda[][] mapa;
 
 	public TipoCelda[][] getMapa(){

@@ -108,7 +108,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	
 	@Override
 	public void mostrarVictimaRescatada(String VictimaId) throws Exception{
-		// TODO Auto-generated method stub
+		throw new Error("NO SE LLAMA A mostrarVictimaRescatada!");
 		
 	}
 	
@@ -147,8 +147,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	@Override
 	public void setMapa(Mapa mapa) throws Exception {
 		controladorUI.setMapa(mapa);
-	}
-	
+	}	
 }
 		
 /*		@Override

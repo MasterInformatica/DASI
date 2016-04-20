@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE tablaEstados SYSTEM "schemas/TablaEstados.dtd">
+<!-- para validacion manual:
+<!DOCTYPE tablaEstados SYSTEM "../../../../../../schemas/TablaEstados.dtd">
+ -->
+<tablaEstados descripcionTabla="Tabla de estados para el agente Iniciador de MRS">
+
+<!--******************************************************************************************************
+    ******************     Declaracion del estado inicial y su transicion             	******************
+    ******************************************************************************************************-->
+  <estadoInicial idInicial="estadoInicial">
+     <transicion input="comenzar" accion="AccionComenzar" estadoSiguiente="esperandoDefinicionEscenario" modoDeTransicion="bloqueante"/>
+  </estadoInicial>
+
+<!--******************************************************************************************************
+    ******************     Declaracion de estados intermedios y sus transiciones        ******************
+    ******************************************************************************************************-->  
+  <estado idIntermedio="esperandoEscenario">
+  	<transicion input=""
+  </estado>
+<!-- 
+  <estado idIntermedio="esperandoPlay">
+  </estado>
+  
+  <estado idIntermedio="EnEjecucion">
+  </estado>
+  
+  <estado idIntermedio="finalizarSimulacion">
+  </estado>
+
+  <estado idIntermedio="finalizandoSimulacion">
+     <transicion input="finSimulacion" accion="FinSimulacion" estadoSiguiente="finalizandoSimulacion" modoDeTransicion="bloqueante"/>     
+     <transicion input="mostrarEscenarioActualSimulado" accion="mostrarEscenarioActualSimulado" estadoSiguiente="finalizandoSimulacion" modoDeTransicion="bloqueante"/>     
+  </estado>
+-->
+<!--******************************************************************************************************
+    ******************     Declaracion de estados finales             	                ******************
+    ******************************************************************************************************-->  
+
+  <estadoFinal idFinal="estadoFinal"/>
+</tablaEstados>
