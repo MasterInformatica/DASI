@@ -8,10 +8,8 @@ public class Coordenada {
 	
 	
 	public String toString(){
-	
 		return "( " + x + " , " + y + " )";
 	}
-	
 	
 	
 	public Coordenada(int x, int y){

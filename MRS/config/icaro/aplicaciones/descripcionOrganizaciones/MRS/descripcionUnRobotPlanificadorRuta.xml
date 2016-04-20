@@ -66,6 +66,7 @@
 <!--<icaro:DescRecursoAplicacion nombre="RecursoCreacionEntornosSimulacion" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoCreacionEntornosSimulacion.imp.ClaseGeneradoraRecursoCreacionEntornosSimulacion"/>-->
     <icaro:DescRecursoAplicacion nombre="RecursoVisualizadorMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.ClaseGeneradoraRecursoVisualizadorMRS"/>			            		
     <icaro:DescRecursoAplicacion nombre="RecursoPlanificadorRuta" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPlanificadorRuta.imp.ClaseGeneradoraRecursoPlanificadorRuta"/>			            		
+	<icaro:DescRecursoAplicacion nombre="RecursoPersistenciaMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPersistenciaMRS.imp.ClaseGeneradoraRecursoPersistenciaMRS"/>
 </icaro:DescRecursosAplicacion>
 
 </icaro:DescripcionComponentes>
@@ -99,7 +100,8 @@
                                 <icaro:componenteGestionado refId="RecursoEstadistica1" tipoComponente="RecursoAplicacion"/>  -->
                     	<icaro:componenteGestionado refId="RecursoVisualizadorEntornosSimulacion1" tipoComponente="RecursoAplicacion"/>
                     	<icaro:componenteGestionado refId="RecursoVisualizadorMRS1" tipoComponente="RecursoAplicacion"/>	    
-                    	<icaro:componenteGestionado refId="RecursoPlanificadorRuta1" tipoComponente="RecursoAplicacion"/>	    
+                    	<icaro:componenteGestionado refId="RecursoPlanificadorRuta1" tipoComponente="RecursoAplicacion"/>
+                    	<icaro:componenteGestionado refId="RecursoPersistenciaMRS1" tipoComponente="RecursoAplicacion"/>
 						<icaro:componenteGestionado refId="RecursoPersistenciaEntornosSimulacion1" tipoComponente="RecursoAplicacion"/>
 <!--  					<icaro:componenteGestionado refId="RecursoCreacionEntornosSimulacion1" tipoComponente="RecursoAplicacion"/>    -->                            
                     </icaro:componentesGestionados>
@@ -134,6 +136,7 @@
                 <icaro:Instancia id="RecursoVisualizadorEntornosSimulacion1" refDescripcion="RecursoVisualizadorEntornosSimulacion" xsi:type="icaro:Instancia"/>
                 <icaro:Instancia id="RecursoVisualizadorMRS1" refDescripcion="RecursoVisualizadorMRS" xsi:type="icaro:Instancia"/>
                 <icaro:Instancia id="RecursoPlanificadorRuta1" refDescripcion="RecursoPlanificadorRuta" xsi:type="icaro:Instancia"/>
+                <icaro:Instancia id="RecursoPersistenciaMRS1" refDescripcion="RecursoPersistenciaMRS" xsi:type="icaro:Instancia"/>
                 <icaro:Instancia id="RecursoPersistenciaEntornosSimulacion1" refDescripcion="RecursoPersistenciaEntornosSimulacion" xsi:type="icaro:Instancia"/>
 <!--            <icaro:Instancia id="RecursoCreacionEntornosSimulacion1" refDescripcion="RecursoCreacionEntornosSimulacion" xsi:type="icaro:Instancia"/> -->                
         </icaro:RecursosAplicacion>
