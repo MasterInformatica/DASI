@@ -39,6 +39,8 @@ implements ItfUsoRecursoPersistenciaMRS{
 			throw e;
 		}
 	}
+	
+	@Override
 	public Escenario parseEscenario(File file) throws Exception{
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -110,6 +112,7 @@ implements ItfUsoRecursoPersistenciaMRS{
 		}
 		return e;
 	}
+
 	private TipoCelda str2tipocelda(String str){
 		if(str.toUpperCase().equals("PASILLO"))
 			return TipoCelda.PASILLO;

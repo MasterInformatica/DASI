@@ -1,5 +1,6 @@
 package icaro.aplicaciones.agentes.agenteAplicacionAgteControladorSimuladorRosaceReactivo.comportamiento;
 
+import icaro.aplicaciones.MRS.informacion.Escenario;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.Rosace.informacion.*;
 import icaro.aplicaciones.Rosace.utils.ConstantesRutasEstadisticas;
@@ -7,6 +8,7 @@ import icaro.aplicaciones.recursos.recursoCreacionEntornosSimulacion.ItfUsoRecur
 import icaro.aplicaciones.recursos.recursoPersistenciaEntornosSimulacion.ItfUsoRecursoPersistenciaEntornosSimulacion;
 import icaro.aplicaciones.recursos.recursoPersistenciaEntornosSimulacion.imp.ReadXMLTestSequence;
 import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
+import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.ItfUsoRecursoVisualizadorEntornosSimulacion;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.imp.EscenarioSimulacionRobtsVictms;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
@@ -15,6 +17,8 @@ import icaro.infraestructura.patronAgenteReactivo.control.acciones.AccionesSeman
 import icaro.infraestructura.recursosOrganizacion.configuracion.ItfUsoConfiguracion;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza.NivelTraza;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -45,7 +49,7 @@ public class AccionesSemanticasAgenteAplicacionAgteControladorSimuladorRosace
 	private ItfUsoRecursoVisualizadorEntornosSimulacion itfUsoRecursoVisualizadorEntornosSimulacion;
 	private ItfUsoRecursoVisualizadorMRS                itfUsoRecursoVisualizadorMRS;
 	private ItfUsoRecursoPlanificadorRuta               itfusoRecursoPlanificadorRuta;
-	
+	private ItfUsoRecursoPersistenciaMRS                itfusoRecursoPersistenciaMRS;	
 	
 	private InfoEquipo equipo;
 	private String identificadorEquipo;
@@ -150,6 +154,10 @@ public class AccionesSemanticasAgenteAplicacionAgteControladorSimuladorRosace
 			itfusoRecursoPlanificadorRuta = (ItfUsoRecursoPlanificadorRuta) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_USO
 							+ "RecursoPlanificadorRuta1");
+			
+			itfusoRecursoPersistenciaMRS = (ItfUsoRecursoPersistenciaMRS) this.itfUsoRepositorio
+					.obtenerInterfaz(NombresPredefinidos.ITF_USO
+							+ "RecursoPersistenciaMRS1");
 			/*@  */
 			
 			
@@ -247,7 +255,10 @@ public class AccionesSemanticasAgenteAplicacionAgteControladorSimuladorRosace
 							.mostrarEscenarioMovimiento(escenarioActual);
 					
 					/*@ */
-					this.mapa = new Mapa();
+	                File file = new File("Escenario1.xml");
+					
+	                Escenario aux = itfusoRecursoPersistenciaMRS.parseEscenario(file);
+					this.mapa = aux.getMapa();
 					itfUsoRecursoVisualizadorMRS.mostrarEscenarioMovimiento(this.mapa);
 					itfusoRecursoPlanificadorRuta.setMapa(mapa);
 					/*@ */

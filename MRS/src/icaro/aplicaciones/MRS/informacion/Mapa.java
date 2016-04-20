@@ -8,10 +8,10 @@ public class Mapa {
 		this.cols=cols;
 		this.rows=rows;
 		
-		this.mapa = new TipoCelda[cols][rows];
+		this.mapa = new TipoCelda[rows][cols];
 	
-		for(int i=0; i<cols; i++)
-			for(int j=0; j<rows; j++)
+		for(int i=0; i<rows; i++)
+			for(int j=0; j<cols; j++)
 				mapa[i][j] = TipoCelda.PARED;
 	}
 	
@@ -32,7 +32,7 @@ public class Mapa {
 	}
 	
 	public void setCoord (int row , int col, TipoCelda t){
-		this.mapa[col][row]=t;
+		this.mapa[row][col]=t;
 	}
 	
 	private String tipocelda2str(TipoCelda t){
@@ -51,10 +51,10 @@ public class Mapa {
 	 
 	@Override
 	public String toString(){
-		String str =" x:"+cols+" - y:"+rows+"\n";
+		String str =" x:"+rows+" - y:"+cols+"\n";
 		for(int i=0; i<rows; i++){
 			for(int j=0; j<cols; j++){
-				str += tipocelda2str(mapa[j][i]);
+				str += tipocelda2str(mapa[i][j]);
 			}
 			str+="\n";
 		}

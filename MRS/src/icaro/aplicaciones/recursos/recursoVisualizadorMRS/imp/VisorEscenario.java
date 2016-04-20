@@ -30,8 +30,8 @@ public class VisorEscenario extends JFrame {
 	private Mapa Map;
 	private ComponenteBotonMapa botonesMapa[][];
 	private HashMap<String, Coordinate> posicionAgentes;
-	private int cols = 25;
-	private int rows = 25;
+	private int cols;// = 25;
+	private int rows;// = 25;
 	private boolean isVisible;
 
 	private ControladorVisorSimulador controlador;
@@ -187,6 +187,8 @@ public class VisorEscenario extends JFrame {
 		Map = mapa;
 		rows = Map.getNumRows();
 		cols = Map.getNumCols();
+		System.out.println("...........................................................................");
+		System.out.println(mapa);
 	}
 
 }
