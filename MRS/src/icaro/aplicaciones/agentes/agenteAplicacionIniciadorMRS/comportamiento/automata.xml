@@ -16,12 +16,20 @@
     ******************     Declaracion de estados intermedios y sus transiciones        ******************
     ******************************************************************************************************-->  
   <estado idIntermedio="esperandoEscenario">
-  	<transicion input="prueba" accion="leerFicheroTimeOut" estadoSiguiente="getFicheroTimeOut" modoDeTransicion="bloqueante"/> 
+  		<transicion input="leerFicheroTimeOut" accion="getFicheroTimeOut" 
+  					estadoSiguiente="esperandoEscenario" modoDeTransicion="bloqueante"/>
+  		<transicion input="validaFichero" accion="checkFile" 
+  					estadoSiguiente="esperandoEscenario" modoDeTransicion="bloqueante"/>
+		<transicion input="generaSimulacion" accion="generarSimulacion" 
+					estadoSiguiente="esperandoPlay" modoDeTransicion="bloqueante"/>
   </estado>
-<!-- 
+ 
   <estado idIntermedio="esperandoPlay">
+  		<transicion input="iniciaSimulacion" accion="iniciarSimulacion"
+  					estadoSiguiente="enEjecucion" modoDeTransicion="bloqueante" />
   </estado>
-  
+
+<!-- 
   <estado idIntermedio="EnEjecucion">
   </estado>
   
@@ -33,6 +41,7 @@
      <transicion input="mostrarEscenarioActualSimulado" accion="mostrarEscenarioActualSimulado" estadoSiguiente="finalizandoSimulacion" modoDeTransicion="bloqueante"/>     
   </estado>
 -->
+
 <!--******************************************************************************************************
     ******************     Declaracion de estados finales             	                ******************
     ******************************************************************************************************-->  

@@ -147,9 +147,51 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	@Override
 	public void setMapa(Mapa mapa) throws Exception {
 		controladorUI.setMapa(mapa);
-	}	
-}
+	}
+
+	
+	//*************************************************************
+	//*** : *******************************************************
+	//*************************************************************
+	@Override
+	public void muestraVentanaControl() {
+		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public File getFicheroEscenario() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void informaErrorEscenario(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void escenarioElegidoValido() {
+		//La idea de este método es que te llamo cuando el esenario es valido, y 
+		//tu bloquees de alguna manera para que no pueda cambiarlo durante la ejecucion.
+		// TODO Auto-generated method stub
+		
+	}	
+	
+	/*****************************************************************
+	 *********  NOTA   ***********************************************
+	 *****************************************************************
+	 *
+	 *
+	 *
+	 *
+	 */
+	iniciaSimulacion
+}
+
+
+
 /*		@Override
 		public void setIdentAgenteAReportar(String identAgenteAReportar){
 			super.setIdentAgenteAReportar(identAgenteAReportar);

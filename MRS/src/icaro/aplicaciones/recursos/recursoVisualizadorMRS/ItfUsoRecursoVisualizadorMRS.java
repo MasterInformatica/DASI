@@ -1,5 +1,7 @@
 package icaro.aplicaciones.recursos.recursoVisualizadorMRS;
 
+import java.io.File;
+
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.recursos.recursoPersistenciaEntornosSimulacion.ItfUsoRecursoPersistenciaEntornosSimulacion;
@@ -120,5 +122,14 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	public void setMapa(Mapa mapa) throws Exception;
 
 
-	public void muestraVentanaControl() throws Exception;
+	public void muestraVentanaControl();
+
+
+	public File getFicheroEscenario();
+
+
+	public void informaErrorEscenario(String string);
+
+
+	public void escenarioElegidoValido();
 }
