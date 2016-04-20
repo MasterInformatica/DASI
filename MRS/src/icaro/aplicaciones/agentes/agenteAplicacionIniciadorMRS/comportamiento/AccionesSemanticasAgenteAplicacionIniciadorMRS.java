@@ -7,6 +7,8 @@ import java.util.Random;
 
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.Rosace.informacion.FinSimulacion;
+import icaro.aplicaciones.Rosace.informacion.OrdenCentroControl;
+import icaro.aplicaciones.Rosace.informacion.VocabularioRosace;
 import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
@@ -122,7 +124,7 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		
 	}
 	
-	public void generarSimulacion(){ // --> esperandoPlay
+	public void generarSimulacion(){ //input=generaSimulacion --> esperandoPlay
 		try {
 			this.itfVisualizadorMRS.escenarioElegidoValido();
 		} catch (Exception e1) {
@@ -144,12 +146,8 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	// Estado esperandoPlay 
 	//--------------------------------------------------------------------------
 	public void iniciarSimulacion(){ //input=iniciaSimulacion --> enEjecucion
-		//OJO: ESTO ES UNA COPIA BARATA DE LO QUE HACE ROSACE POR DENTRO
-		
-		int intervaloSecuencia=100;
-	//	comunicator.informaraGrupoAgentes(ccOrder,
-	//			identsAgtesEquipo);
-		
+		//AQUI HABRIA QUE ENVIAR LAS ORDENES A LOS ROBOTS. EN EL AGENTE
+		//ORIGINAL LO HACE EN EL MÉTODO sendSequenceOfSimulatedVictimsToRobotTeam
 	}
 	
 	
@@ -157,6 +155,8 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	// Estado enEjecucion 
 	//--------------------------------------------------------------------------
 	public void FinSimulacion(){ //input=finSimulacion --> finalizandoSimulacion
+		//AQUI HABRIA QUE ENVIAR LA SEÑAL DE FIN A LOS ROBOTS.
+		//lO DE ABAJO ES UNA COPIA BARATA DEL AGENTE ORIGINAL
 		try {
 			FinSimulacion finalSimulacion = new FinSimulacion();
 			comunicator.informaraGrupoAgentes(finalSimulacion,
@@ -175,11 +175,12 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	// Estado finalizandoSimulacion 
 	//--------------------------------------------------------------------------
 	public void AcabarDelTodo(){ //input=acabarDelTodo --> estadoFinal
+		//Este estado representa un momento en el que el sistema ha acabado de simular,
+		//pero no está en el estado final. Se podría utilizar para mostrar estadísticas
+		//y ese tipo de cosas.
 	}
 	
-	//--------------------------------------------------------------------------
-	// Estado estadoFinal
-	//--------------------------------------------------------------------------
+
 	
 	/*--------------------------
 	  --- METODOS AUXILIARES ---
