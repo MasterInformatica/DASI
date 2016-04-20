@@ -122,14 +122,14 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	public void setMapa(Mapa mapa) throws Exception;
 
 
-	public void muestraVentanaControl();
+	public void muestraVentanaControl()  throws Exception;
 
 
-	public File getFicheroEscenario();
+	public File getFicheroEscenario()  throws Exception;
 
 
-	public void informaErrorEscenario(String string);
+	public void informaErrorEscenario(String string)  throws Exception;
 
 
-	public void escenarioElegidoValido();
+	public void escenarioElegidoValido()  throws Exception;
 }

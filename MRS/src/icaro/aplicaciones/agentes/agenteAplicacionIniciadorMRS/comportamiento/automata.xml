@@ -29,18 +29,17 @@
   					estadoSiguiente="enEjecucion" modoDeTransicion="bloqueante" />
   </estado>
 
-<!-- 
-  <estado idIntermedio="EnEjecucion">
-  </estado>
-  
-  <estado idIntermedio="finalizarSimulacion">
+  <estado idIntermedio="enEjecucion">
+  		<transicion input="finSimulacion" accion="FinSimulacion" 
+  					estadoSiguiente="finalizandoSimulacion" modoDeTransicion="bloqueante"/>
+  		
   </estado>
 
   <estado idIntermedio="finalizandoSimulacion">
-     <transicion input="finSimulacion" accion="FinSimulacion" estadoSiguiente="finalizandoSimulacion" modoDeTransicion="bloqueante"/>     
-     <transicion input="mostrarEscenarioActualSimulado" accion="mostrarEscenarioActualSimulado" estadoSiguiente="finalizandoSimulacion" modoDeTransicion="bloqueante"/>     
+     	<transicion input="acabarDelTodo" accion="AcabarDelTodo"
+     				estadoSiguiente="estadoFinal" modoDeTransicion="bloqueante"/>
   </estado>
--->
+
 
 <!--******************************************************************************************************
     ******************     Declaracion de estados finales             	                ******************

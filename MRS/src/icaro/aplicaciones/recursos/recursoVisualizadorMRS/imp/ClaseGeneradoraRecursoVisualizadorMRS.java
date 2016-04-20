@@ -154,25 +154,25 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	//*** : *******************************************************
 	//*************************************************************
 	@Override
-	public void muestraVentanaControl() {
+	public void muestraVentanaControl()  throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public File getFicheroEscenario() {
+	public File getFicheroEscenario() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void informaErrorEscenario(String string) {
+	public void informaErrorEscenario(String string) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void escenarioElegidoValido() {
+	public void escenarioElegidoValido()  throws Exception{
 		//La idea de este método es que te llamo cuando el esenario es valido, y 
 		//tu bloquees de alguna manera para que no pueda cambiarlo durante la ejecucion.
 		// TODO Auto-generated method stub
@@ -183,11 +183,15 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	 *********  NOTA   ***********************************************
 	 *****************************************************************
 	 *
-	 *
-	 *
+	 * Para desencadenar la transición de iniciar simulacion al pulsar el boton
+	 * de play, hay que llamar al agente de una forma super rara.
+	 * Fijarse en la clase NotificadorInfoUsuarioSimulador para ver como lo hace.
+	 * Tener en cuenta que ahora no se llama "SendSequenceOf....", sino
+	 * "iniciaSimulacion".
 	 *
 	 */
-	iniciaSimulacion
+	
+	
 }
 
 

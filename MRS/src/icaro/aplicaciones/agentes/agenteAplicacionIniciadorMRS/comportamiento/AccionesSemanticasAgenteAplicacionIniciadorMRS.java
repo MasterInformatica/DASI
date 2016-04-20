@@ -2,19 +2,24 @@ package icaro.aplicaciones.agentes.agenteAplicacionIniciadorMRS.comportamiento;
 
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Random;
 
 import icaro.aplicaciones.MRS.informacion.Mapa;
+import icaro.aplicaciones.Rosace.informacion.FinSimulacion;
 import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.patronAgenteReactivo.control.acciones.AccionesSemanticasAgenteReactivo;
 import icaro.infraestructura.recursosOrganizacion.configuracion.ItfUsoConfiguracion;
+import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza.NivelTraza;
 
 //Other imports used by this Agent
 //#start_nodespecialImports:specialImports <--specialImports-- DO NOT REMOVE THIS
 //#end_nodespecialImports:specialImports <--specialImports-- DO NOT REMOVE THIS
+
+
 
 public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		extends AccionesSemanticasAgenteReactivo {
@@ -27,6 +32,13 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	private Mapa mapa;
 
 	
+	//CHAPUZA PARA QUE ESTO FUNCIONE
+	private ArrayList identsAgtesEquipo;
+	public AccionesSemanticasAgenteAplicacionIniciadorMRS(){
+		this.identsAgtesEquipo = new ArrayList();
+		this.identsAgtesEquipo.add("rescate1RobotAsignador");
+		this.identsAgtesEquipo.add("rescate1RobotSubordinado1");
+	}
 	
 	
 	//--------------------------------------------------------------------------
@@ -67,10 +79,15 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	public void getFicheroTimeOut(){
 		int tEspera = 1000; //milisegundos
 		
-		this.ficheroEscenario = this.itfVisualizadorMRS.getFicheroEscenario();
+		try {
+			this.ficheroEscenario = this.itfVisualizadorMRS.getFicheroEscenario();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if(ficheroEscenario==null){
-			trazas.trazar(this.getNombreAgente(),  "Fichero leido null", NivelTraza.debug);
+//			trazas.trazar(this.getNombreAgente(),  "Fichero leido null", NivelTraza.debug);
 			this.generarTimeOutInterno(tEspera, "leerFicheroTimeOut", this.getNombreAgente(),
 			     					   this.itfUsoPropiadeEsteAgente);
 		}else{
@@ -87,7 +104,12 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		Random randomGenerator = new Random();
 		      
 		if( randomGenerator.nextInt(2) == 0){
-			this.itfVisualizadorMRS.informaErrorEscenario("El escenario elegido no es válido");
+			try {
+				this.itfVisualizadorMRS.informaErrorEscenario("El escenario elegido no es válido");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			trazas.trazar(this.getNombreAgente(),  "Validación incorrecta", NivelTraza.debug);
 			
 			this.informaraMiAutomata("leerFicheroTimeOut", null);
@@ -100,10 +122,13 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		
 	}
 	
-	
-	//Este metodo es el encargado de cambiar al siguiente estado
-	public void generarSimulacion(){
-		this.itfVisualizadorMRS.escenarioElegidoValido();
+	public void generarSimulacion(){ // --> esperandoPlay
+		try {
+			this.itfVisualizadorMRS.escenarioElegidoValido();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		//Recogeriamos el mpaa del escenario, configurar robots, agentes, ...
 		try {
@@ -114,11 +139,47 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		}
 	}
 	
+
 	//--------------------------------------------------------------------------
 	// Estado esperandoPlay 
 	//--------------------------------------------------------------------------
+	public void iniciarSimulacion(){ //input=iniciaSimulacion --> enEjecucion
+		//OJO: ESTO ES UNA COPIA BARATA DE LO QUE HACE ROSACE POR DENTRO
+		
+		int intervaloSecuencia=100;
+	//	comunicator.informaraGrupoAgentes(ccOrder,
+	//			identsAgtesEquipo);
+		
+	}
 	
 	
+	//--------------------------------------------------------------------------
+	// Estado enEjecucion 
+	//--------------------------------------------------------------------------
+	public void FinSimulacion(){ //input=finSimulacion --> finalizandoSimulacion
+		try {
+			FinSimulacion finalSimulacion = new FinSimulacion();
+			comunicator.informaraGrupoAgentes(finalSimulacion,
+					identsAgtesEquipo);
+			trazas.aceptaNuevaTraza(new InfoTraza(
+					this.nombreAgente,
+					"Se notifica el fin de la simulacion a los agentes del Equipo:identsAgtesEquipo->"
+							+ identsAgtesEquipo, InfoTraza.NivelTraza.info));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+	}
+	
+	//--------------------------------------------------------------------------
+	// Estado finalizandoSimulacion 
+	//--------------------------------------------------------------------------
+	public void AcabarDelTodo(){ //input=acabarDelTodo --> estadoFinal
+	}
+	
+	//--------------------------------------------------------------------------
+	// Estado estadoFinal
+	//--------------------------------------------------------------------------
 	
 	/*--------------------------
 	  --- METODOS AUXILIARES ---
