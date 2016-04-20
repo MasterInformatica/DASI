@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PersistenciaMRS id="Persistencia">
+   <Mapa key="Mapa" cols="10" rows="5"  >
+      <Celda tipo="PASILLO" x="2" y="3" />
+      <Celda tipo="ESCOMBRO" x="4" y="4" />      
+      
+   </Mapa>
+   
+   <Rescatadores id="Rescatadores" key="Rescatador" numRes="2">
+      <Rescatador tipo="R" startX="3" startY="0" />
+      <Rescatador tipo="R" startX="3" startY="2" />
+   </Rescatadores>
+   
+   <Mineros id="Mineros" key="Mineros" numMin="2">
+     <Minero tipo="M" startX="1" startY="3" />  
+     <Minero tipo="M" startX="1" startY="4" />      
+   </Mineros>   
+   
+</PersistenciaMRS>
