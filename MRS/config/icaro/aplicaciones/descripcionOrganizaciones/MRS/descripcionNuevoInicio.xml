@@ -46,9 +46,9 @@
 	******************   Descripcion del comportamiento de los agentes de aplicacion        ******************
 	********************************************************************************************************-->
 <icaro:DescComportamientoAgentesAplicacion>
-    <icaro:DescComportamientoAgente
-       nombreComportamiento="AgenteAplicacionAgteControladorSimuladorRosace" rol="AgenteAplicacion" localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionAgteControladorSimuladorRosaceReactivo.comportamiento"
-                            tipo="Reactivo" />
+<!--     <icaro:DescComportamientoAgente -->
+<!--        nombreComportamiento="AgenteAplicacionAgteControladorSimuladorRosace" rol="AgenteAplicacion" localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionAgteControladorSimuladorRosaceReactivo.comportamiento" -->
+<!--                             tipo="Reactivo" /> -->
     <icaro:DescComportamientoAgente 
        nombreComportamiento="AgenteAplicacionIniciadorMRS" rol="AgenteAplicacion" localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionIniciadorMRS.comportamiento"									
        						tipo="Reactivo" />
@@ -64,11 +64,12 @@
 	******************   Descripcion de los recursos de aplicacion                          ******************
 	********************************************************************************************************-->
 <icaro:DescRecursosAplicacion>
-    <icaro:DescRecursoAplicacion nombre="RecursoVisualizadorEntornosSimulacion" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.imp.ClaseGeneradoraRecursoVisualizadorEntornosSimulacion"/>			            		
+<!--     <icaro:DescRecursoAplicacion nombre="RecursoVisualizadorEntornosSimulacion" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.imp.ClaseGeneradoraRecursoVisualizadorEntornosSimulacion"/>			            		 -->
 	<icaro:DescRecursoAplicacion nombre="RecursoPersistenciaEntornosSimulacion" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPersistenciaEntornosSimulacion.imp.ClaseGeneradoraRecursoPersistenciaEntornosSimulacion"/>			            		
 <!--<icaro:DescRecursoAplicacion nombre="RecursoCreacionEntornosSimulacion" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoCreacionEntornosSimulacion.imp.ClaseGeneradoraRecursoCreacionEntornosSimulacion"/>-->
     <icaro:DescRecursoAplicacion nombre="RecursoVisualizadorMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.ClaseGeneradoraRecursoVisualizadorMRS"/>			            		
-    <icaro:DescRecursoAplicacion nombre="RecursoPlanificadorRuta" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPlanificadorRuta.imp.ClaseGeneradoraRecursoPlanificadorRuta"/>			            		
+    <icaro:DescRecursoAplicacion nombre="RecursoPlanificadorRuta" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPlanificadorRuta.imp.ClaseGeneradoraRecursoPlanificadorRuta"/>
+    <icaro:DescRecursoAplicacion nombre="RecursoPersistenciaMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPersistenciaMRS.imp.ClaseGeneradoraRecursoPersistenciaMRS"/>			            		
 </icaro:DescRecursosAplicacion>
 
 </icaro:DescripcionComponentes>
@@ -87,7 +88,7 @@
                 </icaro:InstanciaGestor>
                 <icaro:InstanciaGestor id="GestorAgentes" refDescripcion="GestorAgentes">
                     <icaro:componentesGestionados>
-                            <icaro:componenteGestionado refId="AgenteControladorSimuladorRosaceReactivo1" tipoComponente="AgenteAplicacion"/>
+<!--                             <icaro:componenteGestionado refId="AgenteControladorSimuladorRosaceReactivo1" tipoComponente="AgenteAplicacion"/> -->
                             <icaro:componenteGestionado refId="AgenteAplicacionIniciadorMRS1"             tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="rescate1RobotAsignador" tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="rescate1RobotSubordinado1" tipoComponente="AgenteAplicacion"/>
@@ -101,10 +102,11 @@
                     <!--        <icaro:componenteGestionado refId="RecursoMorse1" tipoComponente="RecursoAplicacion"/> 
                                 <icaro:componenteGestionado refId="RecursoGUI1" tipoComponente="RecursoAplicacion"/>   
                                 <icaro:componenteGestionado refId="RecursoEstadistica1" tipoComponente="RecursoAplicacion"/>  -->
-                    	<icaro:componenteGestionado refId="RecursoVisualizadorEntornosSimulacion1" tipoComponente="RecursoAplicacion"/>
+<!--                     	<icaro:componenteGestionado refId="RecursoVisualizadorEntornosSimulacion1" tipoComponente="RecursoAplicacion"/> -->
                     	<icaro:componenteGestionado refId="RecursoVisualizadorMRS1" tipoComponente="RecursoAplicacion"/>	    
                     	<icaro:componenteGestionado refId="RecursoPlanificadorRuta1" tipoComponente="RecursoAplicacion"/>	    
-						<icaro:componenteGestionado refId="RecursoPersistenciaEntornosSimulacion1" tipoComponente="RecursoAplicacion"/>
+                    	<icaro:componenteGestionado refId="RecursoPersistenciaMRS1" tipoComponente="RecursoAplicacion"/>
+<!-- 						<icaro:componenteGestionado refId="RecursoPersistenciaEntornosSimulacion1" tipoComponente="RecursoAplicacion"/> -->
 <!--  					<icaro:componenteGestionado refId="RecursoCreacionEntornosSimulacion1" tipoComponente="RecursoAplicacion"/>    -->                            
                     </icaro:componentesGestionados>
                 </icaro:InstanciaGestor>
@@ -113,8 +115,8 @@
 	******************   Instancias de Agentes de aplicacion                                ******************
 	*******************************************************************************************************-->            
         <icaro:AgentesAplicacion>
-                <icaro:Instancia id="AgenteControladorSimuladorRosaceReactivo1" refDescripcion="AgenteAplicacionAgteControladorSimuladorRosace">
-                </icaro:Instancia>
+<!--                 <icaro:Instancia id="AgenteControladorSimuladorRosaceReactivo1" refDescripcion="AgenteAplicacionAgteControladorSimuladorRosace"> -->
+<!--                 </icaro:Instancia> -->
                 <icaro:Instancia id="AgenteAplicacionIniciadorMRS1" refDescripcion="AgenteAplicacionIniciadorMRS">
                 </icaro:Instancia>
                 <icaro:Instancia id="rescate1RobotAsignador" refDescripcion="AgenteAplicacionAsignadorTareas">
@@ -137,10 +139,11 @@
                 <icaro:Instancia id="RecursoGUI1" refDescripcion="RecursoGUI" xsi:type="icaro:Instancia">    
                 </icaro:Instancia>    --> 
                 <icaro:Instancia id="RecursoEstadistica1" refDescripcion="RecursoEstadistica" xsi:type="icaro:Instancia"/>
-                <icaro:Instancia id="RecursoVisualizadorEntornosSimulacion1" refDescripcion="RecursoVisualizadorEntornosSimulacion" xsi:type="icaro:Instancia"/>
+<!--                 <icaro:Instancia id="RecursoVisualizadorEntornosSimulacion1" refDescripcion="RecursoVisualizadorEntornosSimulacion" xsi:type="icaro:Instancia"/> -->
                 <icaro:Instancia id="RecursoVisualizadorMRS1" refDescripcion="RecursoVisualizadorMRS" xsi:type="icaro:Instancia"/>
                 <icaro:Instancia id="RecursoPlanificadorRuta1" refDescripcion="RecursoPlanificadorRuta" xsi:type="icaro:Instancia"/>
-                <icaro:Instancia id="RecursoPersistenciaEntornosSimulacion1" refDescripcion="RecursoPersistenciaEntornosSimulacion" xsi:type="icaro:Instancia"/>
+                 <icaro:Instancia id="RecursoPersistenciaMRS1" refDescripcion="RecursoPersistenciaMRS" xsi:type="icaro:Instancia"/>
+<!--                 <icaro:Instancia id="RecursoPersistenciaEntornosSimulacion1" refDescripcion="RecursoPersistenciaEntornosSimulacion" xsi:type="icaro:Instancia"/> -->
 <!--            <icaro:Instancia id="RecursoCreacionEntornosSimulacion1" refDescripcion="RecursoCreacionEntornosSimulacion" xsi:type="icaro:Instancia"/> -->                
         </icaro:RecursosAplicacion>
 

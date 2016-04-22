@@ -5,10 +5,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
+import icaro.aplicaciones.MRS.informacion.Escenario;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.Rosace.informacion.FinSimulacion;
 import icaro.aplicaciones.Rosace.informacion.OrdenCentroControl;
 import icaro.aplicaciones.Rosace.informacion.VocabularioRosace;
+import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
 import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
@@ -29,25 +31,19 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	private ItfUsoConfiguracion           itfconfig;
 	private ItfUsoRecursoVisualizadorMRS  itfVisualizadorMRS;
 	private ItfUsoRecursoPlanificadorRuta itfPlanificadorRuta;
+	private ItfUsoRecursoPersistenciaMRS  itfPersistenciaMRS;
+	
 	
 	private File ficheroEscenario;
-	private Mapa mapa;
+	private Escenario escenario;
 
-	
-	//CHAPUZA PARA QUE ESTO FUNCIONE
-	private ArrayList identsAgtesEquipo;
-	public AccionesSemanticasAgenteAplicacionIniciadorMRS(){
-		this.identsAgtesEquipo = new ArrayList();
-		this.identsAgtesEquipo.add("rescate1RobotAsignador");
-		this.identsAgtesEquipo.add("rescate1RobotSubordinado1");
-	}
-	
 	
 	//--------------------------------------------------------------------------
 	// Estado inicial 
 	//--------------------------------------------------------------------------
 	public void AccionComenzar(){
 		try{
+			//Referencias a las interfaces de los recursos
 			this.itfconfig = (ItfUsoConfiguracion) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.NOMBRE_ITF_USO_CONFIGURACION);
 			
@@ -58,7 +54,11 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 			this.itfPlanificadorRuta = (ItfUsoRecursoPlanificadorRuta) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoPlanificadorRuta1");
 			
+			this.itfPersistenciaMRS = (ItfUsoRecursoPersistenciaMRS) this.itfUsoRepositorio
+					.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoPersistenciaMRS1");
 			
+			
+			//Comienzo ventana gráfica
 			this.itfVisualizadorMRS.muestraVentanaControl();
 
 		} catch(Exception e){
@@ -84,7 +84,6 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		try {
 			this.ficheroEscenario = this.itfVisualizadorMRS.getFicheroEscenario();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -99,27 +98,27 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	}
 
 	public void checkFile(){
-		//LUISMA: Aquí llamar a la interfaz de persistencia para parsear el fichero
-		//this.escenario = this.ItfPersistenciaMRS.parseFile(this.ficheroEscenario)
-		this.mapa = new Mapa();
-		
-		Random randomGenerator = new Random();
-		      
-		if( randomGenerator.nextInt(2) == 0){
-			try {
-				this.itfVisualizadorMRS.informaErrorEscenario("El escenario elegido no es válido");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		boolean error = false;
+		try{
+			this.escenario = this.itfPersistenciaMRS.parseEscenario(this.ficheroEscenario);
+			
+			//Aquí el escenario está bien construido, sino estaríamos en el catch
+			trazas.trazar(this.getNombreAgente(),  "Validación correcta", NivelTraza.debug);
+			this.informaraMiAutomata("generaSimulacion", null);			
+		} catch(Exception e){ 
+			error = true;
 			trazas.trazar(this.getNombreAgente(),  "Validación incorrecta", NivelTraza.debug);
 			
-			this.informaraMiAutomata("leerFicheroTimeOut", null);
-		} else {
-			trazas.trazar(this.getNombreAgente(),  "Validación correcta", NivelTraza.debug);
-			
-			this.informaraMiAutomata("activaEsperaSimulacion", null);
-			
+		}
+		
+		if(error){
+			try {
+				this.itfVisualizadorMRS.informaErrorEscenario("Error al leer el fichero de escenario. El escenario elegido no es válido");
+				this.informaraMiAutomata("leerFicheroTimeOut", null);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 	}
@@ -127,15 +126,10 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	public void generarSimulacion(){ //input=generaSimulacion --> esperandoPlay
 		try {
 			this.itfVisualizadorMRS.escenarioElegidoValido();
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		//Recogeriamos el mpaa del escenario, configurar robots, agentes, ...
-		try {
-			this.itfVisualizadorMRS.mostrarEscenarioMovimiento(this.mapa);
-			this.itfPlanificadorRuta.setMapa(this.mapa);
+
+			this.itfVisualizadorMRS.mostrarEscenarioMovimiento(this.escenario.getMapa());
+			this.itfPlanificadorRuta.setMapa(this.escenario.getMapa());
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -156,18 +150,6 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	//--------------------------------------------------------------------------
 	public void FinSimulacion(){ //input=finSimulacion --> finalizandoSimulacion
 		//AQUI HABRIA QUE ENVIAR LA SEÑAL DE FIN A LOS ROBOTS.
-		//lO DE ABAJO ES UNA COPIA BARATA DEL AGENTE ORIGINAL
-		try {
-			FinSimulacion finalSimulacion = new FinSimulacion();
-			comunicator.informaraGrupoAgentes(finalSimulacion,
-					identsAgtesEquipo);
-			trazas.aceptaNuevaTraza(new InfoTraza(
-					this.nombreAgente,
-					"Se notifica el fin de la simulacion a los agentes del Equipo:identsAgtesEquipo->"
-							+ identsAgtesEquipo, InfoTraza.NivelTraza.info));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	
 	}
 	
