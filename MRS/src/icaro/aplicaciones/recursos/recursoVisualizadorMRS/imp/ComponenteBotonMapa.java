@@ -24,41 +24,37 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import icaro.aplicaciones.MRS.informacion.TipoCelda;
+
 public class ComponenteBotonMapa extends JButton {
 	
 	//ARTE
-	private String rutaArteEscenario = "images/";
+	private static String rutaArteEscenario = "images/";
+	private static String rutaMin ="miner.png";
+	private static String rutaRob ="robot.png";
+	private static String rutaPie ="escombro.png";
+	
 	private ImageIcon bg;
-	private ImageIcon min,rob,pie;
 	private CombineIcon ci;
 	private int prof;
 	
 	private HashMap<String,Integer> agentes;
 	
-	private boolean isPared;
+	private TipoCelda tipoCelda;
 	
-	public ComponenteBotonMapa(int type, boolean pared) {
+	public ComponenteBotonMapa(int type, TipoCelda tipoCelda) {
 		super();
 		agentes = new HashMap<String,Integer>();
-		isPared = pared;
+		this.tipoCelda = tipoCelda;
 		prof = 1;
 		bg = new ImageIcon(getIcono(type));
-		min = new ImageIcon("images/miner.png");
-		rob = new ImageIcon("images/robot.png");
-		pie = new ImageIcon("images/miner.png");
 		ci = new CombineIcon("background",bg);
+		if(TipoCelda.ESCOMBRO.equals(tipoCelda))
+			addElement("escombro", "Piedra");
 		setIcon(ci);
 		setMargin(new Insets(0, 0, 0, 0));
 		setBorder(new EmptyBorder(0,0,0,0));
-		/*addActionListener(new ActionListener()
-		{
-		  public void actionPerformed(ActionEvent e)
-		  {
-		    ComponenteBotonMapa cbm = (ComponenteBotonMapa) e.getSource();
-		    cbm.addIcon("min"+cbm.prof, cbm.min,cbm.getSize());
-		    cbm.prof++;
-		  }
-		});*/
+
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
@@ -89,13 +85,14 @@ public class ComponenteBotonMapa extends JButton {
 	public void addElement(String id,String Type){
 		switch(Type){
 		case "Miner":
-			ci.addIcon(id, min);
+			ci.addIcon(id, new ImageIcon(rutaArteEscenario+rutaMin));
 			break;
 		case "Robot":
-			ci.addIcon(id, rob);
+			ci.addIcon(id, new ImageIcon(rutaArteEscenario+rutaRob));
 			break;
+		case "Escombro":
 		case "Piedra":
-			ci.addIcon(id, pie);
+			ci.addIcon(id, new ImageIcon(rutaArteEscenario+rutaPie));
 			break;
 		}
 		repaint();

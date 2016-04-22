@@ -53,5 +53,11 @@ public class ControladorVisorSimulador {
 	public void muestaError(String string, String string2) {
 		visorEscenario.muestraError(string,string2);
 	}
+
+	public void errorFileEscenario() {
+		visorEscenario.errorFileEscenario();
+		
+	}
+
 	
 }

@@ -166,7 +166,8 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 
 	@Override
 	public void informaErrorEscenario(String string) throws Exception {
-		controladorUI.muestaError("Error al mostrar escenario:",string);
+		controladorUI.muestaError("Error al mostrar escenario",string);
+		controladorUI.errorFileEscenario();
 		
 	}
 
@@ -175,7 +176,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		//La idea de este método es que te llamo cuando el esenario es valido, y 
 		//tu bloquees de alguna manera para que no pueda cambiarlo durante la ejecucion.
 		// TODO Auto-generated method stub
-		
+		controladorUI.muestaError("todo bien al leer escenario:","");
 	}	
 	
 	/*****************************************************************

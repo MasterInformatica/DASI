@@ -42,7 +42,7 @@ public class Mapa {
 		case PARED:
 			return "#";
 		case PASILLO:
-			return "�";
+			return "-";
 		default:
 			return "";
 		

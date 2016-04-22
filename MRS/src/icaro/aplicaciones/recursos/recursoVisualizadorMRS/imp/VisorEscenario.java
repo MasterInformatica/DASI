@@ -92,7 +92,13 @@ public class VisorEscenario extends JFrame {
 		return filechoosed;
 	}
 	
+	public void errorFileEscenario() {
+		filechoosed = null;
+	}
 	
+	public void muestraError(String string, String string2) {
+		JOptionPane.showMessageDialog(null,string2,string,0,null);
+	}
 	
 	//-----------------------------PRIVATE--------------------------------
 	
@@ -102,13 +108,12 @@ public class VisorEscenario extends JFrame {
 	 * Inicializa los componentes
 	 * @throws Exception
 	 */
-	private void build() throws Exception{
+	private void build(){
 		isVisible = false;
 		setTitle("MRS - Simulator");
 		rutaPersistencia = "persitenciaMRS/";
 		posicionAgentes = new HashMap<String,Coordinate>();
 		initComponentes();
-		//setVisible(true);
 	}
 	
 	private boolean dibujaAgente(String idAgente, Coordinate coord, String tipo){
@@ -152,6 +157,14 @@ public class VisorEscenario extends JFrame {
 		ControlButtons = new JPanel();
 		ControlButtons.setLayout(new FlowLayout());
 		JButton start_stop = new JButton("Start");
+		start_stop.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				filechoosed = solicitarSeleccionFichero();
+			}
+			
+		});
 		JButton restart = new JButton("reinicializar");
 		ControlButtons.add(start_stop);
 		ControlButtons.add(restart);
@@ -220,11 +233,13 @@ public class VisorEscenario extends JFrame {
 		botonesMapa = new ComponenteBotonMapa[rows][cols];
 		for (int i =  0; i < rows; i++){
 			for (int j = 0; j < cols; j++){
-				botonesMapa[i][j] = new ComponenteBotonMapa(getType(i,j),isPared(i,j));
+				botonesMapa[i][j] = new ComponenteBotonMapa(getType(i,j),Map.getCoord(i,j));
 				mapita.add(botonesMapa[i][j]);
 			}
 		}
 		MapaPanel.setContentPane(mapita);
+		MapaPanel.validate();
+		MapaPanel.repaint();
 		
 	}
 	
@@ -241,10 +256,7 @@ public class VisorEscenario extends JFrame {
 		} else
 			return null; // no ha seleccionado nada
 	}
-	
-	private boolean isPared(int i, int j){
-		return Map.getCoord(i,j)==TipoCelda.PARED;
-	}
+
 	
 	private int getType(int i, int j){
 		int t = 0b0000;	
@@ -289,7 +301,7 @@ public class VisorEscenario extends JFrame {
 	private static final long serialVersionUID = -418573958565443751L;
 
 
-	public void muestraError(String string, String string2) {
-		JOptionPane.showMessageDialog(null,string2,string,0,null);
-	}
+
+
+
 }
