@@ -123,7 +123,8 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	// la ventana de trazas del recurso ....",InfoTraza.NivelTraza.debug));
 	@Override
 	public void mostrarEscenarioMovimiento(Mapa mapa) throws Exception{
-		controladorUI.mostrarEscenarioMovimiento(mapa);
+		controladorUI.setMapa(mapa);
+		controladorUI.mostrarEscenarioMovimiento();
 		trazas.aceptaNuevaTraza(new InfoTraza(this.recursoId,
 				"Escenario (Mapa) añadido al visor",InfoTraza.NivelTraza.debug));
 	}
@@ -155,19 +156,17 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	//*************************************************************
 	@Override
 	public void muestraVentanaControl()  throws Exception {
-		// TODO Auto-generated method stub
-		
+		controladorUI.mostrarEscenarioMovimiento();
 	}
 
 	@Override
 	public File getFicheroEscenario() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return controladorUI.getFicheroEscenario();
 	}
 
 	@Override
 	public void informaErrorEscenario(String string) throws Exception {
-		// TODO Auto-generated method stub
+		controladorUI.muestaError("Error al mostrar escenario:",string);
 		
 	}
 

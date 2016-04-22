@@ -25,6 +25,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class ComponenteBotonMapa extends JButton {
+	
+	//ARTE
+	private String rutaArteEscenario = "images/";
 	private ImageIcon bg;
 	private ImageIcon min,rob,pie;
 	private CombineIcon ci;
@@ -32,11 +35,14 @@ public class ComponenteBotonMapa extends JButton {
 	
 	private HashMap<String,Integer> agentes;
 	
-	public ComponenteBotonMapa(String file) {
+	private boolean isPared;
+	
+	public ComponenteBotonMapa(int type, boolean pared) {
 		super();
 		agentes = new HashMap<String,Integer>();
+		isPared = pared;
 		prof = 1;
-		bg = new ImageIcon(file);
+		bg = new ImageIcon(getIcono(type));
 		min = new ImageIcon("images/miner.png");
 		rob = new ImageIcon("images/robot.png");
 		pie = new ImageIcon("images/miner.png");
@@ -62,6 +68,13 @@ public class ComponenteBotonMapa extends JButton {
 			}
 
 		});
+	}
+	
+	private String getIcono(int type){
+		if(type >=0 && type <=16)
+			return rutaArteEscenario+"mapa/"+type+".png";
+		else
+			return rutaArteEscenario+"error.png";
 	}
 	public void removeElement(String id){
 		ci.removeIcon(id);

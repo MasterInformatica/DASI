@@ -5,36 +5,45 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.MRS.informacion.TipoCelda;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 public class VisorEscenario extends JFrame {
 
-	//ARTE
-	private String rutaArteEscenario = "images/";
+
 	
 	// SWING elements
-	private JPanel MapaPanel;
-	
+	private JRootPane MapaPanel;
+	private JPanel ControlButtons;
+	private ComponenteBotonMapa botonesMapa[][];
+	private JMenuBar menuBar;
+	private JMenu MenuFile;
 	// Logica (Modelo)
+	private File filechoosed;
 	//private boolean[][] Map;
 	private Mapa Map;
-	private ComponenteBotonMapa botonesMapa[][];
 	private HashMap<String, Coordinate> posicionAgentes;
-	private int cols = 25;
-	private int rows = 25;
+	private int cols = 5;
+	private int rows = 5;
 	private boolean isVisible;
 
 	private ControladorVisorSimulador controlador;
+	private String rutaPersistencia;
+	private JFileChooser fileChooser;
+	private JMenuItem menu_Load;
 	
 	
 	public VisorEscenario() throws Exception{
@@ -46,30 +55,60 @@ public class VisorEscenario extends JFrame {
 		controlador = control;
 		build();
 	}
-	
-	private void build() throws Exception{
-		isVisible = false;
-		setTitle("MRS - Simulator");
 
-		posicionAgentes = new HashMap<String,Coordinate>();
-		//initComponentes();
-		//setVisible(true);
-	}
-	
-	
 	public boolean mueveAgente(String idAgente, Coordinate coord, String tipo) {
 		// Get y remove Current position
-		System.out.println(posicionAgentes);
 		if(posicionAgentes.containsKey(idAgente)){
 			Coordinate org_coord = posicionAgentes.get(idAgente);
-			System.out.println(posicionAgentes+" - "+coord+" -- "+org_coord);
 			eliminaAgente(idAgente,org_coord);
 		}
 		// Set y draw new position
 		return dibujaAgente(idAgente,coord, tipo);
 	}
 	
-
+	public void setMapa(Mapa mapa) {
+		Map = mapa;
+		rows = Map.getNumRows();
+		cols = Map.getNumCols();
+		buildMap();
+	}
+	
+	public void mostrar(){
+		if(isVisible)
+			return;
+		isVisible = true;
+		setVisible(true);
+	}
+	
+	public void termina() {
+		this.dispose();
+	}
+	
+	public File getFicheroEscenario(){
+		if (filechoosed == null)
+			filechoosed = solicitarSeleccionFichero();
+		return filechoosed;
+	}
+	
+	
+	
+	//-----------------------------PRIVATE--------------------------------
+	
+	/**
+	 * constructora, metodo para ser reutilizado.
+	 * Establece el titulo, inicializa las variables
+	 * Inicializa los componentes
+	 * @throws Exception
+	 */
+	private void build() throws Exception{
+		isVisible = false;
+		setTitle("MRS - Simulator");
+		rutaPersistencia = "persitenciaMRS/";
+		posicionAgentes = new HashMap<String,Coordinate>();
+		initComponentes();
+		//setVisible(true);
+	}
+	
 	private boolean dibujaAgente(String idAgente, Coordinate coord, String tipo){
 		int x = (int) coord.getX();
 		int y = (int) coord.getY();
@@ -89,53 +128,121 @@ public class VisorEscenario extends JFrame {
 		botonesMapa[x][y].eliminaAgente(idAgente);
 		posicionAgentes.remove(idAgente);
 	}
-	
-	public void mostrar(Mapa mapa){
-		setMapa(mapa);
-		initComponentes();
-		if(isVisible)
-			return;
-		isVisible = true;
-		setVisible(true);
-	}
-	
-	private void printMap(){
-		for (int i =  0; i < rows; i++){
-			for (int j = 0; j < cols; j++){
-				if(Map.getCoord(i,j) == TipoCelda.ESCOMBRO)
-					System.out.print("*");
-				else if(Map.getCoord(i,j) == TipoCelda.PASILLO)
-					System.out.print("·");
-				else
-					System.out.print("#");
-			}
-			System.out.print("\n");
-		}
-	}
+
 	
 	private void initComponentes() {
 		setLayout(new BorderLayout());
-		MapaPanel = new JPanel();
-		MapaPanel.setLayout(new GridLayout(rows,cols,0,0));
-		String path; 
+		
+		MapaPanel = new JRootPane();
+		
+		initEmptyMap();
+		initControlButtons();
+		initFileChooser();
+		initMenu();		
+		Container c = getContentPane();
+        c.setBackground(Color.YELLOW);
+		Dimension d = new Dimension(800,600);
+        c.setPreferredSize(d);
+        setResizable(false);
+		pack();
+	}
+	private void initControlButtons(){
+		ControlButtons = new JPanel();
+		ControlButtons.setLayout(new FlowLayout());
+		JButton start_stop = new JButton("Start");
+		JButton restart = new JButton("reinicializar");
+		ControlButtons.add(start_stop);
+		ControlButtons.add(restart);
+		add(ControlButtons,BorderLayout.SOUTH);
+	}
+	
+	private void initMenu(){
+		menuBar = new JMenuBar();
+		MenuFile = new JMenu("File");
+		MenuFile.setMnemonic(KeyEvent.VK_F);
+		MenuFile.getAccessibleContext().setAccessibleDescription(
+		        "Load,save, modify files...");
+		menuBar.add(MenuFile);
+		
+		menu_Load = new JMenuItem("Load",KeyEvent.VK_L);
+		menu_Load.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				filechoosed = solicitarSeleccionFichero();
+			}
+			
+		});
+		JMenuItem it2 = new JMenuItem("Save",KeyEvent.VK_S);
+		JMenuItem it3 = new JMenuItem("Exit",KeyEvent.VK_E);
+		MenuFile.add(menu_Load);
+		MenuFile.add(it2);
+		MenuFile.addSeparator();
+		MenuFile.add(it3);
+		setJMenuBar(menuBar);
+	}
+	
+	private void initFileChooser(){
+		
+		fileChooser = new JFileChooser();
+		fileChooser.setDialogTitle("Seleccion de escenario");
+		fileChooser.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				//jFileChooser1ActionPerformed(evt);
+			}
+		});
+		
+		/*JButton boton_file = new JButton("Set Mapa");
+		boton_file.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				filechoosed = solicitarSeleccionFichero();
+			}
+			
+		});*/
+		//ControlButtons.add(boton_file);
+	}
+	
+	private void initEmptyMap(){
+		MapaPanel.setContentPane(new JPanel());
+		add(MapaPanel,BorderLayout.CENTER);
+	}
+
+	
+	private void buildMap(){
+		JPanel mapita = new JPanel();
+		mapita.setLayout(new GridLayout(rows,cols,0,0));
 
 		botonesMapa = new ComponenteBotonMapa[rows][cols];
 		for (int i =  0; i < rows; i++){
 			for (int j = 0; j < cols; j++){
-				int t = getType(i,j);
-				path = getIcono(t);
-				botonesMapa[i][j] = new ComponenteBotonMapa(path);
-				MapaPanel.add(botonesMapa[i][j]);
+				botonesMapa[i][j] = new ComponenteBotonMapa(getType(i,j),isPared(i,j));
+				mapita.add(botonesMapa[i][j]);
 			}
 		}
-		Container c = getContentPane();
-        c.setBackground(Color.YELLOW);
-		Dimension d = new Dimension(600,600);
-        c.setPreferredSize(d);
-		add(MapaPanel,BorderLayout.CENTER);
-		pack();
+		MapaPanel.setContentPane(mapita);
+		
 	}
 	
+	private File solicitarSeleccionFichero() {
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(
+				"ficheros xml", "xml", "txt");
+		fileChooser.setFileFilter(filter);
+		File dir = fileChooser.getCurrentDirectory();
+		int returnVal = fileChooser.showOpenDialog(this);
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		fileChooser.setCurrentDirectory(dir);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			return fileChooser.getSelectedFile();
+		} else
+			return null; // no ha seleccionado nada
+	}
+	
+	private boolean isPared(int i, int j){
+		return Map.getCoord(i,j)==TipoCelda.PARED;
+	}
 	
 	private int getType(int i, int j){
 		int t = 0b0000;	
@@ -156,21 +263,18 @@ public class VisorEscenario extends JFrame {
 		return t;
 	}
 	
-	private String getIcono(int type){
-		if(type >=0 && type <=16)
-			return rutaArteEscenario+"mapa/"+type+".png";
-		else
-			return rutaArteEscenario+"error.png";
-	}
+
 	
-	public void termina() {
-		this.dispose();
-	}
+	//-----------------------------TEST--------------------------------
 	
 	public static void main(String args[]){
 		try {
 			VisorEscenario ve = new VisorEscenario();
-			ve.printMap();
+			ve.setVisible(true);
+			ve.muestraError("hola", "eeee");
+			int j = 2;
+			for(int i = 0; i< 100000; i++) j = (j*j) %1000;
+			//ve.buildMap();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -183,10 +287,12 @@ public class VisorEscenario extends JFrame {
 	private static final long serialVersionUID = -418573958565443751L;
 
 
-	public void setMapa(Mapa mapa) {
-		Map = mapa;
-		rows = Map.getNumRows();
-		cols = Map.getNumCols();
+	public void muestraError(String string, String string2) {
+		JOptionPane.showMessageDialog(null,string2,string,0,null);
+		
 	}
+
+
+
 
 }
