@@ -36,8 +36,10 @@ public class VisorEscenario extends JFrame {
 	//private boolean[][] Map;
 	private Mapa Map;
 	private HashMap<String, Coordinate> posicionAgentes;
-	private int cols = 5;
-	private int rows = 5;
+
+	private int cols;// = 25;
+	private int rows;// = 25;
+
 	private boolean isVisible;
 
 	private ControladorVisorSimulador controlador;
@@ -289,10 +291,5 @@ public class VisorEscenario extends JFrame {
 
 	public void muestraError(String string, String string2) {
 		JOptionPane.showMessageDialog(null,string2,string,0,null);
-		
 	}
-
-
-
-
 }

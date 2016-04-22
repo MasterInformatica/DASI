@@ -1,6 +1,5 @@
-package icaro.aplicaciones.MRS.informacion;
+package mineros;
 
-import icaro.aplicaciones.Rosace.informacion.Coordinate;
 
 public class Coordenada {
 	public int x;
@@ -8,9 +7,9 @@ public class Coordenada {
 	
 	
 	public String toString(){
+	
 		return "( " + x + " , " + y + " )";
 	}
-	
 	
 	public Coordenada(int x, int y){
 		this.x = x;
@@ -22,11 +21,11 @@ public class Coordenada {
 		this.y = c.y;
 	}
 	
-	public Coordenada(Coordinate c) {
+/*	public Coordenada(Coordinate c) {
 		this.x = (int) c.getX();
 		this.y = (int) c.getY();
 	}
-	
+	*/
 	public int getX() {
 		return x;
 	}

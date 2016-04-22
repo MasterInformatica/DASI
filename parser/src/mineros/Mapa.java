@@ -1,4 +1,4 @@
-package icaro.aplicaciones.MRS.informacion;
+package mineros;
 
 public class Mapa {
 	private int rows, cols;
@@ -8,11 +8,13 @@ public class Mapa {
 		this.cols=cols;
 		this.rows=rows;
 		
-		this.mapa = new TipoCelda[rows][cols];
+		this.mapa = new TipoCelda[cols][rows];
 	
-		for(int i=0; i<rows; i++)
-			for(int j=0; j<cols; j++)
+		for(int i=0; i<cols; i++)
+			for(int j=0; j<rows; j++)
 				mapa[i][j] = TipoCelda.PARED;
+		
+
 	}
 	
 	
@@ -32,7 +34,7 @@ public class Mapa {
 	}
 	
 	public void setCoord (int row , int col, TipoCelda t){
-		this.mapa[row][col]=t;
+		this.mapa[col][row]=t;
 	}
 	
 	private String tipocelda2str(TipoCelda t){
@@ -42,7 +44,7 @@ public class Mapa {
 		case PARED:
 			return "#";
 		case PASILLO:
-			return "ï¿½";
+			return "·";
 		default:
 			return "";
 		
@@ -51,10 +53,10 @@ public class Mapa {
 	 
 	@Override
 	public String toString(){
-		String str =" x:"+rows+" - y:"+cols+"\n";
+		String str =" x:"+cols+" - y:"+rows+"\n";
 		for(int i=0; i<rows; i++){
 			for(int j=0; j<cols; j++){
-				str += tipocelda2str(mapa[i][j]);
+				str += tipocelda2str(mapa[j][i]);
 			}
 			str+="\n";
 		}
