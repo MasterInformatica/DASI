@@ -43,7 +43,6 @@ public class VisorEscenario extends JFrame {
 	private boolean isVisible;
 
 	private ControladorVisorSimulador controlador;
-	private String rutaPersistencia;
 	private JFileChooser fileChooser;
 	private JMenuItem menu_Load;
 	
@@ -111,7 +110,6 @@ public class VisorEscenario extends JFrame {
 	private void build(){
 		isVisible = false;
 		setTitle("MRS - Simulator");
-		rutaPersistencia = "persitenciaMRS/";
 		posicionAgentes = new HashMap<String,Coordinate>();
 		initComponentes();
 	}
@@ -161,7 +159,8 @@ public class VisorEscenario extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				filechoosed = solicitarSeleccionFichero();
+				controlador.notificarBotonStartPulsado();
+				
 			}
 			
 		});
@@ -201,12 +200,12 @@ public class VisorEscenario extends JFrame {
 		
 		fileChooser = new JFileChooser();
 		fileChooser.setDialogTitle("Seleccion de escenario");
-		fileChooser.addActionListener(new ActionListener() {
+		/*fileChooser.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
 				//jFileChooser1ActionPerformed(evt);
 			}
-		});
+		})*/;
 		
 		/*JButton boton_file = new JButton("Set Mapa");
 		boton_file.addActionListener(new ActionListener(){

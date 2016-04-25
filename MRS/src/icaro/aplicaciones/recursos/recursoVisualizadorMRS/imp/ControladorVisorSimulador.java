@@ -7,14 +7,12 @@ import icaro.aplicaciones.Rosace.informacion.Coordinate;
 
 public class ControladorVisorSimulador {
 
-	
 	private VisorEscenario visorEscenario;
-	
-	public ControladorVisorSimulador() throws Exception{
-		
+	private ClaseGeneradoraRecursoVisualizadorMRS outPoint;
+	public ControladorVisorSimulador(ClaseGeneradoraRecursoVisualizadorMRS cgrvm ) throws Exception{
+		outPoint = cgrvm;
 		visorEscenario = new VisorEscenario(this);
 	}
-	
 	
 	public void mostrarEscenarioMovimiento() {
 		if(visorEscenario != null)
@@ -24,9 +22,11 @@ public class ControladorVisorSimulador {
 	public boolean mueveRobot(String idAgente,Coordinate coord){
 		return mueveAgente(idAgente,coord,"Robot");
 	}
+	
 	public boolean mueveVictima(String idAgente,Coordinate coord){
 		return mueveAgente(idAgente,coord,"Miner");
 	}
+	
 	public boolean mueveAgente(String idAgente, Coordinate coord, String tipo) {
 		if(visorEscenario != null)
 			return visorEscenario.mueveAgente(idAgente,coord,tipo);	
@@ -38,12 +38,10 @@ public class ControladorVisorSimulador {
 			visorEscenario.termina();
 	}
 
-
 	public void setMapa(Mapa mapa) {
 		if ( visorEscenario != null )
 			visorEscenario.setMapa(mapa);
 	}
-
 
 	public File getFicheroEscenario() {
 		return visorEscenario.getFicheroEscenario();
@@ -55,9 +53,13 @@ public class ControladorVisorSimulador {
 	}
 
 	public void errorFileEscenario() {
-		visorEscenario.errorFileEscenario();
-		
+		visorEscenario.errorFileEscenario();	
+	}
+	
+	/*   Metodos para los objetos controlados */
+	
+	public void notificarBotonStartPulsado(){
+		outPoint.notificarBotonStartPulsado();
 	}
 
-	
 }

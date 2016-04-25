@@ -75,7 +75,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 			// visorEscenarios = new VisorEscenariosRosace();
 			// ventanaControlCenterGUI = new ControlCenterGUI4(notifEvt);
 			//-controladorIUSimulador = new ControladorVisualizacionSimulRosace(notifEvt);
-			controladorUI = new ControladorVisorSimulador();
+			controladorUI = new ControladorVisorSimulador(this);
 			trazas.aceptaNuevaTraza(new InfoTraza(idRecurso, "El constructor de la clase generadora del recurso "
 					+ idRecurso + " ha completado su ejecucion ....", InfoTraza.NivelTraza.debug));
 
@@ -176,7 +176,12 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		//La idea de este método es que te llamo cuando el esenario es valido, y 
 		//tu bloquees de alguna manera para que no pueda cambiarlo durante la ejecucion.
 		// TODO Auto-generated method stub
-		controladorUI.muestaError("todo bien al leer escenario:","");
+		controladorUI.muestaError("todo bien al leer escenario","");
+	}
+
+	public void notificarBotonStartPulsado() {
+		
+		controladorUI.muestaError("No implementado","notificarBotonStartPulsado() No implementado en ClaseGeneradoraRecursoVisualizadorMRS");
 	}	
 	
 	/*****************************************************************
@@ -345,49 +350,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 
 
 
-	
 /*
-	public void mostrarEscenarioMovimiento(String rutaEscenario) {
-		// throw new UnsupportedOperationException("Not supported yet.");
-		// verificar que el agente a reportar esta definido , si no lo esta los
-		// eventos no se envian a nadie
-		if (visorEscenarioMov == null) {
-			try {
-				if (controladorIUSimulador.abrirVisorMovimientoConEscenario(rutaEscenario)) {
-					visorEscenarioMov.setVisible(true);
-					escenarioMovAbierto = true;
-				}
-				;
-
-			} catch (Exception ex) {
-				Logger.getLogger(ClaseGeneradoraRecursoVisualizadorMRS.class.getName()).log(Level.SEVERE,
-						null, ex);
-			}
-		}
-		visorEscenarioMov.setVisible(true);
-		// else {
-		// trazas.trazar(this.id, "El identificador del agente controlador no
-		// esta definido. El agente controlador debe definirlo"
-		// + "o definir el identificador del agente en esta clase",
-		// InfoTraza.NivelTraza.error);
-		// }
-	}
-*/
-
-/*
-	@Override
-	public void mostrarEscenario() throws Exception {
-		// if (visorEscenarios == null) {
-		// try {
-		// visorEscenarios = new VisorEscenariosRosace ();
-		// } catch (Exception ex) {
-		// Logger.getLogger(ClaseGeneradoraRecursoVisualizadorEntornosSimulacion.class.getName()).log(Level.SEVERE,
-		// null, ex);
-		// }
-		// }
-		// visorEscenarios.setVisible(true);
-	}
-
 	@Override
 	public void mostrarResultadosFinSimulacion() throws Exception {
 		String directorioTrabajo = System.getProperty("user.dir"); // Obtener
