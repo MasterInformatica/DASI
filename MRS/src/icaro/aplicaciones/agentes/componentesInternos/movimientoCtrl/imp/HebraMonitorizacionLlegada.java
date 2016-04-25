@@ -60,8 +60,6 @@ public class HebraMonitorizacionLlegada extends Thread {
 
 	private volatile boolean enDestino = false;
 	private int dirX = 0, dirY = 0;
-	private int intervaloEnvioInformesMs;
-	private int distanciaRecorridaEnIntervaloInformes;
 	private long tiempoParaAlcanzarDestino = 3000;
 	public ItfUsoRecursoVisualizadorEntornosSimulacion itfusoRecVisSimulador;
 	public ItfUsoRecursoVisualizadorMRS                itfusoRecVisMRS;
@@ -127,10 +125,6 @@ public class HebraMonitorizacionLlegada extends Thread {
 			pendienteRecta = (float) Math.abs(incrY / incrX);
 
 		}
-		
-		intervaloEnvioInformesMs = (int) velocidadRobot * 50;
-		distanciaRecorridaEnIntervaloInformes = 1;
-
 		
 		this.setCoordDestino(coordDestino);
 
@@ -284,22 +278,17 @@ public class HebraMonitorizacionLlegada extends Thread {
 		Coordenada c1 = new Coordenada(coordActuales);
 		Coordenada c2 = new Coordenada(coordDestino);
 		
+
 		
 		try {
-			
-			System.out.println("====================================\n" + c1);
-			System.out.println("====================================\n" + c2);
 			ruta = itfusoRecPlanRuta.getRuta(c1, c2);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		System.out.println("---->" + ruta);
-//		this.coordActuales.setX(this.coordActuales.getX() +1);
 		this.coordActuales.setX(ruta.get(1).getX());
 		this.coordActuales.setY(ruta.get(1).getY());
-		
 	
 	}
 	

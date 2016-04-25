@@ -1,5 +1,7 @@
 package icaro.aplicaciones.MRS.informacion;
 
+import java.util.ArrayList;
+
 public class Mapa {
 	private int rows, cols;
 	private TipoCelda[][] mapa;
@@ -14,6 +16,29 @@ public class Mapa {
 			for(int j=0; j<cols; j++)
 				mapa[i][j] = TipoCelda.PARED;
 	}
+	
+	/* Devuelve un array list con los obstaculos alrededor de la posición pasada
+	 * por parámetro.
+	 * Si no hay obstaculos, puede devolver null o un array list de tamaño 0.   */
+	public ArrayList<Coordenada> getObstaculos(Coordenada c){
+		return this.getObstaculos(c.getX(), c.getY());
+	}
+
+	public ArrayList<Coordenada> getObstaculos(int x, int y){
+		ArrayList<Coordenada> ret = new ArrayList<Coordenada>();
+		
+		if(x>0 && this.mapa[x-1][y] == TipoCelda.ESCOMBRO)
+			ret.add(new Coordenada(x-1, y));
+		if(x+1<rows && this.mapa[x+1][y] == TipoCelda.ESCOMBRO)
+			ret.add(new Coordenada(x+1, y));
+		if(y>0 && this.mapa[x][y-1] == TipoCelda.ESCOMBRO)
+			ret.add(new Coordenada(x, y-1));
+		if(y+1<cols && this.mapa[x][y+1] == TipoCelda.ESCOMBRO)
+			ret.add(new Coordenada(x, y+1));
+		
+		return ret;
+	}
+	
 	
 	
 	public TipoCelda[][] getMapa(){
