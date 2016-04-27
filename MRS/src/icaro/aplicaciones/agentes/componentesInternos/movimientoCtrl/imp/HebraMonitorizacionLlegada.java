@@ -3,9 +3,11 @@ package icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.imp;
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.Rosace.informacion.VocabularioRosace;
+import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
 import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.ItfUsoRecursoVisualizadorEntornosSimulacion;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
+import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Informe;
 import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.factoriaEInterfacesPrObj.ItfProcesadorObjetivos;
 
@@ -62,9 +64,11 @@ public class HebraMonitorizacionLlegada extends Thread {
 	private int dirX = 0, dirY = 0;
 	private long tiempoParaAlcanzarDestino = 3000;
 	public ItfUsoRecursoVisualizadorEntornosSimulacion itfusoRecVisSimulador;
-	public ItfUsoRecursoVisualizadorMRS                itfusoRecVisMRS;
-	public ItfProcesadorObjetivos itfProcObjetivos;
+
+	public ItfProcesadorObjetivos        itfProcObjetivos;
 	public ItfUsoRecursoPlanificadorRuta itfusoRecPlanRuta;
+	public ItfUsoRecursoVisualizadorMRS  itfusoRecVisMRS;
+	public ItfUsoRecursoPersistenciaMRS  itfusoRecPersistencia;
 
 
 	/**
@@ -78,13 +82,15 @@ public class HebraMonitorizacionLlegada extends Thread {
 			MaquinaEstadoMovimientoCtrl contrMovimiento,
 			ItfUsoRecursoVisualizadorEntornosSimulacion itfRecVisSimulador, 
 			ItfUsoRecursoVisualizadorMRS itfRecVisMRS,
-			ItfUsoRecursoPlanificadorRuta itfRecPlanRuta) {
+			ItfUsoRecursoPlanificadorRuta itfRecPlanRuta,
+			ItfUsoRecursoPersistenciaMRS itfRecPersistencia) {
 		
 		super("HebraMonitorizacion " + idRobot);
 		controladorMovimiento = contrMovimiento;
 		this.itfusoRecVisSimulador = itfRecVisSimulador;
 		this.itfusoRecVisMRS = itfRecVisMRS;
 		this.itfusoRecPlanRuta = itfRecPlanRuta;
+		this.itfusoRecPersistencia = itfRecPersistencia;
 		
 		identRobot = idRobot;
 		itfProcObjetivos = contrMovimiento.itfProcObjetivos;
@@ -223,7 +229,8 @@ public class HebraMonitorizacionLlegada extends Thread {
 				this.controladorMovimiento.setCoordenadasActuales(coordActuales);
 				this.itfusoRecVisMRS.mueveAgente(identDestino, coordActuales);
 				this.itfusoRecVisSimulador.mostrarPosicionRobot(identRobot, coordActuales);
-				//*/
+				
+				this.checkBloqueos();
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -277,9 +284,7 @@ public class HebraMonitorizacionLlegada extends Thread {
 		ArrayList<Coordenada> ruta = null;
 		Coordenada c1 = new Coordenada(coordActuales);
 		Coordenada c2 = new Coordenada(coordDestino);
-		
-
-		
+				
 		try {
 			ruta = itfusoRecPlanRuta.getRuta(c1, c2);
 			
@@ -292,6 +297,17 @@ public class HebraMonitorizacionLlegada extends Thread {
 	
 	}
 	
+	private void checkBloqueos(){
+		Coordenada c = new Coordenada(coordActuales);
+		ArrayList<Coordenada> bloqueos = this.itfusoRecPersistencia.getEscenario().getMapa().getObstaculos(c);
+
+		if(bloqueos != null && bloqueos.size()>0){
+			for(Coordenada cc : bloqueos){
+				this.itfusoRecPlanRuta.informarBloqueo(cc);
+				this.itfusoRecVisMRS.informarBloqueo(cc);
+			}
+		}
+	}
 
 
 }

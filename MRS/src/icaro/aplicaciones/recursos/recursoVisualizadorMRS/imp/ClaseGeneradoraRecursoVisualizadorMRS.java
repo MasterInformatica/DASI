@@ -1,5 +1,6 @@
 package icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp;
 
+import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.Rosace.informacion.PuntoEstadistica;
@@ -182,6 +183,14 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	public void notificarBotonStartPulsado() {
 		
 		controladorUI.muestaError("No implementado","notificarBotonStartPulsado() No implementado en ClaseGeneradoraRecursoVisualizadorMRS");
+	}
+
+	@Override
+	public void informarBloqueo(Coordenada c) {
+		//Cuando el robot se encuentra con una roca en el camino, informa de que la ha encontrado, por si se quiere
+		//cambiar la forma de visualizarlo o no
+		controladorUI.muestaError("No implementado", "IMPLEMENTAME!!!! informarBloqueo");
+		
 	}	
 	
 	/*****************************************************************

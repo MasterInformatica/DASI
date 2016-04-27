@@ -7,6 +7,7 @@ package icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.imp;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.Rosace.informacion.VocabularioRosace;
 import icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.ItfUsoMovimientoCtrl;
+import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
 import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.ItfUsoRecursoVisualizadorEntornosSimulacion;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
@@ -57,6 +58,7 @@ public class MaquinaEstadoMovimientoCtrl {
 	ItfUsoRecursoVisualizadorEntornosSimulacion itfUsoRecVisEntornosSimul;
 	ItfUsoRecursoVisualizadorMRS itfUsoRecVisMRS;
 	ItfUsoRecursoPlanificadorRuta itfUsoRecPlanRuta;
+	ItfUsoRecursoPersistenciaMRS itfUsoRecPersistencia;
 	
 	
 	private org.apache.log4j.Logger log = org.apache.log4j.Logger
@@ -90,7 +92,9 @@ public class MaquinaEstadoMovimientoCtrl {
 	public synchronized void inicializar(ItfProcesadorObjetivos itfProcObj,
 			ItfUsoRecursoVisualizadorEntornosSimulacion itfVisSimul, 
 			ItfUsoRecursoVisualizadorMRS itfVisualMRS,
-			ItfUsoRecursoPlanificadorRuta itfPlanRuta) {
+			ItfUsoRecursoPlanificadorRuta itfPlanRuta, 
+			ItfUsoRecursoPersistenciaMRS itfPersistencia) {
+		
 		identAgente = itfProcObj.getAgentId();
 		if (identComponente == null)
 			identComponente = identAgente + "."
@@ -99,6 +103,7 @@ public class MaquinaEstadoMovimientoCtrl {
 		itfUsoRecVisEntornosSimul = itfVisSimul;
 		itfUsoRecVisMRS = itfVisualMRS;
 		this.itfUsoRecPlanRuta = itfPlanRuta;
+		this.itfUsoRecPersistencia = itfPersistencia;
 	}
 
 	public MaquinaEstadoMovimientoCtrl() {
@@ -131,6 +136,12 @@ public class MaquinaEstadoMovimientoCtrl {
 		itfUsoRecVisMRS = itfVisualMRS;
 	}
 
+	public void SetItfUsoRecursoPersistenciaMRS(
+			ItfUsoRecursoPersistenciaMRS itfUsoRecPers) {
+		this.itfUsoRecPersistencia = itfUsoRecPers;
+	}
+	
+	
 	public void SetInfoContexto(ItfProcesadorObjetivos itfProcObj) {
 		identAgente = itfProcObj.getAgentId();
 		itfProcObjetivos = itfProcObj;
@@ -194,7 +205,7 @@ public class MaquinaEstadoMovimientoCtrl {
 		else
 			estadoActual = new RobotEnMovimiento(this);
 		estadoActual.inicializar(itfProcObjetivos, itfUsoRecVisEntornosSimul,
-								 itfUsoRecVisMRS, itfUsoRecPlanRuta);
+								 itfUsoRecVisMRS, itfUsoRecPlanRuta, itfUsoRecPersistencia);
 		identEstadoActual = estadoId.name();
 		estadoActual.identComponente = identComponente;
 		estadosCreados.put(estadoId, estadoActual);
@@ -247,7 +258,8 @@ public class MaquinaEstadoMovimientoCtrl {
 				this.monitorizacionLlegadaDestino = new HebraMonitorizacionLlegada(
 						this.identAgente, this, this.itfUsoRecVisEntornosSimul,
 						this.itfUsoRecVisMRS,
-						this.itfUsoRecPlanRuta);
+						this.itfUsoRecPlanRuta,
+						this.itfUsoRecPersistencia);
 				
 				monitorizacionLlegadaDestino.inicializarDestino(identdest,
 						this.robotposicionActual, coordDestino,
@@ -276,7 +288,8 @@ public class MaquinaEstadoMovimientoCtrl {
 							this.identAgente, this,
 							this.itfUsoRecVisEntornosSimul,
 							this.itfUsoRecVisMRS,
-							this.itfUsoRecPlanRuta);
+							this.itfUsoRecPlanRuta,
+							this.itfUsoRecPersistencia);
 					monitorizacionLlegadaDestino.inicializarDestino(identdest,
 							this.robotposicionActual, coordDestino,
 							velocidadCrucero);
@@ -373,6 +386,9 @@ public class MaquinaEstadoMovimientoCtrl {
 	public String getIdentEstadoMovRobot() {
 		return identEstadoActual;
 	}
+
+	
+	
 
 
 	

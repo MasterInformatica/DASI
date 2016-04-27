@@ -7,6 +7,7 @@ package icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.imp;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.Rosace.informacion.VocabularioRosace;
 import icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.ItfUsoMovimientoCtrl;
+import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
 import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.ItfUsoRecursoVisualizadorEntornosSimulacion;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
@@ -47,6 +48,7 @@ public abstract class EstadoAbstractoMovRobot implements ItfUsoMovimientoCtrl {
 	public ItfUsoRecursoVisualizadorEntornosSimulacion itfusoRecVisSimulador;
 	public ItfUsoRecursoVisualizadorMRS itfusoRecVisMRS;
 	public ItfUsoRecursoPlanificadorRuta itfusoRecPlanRuta;
+	public ItfUsoRecursoPersistenciaMRS itfusoRecPersistencia;
 
 	public EstadoAbstractoMovRobot(MaquinaEstadoMovimientoCtrl maquinaEstds,
 			MaquinaEstadoMovimientoCtrl.EstadoMovimientoRobot identEstadoAcrear) {
@@ -74,7 +76,8 @@ public abstract class EstadoAbstractoMovRobot implements ItfUsoMovimientoCtrl {
 	public void inicializar(ItfProcesadorObjetivos itfProcObj,
 			ItfUsoRecursoVisualizadorEntornosSimulacion itfVisSimul,
 			ItfUsoRecursoVisualizadorMRS itfVisualMRS,
-			ItfUsoRecursoPlanificadorRuta itfPlanRuta) {
+			ItfUsoRecursoPlanificadorRuta itfPlanRuta,
+			ItfUsoRecursoPersistenciaMRS itfPersistencia) {
 		identAgente = itfProcObj.getAgentId();
 		itfProcObjetivos = itfProcObj;
 		identComponente = identAgente + "." + this.getClass().getSimpleName();
@@ -82,7 +85,9 @@ public abstract class EstadoAbstractoMovRobot implements ItfUsoMovimientoCtrl {
 		itfusoRecVisSimulador = itfVisSimul;
 		itfusoRecVisMRS = itfVisualMRS;
 		itfusoRecPlanRuta = itfPlanRuta;
-		maquinaEstados.inicializar(itfProcObj, itfVisSimul, itfVisualMRS,itfPlanRuta);
+		itfusoRecPersistencia = itfPersistencia;
+		
+		maquinaEstados.inicializar(itfProcObj, itfVisSimul, itfVisualMRS,itfPlanRuta, itfPersistencia);
 
 	}
 

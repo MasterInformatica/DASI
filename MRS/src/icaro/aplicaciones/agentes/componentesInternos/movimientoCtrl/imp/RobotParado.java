@@ -75,7 +75,7 @@ public class RobotParado extends EstadoAbstractoMovRobot implements
 					this.monitorizacionLlegadaDestino = new HebraMonitorizacionLlegada(
 							this.identAgente, maquinaEstados,
 							this.itfusoRecVisSimulador, this.itfusoRecVisMRS,
-							this.itfusoRecPlanRuta);
+							this.itfusoRecPlanRuta, this.itfusoRecPersistencia);
 					
 					
 					monitorizacionLlegadaDestino.inicializarDestino(

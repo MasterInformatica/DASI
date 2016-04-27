@@ -8,6 +8,7 @@ import icaro.aplicaciones.Rosace.informacion.VocabularioRosace;
 import icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.FactoriaAbstrCompInterno;
 import icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.InfoCompMovimiento;
 import icaro.aplicaciones.agentes.componentesInternos.movimientoCtrl.ItfUsoMovimientoCtrl;
+import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
 import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
 import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.ItfUsoRecursoVisualizadorEntornosSimulacion;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
@@ -27,6 +28,7 @@ public class FactoriaRIntMovimientoCtrl extends FactoriaAbstrCompInterno {
 	private ItfUsoRecursoVisualizadorEntornosSimulacion itfUsoRecVisEntornosSimul;
 	private ItfUsoRecursoVisualizadorMRS itfUsoRecVisMRS;
 	private ItfUsoRecursoPlanificadorRuta itfUsoRecPlanRuta;
+	private ItfUsoRecursoPersistenciaMRS  itfUsoRecPersistencia;
 
 	
 	public FactoriaRIntMovimientoCtrl() {
@@ -52,6 +54,8 @@ public class FactoriaRIntMovimientoCtrl extends FactoriaAbstrCompInterno {
 					.obtenerInterfazUso(VocabularioRosace.IdentRecursoVisualizadorMRS); 
 			itfUsoRecPlanRuta = (ItfUsoRecursoPlanificadorRuta) repoItfs
 					.obtenerInterfazUso(VocabularioRosace.IdenRecursoPlanificadorRuta);
+			itfUsoRecPersistencia = (ItfUsoRecursoPersistenciaMRS) repoItfs
+					.obtenerInterfazUso(VocabularioRosace.IdenRecursoPersistenciaMRS);
 			
 			maquinaEstados
 					.SetItfUsoRecursoVisualizadorEntornosSimulacion(itfUsoRecVisEntornosSimul);
@@ -60,6 +64,9 @@ public class FactoriaRIntMovimientoCtrl extends FactoriaAbstrCompInterno {
 			
 			maquinaEstados
 					.SetItfUsoRecursoPlanificadorRuta(itfUsoRecPlanRuta);
+			
+			maquinaEstados
+					.SetItfUsoRecursoPersistenciaMRS(itfUsoRecPersistencia);
 	
 		} catch (Exception ex) {
 			Logger.getLogger(FactoriaRIntMovimientoCtrl.class.getName()).log(

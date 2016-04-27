@@ -7,4 +7,5 @@ import icaro.infraestructura.patronRecursoSimple.ItfUsoRecursoSimple;
 
 public interface ItfUsoRecursoPersistenciaMRS extends ItfUsoRecursoSimple{
 	public Escenario parseEscenario(File file) throws Exception;
+	public Escenario getEscenario();
 }

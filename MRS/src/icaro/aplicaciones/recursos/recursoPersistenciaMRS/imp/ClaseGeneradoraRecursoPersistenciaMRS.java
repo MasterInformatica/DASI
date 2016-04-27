@@ -25,6 +25,7 @@ implements ItfUsoRecursoPersistenciaMRS{
 	
 	private static final long serialVersionUID = -2900178575013666003L;
 	private String recursoId;
+	private Escenario escenario;
 	
 	public ClaseGeneradoraRecursoPersistenciaMRS(String idRecurso) throws Exception {
 		super(idRecurso);
@@ -38,6 +39,10 @@ implements ItfUsoRecursoPersistenciaMRS{
 			this.itfAutomata.transita("error");
 			throw e;
 		}
+	}
+	
+	public Escenario getEscenario(){
+		return this.escenario;
 	}
 	
 	@Override
@@ -110,6 +115,7 @@ implements ItfUsoRecursoPersistenciaMRS{
 
 			}
 		}
+		this.escenario = e;
 		return e;
 	}
 

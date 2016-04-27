@@ -2,6 +2,7 @@ package icaro.aplicaciones.recursos.recursoVisualizadorMRS;
 
 import java.io.File;
 
+import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.recursos.recursoPersistenciaEntornosSimulacion.ItfUsoRecursoPersistenciaEntornosSimulacion;
@@ -132,4 +133,7 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 
 
 	public void escenarioElegidoValido()  throws Exception;
+
+
+	public void informarBloqueo(Coordenada c);
 }
