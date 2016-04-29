@@ -17,6 +17,22 @@ public class Mapa {
 				mapa[i][j] = TipoCelda.PARED;
 	}
 	
+	public Mapa(Mapa toCopy, boolean olvidarEscombros){
+		this.cols = toCopy.getNumCols();
+		this.rows = toCopy.getNumRows();
+		
+		this.mapa = new TipoCelda[rows][cols];
+		TipoCelda[][] map = toCopy.getMapa();
+		
+		for(int i=0; i<rows; i++)
+			for(int j=0; j<cols; j++){
+				if ((map[i][j] == TipoCelda.ESCOMBRO) && (olvidarEscombros))
+					mapa[i][j] = TipoCelda.PASILLO;
+				else
+					mapa[i][j] = map[i][j];
+			}
+	}
+	
 	/* Devuelve un array list con los obstaculos alrededor de la posición pasada
 	 * por parámetro.
 	 * Si no hay obstaculos, puede devolver null o un array list de tamaño 0.   */
