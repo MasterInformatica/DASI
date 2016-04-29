@@ -18,7 +18,7 @@ public class InicializarRobotStatus extends TareaSincrona {
 
 	@Override
 	public void ejecutar(Object... params) {
-		try {
+	/*	try {
 			String miIdentAgte = this.getIdentAgente();
 
 			// Lectura del fichero de robots. Aprovechamos para tener en memoria
@@ -80,7 +80,7 @@ public class InicializarRobotStatus extends TareaSincrona {
 								InfoTraza.NivelTraza.error);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 }

@@ -25,6 +25,7 @@ public class AyudarVictima extends Objetivo {
 		super.setgoalId("AyudarVictima");
 	}
 
+	
 	public AyudarVictima(String victmId) {
 		super.setgoalId("AyudarVictima");
 		this.victimId = victmId;

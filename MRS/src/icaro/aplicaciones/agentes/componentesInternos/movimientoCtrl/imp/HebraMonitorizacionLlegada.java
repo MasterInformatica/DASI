@@ -299,13 +299,20 @@ public class HebraMonitorizacionLlegada extends Thread {
 	
 	private void checkBloqueos(){
 		Coordenada c = new Coordenada(coordActuales);
-		ArrayList<Coordenada> bloqueos = this.itfusoRecPersistencia.getEscenario().getMapa().getObstaculos(c);
+		ArrayList<Coordenada> bloqueos;
+		try {
+			bloqueos = this.itfusoRecPersistencia.getEscenario().getMapa().getObstaculos(c);
+		
 
 		if(bloqueos != null && bloqueos.size()>0){
 			for(Coordenada cc : bloqueos){
 				this.itfusoRecPlanRuta.informarBloqueo(cc);
 				this.itfusoRecVisMRS.informarBloqueo(cc);
 			}
+		}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

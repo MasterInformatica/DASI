@@ -12,10 +12,7 @@
             <icaro:propiedad atributo="identificadorEquipo" valor = "rescate1" />
             <icaro:propiedad atributo="nombreJefeEquipo" valor = "rescate1RobotAsignador" />   
             <icaro:propiedad atributo="organizacion" valor = "Jerarquico" />
-    <!--    <icaro:propiedad atributo="rutaFicheroVictimasTest" valor = "src/utils/Esc_6Victimas_0IP_001.xml" />  -->
-    <!--    <icaro:propiedad atributo="identFicheroEscenarioSimulacion" valor = "modeloOrg_Jerarq1uicoNumRobts_5NumVicts_51.xml" />            
-            <icaro:propiedad atributo="rutaFicheroRobotsTest" valor = "src/utils/Esc_Jerarquico_4Robots_001.xml" />
-    -->     <icaro:propiedad atributo="timeMsTarea:TimeOutContactarMiembrosEquipo" valor = "3000" />
+            <icaro:propiedad atributo="timeMsTarea:TimeOutContactarMiembrosEquipo" valor = "3000" />
             <icaro:propiedad atributo="intervaloMilisegundosEnvioMensajesDesdeCC" valor = "10000" />   <!-- valor expresado en milisegundos -->  
             <icaro:propiedad atributo="timeMsTarea:TimeOutRecibirEvaluaciones1" valor = "6000" />   <!-- se usa en el igualitario y en el jerarquico -->                                                                        
             <icaro:propiedad atributo="timeMsTarea:TimeOutRecibirEvaluaciones2" valor = "6000" />
@@ -46,17 +43,31 @@
 	******************   Descripcion del comportamiento de los agentes de aplicacion        ******************
 	********************************************************************************************************-->
 <icaro:DescComportamientoAgentesAplicacion>
-<!--     <icaro:DescComportamientoAgente -->
-<!--        nombreComportamiento="AgenteAplicacionAgteControladorSimuladorRosace" rol="AgenteAplicacion" localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionAgteControladorSimuladorRosaceReactivo.comportamiento" -->
-<!--                             tipo="Reactivo" /> -->
     <icaro:DescComportamientoAgente 
-       nombreComportamiento="AgenteAplicacionIniciadorMRS" rol="AgenteAplicacion" localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionIniciadorMRS.comportamiento"									
-       						tipo="Reactivo" />
+       nombreComportamiento="AgenteAplicacionIniciadorMRS" 
+       rol="AgenteAplicacion" 
+       localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionIniciadorMRS.comportamiento"									
+       tipo="Reactivo" 
+    />
+    <icaro:DescComportamientoAgente 
+       nombreComportamiento="AgenteAplicacionRobotMRS" 
+       rol="AgenteAplicacion" 
+       localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionRobotMRS"									
+       tipo="Cognitivo"
+       localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionRobotMRS.procesoResolucionObjetivos.reglasRobotMRS.drl"
+    />
     <icaro:DescComportamientoAgente
-       nombreComportamiento="AgenteAplicacionAsignadorTareas" rol="AgenteAplicacion" localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionAsignadorTareasCognitivo" tipo="Cognitivo" 
-       localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionAsignadorTareasCognitivo.procesoResolucionObjetivos.reglasjearqJefeCambioRol.drl"/>
+       nombreComportamiento="AgenteAplicacionAsignadorTareas" 
+       rol="AgenteAplicacion" 
+       localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionAsignadorTareasCognitivo" 
+       tipo="Cognitivo" 
+       localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionAsignadorTareasCognitivo.procesoResolucionObjetivos.reglasjearqJefeCambioRol.drl"
+     />
      <icaro:DescComportamientoAgente  
-       nombreComportamiento="AgenteAplicacionSubordinado" rol="AgenteAplicacion" localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionSubordinadoConCambioRolCognitivo" tipo="Cognitivo"
+       nombreComportamiento="AgenteAplicacionSubordinado" 
+       rol="AgenteAplicacion" 
+       localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionSubordinadoConCambioRolCognitivo" 
+       tipo="Cognitivo"
        localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionSubordinadoConCambioRolCognitivo.procesoResolucionObjetivos.reglasSubordConCambioRolNC.drl"/>
 </icaro:DescComportamientoAgentesAplicacion>
 </icaro:DescComportamientoAgentes>
@@ -64,9 +75,7 @@
 	******************   Descripcion de los recursos de aplicacion                          ******************
 	********************************************************************************************************-->
 <icaro:DescRecursosAplicacion>
-<!--     <icaro:DescRecursoAplicacion nombre="RecursoVisualizadorEntornosSimulacion" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.imp.ClaseGeneradoraRecursoVisualizadorEntornosSimulacion"/>			            		 -->
 	<icaro:DescRecursoAplicacion nombre="RecursoPersistenciaEntornosSimulacion" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPersistenciaEntornosSimulacion.imp.ClaseGeneradoraRecursoPersistenciaEntornosSimulacion"/>			            		
-<!--<icaro:DescRecursoAplicacion nombre="RecursoCreacionEntornosSimulacion" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoCreacionEntornosSimulacion.imp.ClaseGeneradoraRecursoCreacionEntornosSimulacion"/>-->
     <icaro:DescRecursoAplicacion nombre="RecursoVisualizadorMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.ClaseGeneradoraRecursoVisualizadorMRS"/>			            		
     <icaro:DescRecursoAplicacion nombre="RecursoPlanificadorRuta" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPlanificadorRuta.imp.ClaseGeneradoraRecursoPlanificadorRuta"/>
     <icaro:DescRecursoAplicacion nombre="RecursoPersistenciaMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPersistenciaMRS.imp.ClaseGeneradoraRecursoPersistenciaMRS"/>			            		
@@ -88,26 +97,17 @@
                 </icaro:InstanciaGestor>
                 <icaro:InstanciaGestor id="GestorAgentes" refDescripcion="GestorAgentes">
                     <icaro:componentesGestionados>
-<!--                             <icaro:componenteGestionado refId="AgenteControladorSimuladorRosaceReactivo1" tipoComponente="AgenteAplicacion"/> -->
                             <icaro:componenteGestionado refId="AgenteAplicacionIniciadorMRS1"             tipoComponente="AgenteAplicacion"/>
+                            <icaro:componenteGestionado refId="AgenteAplicacionRobotMRS1"             tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="rescate1RobotAsignador" tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="rescate1RobotSubordinado1" tipoComponente="AgenteAplicacion"/>
-<!--                        <icaro:componenteGestionado refId="rescate1RobotSubordinado2" tipoComponente="AgenteAplicacion"/>
-                            <icaro:componenteGestionado refId="rescate1RobotSubordinado3" tipoComponente="AgenteAplicacion"/>
-                            <icaro:componenteGestionado refId="rescate1RobotSubordinado4" tipoComponente="AgenteAplicacion"/>
- -->                   </icaro:componentesGestionados>
+                   </icaro:componentesGestionados>
                 </icaro:InstanciaGestor>
                 <icaro:InstanciaGestor id="GestorRecursos" refDescripcion="GestorRecursos">
                     <icaro:componentesGestionados>
-                    <!--        <icaro:componenteGestionado refId="RecursoMorse1" tipoComponente="RecursoAplicacion"/> 
-                                <icaro:componenteGestionado refId="RecursoGUI1" tipoComponente="RecursoAplicacion"/>   
-                                <icaro:componenteGestionado refId="RecursoEstadistica1" tipoComponente="RecursoAplicacion"/>  -->
-<!--                     	<icaro:componenteGestionado refId="RecursoVisualizadorEntornosSimulacion1" tipoComponente="RecursoAplicacion"/> -->
                     	<icaro:componenteGestionado refId="RecursoVisualizadorMRS1" tipoComponente="RecursoAplicacion"/>	    
                     	<icaro:componenteGestionado refId="RecursoPlanificadorRuta1" tipoComponente="RecursoAplicacion"/>	    
                     	<icaro:componenteGestionado refId="RecursoPersistenciaMRS1" tipoComponente="RecursoAplicacion"/>
-<!-- 						<icaro:componenteGestionado refId="RecursoPersistenciaEntornosSimulacion1" tipoComponente="RecursoAplicacion"/> -->
-<!--  					<icaro:componenteGestionado refId="RecursoCreacionEntornosSimulacion1" tipoComponente="RecursoAplicacion"/>    -->                            
                     </icaro:componentesGestionados>
                 </icaro:InstanciaGestor>
             </icaro:Gestores>
@@ -115,36 +115,23 @@
 	******************   Instancias de Agentes de aplicacion                                ******************
 	*******************************************************************************************************-->            
         <icaro:AgentesAplicacion>
-<!--                 <icaro:Instancia id="AgenteControladorSimuladorRosaceReactivo1" refDescripcion="AgenteAplicacionAgteControladorSimuladorRosace"> -->
-<!--                 </icaro:Instancia> -->
                 <icaro:Instancia id="AgenteAplicacionIniciadorMRS1" refDescripcion="AgenteAplicacionIniciadorMRS">
+                </icaro:Instancia>
+                <icaro:Instancia id="AgenteAplicacionRobotMRS1" refDescripcion="AgenteAplicacionRobotMRS">
                 </icaro:Instancia>
                 <icaro:Instancia id="rescate1RobotAsignador" refDescripcion="AgenteAplicacionAsignadorTareas">
                 </icaro:Instancia>
                 <icaro:Instancia id="rescate1RobotSubordinado1" refDescripcion="AgenteAplicacionSubordinado">
                 </icaro:Instancia>
- <!--           <icaro:Instancia id="rescate1RobotSubordinado2" refDescripcion="AgenteAplicacionSubordinado">
-                </icaro:Instancia>
-                <icaro:Instancia id="rescate1RobotSubordinado3" refDescripcion="AgenteAplicacionSubordinado">
-                </icaro:Instancia> 
-                <icaro:Instancia id="rescate1RobotSubordinado4" refDescripcion="AgenteAplicacionSubordinado">
-                </icaro:Instancia> 
- -->       </icaro:AgentesAplicacion>
+       </icaro:AgentesAplicacion>
 	<!--******************************************************************************************************
 	******************   Instancias de Recursos de aplicacion                               ******************
 	********************************************************************************************************-->        
         <icaro:RecursosAplicacion>
-         <!--       <icaro:Instancia id="RecursoMorse1" refDescripcion="RecursoMorse" xsi:type="icaro:Instancia">
-                </icaro:Instancia>
-                <icaro:Instancia id="RecursoGUI1" refDescripcion="RecursoGUI" xsi:type="icaro:Instancia">    
-                </icaro:Instancia>    --> 
                 <icaro:Instancia id="RecursoEstadistica1" refDescripcion="RecursoEstadistica" xsi:type="icaro:Instancia"/>
-<!--                 <icaro:Instancia id="RecursoVisualizadorEntornosSimulacion1" refDescripcion="RecursoVisualizadorEntornosSimulacion" xsi:type="icaro:Instancia"/> -->
                 <icaro:Instancia id="RecursoVisualizadorMRS1" refDescripcion="RecursoVisualizadorMRS" xsi:type="icaro:Instancia"/>
                 <icaro:Instancia id="RecursoPlanificadorRuta1" refDescripcion="RecursoPlanificadorRuta" xsi:type="icaro:Instancia"/>
-                 <icaro:Instancia id="RecursoPersistenciaMRS1" refDescripcion="RecursoPersistenciaMRS" xsi:type="icaro:Instancia"/>
-<!--                 <icaro:Instancia id="RecursoPersistenciaEntornosSimulacion1" refDescripcion="RecursoPersistenciaEntornosSimulacion" xsi:type="icaro:Instancia"/> -->
-<!--            <icaro:Instancia id="RecursoCreacionEntornosSimulacion1" refDescripcion="RecursoCreacionEntornosSimulacion" xsi:type="icaro:Instancia"/> -->                
+                <icaro:Instancia id="RecursoPersistenciaMRS1" refDescripcion="RecursoPersistenciaMRS" xsi:type="icaro:Instancia"/>
         </icaro:RecursosAplicacion>
 
 	<!--******************************************************************************************************

@@ -1,0 +1,39 @@
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.InformeDeTarea;
+import icaro.infraestructura.recursosOrganizacion.recursoTrazas.ItfUsoRecursoTrazas;
+import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.*;
+import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.gestorTareas.ItfGestorTareas;
+import icaro.aplicaciones.agentes.agenteAplicacionRobotMRS.tareas.*
+//??
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
+
+import java.util.ArrayList;
+import java.lang.String;
+
+
+global ItfGestorTareas gestorTareas;
+global ItfUsoRecursoTrazas recursoTrazas;
+global String agentId;
+
+
+rule "Acciones Iniciales Robot MRS "
+ when
+    not ( exists(Focus()))
+ then
+   TareaSincrona tarea1 = gestorTareas.crearTareaSincrona(InicializarRobot.class);
+   tarea1.ejecutar(null,agentId);
+   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
+end
+/*
+rule " Otra Regla "
+ when    
+    misObjs: MisObjetivos()
+    robot:RobotStatus()
+    peticionAgte: PeticionAgente( mensajePeticion == VocabularioRosace.MsgPeticionEnvioEvaluaciones,
+                                 identAgente == VocabularioRosace.IdentAgteDistribuidorTareas,victimaCC:justificacion)
+  then
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(MandarEvaluacionAlAgteAsignador.class);
+     tarea.ejecutar(null,peticionAgte,misObjs,robot,victims2R); 
+     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
+end
+*/

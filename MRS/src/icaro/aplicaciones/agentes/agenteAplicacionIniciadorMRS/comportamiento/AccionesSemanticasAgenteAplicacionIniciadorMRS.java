@@ -3,10 +3,12 @@ package icaro.aplicaciones.agentes.agenteAplicacionIniciadorMRS.comportamiento;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import icaro.aplicaciones.MRS.informacion.Escenario;
 import icaro.aplicaciones.MRS.informacion.Mapa;
+import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.Rosace.informacion.FinSimulacion;
 import icaro.aplicaciones.Rosace.informacion.OrdenCentroControl;
 import icaro.aplicaciones.Rosace.informacion.VocabularioRosace;
@@ -14,6 +16,7 @@ import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersisten
 import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
+import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.factoriaEInterfacesPrObj.ItfProcesadorObjetivos;
 import icaro.infraestructura.patronAgenteReactivo.control.acciones.AccionesSemanticasAgenteReactivo;
 import icaro.infraestructura.recursosOrganizacion.configuracion.ItfUsoConfiguracion;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
@@ -33,6 +36,7 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	private ItfUsoRecursoPlanificadorRuta itfPlanificadorRuta;
 	private ItfUsoRecursoPersistenciaMRS  itfPersistenciaMRS;
 	
+	private ItfProcesadorObjetivos        itfProcObjetivos;
 	
 	private File ficheroEscenario;
 	private Escenario escenario;
@@ -46,6 +50,8 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 			//Referencias a las interfaces de los recursos
 			this.itfconfig = (ItfUsoConfiguracion) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.NOMBRE_ITF_USO_CONFIGURACION);
+			
+			
 			
 			this.itfVisualizadorMRS = (ItfUsoRecursoVisualizadorMRS) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoVisualizadorMRS1");
@@ -130,6 +136,12 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 			this.itfVisualizadorMRS.mostrarEscenarioMovimiento(this.escenario.getMapa());
 			this.itfPlanificadorRuta.setMapa(this.escenario.getMapa());
 			
+			List<Robot> robots = this.escenario.getListaRobots();
+			int i=0;
+			for(Robot r : robots){
+				(new TareaIniciadoraAgentes()).ejecutar(i);
+				i++;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

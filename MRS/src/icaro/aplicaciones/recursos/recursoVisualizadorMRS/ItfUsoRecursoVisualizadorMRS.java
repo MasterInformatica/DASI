@@ -135,5 +135,5 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	public void escenarioElegidoValido()  throws Exception;
 
 
-	public void informarBloqueo(Coordenada c);
+	public void informarBloqueo(Coordenada c) throws Exception;
 }

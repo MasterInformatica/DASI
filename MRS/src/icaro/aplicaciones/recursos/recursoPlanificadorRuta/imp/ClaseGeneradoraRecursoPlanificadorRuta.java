@@ -119,4 +119,10 @@ public class ClaseGeneradoraRecursoPlanificadorRuta extends ImplRecursoSimple
 		to_return.addAll(aux.get(theChosenOne));
 		return to_return;
 	}
+
+	@Override
+	public void informarBloqueo(Coordenada c) {
+		// TODO Auto-generated method stub
+		
+	}
 }
