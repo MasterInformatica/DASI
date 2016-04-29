@@ -1,12 +1,25 @@
 package icaro.aplicaciones.agentes.agenteAplicacionRobotMRS.tareas;
 
+import icaro.aplicaciones.MRS.informacion.RobotBaseConocimiento;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
+
 
 public class InicializarRobot extends TareaSincrona {
 
+	/** Esta tarea se encarga de leer la información del robot del recurso de persistencia,
+	 * inicializar la clase RobotBaseConocimiento, e insertarlo en el conocimiento de los agentes (reglas).
+	 * 
+	 * Se pasa como primer argumento el nombre del robot.
+	 */
+	
 	@Override
 	public void ejecutar(Object... params) {
-		System.err.println("HOLA: "+params[0]+" . "+params[1]);
-	}
-
+		RobotBaseConocimiento r = new RobotBaseConocimiento();
+		r.setIdRobot((String) params[0]);
+	
+		//Aquí habría que acceder a la persistencia, y rellenar el conocimiento del robot
+		//de acuerdo a los datos que estén allí almacenados.
+		
+		this.getEnvioHechos().insertarHechoWithoutFireRules(r);
+	}	
 }
