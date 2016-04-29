@@ -23,7 +23,7 @@ public class ClaseGeneradoraRecursoPlanificadorRuta extends ImplRecursoSimple
 
 	private static final long serialVersionUID = -7272037961162939091L;
 	private String recursoId;
-	private Mapa mapa;
+	private Mapa mapaConocimiento;
 	
 	public ClaseGeneradoraRecursoPlanificadorRuta(String idRecurso) throws Exception {
 		super(idRecurso);
@@ -41,12 +41,12 @@ public class ClaseGeneradoraRecursoPlanificadorRuta extends ImplRecursoSimple
 	
 	@Override
 	public void setMapa(Mapa mapa) throws Exception{
-		this.mapa = mapa;
+		this.mapaConocimiento = new Mapa(mapa, true);
 	}
 	
 	@Override
 	public ArrayList<Coordenada> getRuta(Coordenada start, Coordenada finish) throws Exception{
-		TipoCelda[][] map = this.mapa.getMapa();
+		TipoCelda[][] map = this.mapaConocimiento.getMapa();
 		if (map[finish.x][finish.y] != TipoCelda.PASILLO)
 			return new ArrayList<Coordenada>();
 		int sizeX = map.length;
@@ -118,5 +118,10 @@ public class ClaseGeneradoraRecursoPlanificadorRuta extends ImplRecursoSimple
 		to_return.add(start);
 		to_return.addAll(aux.get(theChosenOne));
 		return to_return;
+	}
+
+	@Override
+	public void informarBloqueo(Coordenada c) {
+		this.mapaConocimiento.getMapa()[c.getX()][c.getY()] = TipoCelda.ESCOMBRO;
 	}
 }
