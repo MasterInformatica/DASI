@@ -1,4 +1,4 @@
-package icaro.aplicaciones.agentes.agenteAplicacionRobotMRS.tareas;
+package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas;
 
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 

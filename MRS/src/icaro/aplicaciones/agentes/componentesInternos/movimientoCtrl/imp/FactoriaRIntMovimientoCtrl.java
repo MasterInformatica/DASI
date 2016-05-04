@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  */
 public class FactoriaRIntMovimientoCtrl extends FactoriaAbstrCompInterno {
 	private ItfUsoRecursoTrazas trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
-	private ItfUsoRecursoVisualizadorEntornosSimulacion itfUsoRecVisEntornosSimul;
+	//private ItfUsoRecursoVisualizadorEntornosSimulacion itfUsoRecVisEntornosSimul;
 	private ItfUsoRecursoVisualizadorMRS itfUsoRecVisMRS;
 	private ItfUsoRecursoPlanificadorRuta itfUsoRecPlanRuta;
 	private ItfUsoRecursoPersistenciaMRS  itfUsoRecPersistencia;
@@ -48,8 +48,8 @@ public class FactoriaRIntMovimientoCtrl extends FactoriaAbstrCompInterno {
 		
 		try {
 			ItfUsoRepositorioInterfaces repoItfs = NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ;
-			itfUsoRecVisEntornosSimul = (ItfUsoRecursoVisualizadorEntornosSimulacion) repoItfs
-					.obtenerInterfazUso(VocabularioRosace.IdentRecursoVisualizadorEntornosSimulacion);
+			/*itfUsoRecVisEntornosSimul = (ItfUsoRecursoVisualizadorEntornosSimulacion) repoItfs
+					.obtenerInterfazUso(VocabularioRosace.IdentRecursoVisualizadorEntornosSimulacion);*/
 			itfUsoRecVisMRS = (ItfUsoRecursoVisualizadorMRS) repoItfs
 					.obtenerInterfazUso(VocabularioRosace.IdentRecursoVisualizadorMRS); 
 			itfUsoRecPlanRuta = (ItfUsoRecursoPlanificadorRuta) repoItfs
@@ -57,8 +57,8 @@ public class FactoriaRIntMovimientoCtrl extends FactoriaAbstrCompInterno {
 			itfUsoRecPersistencia = (ItfUsoRecursoPersistenciaMRS) repoItfs
 					.obtenerInterfazUso(VocabularioRosace.IdenRecursoPersistenciaMRS);
 			
-			maquinaEstados
-					.SetItfUsoRecursoVisualizadorEntornosSimulacion(itfUsoRecVisEntornosSimul);
+			/*maquinaEstados
+					.SetItfUsoRecursoVisualizadorEntornosSimulacion(itfUsoRecVisEntornosSimul);*/
 			maquinaEstados
 					.SetItfUsoRecursoVisualizadorMRS(itfUsoRecVisMRS);
 			

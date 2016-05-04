@@ -50,11 +50,11 @@
        tipo="Reactivo" 
     />
     <icaro:DescComportamientoAgente 
-       nombreComportamiento="AgenteAplicacionRobotMRS" 
+       nombreComportamiento="AgenteAplicacionRescatadorMRS" 
        rol="AgenteAplicacion" 
-       localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionRobotMRS"									
+       localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS"									
        tipo="Cognitivo"
-       localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionRobotMRS.procesoResolucionObjetivos.reglasRobotMRS.drl"
+       localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.procesoResolucionObjetivos.reglasRescatadorMRS.drl"
     />
     <icaro:DescComportamientoAgente
        nombreComportamiento="AgenteAplicacionAsignadorTareas" 
@@ -98,7 +98,7 @@
                 <icaro:InstanciaGestor id="GestorAgentes" refDescripcion="GestorAgentes">
                     <icaro:componentesGestionados>
                             <icaro:componenteGestionado refId="AgenteAplicacionIniciadorMRS1"             tipoComponente="AgenteAplicacion"/>
-                            <icaro:componenteGestionado refId="AgenteAplicacionRobotMRS1"             tipoComponente="AgenteAplicacion"/>
+                            <icaro:componenteGestionado refId="AgenteAplicacionRescatadorMRS1"             tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="rescate1RobotAsignador" tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="rescate1RobotSubordinado1" tipoComponente="AgenteAplicacion"/>
                    </icaro:componentesGestionados>
@@ -117,7 +117,7 @@
         <icaro:AgentesAplicacion>
                 <icaro:Instancia id="AgenteAplicacionIniciadorMRS1" refDescripcion="AgenteAplicacionIniciadorMRS">
                 </icaro:Instancia>
-                <icaro:Instancia id="AgenteAplicacionRobotMRS1" refDescripcion="AgenteAplicacionRobotMRS">
+                <icaro:Instancia id="AgenteAplicacionRescatadorMRS1" refDescripcion="AgenteAplicacionRescatadorMRS">
                 </icaro:Instancia>
                 <icaro:Instancia id="rescate1RobotAsignador" refDescripcion="AgenteAplicacionAsignadorTareas">
                 </icaro:Instancia>

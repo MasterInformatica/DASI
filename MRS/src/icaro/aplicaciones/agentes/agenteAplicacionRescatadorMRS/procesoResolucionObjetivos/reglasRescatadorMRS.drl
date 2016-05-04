@@ -3,7 +3,7 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.ItfUsoRecursoTra
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.*;
 import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.gestorTareas.ItfGestorTareas;
-import icaro.aplicaciones.agentes.agenteAplicacionRobotMRS.tareas.*
+import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas.*
 //??
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 
@@ -19,19 +19,19 @@ global String agentId;
 
 
 /** Tengo un gran dilema con este agente.
-* Cuando este robot se inicializa y ejecuta su primera regla, el escenario todavía no ha sido seleccionado por
+* Cuando este robot se inicializa y ejecuta su primera regla, el escenario todavï¿½a no ha sido seleccionado por
 * el usuario, por lo que este robot no puede iniciarse a si mismo de manera correcta.
 * Sin embargo, lo que si puede hacer al inicio es inicializar sus componentes internos (en este caso unicamente
-* el componente de movimiento, que habrá que reimplementar en algún futuro para quitar la chapuza que hay ahora mismo).
+* el componente de movimiento, que habrï¿½ que reimplementar en algï¿½n futuro para quitar la chapuza que hay ahora mismo).
 *
-* Mi idea para solventar el inicio correcto de los robots, es que el agenteIniciador de la aplicación envie un mensaje a
-* los robots de que el recurso de persistencia está listo y pueden pasar a iniciarse a si mismos (o algo así.
+* Mi idea para solventar el inicio correcto de los robots, es que el agenteIniciador de la aplicaciï¿½n envie un mensaje a
+* los robots de que el recurso de persistencia estï¿½ listo y pueden pasar a iniciarse a si mismos (o algo asï¿½.
 *
 * Fdo.: Luisma
 */
 
 
-rule "Acciones Iniciales Robot MRS "
+rule "Acciones Iniciales Rescatador MRS "
  when
     not ( exists(Focus())) //SUPONGO QUE ESTO *SOLO* SE EJECUTA LA PRIMERA VEZ
  then
@@ -42,7 +42,7 @@ rule "Acciones Iniciales Robot MRS "
 end
 
  	
-/**  Añadir la condicion de enviar un mensaje al robot para inicializarse **/
+/**  Aï¿½adir la condicion de enviar un mensaje al robot para inicializarse **/
 rule "Iniciarse a si mismo a traves del escenario"
  when
  	not ( exists( RobotBaseConocimiento(idRobot == agentId)))
