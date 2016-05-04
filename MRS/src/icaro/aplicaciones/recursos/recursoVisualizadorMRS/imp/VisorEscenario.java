@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.MRS.informacion.TipoCelda;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
@@ -98,6 +99,10 @@ public class VisorEscenario extends JFrame {
 	
 	public void muestraError(String string, String string2) {
 		JOptionPane.showMessageDialog(null,string2,string,0,null);
+	}
+	
+	public void informarBloqueo(Coordenada c) {
+		botonesMapa[c.getX()][c.getY()].addElement("escombro","Piedra");
 	}
 	
 	//-----------------------------PRIVATE--------------------------------
@@ -233,14 +238,15 @@ public class VisorEscenario extends JFrame {
 		botonesMapa = new ComponenteBotonMapa[rows][cols];
 		for (int i =  0; i < rows; i++){
 			for (int j = 0; j < cols; j++){
-				botonesMapa[i][j] = new ComponenteBotonMapa(getType(i,j),Map.getCoord(i,j));
+				botonesMapa[i][j] = new ComponenteBotonMapa(getType(i,j));
+				if(TipoCelda.ESCOMBRO ==Map.getCoord(i,j))
+					botonesMapa[i][j].addElement("escombro", "NOPiedra");
 				mapita.add(botonesMapa[i][j]);
 			}
 		}
 		MapaPanel.setContentPane(mapita);
 		MapaPanel.validate();
 		MapaPanel.repaint();
-		
 	}
 	
 	private File solicitarSeleccionFichero() {
@@ -299,6 +305,9 @@ public class VisorEscenario extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -418573958565443751L;
+
+
+
 
 
 

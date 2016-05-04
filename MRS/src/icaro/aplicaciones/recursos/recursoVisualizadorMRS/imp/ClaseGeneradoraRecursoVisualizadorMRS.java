@@ -176,8 +176,8 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	public void escenarioElegidoValido()  throws Exception{
 		//La idea de este método es que te llamo cuando el esenario es valido, y 
 		//tu bloquees de alguna manera para que no pueda cambiarlo durante la ejecucion.
-		// TODO Auto-generated method stub
-		controladorUI.muestaError("todo bien al leer escenario","");
+		trazas.aceptaNuevaTraza(new InfoTraza(this.recursoId,
+				"Informe de Escenario valido recibido",InfoTraza.NivelTraza.info));
 	}
 
 	public void notificarBotonStartPulsado() {
@@ -189,8 +189,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	public void informarBloqueo(Coordenada c) {
 		//Cuando el robot se encuentra con una roca en el camino, informa de que la ha encontrado, por si se quiere
 		//cambiar la forma de visualizarlo o no
-		controladorUI.muestaError("No implementado", "IMPLEMENTAME!!!! informarBloqueo");
-		
+		controladorUI.informarBloqueo(c);
 	}	
 	
 	/*****************************************************************

@@ -255,7 +255,7 @@ public class AccionesSemanticasAgenteAplicacionAgteControladorSimuladorRosace
 							.mostrarEscenarioMovimiento(escenarioActual);
 					
 					/*@ */
-	                File file = new File("Escenario1.xml");
+	                File file = new File("MRS/escenarios/Escenario1.xml");
 					
 	                Escenario aux = itfusoRecursoPersistenciaMRS.parseEscenario(file);
 					this.mapa = aux.getMapa();

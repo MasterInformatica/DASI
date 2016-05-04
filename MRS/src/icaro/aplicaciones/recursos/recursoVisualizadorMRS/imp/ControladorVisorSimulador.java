@@ -2,6 +2,7 @@ package icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp;
 
 import java.io.File;
 
+import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 
@@ -56,10 +57,16 @@ public class ControladorVisorSimulador {
 		visorEscenario.errorFileEscenario();	
 	}
 	
+
+	
 	/*   Metodos para los objetos controlados */
 	
 	public void notificarBotonStartPulsado(){
 		outPoint.notificarBotonStartPulsado();
+	}
+
+	public void informarBloqueo(Coordenada c) {
+		visorEscenario.informarBloqueo(c);
 	}
 
 }

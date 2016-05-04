@@ -32,7 +32,7 @@ public class ComponenteBotonMapa extends JButton {
 	private static String rutaArteEscenario = "MRS/images/";
 	private static String rutaMin ="miner.png";
 	private static String rutaRob ="robot.png";
-	private static String rutaPie ="escombro.png";
+	private static String rutaPie ="piedra.png";
 	
 	private ImageIcon bg;
 	private CombineIcon ci;
@@ -40,18 +40,15 @@ public class ComponenteBotonMapa extends JButton {
 	
 	private HashMap<String,Integer> agentes;
 	
-	private TipoCelda tipoCelda;
-	
-	public ComponenteBotonMapa(int type, TipoCelda tipoCelda) {
+	public ComponenteBotonMapa(int type) {
 		super();
 		agentes = new HashMap<String,Integer>();
-		this.tipoCelda = tipoCelda;
 		prof = 1;
 		bg = new ImageIcon(getIcono(type));
 		ci = new CombineIcon("background",bg);
-		if(TipoCelda.ESCOMBRO.equals(tipoCelda))
-			addElement("escombro", "Piedra");
 		setIcon(ci);
+		
+		
 		setMargin(new Insets(0, 0, 0, 0));
 		setBorder(new EmptyBorder(0,0,0,0));
 
@@ -91,8 +88,12 @@ public class ComponenteBotonMapa extends JButton {
 			ci.addIcon(id, new ImageIcon(rutaArteEscenario+rutaRob));
 			break;
 		case "Escombro":
+		case "NOPiedra":
+			ci.addIcon("PIEDRA", new ImageIcon(rutaArteEscenario+"NO"+rutaPie));
+			break;
 		case "Piedra":
-			ci.addIcon(id, new ImageIcon(rutaArteEscenario+rutaPie));
+			ci.removeIcon("PIEDRA");
+			ci.addIcon("PIEDRA", new ImageIcon(rutaArteEscenario+rutaPie));
 			break;
 		}
 		repaint();
@@ -203,8 +204,8 @@ public class ComponenteBotonMapa extends JButton {
 	    	list.get(0).paintIcon(c,g,x,y);
 	    	int inc = 0;
 	    	for(int i = 1; i < list.size(); i++){
-	    		list.get(i).paintIcon(c,g,inc,0);
-	    		inc += 10;
+	    		list.get(i).paintIcon(c,g,x,y);
+	    		//inc += 10;
 	    	}
 	    }
 
