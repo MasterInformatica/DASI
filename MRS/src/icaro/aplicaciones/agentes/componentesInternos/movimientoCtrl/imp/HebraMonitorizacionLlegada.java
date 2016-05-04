@@ -219,7 +219,7 @@ public class HebraMonitorizacionLlegada extends Thread {
 				this.itfusoRecVisMRS.mueveAgente(identDestino, coordActuales);
 				/*/
 				
-				Thread.sleep((long) (2.0*1e3));
+				Thread.sleep((long) (0.2*1e3));
 				
 				calcularNuevasCoordenadasDiscretas();
 				enDestino = (coordActuales.getX() == coordDestino.getX()) &&
@@ -228,7 +228,7 @@ public class HebraMonitorizacionLlegada extends Thread {
 				
 				this.controladorMovimiento.setCoordenadasActuales(coordActuales);
 				this.itfusoRecVisMRS.mueveAgente(identDestino, coordActuales);
-				this.itfusoRecVisSimulador.mostrarPosicionRobot(identRobot, coordActuales);
+				//this.itfusoRecVisSimulador.mostrarPosicionRobot(identRobot, coordActuales);
 				
 				this.checkBloqueos();
 				

@@ -11,7 +11,7 @@
 	   <Celda tipo="PASILLO" x="2" y="4" />
 	   <Celda tipo="PASILLO" x="2" y="5" />
 	   <Celda tipo="PASILLO" x="2" y="6" />
-	   <Celda tipo="PASILLO" x="2" y="10" />
+	   <Celda tipo="ESCOMBRO" x="2" y="10" />
 	   <Celda tipo="PASILLO" x="2" y="11" />
 	   <Celda tipo="PASILLO" x="2" y="12" />
 	   <Celda tipo="PASILLO" x="2" y="13" />
