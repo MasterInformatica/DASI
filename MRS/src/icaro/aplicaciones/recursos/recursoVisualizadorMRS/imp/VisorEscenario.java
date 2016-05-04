@@ -24,7 +24,8 @@ import java.io.IOException;
 public class VisorEscenario extends JFrame {
 
 
-	
+	//
+	private String rutaEscenarios = "MRS/escenarios/";
 	// SWING elements
 	private JRootPane MapaPanel;
 	private JPanel ControlButtons;
@@ -198,7 +199,7 @@ public class VisorEscenario extends JFrame {
 	
 	private void initFileChooser(){
 		
-		fileChooser = new JFileChooser();
+		fileChooser = new JFileChooser(rutaEscenarios);
 		fileChooser.setDialogTitle("Seleccion de escenario");
 		/*fileChooser.addActionListener(new ActionListener() {
 			@Override

@@ -29,7 +29,7 @@ import icaro.aplicaciones.MRS.informacion.TipoCelda;
 public class ComponenteBotonMapa extends JButton {
 	
 	//ARTE
-	private static String rutaArteEscenario = "images/";
+	private static String rutaArteEscenario = "MRS/images/";
 	private static String rutaMin ="miner.png";
 	private static String rutaRob ="robot.png";
 	private static String rutaPie ="escombro.png";
