@@ -48,17 +48,12 @@ public class FactoriaRIntMovimientoCtrl extends FactoriaAbstrCompInterno {
 		
 		try {
 			ItfUsoRepositorioInterfaces repoItfs = NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ;
-			/*itfUsoRecVisEntornosSimul = (ItfUsoRecursoVisualizadorEntornosSimulacion) repoItfs
-					.obtenerInterfazUso(VocabularioRosace.IdentRecursoVisualizadorEntornosSimulacion);*/
 			itfUsoRecVisMRS = (ItfUsoRecursoVisualizadorMRS) repoItfs
 					.obtenerInterfazUso(VocabularioRosace.IdentRecursoVisualizadorMRS); 
 			itfUsoRecPlanRuta = (ItfUsoRecursoPlanificadorRuta) repoItfs
 					.obtenerInterfazUso(VocabularioRosace.IdenRecursoPlanificadorRuta);
 			itfUsoRecPersistencia = (ItfUsoRecursoPersistenciaMRS) repoItfs
 					.obtenerInterfazUso(VocabularioRosace.IdenRecursoPersistenciaMRS);
-			
-			/*maquinaEstados
-					.SetItfUsoRecursoVisualizadorEntornosSimulacion(itfUsoRecVisEntornosSimul);*/
 			maquinaEstados
 					.SetItfUsoRecursoVisualizadorMRS(itfUsoRecVisMRS);
 			
