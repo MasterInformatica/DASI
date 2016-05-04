@@ -2,6 +2,7 @@ package icaro.aplicaciones.agentes.agenteAplicacionAgteControladorSimuladorRosac
 
 import icaro.aplicaciones.MRS.informacion.Escenario;
 import icaro.aplicaciones.MRS.informacion.Mapa;
+import icaro.aplicaciones.MRS.informacion.VocabularioMRS;
 import icaro.aplicaciones.Rosace.informacion.*;
 import icaro.aplicaciones.Rosace.utils.ConstantesRutasEstadisticas;
 import icaro.aplicaciones.recursos.recursoCreacionEntornosSimulacion.ItfUsoRecursoCreacionEntornosSimulacion;
@@ -255,7 +256,7 @@ public class AccionesSemanticasAgenteAplicacionAgteControladorSimuladorRosace
 							.mostrarEscenarioMovimiento(escenarioActual);
 					
 					/*@ */
-	                File file = new File("MRS/escenarios/Escenario1.xml");
+	                File file = new File(VocabularioMRS.RutaEscenarioCableado);
 					
 	                Escenario aux = itfusoRecursoPersistenciaMRS.parseEscenario(file);
 					this.mapa = aux.getMapa();

@@ -29,9 +29,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.openide.util.Exceptions;
 /**
-//Other imports used by this Resource
-//#start_nodespecialImports:specialImports <--specialImports-- DO NOT REMOVE THIS
-//#end_nodespecialImports:specialImports <--specialImports-- DO NOT REMOVE THIS
  * 
  * @author friker
  *
@@ -42,10 +39,10 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	private ControladorVisorSimulador controladorUI;
 	
 	
-	private VisualizacionJfreechart visualizadorJFchart;
+	//private VisualizacionJfreechart visualizadorJFchart;
 	//private NotificadorInfoUsuarioSimulador notifEvt;
 	private String recursoId;
-	private String identAgenteaReportar;
+	//private String identAgenteaReportar;
 	// private Map<String,HebraMovimiento> tablaHebrasMov;
 	private int coordX = 40;
 	private int coordY = 40; // valores iniciales
@@ -53,18 +50,10 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	// valores iniciales y se incrementan para que las ventanas no coincidan
 	//private ControladorVisualizacionSimulRosace controladorIUSimulador;
 	// para prueba de integracion
-	private String directorioPersistencia = VocabularioRosace.NombreDirectorioPersistenciaEscenarios + File.separator;
-	// private String identFicheroEscenarioSimulacion=directorioPersistencia+"modeloOrg_JerarquicoNumRobts_4NumVicts_2.xml";
-	private String identFicheroEscenarioSimulacion;
-	private Coordinate coordDestino;
-	private String identDestino;
-	private boolean escenarioMovAbierto;
-	private org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(this.getClass().getSimpleName());
-	// private VisorMovimientoEscenario visorMovimiento;
+	//private String directorioPersistencia = VocabularioRosace.NombreDirectorioPersistenciaEscenarios + File.separator;
 
 	public ClaseGeneradoraRecursoVisualizadorMRS(String idRecurso) throws Exception {
-		// #start_nodeconstructorMethod:constructorMethod <--constructorMethod--
-		// DO NOT REMOVE THIS
+
 		super(idRecurso);
 		recursoId = idRecurso;
 		try {

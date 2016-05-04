@@ -25,11 +25,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import icaro.aplicaciones.MRS.informacion.TipoCelda;
+import icaro.aplicaciones.MRS.informacion.VocabularioMRS;
 
 public class ComponenteBotonMapa extends JButton {
 	
 	//ARTE
-	private static String rutaArteEscenario = "MRS/images/";
+	private static String rutaArteEscenario = VocabularioMRS.RutaArte+"/";
+	private static String rutaArteBG = VocabularioMRS.RutaArteBG+"/";
 	private static String rutaMin ="miner.png";
 	private static String rutaRob ="robot.png";
 	private static String rutaPie ="piedra.png";
@@ -65,7 +67,7 @@ public class ComponenteBotonMapa extends JButton {
 	
 	private String getIcono(int type){
 		if(type >=0 && type <=16)
-			return rutaArteEscenario+"mapa/"+type+".png";
+			return rutaArteBG+type+".png";
 		else
 			return rutaArteEscenario+"error.png";
 	}
