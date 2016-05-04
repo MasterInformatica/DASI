@@ -1,7 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <PersistenciaMRS id="Persistencia">
-   <Mapa key="Mapa" cols="14" rows="15"  >
+   <Mapa key="Mapa" cols="23" rows="17"  >
+   
+   <!-- 
+   <Celda tipo="PASILLO" x="0" y="0" />
+   <Celda tipo="PASILLO" x="0" y="1" />
+   <Celda tipo="PASILLO" x="0" y="2" />
+   <Celda tipo="PASILLO" x="0" y="3" />
+   <Celda tipo="PASILLO" x="0" y="4" />
+   <Celda tipo="PASILLO" x="0" y="5" />
+   <Celda tipo="PASILLO" x="0" y="6" />
+   <Celda tipo="PASILLO" x="0" y="7" />
+   <Celda tipo="PASILLO" x="0" y="8" />
+   <Celda tipo="PASILLO" x="0" y="9" />
+   <Celda tipo="PASILLO" x="0" y="10" />
+   <Celda tipo="PASILLO" x="0" y="11" />
+   <Celda tipo="PASILLO" x="0" y="12" />
+   <Celda tipo="PASILLO" x="0" y="13" />
+   <Celda tipo="PASILLO" x="0" y="14" />
+   <Celda tipo="PASILLO" x="0" y="15" />
+   <Celda tipo="PASILLO" x="0" y="16" />
+   <Celda tipo="PASILLO" x="0" y="17" />
+   <Celda tipo="PASILLO" x="0" y="18" />
+   <Celda tipo="PASILLO" x="0" y="19" />
+   <Celda tipo="PASILLO" x="0" y="20" />
+   <Celda tipo="PASILLO" x="0" y="21" />
+   <Celda tipo="PASILLO" x="0" y="22" />
+   -->
+   
+   <Celda tipo="PASILLO" x="0" y="2" />
+   
+   <Celda tipo="PASILLO" x="1" y="2" />
+   
+
+   <Celda tipo="PASILLO" x="2" y="2" />
+   <Celda tipo="PASILLO" x="2" y="3" />
+   <Celda tipo="PASILLO" x="2" y="4" />
+   <Celda tipo="PASILLO" x="2" y="5" />
+   <Celda tipo="PASILLO" x="2" y="6" />
+   <Celda tipo="PASILLO" x="2" y="10" />
+   <Celda tipo="PASILLO" x="2" y="11" />
+   <Celda tipo="PASILLO" x="2" y="12" />
+   <Celda tipo="PASILLO" x="2" y="13" />
+   <Celda tipo="PASILLO" x="2" y="14" />
+   <Celda tipo="PASILLO" x="2" y="15" />
+   <Celda tipo="PASILLO" x="2" y="16" />
+   <Celda tipo="PASILLO" x="2" y="17" />
+   <Celda tipo="PASILLO" x="2" y="18" />
+   <Celda tipo="PASILLO" x="2" y="19" />
+   <Celda tipo="PASILLO" x="2" y="20" />
+   <Celda tipo="PASILLO" x="2" y="21" />
+   <Celda tipo="PASILLO" x="2" y="22" />
+   
+
+   <Celda tipo="PASILLO" x="3" y="2" />
+   <Celda tipo="PASILLO" x="3" y="6" />
+   <Celda tipo="PASILLO" x="3" y="10" />
+   <Celda tipo="PASILLO" x="3" y="16" />
+   <Celda tipo="PASILLO" x="3" y="22" />
+   
+   <Celda tipo="PASILLO" x="4" y="2" />
+   <Celda tipo="PASILLO" x="4" y="6" />
+   <Celda tipo="PASILLO" x="4" y="8" />
+   <Celda tipo="PASILLO" x="4" y="9" />
+   <Celda tipo="PASILLO" x="4" y="10" />
+   <Celda tipo="PASILLO" x="4" y="11" />
+   <Celda tipo="PASILLO" x="4" y="12" />
+   <Celda tipo="PASILLO" x="4" y="16" />
+   <Celda tipo="PASILLO" x="4" y="18" />
+   <Celda tipo="PASILLO" x="4" y="19" />
+   <Celda tipo="PASILLO" x="4" y="20" />
+   <Celda tipo="PASILLO" x="4" y="21" />
+   <Celda tipo="PASILLO" x="4" y="22" />
+
+   
+   
+	<!-- 
       <Celda tipo="PASILLO" x="0" y="0" />
       <Celda tipo="PASILLO" x="1" y="0" />
       <Celda tipo="PASILLO" x="2" y="0" />
@@ -34,7 +109,8 @@
       <Celda tipo="PASILLO" x="12" y="13" />
 
       <Celda tipo="PASILLO" x="2" y="3" />
-      <Celda tipo="ESCOMBRO" x="4" y="4" />      
+      <Celda tipo="ESCOMBRO" x="4" y="4" />     
+	--> 
    </Mapa>
    
    <Rescatadores id="Rescatadores" key="Rescatador" numRes="2">
