@@ -3,31 +3,12 @@ package icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp;
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
-import icaro.aplicaciones.Rosace.informacion.PuntoEstadistica;
-import icaro.aplicaciones.Rosace.informacion.VocabularioRosace;
-import icaro.aplicaciones.recursos.recursoEstadistica.imp.visualizacionEstadisticas.VisualizacionJfreechart;
-import icaro.aplicaciones.recursos.recursoPersistenciaEntornosSimulacion.ItfUsoRecursoPersistenciaEntornosSimulacion;
-import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.ItfUsoRecursoVisualizadorEntornosSimulacion;
-import icaro.aplicaciones.recursos.recursoVisualizadorEntornosSimulacion.imp.EscenarioSimulacionRobtsVictms;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
-import icaro.infraestructura.entidadesBasicas.InfoTraza.NivelTraza;
-import icaro.infraestructura.entidadesBasicas.comunicacion.InfoContEvtMsgAgteReactivo;
-import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Informe;
-import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Temporizador;
+import icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.NotificadorEventos.Eventos;
 import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
-import java.awt.Color;
 import java.io.File;
-import static java.rmi.server.LogStream.log;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.xy.XYSeries;
-import org.openide.util.Exceptions;
+
 /**
  * 
  * @author friker
@@ -37,28 +18,19 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		implements ItfUsoRecursoVisualizadorMRS {
 
 	private ControladorVisorSimulador controladorUI;
-	
-	
-	//private VisualizacionJfreechart visualizadorJFchart;
+		
 	//private NotificadorInfoUsuarioSimulador notifEvt;
 	private String recursoId;
-	//private String identAgenteaReportar;
-	// private Map<String,HebraMovimiento> tablaHebrasMov;
-	private int coordX = 40;
-	private int coordY = 40; // valores iniciales
-	// private int coordX, coordY ; // coordenadas de visualizacion se le dan
-	// valores iniciales y se incrementan para que las ventanas no coincidan
-	//private ControladorVisualizacionSimulRosace controladorIUSimulador;
-	// para prueba de integracion
-	//private String directorioPersistencia = VocabularioRosace.NombreDirectorioPersistenciaEscenarios + File.separator;
 
+	private NotificadorEventos notificador;
+	
 	public ClaseGeneradoraRecursoVisualizadorMRS(String idRecurso) throws Exception {
 
 		super(idRecurso);
 		recursoId = idRecurso;
 		try {
 			
-			//-notifEvt = new NotificadorInfoUsuarioSimulador(recursoId, identAgenteaReportar);
+			notificador = new NotificadorEventos(recursoId, "iniciador"/*, Iniciador*/);
 			// un agente debe decirle al recurso a quien debe reportar . Se
 			// puede poner el agente a reportar fijo
 			// visorEscenarios = new VisorEscenariosRosace3();
@@ -78,25 +50,6 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	}
 	
 	@Override
-	//public void obtenerEscenarioSimulacion(String modOrganizativo, int numRobots) throws Exception {
-	public void obtenerEscenarioSimulacion() throws Exception {
-		//this.controladorIUSimulador.peticionObtenerEscenarioSimulacion(modOrganizativo, numRobots);
-		// EscenarioSimulacionRobtsVictms escenarioActual= null;
-		// int numerointentos = 0;int maxIntentos = 2;
-		// while ( numerointentos<maxIntentos && escenarioActual==null ){
-		// escenarioActual =
-		// controladorIUSimulador.obtenerEscenarioSimulacion(modOrganizativo,numRobots
-		// );
-		//
-		// numerointentos++;
-		// }
-		// this.notifEvt.informaraOtroAgenteReactivo(new
-		// InfoContEvtMsgAgteReactivo("escenarioDefinidoPorUsuario",
-		// escenarioActual), identAgenteaReportar);
-	}
-	
-	
-	@Override
 	public void mostrarVictimaRescatada(String VictimaId) throws Exception{
 		throw new Error("NO SE LLAMA A mostrarVictimaRescatada!");
 		
@@ -108,18 +61,6 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		
 	}
 	
-	// Fragmento de codigo para mostrar por la ventana de trazas de este recurso
-	// un mensaje trazas.aceptaNuevaTraza(new InfoTraza(this.idRecurso,"Mensaje mostrado en
-	// la ventana de trazas del recurso ....",InfoTraza.NivelTraza.debug));
-	@Override
-	public void mostrarEscenarioMovimiento(Mapa mapa) throws Exception{
-		controladorUI.setMapa(mapa);
-		controladorUI.mostrarEscenarioMovimiento();
-		trazas.aceptaNuevaTraza(new InfoTraza(this.recursoId,
-				"Escenario (Mapa) añadido al visor",InfoTraza.NivelTraza.debug));
-	}
-		
-		
 	@Override
 	public void termina() {
 		trazas.aceptaNuevaTraza(
@@ -138,6 +79,8 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	@Override
 	public void setMapa(Mapa mapa) throws Exception {
 		controladorUI.setMapa(mapa);
+		trazas.aceptaNuevaTraza(new InfoTraza(this.recursoId,
+				"Escenario (Mapa) añadido al visor",InfoTraza.NivelTraza.debug));
 	}
 
 	
@@ -145,8 +88,8 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	//*** : *******************************************************
 	//*************************************************************
 	@Override
-	public void muestraVentanaControl()  throws Exception {
-		controladorUI.mostrarEscenarioMovimiento();
+	public void muestraVentana()  throws Exception {
+		controladorUI.mostrarEscenario();
 	}
 
 	@Override
@@ -169,11 +112,21 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 				"Informe de Escenario valido recibido",InfoTraza.NivelTraza.info));
 	}
 
-	public void notificarBotonStartPulsado() {
-		
-		controladorUI.muestaError("No implementado","notificarBotonStartPulsado() No implementado en ClaseGeneradoraRecursoVisualizadorMRS");
+	@Override
+	public NotificadorEventos getNotificadorEventos() throws Exception {
+		return notificador;
 	}
-
+	
+	public void notificar(Eventos event) {
+		controladorUI.muestaError("No implementado","notificar() No implementado");
+		notificador.notificar(event);
+	}
+	
+	public void notificar(Eventos event,String s) {
+		controladorUI.muestaError("No implementado","notificar() No implementado");
+		notificador.notificar(event,s);
+	}
+	
 	@Override
 	public void informarBloqueo(Coordenada c) {
 		//Cuando el robot se encuentra con una roca en el camino, informa de que la ha encontrado, por si se quiere
@@ -193,6 +146,10 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	 *
 	 */
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5349292996954794349L;
 	
 }
 
@@ -486,18 +443,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	// return null;
 	//
 	// }
-	@Override
-	public void mostrarIdentsEquipoRobots(ArrayList identList) {
-		// this.ventanaControlCenterGUI.visualizarIdentsEquipoRobot(identList);
-		controladorIUSimulador.peticionVisualizarIdentsRobots(identList);
-	}
 
-	@Override
-	public void setItfUsoPersistenciaSimulador(ItfUsoRecursoPersistenciaEntornosSimulacion itfUsopersistencia)
-			throws Exception {
-		this.controladorIUSimulador.setIftRecPersistencia(itfUsopersistencia);
-		this.controladorIUSimulador.initModelosYvistas();
-	}
 */
 	
 

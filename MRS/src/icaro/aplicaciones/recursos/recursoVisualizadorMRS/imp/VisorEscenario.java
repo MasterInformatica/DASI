@@ -1,26 +1,19 @@
 package icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp;
 import java.util.HashMap;
-import java.util.Random;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.MRS.informacion.TipoCelda;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
+import icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.NotificadorEventos.Eventos;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 public class VisorEscenario extends JFrame {
 
@@ -53,7 +46,6 @@ public class VisorEscenario extends JFrame {
 		build();
 	}
 	
-	//TODO : Constructor VisorControlSimu recibiendo Controladora del visor
 	public VisorEscenario(ControladorVisorSimulador control) throws Exception{
 		controlador = control;
 		build();
@@ -162,15 +154,18 @@ public class VisorEscenario extends JFrame {
 		ControlButtons.setLayout(new FlowLayout());
 		JButton start_stop = new JButton("Start");
 		start_stop.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controlador.notificarBotonStartPulsado();
-				
+				controlador.notificar(NotificadorEventos.Eventos.BOTON_START);
 			}
-			
 		});
 		JButton restart = new JButton("reinicializar");
+		restart.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controlador.notificar(NotificadorEventos.Eventos.BOTON_REINICIAR);
+			}
+		});
 		ControlButtons.add(start_stop);
 		ControlButtons.add(restart);
 		add(ControlButtons,BorderLayout.SOUTH);
@@ -182,47 +177,48 @@ public class VisorEscenario extends JFrame {
 		MenuFile.setMnemonic(KeyEvent.VK_F);
 		MenuFile.getAccessibleContext().setAccessibleDescription(
 		        "Load,save, modify files...");
-		menuBar.add(MenuFile);
-		
+		menuBar.add(MenuFile);	
 		menu_Load = new JMenuItem("Load",KeyEvent.VK_L);
 		menu_Load.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				filechoosed = solicitarSeleccionFichero();
+				if(filechoosed != null){
+					notificar(NotificadorEventos.Eventos.ARCHIVO_CAMBIADO);
+				}
 			}
-			
 		});
-		JMenuItem it2 = new JMenuItem("Save",KeyEvent.VK_S);
-		JMenuItem it3 = new JMenuItem("Exit",KeyEvent.VK_E);
+		JMenuItem menu_save = new JMenuItem("Save",KeyEvent.VK_S);
+		menu_save.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				notificar(NotificadorEventos.Eventos.MENU_SALVAR);
+			}
+		});
+		JMenuItem menu_exit = new JMenuItem("Exit",KeyEvent.VK_E);
+		menu_exit.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				notificar(NotificadorEventos.Eventos.MENU_SALIR);
+			}
+		});
 		MenuFile.add(menu_Load);
-		MenuFile.add(it2);
+		MenuFile.add(menu_save);
 		MenuFile.addSeparator();
-		MenuFile.add(it3);
+		MenuFile.add(menu_exit);
 		setJMenuBar(menuBar);
 	}
 	
+	private void notificar(Eventos event) {
+		controlador.notificar(event);
+	}
+	private void notificar(Eventos event, String s) {
+		controlador.notificar(event, s);
+	}
+
 	private void initFileChooser(){
-		
 		fileChooser = new JFileChooser(rutaEscenarios);
 		fileChooser.setDialogTitle("Seleccion de escenario");
-		/*fileChooser.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				//jFileChooser1ActionPerformed(evt);
-			}
-		})*/;
-		
-		/*JButton boton_file = new JButton("Set Mapa");
-		boton_file.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				filechoosed = solicitarSeleccionFichero();
-			}
-			
-		});*/
-		//ControlButtons.add(boton_file);
 	}
 	
 	private void initEmptyMap(){
@@ -291,12 +287,10 @@ public class VisorEscenario extends JFrame {
 		try {
 			VisorEscenario ve = new VisorEscenario();
 			ve.setVisible(true);
-			ve.muestraError("hola", "eeee");
 			int j = 2;
 			for(int i = 0; i< 100000; i++) j = (j*j) %1000;
 			//ve.buildMap();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
