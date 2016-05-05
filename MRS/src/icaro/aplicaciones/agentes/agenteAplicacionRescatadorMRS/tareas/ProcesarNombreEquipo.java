@@ -1,7 +1,7 @@
 package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas;
 
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ControlEvaluacionVictimas;
-import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ListaRobots;
+import icaro.aplicaciones.MRS.informacion.ListaRobots;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.EvaluarSolicitudes;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;

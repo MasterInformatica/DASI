@@ -30,7 +30,6 @@ public class Escenario {
 		return listaRobots;
 	}
 	
-	
 	public List<Robot> getListaRobotTipo(String tipo){
 		ArrayList<Robot> lr = new ArrayList<Robot>();
 		

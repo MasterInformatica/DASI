@@ -13,4 +13,7 @@ public class VocabularioMRS extends NombresPredefinidos{
 	public static String InputIniciaSimulacion = "iniciaSimulacion";
 	public static String InputCambioFicheroEscenario = "cambioFichero";
 
+	
+	// Mensajes
+	public static String MensajeAyuda = "ayuda";
 }

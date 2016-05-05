@@ -1,30 +1,30 @@
-package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion;
+package icaro.aplicaciones.MRS.informacion;
 
 import java.util.ArrayList;
 import java.util.List;
+import icaro.aplicaciones.MRS.informacion.Victima;
 
-import icaro.aplicaciones.MRS.informacion.Robot;
 
-public class ListaRobots {
+public class ListaMineros {
 	public List<String> nombres = null;
 	public int numMineros = 0;
 	
-	public ListaRobots(){
+	public ListaMineros(){
 		this.nombres = new ArrayList<String>();
 		this.numMineros=0;
 	}
 	
-	public ListaRobots(ListaRobots l){
+	public ListaMineros(ListaMineros l){
 		this.nombres = new ArrayList<String>(l.nombres);
 		this.numMineros = l.numMineros;
 	}
 	
-	public ListaRobots(List<Robot> l){
+	public ListaMineros(List<Victima> l){
 		this.nombres = new ArrayList<String>();
 		this.numMineros = 0;
 		
 		
-		for(Robot r : l){
+		for(Victima r : l){
 			this.nombres.add(r.getName());
 		}
 		

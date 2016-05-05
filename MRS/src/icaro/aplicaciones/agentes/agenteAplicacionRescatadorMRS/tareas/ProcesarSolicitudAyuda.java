@@ -8,7 +8,7 @@ import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.MRS.informacion.Victima;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ControlEvaluacionVictimas;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.EvaluacionObjetivo;
-import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ListaRobots;
+import icaro.aplicaciones.MRS.informacion.ListaRobots;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.MsgEvaluacionRobot;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.ConocerEquipo;
 import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
