@@ -1,22 +1,30 @@
 package icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp;
 
-public class NotificadorEventos {
+import icaro.infraestructura.entidadesBasicas.comunicacion.ComunicacionAgentes;
+import icaro.infraestructura.entidadesBasicas.comunicacion.InfoContEvtMsgAgteReactivo;
+
+public class NotificadorEventos extends ComunicacionAgentes{
 
 	private String recurso;
 	private String agente;
 	public NotificadorEventos(String recursoId, String agenteId) {
+		super(recursoId);
 		recurso = recursoId;
 		agente = agenteId;
 	}
 
-	public void notificar(Eventos e){
-		
+	public void notificar(String e){
+		this.informaraOtroAgenteReactivo(new InfoContEvtMsgAgteReactivo(e), agente);
 	}
 	
-	public void notificar(Eventos e,String s){
-		
+	public void notificar(String e,String s){
+		this.informaraOtroAgenteReactivo(new InfoContEvtMsgAgteReactivo(e,s), agente);
 	}
 	
-	public static enum Eventos { ARCHIVO_CAMBIADO, BOTON_START, BOTON_REINICIAR, MENU_SALVAR, MENU_SALIR};
+	
+	public void setAgente(String agenteId) {
+		agente = agenteId;
+		
+	};
 
 }

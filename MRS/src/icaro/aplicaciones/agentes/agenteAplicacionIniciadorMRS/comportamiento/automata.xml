@@ -27,6 +27,8 @@
   <estado idIntermedio="esperandoPlay">
   		<transicion input="iniciaSimulacion" accion="iniciarSimulacion"
   					estadoSiguiente="enEjecucion" modoDeTransicion="bloqueante" />
+  		<transicion input="cambioFichero" accion="cambiarFichero"
+  					estadoSiguiente="esperandoEscenario" modoDeTransicion="bloqueante" />
   </estado>
 
   <estado idIntermedio="enEjecucion">

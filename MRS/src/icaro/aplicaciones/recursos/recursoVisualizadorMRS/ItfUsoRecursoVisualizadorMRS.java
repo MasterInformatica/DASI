@@ -38,8 +38,7 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	 *  Más abajo y cuando lo prepare todo pongo los métodos para mover a los robots y agentes y eso.
 	 */
 	
-	// El agante iniciador se registra a si mismo (lo llamo con this.nombreAgente)
-	//public void setIdentAgenteAReportar(String nombreAgente);
+
 	
 	
 	// Esta es la forma en la que te pasan el recurso de persistencia. En el primer prototipo no se si sería necesario
@@ -107,4 +106,7 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	public void informarBloqueo(Coordenada c) throws Exception;
 	
 	public NotificadorEventos getNotificadorEventos() throws Exception;
+	
+	// El agante iniciador se registra a si mismo (lo llamo con this.nombreAgente)
+	public void setAgenteIniciador(String nombreAgente) throws Exception;
 }

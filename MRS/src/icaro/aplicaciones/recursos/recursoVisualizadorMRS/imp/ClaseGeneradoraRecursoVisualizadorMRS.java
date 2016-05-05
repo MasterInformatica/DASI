@@ -4,7 +4,6 @@ import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
-import icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.NotificadorEventos.Eventos;
 import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 import java.io.File;
@@ -22,6 +21,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	//private NotificadorInfoUsuarioSimulador notifEvt;
 	private String recursoId;
 
+	private String identAgenteaReportar;
 	private NotificadorEventos notificador;
 	
 	public ClaseGeneradoraRecursoVisualizadorMRS(String idRecurso) throws Exception {
@@ -30,13 +30,8 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		recursoId = idRecurso;
 		try {
 			
-			notificador = new NotificadorEventos(recursoId, "iniciador"/*, Iniciador*/);
-			// un agente debe decirle al recurso a quien debe reportar . Se
-			// puede poner el agente a reportar fijo
-			// visorEscenarios = new VisorEscenariosRosace3();
-			// visorEscenarios = new VisorEscenariosRosace();
-			// ventanaControlCenterGUI = new ControlCenterGUI4(notifEvt);
-			//-controladorIUSimulador = new ControladorVisualizacionSimulRosace(notifEvt);
+			notificador = new NotificadorEventos(recursoId, null);
+			
 			controladorUI = new ControladorVisorSimulador(this);
 			trazas.aceptaNuevaTraza(new InfoTraza(idRecurso, "El constructor de la clase generadora del recurso "
 					+ idRecurso + " ha completado su ejecucion ....", InfoTraza.NivelTraza.debug));
@@ -117,13 +112,11 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		return notificador;
 	}
 	
-	public void notificar(Eventos event) {
-		controladorUI.muestaError("No implementado","notificar() No implementado");
+	public void notificar(String event) {
 		notificador.notificar(event);
 	}
 	
-	public void notificar(Eventos event,String s) {
-		controladorUI.muestaError("No implementado","notificar() No implementado");
+	public void notificar(String event,String s) {
 		notificador.notificar(event,s);
 	}
 	
@@ -150,6 +143,11 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	 * 
 	 */
 	private static final long serialVersionUID = -5349292996954794349L;
+
+	@Override
+	public void setAgenteIniciador(String nombreAgente) {
+		notificador.setAgente(nombreAgente);
+	}
 	
 }
 

@@ -6,8 +6,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.MRS.informacion.TipoCelda;
+import icaro.aplicaciones.MRS.informacion.VocabularioMRS;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
-import icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.NotificadorEventos.Eventos;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -156,14 +156,14 @@ public class VisorEscenario extends JFrame {
 		start_stop.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controlador.notificar(NotificadorEventos.Eventos.BOTON_START);
+				controlador.notificar(VocabularioMRS.InputIniciaSimulacion);
 			}
 		});
 		JButton restart = new JButton("reinicializar");
 		restart.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controlador.notificar(NotificadorEventos.Eventos.BOTON_REINICIAR);
+				controlador.notificar(VocabularioMRS.InputIniciaSimulacion);
 			}
 		});
 		ControlButtons.add(start_stop);
@@ -184,7 +184,7 @@ public class VisorEscenario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				filechoosed = solicitarSeleccionFichero();
 				if(filechoosed != null){
-					notificar(NotificadorEventos.Eventos.ARCHIVO_CAMBIADO);
+					controlador.notificar(VocabularioMRS.InputCambioFicheroEscenario);
 				}
 			}
 		});
@@ -192,14 +192,14 @@ public class VisorEscenario extends JFrame {
 		menu_save.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				notificar(NotificadorEventos.Eventos.MENU_SALVAR);
+				controlador.notificar(VocabularioMRS.InputIniciaSimulacion);
 			}
 		});
 		JMenuItem menu_exit = new JMenuItem("Exit",KeyEvent.VK_E);
 		menu_exit.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				notificar(NotificadorEventos.Eventos.MENU_SALIR);
+				controlador.notificar(VocabularioMRS.InputIniciaSimulacion);
 			}
 		});
 		MenuFile.add(menu_Load);
@@ -207,13 +207,6 @@ public class VisorEscenario extends JFrame {
 		MenuFile.addSeparator();
 		MenuFile.add(menu_exit);
 		setJMenuBar(menuBar);
-	}
-	
-	private void notificar(Eventos event) {
-		controlador.notificar(event);
-	}
-	private void notificar(Eventos event, String s) {
-		controlador.notificar(event, s);
 	}
 
 	private void initFileChooser(){

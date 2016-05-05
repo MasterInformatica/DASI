@@ -48,22 +48,20 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	//--------------------------------------------------------------------------
 	public void AccionComenzar(){
 		try{
-			//Referencias a las interfaces de los recursos
+			//Referencias a las interfaces de icaro
 			this.itfconfig = (ItfUsoConfiguracion) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.NOMBRE_ITF_USO_CONFIGURACION);
 			
-			
-			
+			// Referencias a las interfaces de los recursos
 			this.itfVisualizadorMRS = (ItfUsoRecursoVisualizadorMRS) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoVisualizadorMRS1");
-			this.itfVisualizadorMRS.setIdentAgenteAReportar(this.nombreAgente);
+			this.itfVisualizadorMRS.setAgenteIniciador(this.nombreAgente);
 			
 			this.itfPlanificadorRuta = (ItfUsoRecursoPlanificadorRuta) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoPlanificadorRuta1");
 			
 			this.itfPersistenciaMRS = (ItfUsoRecursoPersistenciaMRS) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoPersistenciaMRS1");
-			
 			
 			//Comienzo ventana gráfica
 			this.itfVisualizadorMRS.muestraVentana();
@@ -95,7 +93,6 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		}
 		
 		if(ficheroEscenario==null){
-//			trazas.trazar(this.getNombreAgente(),  "Fichero leido null", NivelTraza.debug);
 			this.generarTimeOutInterno(tEspera, "leerFicheroTimeOut", this.getNombreAgente(),
 			     					   this.itfUsoPropiadeEsteAgente);
 		}else{
@@ -108,8 +105,6 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		boolean error = false;
 		try{
 			this.escenario = this.itfPersistenciaMRS.parseEscenario(this.ficheroEscenario);
-			
-			//Aquí el escenario está bien construido, sino estaríamos en el catch
 			trazas.trazar(this.getNombreAgente(),  "Validación correcta", NivelTraza.debug);
 			this.informaraMiAutomata("generaSimulacion", null);			
 		} catch(Exception e){ 
@@ -135,7 +130,7 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 			this.itfVisualizadorMRS.escenarioElegidoValido();
 
 			this.itfPlanificadorRuta.setMapa(this.escenario.getMapa());
-
+			this.itfVisualizadorMRS.setMapa(this.escenario.getMapa());
 			/* Informamos a todos los robots del nombre del resto (incluidos ellos mismos) */
 			comunicator = this.getComunicator();
 			assert(comunicator != null);
@@ -160,6 +155,13 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		//AQUI HABRIA QUE ENVIAR LAS ORDENES A LOS ROBOTS. EN EL AGENTE
 		//ORIGINAL LO HACE EN EL MÉTODO sendSequenceOfSimulatedVictimsToRobotTeam
 	}
+	
+	public void cambiarFichero(){ //input=cambioFichero --> esperandoEscenario
+		// NO HACE NADA solo va al otro estado.
+		// si se add a mas estados podria tener que parar la ejecucion
+		this.informaraMiAutomata("leerFicheroTimeOut", null);
+	}
+	
 	
 	
 	//--------------------------------------------------------------------------
