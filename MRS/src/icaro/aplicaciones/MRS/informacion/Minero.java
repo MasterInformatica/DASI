@@ -5,10 +5,12 @@ public class Minero implements Victima {
 	
 	private Coordenada coordenadasIniciales;
 	private String tipo;
+	private String nombre;
 	
-	public Minero (String tipo, Coordenada coordenadasIniciales ) {
+	public Minero (String tipo, Coordenada coordenadasIniciales, String nombre ) {
 		this.tipo=tipo;
 		this.coordenadasIniciales = coordenadasIniciales;
+		this.nombre = nombre;
 	}
 
 	
@@ -28,5 +30,15 @@ public class Minero implements Victima {
 	@Override
 	public String toString(){
 		return ""+tipo+": "+coordenadasIniciales+" ";
+	}
+
+	@Override
+	public String getName() {
+		return this.nombre;
+	}
+
+	@Override
+	public Coordenada getPosicion() {
+		return this.getCoordenadasIniciales();
 	}
 }

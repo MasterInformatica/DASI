@@ -24,8 +24,8 @@ public class ProcesarNombreEquipo extends TareaSincrona {
 		this.getEnvioHechos().actualizarHechoWithoutFireRules(lr);
 		
 		
-		/*TODO: AQUI HABRIA QUE ELIMINAR EL OBJETIVO ACTUAL; FOCO Y DEMAS */
-		this.getEnvioHechos().eliminarHecho(o);
-	}
-	
+		f.setFoco(null);
+		this.getEnvioHechos().actualizarHechoWithoutFireRules(f);
+		this.getEnvioHechos().eliminarHecho(o);		
+	}	
 }
