@@ -54,8 +54,37 @@ rule "Me han informado del equipo (conocerEquipo)"
  	obj: ConocerEquipo(state == Objetivo.SOLVING)
     fc : Focus(foco == obj)
     robots : ListaRobots()
+    yo : Robot( getName() == agentId)
  then
  	TareaSincrona t1 = gestorTareas.crearTareaSincrona(ProcesarNombreEquipo.class);
  	t1.ejecutar(agentId, robots, obj, fc);
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end
+
+//----------- Evaluar solicitudes -----------------------
+rule "Procesar peticion Victima"
+ when
+ 	obj: EvaluarSolicitudes(state == Objetivo.SOLVING)
+    fc : Focus(foco == obj)
+    robots: ListaRobots()
+   	msg : SolicitudAyuda() //JESUS ME ENVIA ESTO
+   	ce : ControlEvaluacionVictimas()
+ then
+ 	TareaSincrona t1 = gestorTareas.crearTareaSincrona(ProcesarSolicitudAyuda.class);
+ 	t1.ejecutar(agentId, robots, obj, fc);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
+end
+
+/*
+//Recibir un mensaje de otro
+rule "ASF"
+ when
+ msg : Msg
+ then
+end
+//Se han reccibido todos los mensajes
+rule "ASF"
+ when
+ then
+end
+*/

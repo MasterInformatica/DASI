@@ -109,14 +109,14 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 			this.informaraMiAutomata("generaSimulacion", null);			
 		} catch(Exception e){ 
 			error = true;
-			trazas.trazar(this.getNombreAgente(),  "Validación incorrecta", NivelTraza.debug);
-			
+			e.printStackTrace();
+			trazas.trazar(this.getNombreAgente(),  "Validación incorrecta " + e.getStackTrace(), NivelTraza.error);		
 		}
 		
 		if(error){
 			try {
 				this.itfVisualizadorMRS.informaErrorEscenario("Error al leer el fichero de escenario. El escenario elegido no es válido");
-				this.informaraMiAutomata("leerFicheroTimeOut", null);
+				//this.informaraMiAutomata("leerFicheroTimeOut", null);
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -136,9 +136,12 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 			assert(comunicator != null);
 
 			ListaRobots lr = new ListaRobots(this.escenario.getListaRobots());
+			
 			List<String> n = lr.getNames();
 			for(String s : n){
-				comunicator.enviarInfoAotroAgente(lr, s);
+				ListaRobots lc = new ListaRobots(lr);
+				comunicator.enviarInfoAotroAgente(lc, s);
+				comunicator.enviarInfoAotroAgente(this.escenario.getRobot(s), s);
 			}
 
 			

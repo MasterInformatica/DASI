@@ -10,6 +10,7 @@ public class ControlEvaluacionVictimas {
 	
 	public ControlEvaluacionVictimas(){
 		this.victimasArescatar = new TreeSet<String>();
+		this.proximaVictima = null;
 	}
 	
 	

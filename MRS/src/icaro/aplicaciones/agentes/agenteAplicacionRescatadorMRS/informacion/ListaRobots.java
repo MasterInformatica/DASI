@@ -14,6 +14,11 @@ public class ListaRobots {
 		this.numMineros=0;
 	}
 	
+	public ListaRobots(ListaRobots l){
+		this.nombres = new ArrayList<String>(l.nombres);
+		this.numMineros = l.numMineros;
+	}
+	
 	public ListaRobots(List<Robot> l){
 		this.nombres = new ArrayList<String>();
 		this.numMineros = 0;
@@ -56,5 +61,9 @@ public class ListaRobots {
 	
 	public List<String> getNames(){
 		return this.nombres;
+	}
+
+	public int size() {
+		return this.numMineros;
 	}
 }

@@ -1,6 +1,8 @@
 package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas;
 
+import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ControlEvaluacionVictimas;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ListaRobots;
+import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.EvaluarSolicitudes;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
@@ -23,9 +25,21 @@ public class ProcesarNombreEquipo extends TareaSincrona {
 		lr.deleteRobot(name);
 		this.getEnvioHechos().actualizarHechoWithoutFireRules(lr);
 		
+		//Marcamos como resuelto
+		o.setSolved();
+		this.getEnvioHechos().actualizarHechoWithoutFireRules(o);		
 		
-		f.setFoco(null);
+		//Insertar nuevo objetivo
+		Objetivo ob = new EvaluarSolicitudes();
+		ob.setSolving();
+		
+		this.getEnvioHechos().insertarHechoWithoutFireRules(ob);
+		f.setFoco(ob);
 		this.getEnvioHechos().actualizarHechoWithoutFireRules(f);
-		this.getEnvioHechos().eliminarHecho(o);		
+		
+		
+		//Creamos la bbdd vacia para ir insertando solicitudes
+		ControlEvaluacionVictimas ce = new ControlEvaluacionVictimas();
+		this.getEnvioHechos().insertarHecho(ce);
 	}	
 }

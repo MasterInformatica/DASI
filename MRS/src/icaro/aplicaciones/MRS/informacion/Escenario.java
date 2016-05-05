@@ -62,4 +62,14 @@ public class Escenario {
 
 	}
 
+
+	public Robot getRobot(String s) {
+		for (Robot r : this.listaRobots){
+			if(r.getName().equals(s))
+				return r;
+		}
+		
+		return null;
+	}
+
 }

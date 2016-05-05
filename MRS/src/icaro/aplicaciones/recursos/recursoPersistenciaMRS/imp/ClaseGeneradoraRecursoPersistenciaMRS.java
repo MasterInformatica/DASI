@@ -107,7 +107,7 @@ implements ItfUsoRecursoPersistenciaMRS{
 				int size = eElement.getElementsByTagName("Minero").getLength();
 				for (int i = 0; i < size; i++) {
 					String tipo= eElement.getElementsByTagName("Minero").item(i).getAttributes().getNamedItem("tipo").getNodeValue();
-					String nombre= eElement.getElementsByTagName("Minero").item(i).getAttributes().getNamedItem("nombre").getNodeValue();
+					String nombre= eElement.getElementsByTagName("Minero").item(i).getAttributes().getNamedItem("name").getNodeValue();
 					int startX= Integer.parseInt(eElement.getElementsByTagName("Minero").item(i).getAttributes().getNamedItem("startX").getNodeValue());
 					int startY= Integer.parseInt(eElement.getElementsByTagName("Minero").item(i).getAttributes().getNamedItem("startY").getNodeValue());
 					Coordenada coordenadasIniciales= new Coordenada(startX, startY);
