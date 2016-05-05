@@ -5,6 +5,7 @@ import java.io.File;
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
+import icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.NotificadorEventos.Eventos;
 
 public class ControladorVisorSimulador {
 
@@ -61,12 +62,15 @@ public class ControladorVisorSimulador {
 	
 	/*   Metodos para los objetos controlados */
 	
-	public void notificarBotonStartPulsado(){
-		outPoint.notificarBotonStartPulsado();
-	}
-
 	public void informarBloqueo(Coordenada c) {
 		visorEscenario.informarBloqueo(c);
+	}
+
+	public void notificar(Eventos event) {
+		outPoint.notificar(event);
+	}
+	public void notificar(Eventos event,String s) {
+		outPoint.notificar(event,s);
 	}
 
 }

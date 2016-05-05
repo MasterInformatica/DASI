@@ -4,6 +4,7 @@ import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
+import icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.NotificadorEventos.Eventos;
 import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 import java.io.File;
@@ -20,6 +21,8 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		
 	//private NotificadorInfoUsuarioSimulador notifEvt;
 	private String recursoId;
+
+	private NotificadorEventos notificador;
 	
 	public ClaseGeneradoraRecursoVisualizadorMRS(String idRecurso) throws Exception {
 
@@ -27,7 +30,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		recursoId = idRecurso;
 		try {
 			
-			//-notifEvt = new NotificadorInfoUsuarioSimulador(recursoId, identAgenteaReportar);
+			notificador = new NotificadorEventos(recursoId, "iniciador"/*, Iniciador*/);
 			// un agente debe decirle al recurso a quien debe reportar . Se
 			// puede poner el agente a reportar fijo
 			// visorEscenarios = new VisorEscenariosRosace3();
@@ -46,24 +49,6 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		}
 	}
 	
-	//public void obtenerEscenarioSimulacion(String modOrganizativo, int numRobots) throws Exception {
-	//public void obtenerEscenarioSimulacion() throws Exception {
-		//this.controladorIUSimulador.peticionObtenerEscenarioSimulacion(modOrganizativo, numRobots);
-		// EscenarioSimulacionRobtsVictms escenarioActual= null;
-		// int numerointentos = 0;int maxIntentos = 2;
-		// while ( numerointentos<maxIntentos && escenarioActual==null ){
-		// escenarioActual =
-		// controladorIUSimulador.obtenerEscenarioSimulacion(modOrganizativo,numRobots
-		// );
-		//
-		// numerointentos++;
-		// }
-		// this.notifEvt.informaraOtroAgenteReactivo(new
-		// InfoContEvtMsgAgteReactivo("escenarioDefinidoPorUsuario",
-		// escenarioActual), identAgenteaReportar);
-	//}
-	
-	
 	@Override
 	public void mostrarVictimaRescatada(String VictimaId) throws Exception{
 		throw new Error("NO SE LLAMA A mostrarVictimaRescatada!");
@@ -76,17 +61,6 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		
 	}
 	
-	// Fragmento de codigo para mostrar por la ventana de trazas de este recurso
-	// un mensaje trazas.aceptaNuevaTraza(new InfoTraza(this.idRecurso,"Mensaje mostrado en
-	// la ventana de trazas del recurso ....",InfoTraza.NivelTraza.debug));
-	//@Override
-	/*public void mostrarEscenarioMovimiento(Mapa mapa) throws Exception{
-		controladorUI.setMapa(mapa);
-		controladorUI.mostrarEscenarioMovimiento();
-		
-	}*/
-		
-		
 	@Override
 	public void termina() {
 		trazas.aceptaNuevaTraza(
@@ -138,11 +112,21 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 				"Informe de Escenario valido recibido",InfoTraza.NivelTraza.info));
 	}
 
-	public void notificarBotonStartPulsado() {
-		
-		controladorUI.muestaError("No implementado","notificarBotonStartPulsado() No implementado en ClaseGeneradoraRecursoVisualizadorMRS");
+	@Override
+	public NotificadorEventos getNotificadorEventos() throws Exception {
+		return notificador;
 	}
-
+	
+	public void notificar(Eventos event) {
+		controladorUI.muestaError("No implementado","notificar() No implementado");
+		notificador.notificar(event);
+	}
+	
+	public void notificar(Eventos event,String s) {
+		controladorUI.muestaError("No implementado","notificar() No implementado");
+		notificador.notificar(event,s);
+	}
+	
 	@Override
 	public void informarBloqueo(Coordenada c) {
 		//Cuando el robot se encuentra con una roca en el camino, informa de que la ha encontrado, por si se quiere
@@ -166,7 +150,6 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	 * 
 	 */
 	private static final long serialVersionUID = -5349292996954794349L;
-	
 	
 }
 
@@ -460,18 +443,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	// return null;
 	//
 	// }
-	@Override
-	public void mostrarIdentsEquipoRobots(ArrayList identList) {
-		// this.ventanaControlCenterGUI.visualizarIdentsEquipoRobot(identList);
-		controladorIUSimulador.peticionVisualizarIdentsRobots(identList);
-	}
 
-	@Override
-	public void setItfUsoPersistenciaSimulador(ItfUsoRecursoPersistenciaEntornosSimulacion itfUsopersistencia)
-			throws Exception {
-		this.controladorIUSimulador.setIftRecPersistencia(itfUsopersistencia);
-		this.controladorIUSimulador.initModelosYvistas();
-	}
 */
 	
 

@@ -5,6 +5,7 @@ import java.io.File;
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
+import icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.NotificadorEventos;
 import icaro.infraestructura.patronRecursoSimple.ItfUsoRecursoSimple;
 
 public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
@@ -104,4 +105,6 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 
 
 	public void informarBloqueo(Coordenada c) throws Exception;
+	
+	public NotificadorEventos getNotificadorEventos() throws Exception;
 }
