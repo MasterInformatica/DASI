@@ -89,10 +89,11 @@ implements ItfUsoRecursoPersistenciaMRS{
 				int size = eElement.getElementsByTagName("Rescatador").getLength();
 				for (int i = 0; i < size; i++) {
 					String tipo= eElement.getElementsByTagName("Rescatador").item(i).getAttributes().getNamedItem("tipo").getNodeValue();
+					String nombre= eElement.getElementsByTagName("Rescatador").item(i).getAttributes().getNamedItem("name").getNodeValue();
 					int startX= Integer.parseInt(eElement.getElementsByTagName("Rescatador").item(i).getAttributes().getNamedItem("startX").getNodeValue());
 					int startY= Integer.parseInt(eElement.getElementsByTagName("Rescatador").item(i).getAttributes().getNamedItem("startY").getNodeValue());
 					Coordenada coordenadasIniciales= new Coordenada(startX, startY);
-					Rescatador myResc=new Rescatador(tipo,coordenadasIniciales);
+					Rescatador myResc=new Rescatador(tipo,coordenadasIniciales, nombre);
 					e.addRobot(myResc);
 				}
 			}

@@ -6,4 +6,6 @@ public interface Robot {
 	public Coordenada getCoordenadasIniciales();
 	public void setCoordenadasIniciales(Coordenada coordenadasIniciales);
 	public void setTipo(String tipo) ;
+	
+	public String getName();
 }

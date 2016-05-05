@@ -12,6 +12,7 @@ import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.Rosace.informacion.FinSimulacion;
 import icaro.aplicaciones.Rosace.informacion.OrdenCentroControl;
 import icaro.aplicaciones.Rosace.informacion.VocabularioRosace;
+import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ListaRobots;
 import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
 import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
@@ -135,13 +136,18 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 
 			this.itfVisualizadorMRS.mostrarEscenarioMovimiento(this.escenario.getMapa());
 			this.itfPlanificadorRuta.setMapa(this.escenario.getMapa());
-			
-			List<Robot> robots = this.escenario.getListaRobots();
-			int i=0;
-			for(Robot r : robots){
-				(new TareaIniciadoraAgentes()).ejecutar(i);
-				i++;
+
+			/* Informamos a todos los robots del nombre del resto (incluidos ellos mismos) */
+			comunicator = this.getComunicator();
+			assert(comunicator != null);
+
+			ListaRobots lr = new ListaRobots(this.escenario.getListaRobots());
+			List<String> n = lr.getNames();
+			for(String s : n){
+				comunicator.enviarInfoAotroAgente(lr, s);
 			}
+
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

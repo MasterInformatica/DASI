@@ -1,70 +1,61 @@
+// Propias de ICARO
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.InformeDeTarea;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.ItfUsoRecursoTrazas;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.*;
 import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.gestorTareas.ItfGestorTareas;
-import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas.*
-//??
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 
-import icaro.aplicaciones.MRS.informacion.*;
+// Propias del agente
+import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.*
+import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas.*
+import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.*
 
+// Propias de MRS
+import icaro.aplicaciones.MRS.informacion.*;
+import icaro.aplicaciones.MRS.tareasComunes.*;
+
+// Propias de Java
+import java.util.List;
 import java.util.ArrayList;
 import java.lang.String;
 
+//-----------------------------------------------------------------------------------------------------------
 
 global ItfGestorTareas gestorTareas;
 global ItfUsoRecursoTrazas recursoTrazas;
 global String agentId;
 
 
-/** Tengo un gran dilema con este agente.
-* Cuando este robot se inicializa y ejecuta su primera regla, el escenario todav�a no ha sido seleccionado por
-* el usuario, por lo que este robot no puede iniciarse a si mismo de manera correcta.
-* Sin embargo, lo que si puede hacer al inicio es inicializar sus componentes internos (en este caso unicamente
-* el componente de movimiento, que habr� que reimplementar en alg�n futuro para quitar la chapuza que hay ahora mismo).
-*
-* Mi idea para solventar el inicio correcto de los robots, es que el agenteIniciador de la aplicaci�n envie un mensaje a
-* los robots de que el recurso de persistencia est� listo y pueden pasar a iniciarse a si mismos (o algo as�.
-*
-* Fdo.: Luisma
-*/
-
-
+/**
+ * La idea de como funciona las reglas va a ser similar a la propuesta por ICARO.
+ * Van a existir objetivos, y cada objetivo va a estar focalizado, de esta forma, todas las reglas
+ *  solamente van a actuar si el objetivo marcado esta activo (focalizado).
+ * Se puede ver como que las reglas se agrupan por objetivos, y solo se activan cuando el objetivo esta
+ *  activo (flcalizado)
+ */
+ 
+ 
+ /* Si no hay foco, es que estamos en la primera regla */
 rule "Acciones Iniciales Rescatador MRS "
  when
-    not ( exists(Focus())) //SUPONGO QUE ESTO *SOLO* SE EJECUTA LA PRIMERA VEZ
+    not ( exists(Focus()))
  then
-   TareaSincrona tarea1 = gestorTareas.crearTareaSincrona(SaludaRobot.class);
-   tarea1.ejecutar(null,agentId);
+   TareaSincrona tarea1 = gestorTareas.crearTareaSincrona(InicializarRobot.class);
+   tarea1.ejecutar(agentId);
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
    //TODO: Crear los componentes internos aqui (mvto, ..., ...)
 end
 
- 	
-/**  A�adir la condicion de enviar un mensaje al robot para inicializarse **/
-rule "Iniciarse a si mismo a traves del escenario"
+
+//------------  ConocerEquipo  --------------------------
+rule "Me han informado del equipo (conocerEquipo)"
  when
- 	not ( exists( RobotBaseConocimiento(idRobot == agentId)))
+ 	obj: ConocerEquipo(state == Objetivo.SOLVING)
+    fc : Focus(foco == obj)
+    robots : ListaRobots()
  then
- 	TareaSincrona t = gestorTareas.crearTareaSincrona(InicializarRobot.class);
- 	t.ejecutar(null, agentId);
+ 	TareaSincrona t1 = gestorTareas.crearTareaSincrona(ProcesarNombreEquipo.class);
+ 	t1.ejecutar(agentId, robots, obj, fc);
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end
-
-
-
-
-/*
-rule " Otra Regla "
- when    
-    misObjs: MisObjetivos()
-    robot:RobotStatus()
-    peticionAgte: PeticionAgente( mensajePeticion == VocabularioRosace.MsgPeticionEnvioEvaluaciones,
-                                 identAgente == VocabularioRosace.IdentAgteDistribuidorTareas,victimaCC:justificacion)
-  then
-     TareaSincrona tarea = gestorTareas.crearTareaSincrona(MandarEvaluacionAlAgteAsignador.class);
-     tarea.ejecutar(null,peticionAgte,misObjs,robot,victims2R); 
-     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
-end
-*/

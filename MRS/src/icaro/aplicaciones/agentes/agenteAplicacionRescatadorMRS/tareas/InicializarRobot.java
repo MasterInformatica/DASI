@@ -1,25 +1,45 @@
 package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas;
 
-import icaro.aplicaciones.MRS.informacion.RobotBaseConocimiento;
+
+import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.ConocerEquipo;
+import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.MisObjetivos;
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
+import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
 
 public class InicializarRobot extends TareaSincrona {
 
-	/** Esta tarea se encarga de leer la informaci�n del robot del recurso de persistencia,
-	 * inicializar la clase RobotBaseConocimiento, e insertarlo en el conocimiento de los agentes (reglas).
-	 * 
-	 * Se pasa como primer argumento el nombre del robot.
+	/** 
+	 * Encargada de:
+	 *   - Inicializar foco
+	 *   - Inicializa componentes internos (??)
+	 *   - Crear primer objetivo
 	 */
 	
 	@Override
 	public void ejecutar(Object... params) {
-		RobotBaseConocimiento r = new RobotBaseConocimiento();
-		r.setIdRobot((String) params[0]);
-	
-		//Aqu� habr�a que acceder a la persistencia, y rellenar el conocimiento del robot
-		//de acuerdo a los datos que est�n all� almacenados.
+		Focus f = new Focus();
+		//MisObjetivos mo = new MisObjetivos();
+
+		//Creamos el objetivo, y lo anyadimos y focalizamos.
+		Objetivo o = new ConocerEquipo();
+	//	mo.addObjetivo(o);
+		f.setFoco(o);
 		
-		this.getEnvioHechos().insertarHechoWithoutFireRules(r);
+		this.getEnvioHechos().insertarHechoWithoutFireRules(o);
+		this.getEnvioHechos().insertarHecho(f);
+		
+		
+		// Informar mediante trazas
+		trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
+
+		trazas.aceptaNuevaTraza(new InfoTraza(this.identAgente,
+				"Inicializadas las reglas. Insertado nuevo objetivo",
+				InfoTraza.NivelTraza.info));
+		
+		
 	}	
 }
