@@ -40,6 +40,5 @@ public class InicializarRobot extends TareaSincrona {
 				"Inicializadas las reglas. Insertado nuevo objetivo",
 				InfoTraza.NivelTraza.info));
 		
-		
 	}	
 }

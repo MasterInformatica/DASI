@@ -5,26 +5,16 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Random;
 import java.util.Vector;
 
-import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import icaro.aplicaciones.MRS.informacion.TipoCelda;
 import icaro.aplicaciones.MRS.informacion.VocabularioMRS;
 
 public class ComponenteBotonMapa extends JButton {
@@ -38,14 +28,9 @@ public class ComponenteBotonMapa extends JButton {
 	
 	private ImageIcon bg;
 	private CombineIcon ci;
-	private int prof;
-	
-	private HashMap<String,Integer> agentes;
 	
 	public ComponenteBotonMapa(int type) {
 		super();
-		agentes = new HashMap<String,Integer>();
-		prof = 1;
 		bg = new ImageIcon(getIcono(type));
 		ci = new CombineIcon("background",bg);
 		setIcon(ci);
@@ -206,13 +191,18 @@ public class ComponenteBotonMapa extends JButton {
 	    	list.get(0).paintIcon(c,g,x,y);
 	    	int inc = 0;
 	    	for(int i = 1; i < list.size(); i++){
-	    		list.get(i).paintIcon(c,g,x,y);
-	    		//inc += 10;
+	    		list.get(i).paintIcon(c,g,inc,y);
+	    		inc += 10;
 	    	}
 	    }
 
 		
 	}
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6020843624647630830L;
 
 	
 }

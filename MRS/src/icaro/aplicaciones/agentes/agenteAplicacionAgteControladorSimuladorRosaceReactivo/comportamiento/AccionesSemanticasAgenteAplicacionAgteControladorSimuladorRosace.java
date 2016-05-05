@@ -260,8 +260,10 @@ public class AccionesSemanticasAgenteAplicacionAgteControladorSimuladorRosace
 					
 	                Escenario aux = itfusoRecursoPersistenciaMRS.parseEscenario(file);
 					this.mapa = aux.getMapa();
-					itfUsoRecursoVisualizadorMRS.mostrarEscenarioMovimiento(this.mapa);
 					itfusoRecursoPlanificadorRuta.setMapa(mapa);
+					itfUsoRecursoVisualizadorMRS.setMapa(this.mapa);
+					itfUsoRecursoVisualizadorMRS.muestraVentana();
+					
 					/*@ */
 					
 					

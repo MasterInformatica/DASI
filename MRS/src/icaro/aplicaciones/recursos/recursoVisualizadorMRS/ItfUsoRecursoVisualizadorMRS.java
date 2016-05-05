@@ -5,6 +5,7 @@ import java.io.File;
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.Rosace.informacion.Coordinate;
+import icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.NotificadorEventos;
 import icaro.infraestructura.patronRecursoSimple.ItfUsoRecursoSimple;
 
 public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
@@ -45,32 +46,6 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	//public void setItfUsoPersistenciaSimulador(ItfUsoRecursoPersistenciaEntornosSimulacion a);
 	
 	
-	//Esta método muestra la ventana de control de la aplicación. Contiene el botón de iniciar simulación y
-	//demás tonterías. Recibe por parámetro el escenario actual encapsulado en un tipo raro, pero para el
-	//prototipo 1 no se si hace falta realmente.
-	//Según donde queramos poner el botón de play, este método tendría sentido o no.
-	//De alguna manera, la forma de comunicar que la simulación tiene que comenzar es a través de
-	// sendPeticionSimulacionSecuenciaVictimasToRobotTeam (o algo así).
-	//Este método tiene varias cabeceras, por el momento no se qué hace cada una. Cuando lo averigue
-	//vuelvo aquí y lo comento. 
-	// Según el xml, esta cosa en inglés es equivalente a peticionSimulacionVictima (o eso pone el xml).
-	// Realmente no se si esto es un método, un string llamado a través de un método o alguna cosa rara.
-	//Para mi es el input que desencadena una transición entre estados.
-	// Si se quiere para el prototipo, se puede llamar con el nombre de otroa función/cosa, de la misma manera
-	//que se hacía el anterior. solamente dimelo que hay que cambiarlo en un xml.
-	/*
-	 * public void mostrarVentanaControlSimulador(TipoRaro escenarioActual);
-	 */
-	
-	
-	//Si no consigo cargar el escenario desde el recurso de persistencia, llamo a este 
-	//método, que imagino que pedirá que selecciones el xml del mapa definitivo.
-	//Por el momento no implementar.
-	//Los datos pasados los lee del recurso de configuración global
-	//public void obtenerEscenarioSimulacion(String modeloOrganizativo, int numeroRobotsSimulacion);
-	public void obtenerEscenarioSimulacion() throws Exception; //Este le tenías tu por ahí
-	
-	
 	//Cuando leo un escenario y compruebo que este escenario es válido, llamo a este método
 	//para PINTAR EL MAPA.
 	//El escenario a pintar se pasa por parámetro, encapsulado en un tipo propio
@@ -78,10 +53,7 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	// un array de []x[] de booleanos, que es como lo tiene Hristo si te es más fácil.
 	//Otra opción es que te pase una referencia al recurso de Mapa de Hristo y lo cojas tu,
 	//o incluso en un futuro al recurso de Persistencia que es el que lee de un xml el mapa.
-	/* TODO eliminar la funcion sin parametros por esta
-	 * public void mostrarEscenarioMovimiento(escenarioActual);
-	 */
-	public void mostrarEscenarioMovimiento(Mapa mapa) throws Exception;
+	//public void mostrarEscenarioMovimiento(Mapa mapa) throws Exception;
 	
 	
 	
@@ -120,7 +92,7 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	public void setMapa(Mapa mapa) throws Exception;
 
 
-	public void muestraVentanaControl()  throws Exception;
+	public void muestraVentana()  throws Exception;
 
 
 	public File getFicheroEscenario()  throws Exception;
@@ -133,4 +105,6 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 
 
 	public void informarBloqueo(Coordenada c) throws Exception;
+	
+	public NotificadorEventos getNotificadorEventos() throws Exception;
 }

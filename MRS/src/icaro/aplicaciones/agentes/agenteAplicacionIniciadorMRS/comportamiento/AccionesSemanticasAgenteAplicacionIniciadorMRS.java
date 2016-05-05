@@ -66,7 +66,7 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 			
 			
 			//Comienzo ventana gráfica
-			this.itfVisualizadorMRS.muestraVentanaControl();
+			this.itfVisualizadorMRS.muestraVentana();
 
 		} catch(Exception e){
 			e.printStackTrace();
@@ -134,7 +134,6 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		try {
 			this.itfVisualizadorMRS.escenarioElegidoValido();
 
-			this.itfVisualizadorMRS.mostrarEscenarioMovimiento(this.escenario.getMapa());
 			this.itfPlanificadorRuta.setMapa(this.escenario.getMapa());
 
 			/* Informamos a todos los robots del nombre del resto (incluidos ellos mismos) */
