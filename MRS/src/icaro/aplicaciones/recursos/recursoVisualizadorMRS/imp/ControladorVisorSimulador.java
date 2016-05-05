@@ -15,7 +15,7 @@ public class ControladorVisorSimulador {
 		visorEscenario = new VisorEscenario(this);
 	}
 	
-	public void mostrarEscenarioMovimiento() {
+	public void mostrarEscenario() {
 		if(visorEscenario != null)
 			visorEscenario.mostrar();
 	}
