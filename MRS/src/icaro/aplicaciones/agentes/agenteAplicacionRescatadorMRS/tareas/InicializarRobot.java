@@ -15,6 +15,9 @@ public class InicializarRobot extends TareaSincrona {
 	@Override
 	public void ejecutar(Object... params) {
 		RobotBaseConocimiento r = new RobotBaseConocimiento();
+		// TODO. Creo que debe ser '1', dado que la llamada es esto es la siguiente.
+		// TareaSincrona t = gestorTareas.crearTareaSincrona(InicializarRobot.class);
+	 	// t.ejecutar(null, agentId);
 		r.setIdRobot((String) params[0]);
 	
 		//Aqu� habr�a que acceder a la persistencia, y rellenar el conocimiento del robot
