@@ -1,0 +1,91 @@
+// Propias de ICARO
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.InformeDeTarea;
+import icaro.infraestructura.recursosOrganizacion.recursoTrazas.ItfUsoRecursoTrazas;
+import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.*;
+import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.gestorTareas.ItfGestorTareas;
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
+
+// Propias del agente
+import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.*
+import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas.*
+import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.*
+
+// Propias de MRS
+import icaro.aplicaciones.MRS.informacion.*;
+import icaro.aplicaciones.MRS.tareasComunes.*;
+
+// Propias de Java
+import java.util.List;
+import java.util.ArrayList;
+import java.lang.String;
+
+//-----------------------------------------------------------------------------------------------------------
+
+global ItfGestorTareas gestorTareas;
+global ItfUsoRecursoTrazas recursoTrazas;
+global String agentId;
+
+
+/**
+ * La idea de como funciona las reglas va a ser similar a la propuesta por ICARO.
+ * Van a existir objetivos, y cada objetivo va a estar focalizado, de esta forma, todas las reglas
+ *  solamente van a actuar si el objetivo marcado esta activo (focalizado).
+ * Se puede ver como que las reglas se agrupan por objetivos, y solo se activan cuando el objetivo esta
+ *  activo (flcalizado)
+ */
+ 
+ 
+ /* Si no hay foco, es que estamos en la primera regla */
+rule "Acciones Iniciales Rescatador MRS "
+ when
+    not ( exists(Focus()))
+ then
+   TareaSincrona tarea1 = gestorTareas.crearTareaSincrona(InicializarRobot.class);
+   tarea1.ejecutar(agentId);
+   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
+   //TODO: Crear los componentes internos aqui (mvto, ..., ...)
+end
+
+
+//------------  ConocerEquipo  --------------------------
+rule "Me han informado del equipo (conocerEquipo)"
+ when
+ 	obj: ConocerEquipo(state == Objetivo.SOLVING)
+    fc : Focus(foco == obj)
+    robots : ListaIds()
+    yo : Robot( getName() == agentId)
+ then
+ 	TareaSincrona t1 = gestorTareas.crearTareaSincrona(ProcesarNombreEquipo.class);
+ 	t1.ejecutar(agentId, robots, obj, fc);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
+end
+
+//----------- Evaluar solicitudes -----------------------
+rule "Procesar peticion Victima"
+ when
+ 	obj: EvaluarSolicitudes(state == Objetivo.SOLVING)
+    fc : Focus(foco == obj)
+    robots: ListaIds()
+   	msg : SolicitudAyuda() //JESUS ME ENVIA ESTO
+   	ce : ControlEvaluacionVictimas()
+   	yo : Robot( getName() == agentId)
+ then
+ 	TareaSincrona t1 = gestorTareas.crearTareaSincrona(ProcesarSolicitudAyuda.class);
+ 	t1.ejecutar(agentId, robots, obj, fc, yo, ce, msg);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
+end
+
+/*
+//Recibir un mensaje de otro
+rule "ASF"
+ when
+ msg : Msg
+ then
+end
+//Se han reccibido todos los mensajes
+rule "ASF"
+ when
+ then
+end
+*/
