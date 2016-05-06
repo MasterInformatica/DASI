@@ -53,8 +53,9 @@ public class ProcesarSolicitudAyuda extends TareaSincrona {
 		//Actualizamos la información propia del propio robot
 		try {
 			ItfUsoRecursoPlanificadorRuta pr = (ItfUsoRecursoPlanificadorRuta)
-					this.repoInterfaces.obtenerInterfazUso(NombresPredefinidos.ITF_USO + "RecursoPlanificadorRuta");
+					this.repoInterfaces.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoPlanificadorRuta1");
 			
+			assert(pr != null);
 			List<Coordenada> l = pr.getRuta(yo.getCoordenadasIniciales(), minero.getPosicion());
 			
 			eo.addEvaluacion(yo.getName(), l.size());
@@ -74,7 +75,8 @@ public class ProcesarSolicitudAyuda extends TareaSincrona {
 			e.printStackTrace();
 		}
 		
-		
+		//Eliminamos el mensaje de solicitud de ayuda para no entrar a la regla otra vez
+		this.getEnvioHechos().eliminarHecho(sa);
 		
 		// Informar mediante trazas
 		trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
