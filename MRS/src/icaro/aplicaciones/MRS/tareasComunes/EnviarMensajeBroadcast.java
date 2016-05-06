@@ -13,11 +13,11 @@ public class EnviarMensajeBroadcast extends TareaSincrona {
 	 */
 	@Override
 	public void ejecutar(Object... params) {
-		List<String> agtes = (List<String>)params[0];
+		List<String> agtes = (List<String>)params[1];
 	
 		this.comunicator = this.getComunicator();
 		for(String s : agtes){
-			comunicator.enviarInfoAotroAgente(params[1], s);
+			comunicator.enviarInfoAotroAgente(params[2], s);
 		}
 	}
 

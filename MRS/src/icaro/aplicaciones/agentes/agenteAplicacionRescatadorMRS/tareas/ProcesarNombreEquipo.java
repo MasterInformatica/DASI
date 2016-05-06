@@ -1,7 +1,7 @@
 package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas;
 
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ControlEvaluacionVictimas;
-import icaro.aplicaciones.MRS.informacion.ListaRobots;
+import icaro.aplicaciones.MRS.informacion.ListaIds;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.EvaluarSolicitudes;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
@@ -12,13 +12,13 @@ public class ProcesarNombreEquipo extends TareaSincrona {
 	@Override
 	public void ejecutar(Object... params) {
 		/* params[0] -> nombre del agente
-		 * params[1] -> el objeto de tipo ListaRobots
+		 * params[1] -> el objeto de tipo ListaIds
 		 * params[2] -> Objetivo actual
 		 * params[3] -> foco
 		 */
 		
 		String name = (String) params[0];
-		ListaRobots lr = (ListaRobots) params[1];
+		ListaIds lr = (ListaIds) params[1];
 		Objetivo o = (Objetivo) params[2];
 		Focus f = (Focus) params[3];
 		

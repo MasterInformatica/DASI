@@ -70,5 +70,13 @@ public class Escenario {
 		
 		return null;
 	}
+	public Victima getVictima(String s) {
+		for (Victima v : this.listaVictimas){
+			if(v.getName().equals(s))
+				return v;
+		}
+		
+		return null;
+	}
 
 }

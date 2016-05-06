@@ -7,13 +7,9 @@ import java.util.List;
 import java.util.Random;
 
 import icaro.aplicaciones.MRS.informacion.Escenario;
-import icaro.aplicaciones.MRS.informacion.ListaMineros;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.MRS.informacion.Robot;
-import icaro.aplicaciones.Rosace.informacion.FinSimulacion;
-import icaro.aplicaciones.Rosace.informacion.OrdenCentroControl;
-import icaro.aplicaciones.Rosace.informacion.VocabularioRosace;
-import icaro.aplicaciones.MRS.informacion.ListaRobots;
+import icaro.aplicaciones.MRS.informacion.ListaIds;
 import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
 import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
@@ -136,18 +132,19 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 			comunicator = this.getComunicator();
 			assert(comunicator != null);
 
-			ListaRobots lr = new ListaRobots(this.escenario.getListaRobots());
-			ListaMineros lm = new ListaMineros(this.escenario.getListaVictimas());
+			ListaIds lr = new ListaIds(this.escenario.getListaRobots());
+			ListaIds lm = new ListaIds(this.escenario.getListaVictimas());
 			List<String> n = lr.getNames();
 			for(String s : n){
-				ListaRobots lc = new ListaRobots(lr);
+				ListaIds lc = new ListaIds(lr);
 				comunicator.enviarInfoAotroAgente(lc, s);
 				comunicator.enviarInfoAotroAgente(this.escenario.getRobot(s), s);
 			}
 			
 			for(String min: lm.getNames()){
-				ListaRobots lc = new ListaRobots(lr);
+				ListaIds lc = new ListaIds(lr);
 				comunicator.enviarInfoAotroAgente(lc, min);
+				comunicator.enviarInfoAotroAgente(this.escenario.getVictima(min), min);
 			}
 
 			

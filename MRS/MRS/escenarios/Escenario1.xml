@@ -164,8 +164,8 @@
    </Rescatadores>
    
    <Mineros id="Mineros" key="Mineros" numMin="2">
-     <Minero tipo="M" startX="6" startY="18" name="Victima1"/>  
-     <Minero tipo="M" startX="6" startY="10" name="Victima2"/>
+     <Minero tipo="M" startX="6" startY="18" name="AgenteAplicacionMineroMRS1"/>  
+     <Minero tipo="M" startX="6" startY="10" name="AgenteAplicacionMineroMRS1"/>
    </Mineros>   
    
 </PersistenciaMRS>

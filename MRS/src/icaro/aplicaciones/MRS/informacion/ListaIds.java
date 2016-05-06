@@ -2,33 +2,49 @@ package icaro.aplicaciones.MRS.informacion;
 
 import java.util.ArrayList;
 import java.util.List;
-import icaro.aplicaciones.MRS.informacion.Victima;
 
+import icaro.aplicaciones.MRS.informacion.Robot;
 
-public class ListaMineros {
+public class ListaIds {
 	public List<String> nombres = null;
 	public int numMineros = 0;
 	
-	public ListaMineros(){
+	public ListaIds(){
 		this.nombres = new ArrayList<String>();
 		this.numMineros=0;
 	}
 	
-	public ListaMineros(ListaMineros l){
+	public ListaIds(ListaIds l){
 		this.nombres = new ArrayList<String>(l.nombres);
 		this.numMineros = l.numMineros;
 	}
 	
-	public ListaMineros(List<Victima> l){
+	public ListaIds(List l){
 		this.nombres = new ArrayList<String>();
 		this.numMineros = 0;
 		
 		
-		for(Victima r : l){
-			this.nombres.add(r.getName());
+		for(Object r : l){
+			if(r instanceof Robot){
+				Robot b = (Robot)r;
+				this.nombres.add(b.getName());
+			}else{
+				Victima b = (Victima)r;
+				this.nombres.add(b.getName());
+			}
 		}
 		
 		this.numMineros = this.nombres.size();
+	}
+	
+	public void addVictima(Victima r){
+		if(this.nombres==null){
+			nombres = new ArrayList<String>();
+			this.numMineros = 0;
+		}
+		
+		this.nombres.add(r.getName());
+		this.numMineros++;
 	}
 	
 	public void addRobot(Robot r){

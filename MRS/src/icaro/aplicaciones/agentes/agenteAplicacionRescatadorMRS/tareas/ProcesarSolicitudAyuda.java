@@ -3,12 +3,9 @@ package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas;
 
 import java.util.List;
 
-import icaro.aplicaciones.MRS.informacion.Coordenada;
-import icaro.aplicaciones.MRS.informacion.Robot;
-import icaro.aplicaciones.MRS.informacion.Victima;
+import icaro.aplicaciones.MRS.informacion.*;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ControlEvaluacionVictimas;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.EvaluacionObjetivo;
-import icaro.aplicaciones.MRS.informacion.ListaRobots;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.MsgEvaluacionRobot;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.ConocerEquipo;
 import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
@@ -33,26 +30,30 @@ public class ProcesarSolicitudAyuda extends TareaSincrona {
 	
 	@Override
 	public void ejecutar(Object... params) {
-		Robot yo = (Robot)params[3];
+		//t1.ejecutar(agentId, robots, obj, fc, yo, ce, msg);
+		String name = (String) params[0];
+		ListaIds lr = (ListaIds) params[1];
+		Objetivo o = (Objetivo) params[2];
+		Focus f = (Focus) params[3];
+		Robot yo = (Robot) params[4];
+		ControlEvaluacionVictimas ce = (ControlEvaluacionVictimas)params[5];
+		SolicitudAyuda sa = (SolicitudAyuda)params[6];
+		Victima minero = sa.getVictima();
+		String mineroName = minero.getName();
 		
-		//TODO: SolicitudAyuda sa = (SolicitudAyuda)params[0];
-		// String mineroName = sa.getVictima().getName();
-		String mineroName="";
-		Victima minero = null;
-		ControlEvaluacionVictimas ce = (ControlEvaluacionVictimas)params[1];
+		
 		
 		ce.addVictima(mineroName);
 		this.getEnvioHechos().actualizarHechoWithoutFireRules(ce);
 		
 		
-		ListaRobots lr = (ListaRobots) params[2];
 		EvaluacionObjetivo eo = new EvaluacionObjetivo(minero, lr.size()+1);
 
 		
 		//Actualizamos la información propia del propio robot
 		try {
 			ItfUsoRecursoPlanificadorRuta pr = (ItfUsoRecursoPlanificadorRuta)
-					this.repoInterfaces.obtenerInterfazUso(NombresPredefinidos.ITF_USO + "RecursoPlanificadorRuta1");
+					this.repoInterfaces.obtenerInterfazUso(NombresPredefinidos.ITF_USO + "RecursoPlanificadorRuta");
 			
 			List<Coordenada> l = pr.getRuta(yo.getCoordenadasIniciales(), minero.getPosicion());
 			

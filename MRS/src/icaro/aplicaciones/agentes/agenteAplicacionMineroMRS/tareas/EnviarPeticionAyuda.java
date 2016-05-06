@@ -16,17 +16,20 @@ public class EnviarPeticionAyuda extends TareaSincrona {
 	@Override
 	public void ejecutar(Object... params) {
 		/* params[0] -> nombre del agente
-		 * params[1] -> el objeto de tipo ListaRobots
+		 * params[1] -> el objeto de tipo ListaIds
 		 * params[2] -> Objetivo actual
 		 * params[3] -> foco
 		 */
 		
 		String name = (String) params[0];
-		ListaRobots lr = (ListaRobots) params[1];
+		ListaIds lr = (ListaIds) params[1];
 		Objetivo o = (Objetivo) params[2];
 		Focus f = (Focus) params[3];
+		Victima yo = (Victima) params[4];
 		
 		comunicator = this.getComunicator();
+		SolicitudAyuda msj = new SolicitudAyuda(yo);
+		sendBroadcast(lr,msj);
 		// Informar mediante trazas
 		trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
 
@@ -36,9 +39,9 @@ public class EnviarPeticionAyuda extends TareaSincrona {
 		
 	}
 	
-	private void sendBroadcast(ListaRobots lr){
+	private void sendBroadcast(ListaIds lr, Object msj){
 		for(String name : lr.getNames()){
-			comunicator.enviarInfoAotroAgente(VocabularioMRS.MensajeAyuda,name);
+			comunicator.enviarInfoAotroAgente(msj,name);
 		}
 	
 	}
