@@ -15,6 +15,31 @@ public class EvaluacionObjetivo extends Objetivo {
 	private int numeroEvaluacionesEsperadas;
 
 	
+	
+	
+	public String getVictimaName() {
+		return victimaName;
+	}
+
+
+	public Victima getVictimaObjetivo() {
+		return victimaObjetivo;
+	}
+
+
+	public boolean isFinalizadaEvaluacion() {
+		return finalizadaEvaluacion;
+	}
+
+	public int getFinalizadaEvaluacion(){
+		return finalizadaEvaluacion ? 1 : 0;
+	}
+
+	public int getNumeroEvaluacionesEsperadas() {
+		return numeroEvaluacionesEsperadas;
+	}
+
+
 	public EvaluacionObjetivo(Victima v, int numVotosObjetivo){
 		this.victimaObjetivo = v;
 		this.victimaName = v.getName();

@@ -6,6 +6,11 @@ import java.util.TreeSet;
 public class ControlEvaluacionVictimas {
 	public String proximaVictima;
 	
+	public String getProximaVictima() {
+		return proximaVictima;
+	}
+
+
 	public TreeSet<String> victimasArescatar;
 	
 	public ControlEvaluacionVictimas(){

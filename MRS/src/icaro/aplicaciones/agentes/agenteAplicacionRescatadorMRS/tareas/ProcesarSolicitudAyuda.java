@@ -31,6 +31,7 @@ public class ProcesarSolicitudAyuda extends TareaSincrona {
 	@Override
 	public void ejecutar(Object... params) {
 		//t1.ejecutar(agentId, robots, obj, fc, yo, ce, msg);
+		
 		String name = (String) params[0];
 		ListaIds lr = (ListaIds) params[1];
 		Objetivo o = (Objetivo) params[2];
@@ -38,10 +39,11 @@ public class ProcesarSolicitudAyuda extends TareaSincrona {
 		Robot yo = (Robot) params[4];
 		ControlEvaluacionVictimas ce = (ControlEvaluacionVictimas)params[5];
 		SolicitudAyuda sa = (SolicitudAyuda)params[6];
+		
+		
 		Victima minero = sa.getVictima();
 		String mineroName = minero.getName();
-		
-		
+				
 		
 		ce.addVictima(mineroName);
 		this.getEnvioHechos().actualizarHechoWithoutFireRules(ce);
@@ -49,6 +51,7 @@ public class ProcesarSolicitudAyuda extends TareaSincrona {
 		
 		EvaluacionObjetivo eo = new EvaluacionObjetivo(minero, lr.size()+1);
 
+		int coste = 0;
 		
 		//Actualizamos la información propia del propio robot
 		try {
@@ -71,6 +74,8 @@ public class ProcesarSolicitudAyuda extends TareaSincrona {
 			for(String s : ls){
 				comunicator.enviarInfoAotroAgente(msg, s);
 			}
+			
+			coste = l.size();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -82,7 +87,7 @@ public class ProcesarSolicitudAyuda extends TareaSincrona {
 		trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
 
 		trazas.aceptaNuevaTraza(new InfoTraza(this.identAgente,
-				"Recibida la peticion de ayuda de " + minero,
+				"Recibida la peticion de ayuda de " + minero + " evaluada con coste " + coste,
 				InfoTraza.NivelTraza.info));
 		
 	}	

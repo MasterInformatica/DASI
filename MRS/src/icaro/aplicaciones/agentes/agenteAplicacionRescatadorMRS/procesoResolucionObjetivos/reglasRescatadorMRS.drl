@@ -76,13 +76,42 @@ rule "Procesar peticion Victima"
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end
 
-/*
-//Recibir un mensaje de otro
-rule "ASF"
+
+rule "Recibir mensaje evaluacion otro robot"
  when
- msg : Msg
+ 	obj: EvaluarSolicitudes(state == Objetivo.SOLVING)
+    fc : Focus(foco == obj)
+    robots: ListaIds()
+ 	
+ 	msg: MsgEvaluacionRobot($v: minero)
+ 
+ 	ce : ControlEvaluacionVictimas()
+ 	eo : EvaluacionObjetivo(victimaName == $v)
  then
+ 	TareaSincrona t1 = gestorTareas.crearTareaSincrona(ProcesarEvaluacion.class);
+ 	t1.ejecutar(obj, fc, robots, msg, ce, eo);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end
+
+
+rule "Se ha recibido todas las evaluaciones del primer objetivo"
+ when
+ 	obj: EvaluarSolicitudes(state == Objetivo.SOLVING)
+    fc : Focus(foco == obj)
+    robots: ListaIds()
+    
+    ce : ControlEvaluacionVictimas($v: proximaVictima)
+    eo : EvaluacionObjetivo(victimaName == $v, finalizadaEvaluacion == true)
+//	eo : EvaluacionObjetivo(finalizadaEvaluacion == true)
+ then
+ 	TareaSincrona t1 = gestorTareas.crearTareaSincrona(TareaKK.class);
+ 	t1.ejecutar(obj, fc, robots, ce, eo);
+	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
+end
+
+
+
+/*
 //Se han reccibido todos los mensajes
 rule "ASF"
  when
