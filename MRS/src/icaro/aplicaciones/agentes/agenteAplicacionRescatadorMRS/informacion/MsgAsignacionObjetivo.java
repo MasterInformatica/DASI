@@ -17,4 +17,10 @@ public class MsgAsignacionObjetivo {
 		return robot;
 	}
 	
+	
+	@Override
+	public String toString(){
+		return "Robot " + robot + " se asigna al minero " + minero;
+	}
+	
 }

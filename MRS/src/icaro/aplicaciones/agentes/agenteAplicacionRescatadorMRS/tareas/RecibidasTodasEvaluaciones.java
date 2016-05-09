@@ -53,8 +53,8 @@ public class RecibidasTodasEvaluaciones extends TareaSincrona {
 		trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
 
 		trazas.aceptaNuevaTraza(new InfoTraza(this.identAgente,
-				"Recibida la evaluación de todos los robots. Esperando al mejor"
-				+ " robot para la victima " + eo.getVictimaName(),
+				"Recibida la evaluación de todos los robots. Informando de que soy"
+				+ " el mejor para la victima " + eo.getVictimaName(),
 				InfoTraza.NivelTraza.info));
 	}
 

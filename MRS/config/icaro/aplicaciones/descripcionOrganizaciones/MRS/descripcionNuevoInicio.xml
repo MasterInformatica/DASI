@@ -63,22 +63,6 @@
        tipo="Cognitivo"
        localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionMineroMRS.procesoResolucionObjetivos.reglasMineroMRS.drl"
     />
-	<!-- ****TO BE DELETE  TO BE DELETE -->
-    <icaro:DescComportamientoAgente
-       nombreComportamiento="AgenteAplicacionAsignadorTareas" 
-       rol="AgenteAplicacion" 
-       localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionAsignadorTareasCognitivo" 
-       tipo="Cognitivo" 
-       localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionAsignadorTareasCognitivo.procesoResolucionObjetivos.reglasjearqJefeCambioRol.drl"
-     />
-     <icaro:DescComportamientoAgente  
-       nombreComportamiento="AgenteAplicacionSubordinado" 
-       rol="AgenteAplicacion" 
-       localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionSubordinadoConCambioRolCognitivo" 
-       tipo="Cognitivo"
-       localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionSubordinadoConCambioRolCognitivo.procesoResolucionObjetivos.reglasSubordConCambioRolNC.drl"
-     />
-     <!-- ****TO BE DELETE  TO BE DELETE -->
 </icaro:DescComportamientoAgentesAplicacion>
 </icaro:DescComportamientoAgentes>
 	<!--******************************************************************************************************
@@ -112,10 +96,6 @@
                             <icaro:componenteGestionado refId="AgenteAplicacionRescatadorMRS2" tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="AgenteAplicacionMineroMRS1" tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="AgenteAplicacionMineroMRS2" tipoComponente="AgenteAplicacion"/>
-                            <!-- ****TO BE DELETE  TO BE DELETE -->
-                            <icaro:componenteGestionado refId="rescate1RobotAsignador" tipoComponente="AgenteAplicacion"/>
-                            <icaro:componenteGestionado refId="rescate1RobotSubordinado1" tipoComponente="AgenteAplicacion"/>
-                			<!-- ****TO BE DELETE  TO BE DELETE -->
                    </icaro:componentesGestionados>
                 </icaro:InstanciaGestor>
                 <icaro:InstanciaGestor id="GestorRecursos" refDescripcion="GestorRecursos">
@@ -140,12 +120,6 @@
                 </icaro:Instancia>
                 <icaro:Instancia id="AgenteAplicacionMineroMRS2" refDescripcion="AgenteAplicacionMineroMRS">
                 </icaro:Instancia>
-                <!-- ****TO BE DELETE  TO BE DELETE -->
-                <icaro:Instancia id="rescate1RobotAsignador" refDescripcion="AgenteAplicacionAsignadorTareas">
-                </icaro:Instancia>
-                <icaro:Instancia id="rescate1RobotSubordinado1" refDescripcion="AgenteAplicacionSubordinado">
-                </icaro:Instancia>
-                <!-- ****TO BE DELETE  TO BE DELETE -->
        </icaro:AgentesAplicacion>
 	<!--******************************************************************************************************
 	******************   Instancias de Recursos de aplicacion                               ******************

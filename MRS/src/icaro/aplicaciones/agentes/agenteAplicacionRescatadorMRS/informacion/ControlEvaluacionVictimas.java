@@ -9,7 +9,17 @@ public class ControlEvaluacionVictimas {
 	public TreeSet<String> victimasArescatar;
 	public boolean finalizadaTodasEvaluaciones;
 	
+
 	
+	public boolean isFinalizadaTodasEvaluaciones() {
+		return finalizadaTodasEvaluaciones;
+	}
+
+	public boolean getFinalizadaTodasEvaluaciones() {
+		return finalizadaTodasEvaluaciones;
+	}
+
+
 	public String getProximaVictima() {
 		return proximaVictima;
 	}

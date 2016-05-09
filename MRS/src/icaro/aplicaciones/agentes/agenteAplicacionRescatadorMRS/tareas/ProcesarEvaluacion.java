@@ -51,8 +51,10 @@ public class ProcesarEvaluacion extends TareaSincrona {
 		assert(eo.victimaName.equals(msg.getMinero()));
 				
 		eo.addEvaluacion(msg.getRobot(), msg.getPuntuacion());
-		if( eo.getFinalizadaEvaluacion() )
+		if( eo.getFinalizadaEvaluacion() ){
 			ce.informarEvaluacionFinalizada(msg.getMinero());
+			this.getEnvioHechos().actualizarHecho(ce);
+		}
 		
 		this.getEnvioHechos().actualizarHecho(eo);
 		this.getEnvioHechos().eliminarHecho(msg);

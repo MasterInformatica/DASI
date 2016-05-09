@@ -86,6 +86,7 @@ rule "Procesar peticion Victima"
 end
 
 
+//----------- Recibir evaluaciones otros robots -----------------------
 rule "Recibir mensaje evaluacion otro robot"
  when
    	$yo : Robot( getName() == agentId)
@@ -106,6 +107,7 @@ rule "Recibir mensaje evaluacion otro robot"
 end
 
 
+//----------- Desplazar objetivo actual -----------------------
 rule "Se han evaluado todas las victimas por todos los robots"
  when
   	$yo : Robot( getName() == agentId)
@@ -114,6 +116,8 @@ rule "Se han evaluado todas las victimas por todos los robots"
  	$mo : MisObjetivos()
 
 	ce : ControlEvaluacionVictimas(finalizadaTodasEvaluaciones == true)
+	not(  SolicitudAyuda() )  //No quedan solicitudes por evaluar por nosotros
+	not( MsgEvaluacionRobot() )
  then
 	TareaSincrona t1 = gestorTareas.crearTareaSincrona(TodasVictimasEvaluadas.class);
  	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, ce);

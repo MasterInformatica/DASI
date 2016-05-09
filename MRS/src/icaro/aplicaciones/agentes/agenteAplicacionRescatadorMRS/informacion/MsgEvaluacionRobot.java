@@ -23,5 +23,10 @@ public class MsgEvaluacionRobot {
 		return puntuacion;
 	}
 	
+	@Override
+	public String toString(){
+		return "Evaluación del robot " + robot + " sobre la victima " + minero 
+				+ "con una valoración de " + this.puntuacion;
+	}
 	
 }
