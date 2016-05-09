@@ -37,7 +37,7 @@ public class ProcesarEvaluacion extends TareaSincrona {
 				
 		eo.addEvaluacion(msg.getRobot(), msg.getPuntuacion());
 		
-		this.getEnvioHechos().actualizarHechoWithoutFireRules(eo);
+		this.getEnvioHechos().actualizarHecho(eo);
 		this.getEnvioHechos().eliminarHecho(msg);
 		
 		//----------------------------------------------------------------------

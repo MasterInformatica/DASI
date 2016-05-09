@@ -30,6 +30,9 @@ public class EnviarPeticionAyuda extends TareaSincrona {
 		comunicator = this.getComunicator();
 		SolicitudAyuda msj = new SolicitudAyuda(yo);
 		sendBroadcast(lr,msj);
+		
+		o.setSolved();
+		this.getEnvioHechos().actualizarHecho(o);
 		// Informar mediante trazas
 		trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
 

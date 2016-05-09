@@ -33,9 +33,8 @@ public class ProcesarInicioFase extends TareaSincrona{
 				
 		switch(ie.getEstadoIniciado()){
 		case InicioEstado.ST_NuevoEscenario:
+			
 			PriorityBlockingQueue<Objetivo> pqO = mo.getMisObjetivosPriorizados();
-			this.getEnvioHechos().eliminarHechoWithoutFireRules(mo);
-			this.getEnvioHechos().eliminarHechoWithoutFireRules(f);
 			while(!pqO.isEmpty()){
 				Objetivo oo = pqO.poll();
 				this.getEnvioHechos().eliminarHechoWithoutFireRules(oo);
@@ -45,9 +44,10 @@ public class ProcesarInicioFase extends TareaSincrona{
 			Objetivo o = new ConocerEquipo();
 			mo.addObjetivo(o);
 			f.setFoco(o);
+
 			this.getEnvioHechos().insertarHechoWithoutFireRules(o);
 			this.getEnvioHechos().actualizarHechoWithoutFireRules(mo);
-			this.getEnvioHechos().actualizarHecho(f);
+			this.getEnvioHechos().actualizarHechoWithoutFireRules(f);
 			break;
 		case InicioEstado.ST_Inicio:
 			// LUISMA JESUS Robots Cambio de Fase a Inicio 
@@ -56,6 +56,7 @@ public class ProcesarInicioFase extends TareaSincrona{
 		default:
 			break;
 		}
+		this.getEnvioHechos().eliminarHecho(ie);
 	}
 
 }

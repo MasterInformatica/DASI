@@ -25,11 +25,11 @@ public class InicializarRobot extends TareaSincrona {
 		MisObjetivos mo = new MisObjetivos();
 
 		//Creamos el objetivo, y lo anyadimos y focalizamos.
-		Objetivo o = new ConocerEquipo();
-		mo.addObjetivo(o);
+		/*Objetivo o = new ConocerEquipo();
 		f.setFoco(o);
+		mo.addObjetivo(o);
 		
-		this.getEnvioHechos().insertarHechoWithoutFireRules(o);
+		this.getEnvioHechos().insertarHechoWithoutFireRules(o);*/
 		this.getEnvioHechos().insertarHechoWithoutFireRules(mo);
 		this.getEnvioHechos().insertarHecho(f);
 		

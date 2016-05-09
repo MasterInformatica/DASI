@@ -2,6 +2,7 @@ package icaro.aplicaciones.agentes.agenteAplicacionMineroMRS.tareas;
 
 
 import icaro.aplicaciones.agentes.agenteAplicacionMineroMRS.objetivos.PedirAyuda;
+import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.ConocerEquipo;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.MisObjetivos;
@@ -22,13 +23,16 @@ public class InicializarVictima extends TareaSincrona {
 	@Override
 	public void ejecutar(Object... params) {
 		Focus f = new Focus();
-		//MisObjetivos mo = new MisObjetivos();
+		MisObjetivos mo = new MisObjetivos();
 
 		//Creamos el objetivo, y lo anyadimos y focalizamos.
+		/*Objetivo o = new ConocerEquipo();
+		mo.addObjetivo(o);
+		f.setFoco(o);
 		Objetivo o = new PedirAyuda();
 		f.setFoco(o);
-		
-		this.getEnvioHechos().insertarHechoWithoutFireRules(o);
+		*/
+		this.getEnvioHechos().insertarHechoWithoutFireRules(mo);
 		this.getEnvioHechos().insertarHecho(f);
 		
 		

@@ -10,4 +10,8 @@ public class SolicitudAyuda {
 	public Victima getVictima(){
 		return v;
 	}
+	@Override
+	public String toString() {
+		return v.toString();
+	}
 }

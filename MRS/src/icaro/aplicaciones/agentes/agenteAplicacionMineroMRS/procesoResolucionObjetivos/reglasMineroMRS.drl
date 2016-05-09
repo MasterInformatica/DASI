@@ -36,9 +36,21 @@ rule "Acciones Iniciales Minero MRS "
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end
 
+//------------  ProcesarInicioFase ---------------------
+rule "Nueva Fase"
+ when
+ 	$fase : InicioEstado($st : estadoIniciado)
+ 	$yo : Victima( getName() == agentId)
+ 	$fc : Focus()
+ 	$mo : MisObjetivos()
+ then
+	TareaSincrona t1 = gestorTareas.crearTareaSincrona(ProcesarInicioFase.class);
+ 	t1.ejecutar(agentId, $yo, $fc, $mo, $fase);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName()+ " " +$st);
+end
 
 //------------  EnviarPeticionAyuda  --------------------------
-rule "Incio de Simulacion"
+rule "Solicitar Ayuda"
  when
  	obj: PedirAyuda(state == Objetivo.SOLVING)
     fc : Focus(foco == obj)

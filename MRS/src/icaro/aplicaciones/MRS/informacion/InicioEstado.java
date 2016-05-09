@@ -5,13 +5,13 @@ public class InicioEstado {
 	public final static String ST_Inicio 			= "ST_Incio";
 	public final static String ST_Fin 				= "ST_Fin";
 	public final static String ST_ 					= "ST_";
-	public String EstadoIniciado;
+	public String estadoIniciado;
 	
 	public InicioEstado(String st){
-		EstadoIniciado = st;
+		estadoIniciado = st;
 	}
 	
 	public String getEstadoIniciado() {
-		return EstadoIniciado;
+		return estadoIniciado;
 	}
 }

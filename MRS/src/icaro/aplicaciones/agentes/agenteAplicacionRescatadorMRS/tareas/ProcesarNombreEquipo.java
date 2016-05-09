@@ -41,6 +41,9 @@ public class ProcesarNombreEquipo extends TareaSincrona {
 		Objetivo ob = new EvaluarSolicitudes();
 		ob.setSolving();
 		
+		
+		mo.addObjetivo(ob);
+		this.getEnvioHechos().actualizarHecho(mo);
 		this.getEnvioHechos().insertarHechoWithoutFireRules(ob);
 		f.setFoco(ob);
 		this.getEnvioHechos().actualizarHechoWithoutFireRules(f);
