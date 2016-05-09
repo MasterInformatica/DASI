@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Random;
 
 import icaro.aplicaciones.MRS.informacion.Escenario;
+import icaro.aplicaciones.MRS.informacion.InicioEstado;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.MRS.informacion.Robot;
+import icaro.aplicaciones.MRS.informacion.Victima;
 import icaro.aplicaciones.MRS.informacion.ListaIds;
 import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
 import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
@@ -134,8 +136,8 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 
 			ListaIds lr = new ListaIds(this.escenario.getListaRobots());
 			ListaIds lm = new ListaIds(this.escenario.getListaVictimas());
-			List<String> n = lr.getNames();
-			for(String s : n){
+			informarTodosNuevoEstado(InicioEstado.ST_NuevoEscenario);
+			for(String s : lr.getNames()){
 				ListaIds lc = new ListaIds(lr);
 				comunicator.enviarInfoAotroAgente(lc, s);
 				comunicator.enviarInfoAotroAgente(this.escenario.getRobot(s), s);
@@ -160,6 +162,7 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	public void iniciarSimulacion(){ //input=iniciaSimulacion --> enEjecucion
 		//AQUI HABRIA QUE ENVIAR LAS ORDENES A LOS ROBOTS. EN EL AGENTE
 		//ORIGINAL LO HACE EN EL MÉTODO sendSequenceOfSimulatedVictimsToRobotTeam
+		informarTodosNuevoEstado(InicioEstado.ST_Inicio);
 	}
 	
 	public void cambiarFichero(){ //input=cambioFichero --> esperandoEscenario
@@ -175,6 +178,7 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	//--------------------------------------------------------------------------
 	public void FinSimulacion(){ //input=finSimulacion --> finalizandoSimulacion
 		//AQUI HABRIA QUE ENVIAR LA SEÑAL DE FIN A LOS ROBOTS.
+		informarTodosNuevoEstado(InicioEstado.ST_Fin);
 	
 	}
 	
@@ -197,5 +201,16 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		// TODO Auto-generated method stub
 	}
 
+	private void informarTodosNuevoEstado(String st){
+		InicioEstado ie = new InicioEstado(st);
+		for(Robot r : this.escenario.getListaRobots()){
+			comunicator.enviarInfoAotroAgente(ie, r.getName());
+		}
+		
+		for(Victima v: this.escenario.getListaVictimas()){
+			comunicator.enviarInfoAotroAgente(ie, v.getName());
+		}
+
+	}
 
 }

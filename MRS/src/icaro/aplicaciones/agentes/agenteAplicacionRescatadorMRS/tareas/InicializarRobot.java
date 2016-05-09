@@ -22,14 +22,15 @@ public class InicializarRobot extends TareaSincrona {
 	@Override
 	public void ejecutar(Object... params) {
 		Focus f = new Focus();
-		//MisObjetivos mo = new MisObjetivos();
+		MisObjetivos mo = new MisObjetivos();
 
 		//Creamos el objetivo, y lo anyadimos y focalizamos.
 		Objetivo o = new ConocerEquipo();
-	//	mo.addObjetivo(o);
+		mo.addObjetivo(o);
 		f.setFoco(o);
 		
 		this.getEnvioHechos().insertarHechoWithoutFireRules(o);
+		this.getEnvioHechos().insertarHechoWithoutFireRules(mo);
 		this.getEnvioHechos().insertarHecho(f);
 		
 		

@@ -38,6 +38,18 @@ rule "Acciones Iniciales Rescatador MRS "
    //TODO: Crear los componentes internos aqui (mvto, ..., ...)
 end
 
+//------------  ProcesarInicioFase ---------------------
+rule "Nueva Fase"
+ when
+ 	$fase : InicioEstado()
+ 	$yo : Robot( getName() == agentId)
+ 	$fc : Focus()
+ 	$mo : MisObjetivos()
+ then
+	TareaSincrona t1 = gestorTareas.crearTareaSincrona(ProcesarInicioFase.class);
+ 	t1.ejecutar(agentId, $yo, $fc, $mo, $fase);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
+end
 
 //------------  ConocerEquipo  --------------------------
 rule "Me han informado del equipo (conocerEquipo)"

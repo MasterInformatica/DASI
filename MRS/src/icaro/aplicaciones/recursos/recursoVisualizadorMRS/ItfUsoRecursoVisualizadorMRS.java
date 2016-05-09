@@ -10,7 +10,7 @@ import icaro.infraestructura.patronRecursoSimple.ItfUsoRecursoSimple;
 
 public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 
-	/* LUISMA:
+	/* LuisMa:
 	 *  Las siguientes llamadas las hago desde la clase encargada de inicializar el sistema entero.
 	 *  Puede que algunos de estos métodos ya estén implementdos en la clase padre y solamente haya que hacer
 	 *  un super.
