@@ -59,7 +59,7 @@ public class ProcesarSolicitudAyuda extends TareaSincrona {
 				
 		
 		ce.addVictima(mineroName);
-		this.getEnvioHechos().actualizarHechoWithoutFireRules(ce);
+		this.getEnvioHechos().actualizarHecho(ce);
 		
 		
 		EvaluacionObjetivo eo = new EvaluacionObjetivo(minero, lr.size()+1);
@@ -78,7 +78,7 @@ public class ProcesarSolicitudAyuda extends TareaSincrona {
 	
 		eo.addEvaluacion(yo.getName(), l.size());
 		
-		this.getEnvioHechos().insertarHechoWithoutFireRules(eo);
+		this.getEnvioHechos().insertarHecho(eo);
 		
 		//Informamos al resto de robots de nuestra evaluacion
 		MsgEvaluacionRobot msg = new MsgEvaluacionRobot(yo.getName(), minero.getName(),
