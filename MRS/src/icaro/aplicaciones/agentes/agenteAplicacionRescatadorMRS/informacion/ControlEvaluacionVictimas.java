@@ -10,8 +10,8 @@ public class ControlEvaluacionVictimas {
 		return proximaVictima;
 	}
 
-
 	public TreeSet<String> victimasArescatar;
+	
 	
 	public ControlEvaluacionVictimas(){
 		this.victimasArescatar = new TreeSet<String>();
@@ -26,7 +26,16 @@ public class ControlEvaluacionVictimas {
 		this.proximaVictima = it.next();
 	}
 	
+	public void eliminaVictima(String s){
+		String v = this.victimasArescatar.pollFirst();
+		assert(v == s);
+	}
 	
+
+	
+	
+	//--------------------------------------------------------------------------
+
 	public static void main(String args[]){
 		ControlEvaluacionVictimas aa = new ControlEvaluacionVictimas();
 		

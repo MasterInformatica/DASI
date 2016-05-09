@@ -51,12 +51,17 @@ public class EvaluacionObjetivo extends Objetivo {
 	
 	
 	public void addEvaluacion(String evaluador, int puntuacion){
+		assert(finalizadaEvaluacion==false);
+		
 		this.evaluaciones.add(new ParEvaluacion(evaluador, puntuacion));
 		
 		if(this.evaluaciones.size() == this.numeroEvaluacionesEsperadas)
 			this.finalizadaEvaluacion = true;
 	}
 	
+	public String getMejorRobot(){
+		return this.evaluaciones.get(0).evaluador;
+	}
 	
 	protected class ParEvaluacion{
 		private String evaluador;

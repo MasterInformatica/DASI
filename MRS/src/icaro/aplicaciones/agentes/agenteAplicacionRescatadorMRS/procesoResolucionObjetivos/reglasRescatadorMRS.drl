@@ -25,15 +25,6 @@ import java.lang.String;
 global ItfGestorTareas gestorTareas;
 global ItfUsoRecursoTrazas recursoTrazas;
 global String agentId;
-
-
-/**
- * La idea de como funciona las reglas va a ser similar a la propuesta por ICARO.
- * Van a existir objetivos, y cada objetivo va a estar focalizado, de esta forma, todas las reglas
- *  solamente van a actuar si el objetivo marcado esta activo (focalizado).
- * Se puede ver como que las reglas se agrupan por objetivos, y solo se activan cuando el objetivo esta
- *  activo (flcalizado)
- */
  
  
  /* Si no hay foco, es que estamos en la primera regla */
@@ -61,13 +52,14 @@ rule "Me han informado del equipo (conocerEquipo)"
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end
 
+
 //----------- Evaluar solicitudes -----------------------
 rule "Procesar peticion Victima"
  when
  	obj: EvaluarSolicitudes(state == Objetivo.SOLVING)
     fc : Focus(foco == obj)
     robots: ListaIds()
-   	msg : SolicitudAyuda() //JESUS ME ENVIA ESTO
+   	msg : SolicitudAyuda() //El mensaje de auxilio de los mineros
    	ce : ControlEvaluacionVictimas()
    	yo : Robot( getName() == agentId)
  then
@@ -94,27 +86,53 @@ rule "Recibir mensaje evaluacion otro robot"
 end
 
 
-rule "Se ha recibido todas las evaluaciones del primer objetivo"
+rule "Se ha recibido todas las evaluaciones del objetivo"
  when
  	obj: EvaluarSolicitudes(state == Objetivo.SOLVING)
     fc : Focus(foco == obj)
     robots: ListaIds()
-    
+ 	yo : Robot( getName() == agentId)
+     	
     ce : ControlEvaluacionVictimas($v: proximaVictima)
     eo : EvaluacionObjetivo(victimaName == $v, finalizadaEvaluacion == true)
-//	eo : EvaluacionObjetivo(finalizadaEvaluacion == true)
  then
- 	TareaSincrona t1 = gestorTareas.crearTareaSincrona(TareaKK.class);
- 	t1.ejecutar(obj, fc, robots, ce, eo);
+ 	TareaSincrona t1 = gestorTareas.crearTareaSincrona(RecibidasTodasEvaluaciones.class);
+ 	t1.ejecutar(obj, fc, robots, yo, ce, eo);
 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end
 
-
-
-/*
-//Se han reccibido todos los mensajes
-rule "ASF"
- when
- then
+//Estoy esperando a que me informe el mejor robot
+rule "Esperar confirmacion de robot asignado a objetivo"
+  when
+  	yo : Robot( getName() == agentId)
+  	fc : Focus()
+  	mo : MisObjetivos()
+  	
+  	obj: EsperaRobotAsignado($v: minero) 	
+    msg: MsgAsignacionObjetivo(minero == $v) 	
+     	
+    ce : ControlEvaluacionVictimas()
+    eo : EvaluacionObjetivo(victimaName == $v, finalizadaEvaluacion == true)
+  then
+  	TareaSincrona t1 = gestorTareas.crearTareaSincrona(ProcesarMsgAsignacionRobot.class);
+  	t1.ejecutar(agentId, yo, fc, mo, obj, msg, ce, eo);
+  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end
-*/
+
+//Soy el mejor robot, tengo que informar a todos
+rule "Informar soy mejor robot"
+  when
+  	yo : Robot( getName() == agentId)
+  	fc : Focus()
+  	mo : MisObjetivos()
+  	lr : ListaIds()
+  	
+  	obj : InformarSoyElMejorRobot($v: minero)
+  	
+  	ce : ControlEvaluacionVictimas()
+  	eo : EvaluacionObjetivo(victimaName == $v, finalizadaEvaluacion == true)
+  then
+  	TareaSincrona t1 = gestorTareas.crearTareaSincrona(InformarAutoasignacionVictima.class);
+  	t1.ejecutar(agentId, yo, fc, mo, lr, obj, ce, eo);
+  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
+end
