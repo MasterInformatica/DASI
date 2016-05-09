@@ -31,8 +31,8 @@ public class EvaluacionObjetivo extends Objetivo {
 		return finalizadaEvaluacion;
 	}
 
-	public int getFinalizadaEvaluacion(){
-		return finalizadaEvaluacion ? 1 : 0;
+	public boolean getFinalizadaEvaluacion(){
+		return finalizadaEvaluacion;
 	}
 
 	public int getNumeroEvaluacionesEsperadas() {

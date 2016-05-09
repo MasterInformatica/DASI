@@ -30,15 +30,28 @@ public class ProcesarSolicitudAyuda extends TareaSincrona {
 	
 	@Override
 	public void ejecutar(Object... params) {
-		//t1.ejecutar(agentId, robots, obj, fc, yo, ce, msg);
+		/* 
+		 * params[0] -> nombre del agente
+		 * params[1] -> yo
+		 * params[2] -> fc
+		 * params[3] -> MisObjetivos
+		 * --------------------------------
+		 * params[4] -> Objetivo Actual
+		 * params[5] -> robots
+		 * params[6] -> mensaje
+		 * params[7] -> controlEvaluacionVictimas
+		 */
 		
-		String name = (String) params[0];
-		ListaIds lr = (ListaIds) params[1];
-		Objetivo o = (Objetivo) params[2];
-		Focus f = (Focus) params[3];
-		Robot yo = (Robot) params[4];
-		ControlEvaluacionVictimas ce = (ControlEvaluacionVictimas)params[5];
-		SolicitudAyuda sa = (SolicitudAyuda)params[6];
+		String name 		= (String) params[0];
+		Robot yo 			= (Robot) params[1];
+		Focus f 			= (Focus) params[2];
+		MisObjetivos mo 	= (MisObjetivos) params[3];
+		
+		Objetivo o			= (Objetivo) params[4];
+		
+		ListaIds lr 					= (ListaIds) params[5];
+		SolicitudAyuda sa 				= (SolicitudAyuda)params[6];
+		ControlEvaluacionVictimas ce 	= (ControlEvaluacionVictimas)params[7];
 		
 		
 		Victima minero = sa.getVictima();
@@ -51,33 +64,30 @@ public class ProcesarSolicitudAyuda extends TareaSincrona {
 		
 		EvaluacionObjetivo eo = new EvaluacionObjetivo(minero, lr.size()+1);
 
-		int coste = 0;
-		
 		//Actualizamos la información propia del propio robot
+		ItfUsoRecursoPlanificadorRuta pr = null;
+		List<Coordenada> l = null;
 		try {
-			ItfUsoRecursoPlanificadorRuta pr = (ItfUsoRecursoPlanificadorRuta)
+			pr = (ItfUsoRecursoPlanificadorRuta)
 					this.repoInterfaces.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoPlanificadorRuta1");
-			
-			assert(pr != null);
-			List<Coordenada> l = pr.getRuta(yo.getCoordenadasIniciales(), minero.getPosicion());
-			
-			eo.addEvaluacion(yo.getName(), l.size());
-			
-			this.getEnvioHechos().insertarHechoWithoutFireRules(eo);
-			
-			//Informamos al resto de robots de nuestra evaluacion
-			MsgEvaluacionRobot msg = new MsgEvaluacionRobot(yo.getName(), minero.getName(),
-															l.size());
-			
-			List<String> ls = lr.getNames();
-			this.comunicator = this.getComunicator();
-			for(String s : ls){
-				comunicator.enviarInfoAotroAgente(msg, s);
-			}
-			
-			coste = l.size();
+			l = pr.getRuta(yo.getCoordenadasIniciales(), minero.getPosicion());
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		assert(pr != null);
+	
+		eo.addEvaluacion(yo.getName(), l.size());
+		
+		this.getEnvioHechos().insertarHechoWithoutFireRules(eo);
+		
+		//Informamos al resto de robots de nuestra evaluacion
+		MsgEvaluacionRobot msg = new MsgEvaluacionRobot(yo.getName(), minero.getName(),
+														l.size());
+		
+		List<String> ls = lr.getNames();
+		this.comunicator = this.getComunicator();
+		for(String s : ls){
+			comunicator.enviarInfoAotroAgente(msg, s);
 		}
 		
 		//Eliminamos el mensaje de solicitud de ayuda para no entrar a la regla otra vez
@@ -87,7 +97,7 @@ public class ProcesarSolicitudAyuda extends TareaSincrona {
 		trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
 
 		trazas.aceptaNuevaTraza(new InfoTraza(this.identAgente,
-				"Recibida la peticion de ayuda de " + minero + " evaluada con coste " + coste,
+				"Recibida la peticion de ayuda de " + minero + " evaluada con coste " + l.size(),
 				InfoTraza.NivelTraza.info));
 		
 	}	

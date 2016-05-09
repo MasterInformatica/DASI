@@ -69,23 +69,30 @@ end
 //----------- Evaluar solicitudes -----------------------
 rule "Procesar peticion Victima"
  when
- 	obj: EvaluarSolicitudes(state == Objetivo.SOLVING)
-    fc : Focus(foco == obj)
-    robots: ListaIds()
+  	$yo : Robot( getName() == agentId)
+ 	$obj: EvaluarSolicitudes(state == Objetivo.SOLVING)
+ 	$fc : Focus(foco == $obj)
+ 	$mo : MisObjetivos()
+ 	
+ 	robots: ListaIds()
+    
    	msg : SolicitudAyuda() //El mensaje de auxilio de los mineros
+  
    	ce : ControlEvaluacionVictimas()
-   	yo : Robot( getName() == agentId)
  then
  	TareaSincrona t1 = gestorTareas.crearTareaSincrona(ProcesarSolicitudAyuda.class);
- 	t1.ejecutar(agentId, robots, obj, fc, yo, ce, msg);
+ 	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, robots, msg, ce);
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end
 
 
 rule "Recibir mensaje evaluacion otro robot"
  when
- 	obj: EvaluarSolicitudes(state == Objetivo.SOLVING)
-    fc : Focus(foco == obj)
+   	$yo : Robot( getName() == agentId)
+ 	$obj: EvaluarSolicitudes(state == Objetivo.SOLVING)
+ 	$fc : Focus(foco == $obj)
+ 	$mo : MisObjetivos()
+
     robots: ListaIds()
  	
  	msg: MsgEvaluacionRobot($v: minero)
@@ -94,14 +101,30 @@ rule "Recibir mensaje evaluacion otro robot"
  	eo : EvaluacionObjetivo(victimaName == $v)
  then
  	TareaSincrona t1 = gestorTareas.crearTareaSincrona(ProcesarEvaluacion.class);
- 	t1.ejecutar(obj, fc, robots, msg, ce, eo);
+ 	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, robots, msg, ce, eo);
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end
 
 
-rule "Se ha recibido todas las evaluaciones del objetivo"
+rule "Se han evaluado todas las victimas por todos los robots"
  when
- 	obj: EvaluarSolicitudes(state == Objetivo.SOLVING)
+  	$yo : Robot( getName() == agentId)
+ 	$obj: EvaluarSolicitudes(state == Objetivo.SOLVING)
+ 	$fc : Focus(foco == $obj)
+ 	$mo : MisObjetivos()
+
+	ce : ControlEvaluacionVictimas(finalizadaTodasEvaluaciones == true)
+ then
+	TareaSincrona t1 = gestorTareas.crearTareaSincrona(TodasVictimasEvaluadas.class);
+ 	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, ce);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
+end	
+
+
+// A PARTIR DE AQUI CON OTRO OBJETIVO
+/*rule "Se ha recibido todas las evaluaciones del objetivo"
+ when
+ 	obj: AsignarRobots(state == Objetivo.SOLVING) //CAMBIAR ESTE OBJ
     fc : Focus(foco == obj)
     robots: ListaIds()
  	yo : Robot( getName() == agentId)
@@ -111,7 +134,7 @@ rule "Se ha recibido todas las evaluaciones del objetivo"
  then
  	TareaSincrona t1 = gestorTareas.crearTareaSincrona(RecibidasTodasEvaluaciones.class);
  	t1.ejecutar(obj, fc, robots, yo, ce, eo);
-	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
+	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName()+" " + $v);
 end
 
 //Estoy esperando a que me informe el mejor robot
@@ -148,4 +171,4 @@ rule "Informar que soy el mejor robot"
   	TareaSincrona t1 = gestorTareas.crearTareaSincrona(InformarAutoasignacionVictima.class);
   	t1.ejecutar(agentId, yo, fc, mo, lr, obj, ce, eo);
   	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
-end
+end*/
