@@ -82,4 +82,9 @@ public class ListaIds {
 	public int size() {
 		return this.numMineros;
 	}
+	
+	@Override
+	public String toString() {
+		return nombres.toString();
+	}
 }

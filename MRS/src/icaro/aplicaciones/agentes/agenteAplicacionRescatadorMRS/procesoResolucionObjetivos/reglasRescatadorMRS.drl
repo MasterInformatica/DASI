@@ -138,9 +138,9 @@ end
 rule "Se ha recibido todas las evaluaciones del objetivo"
  when
  	$yo : Robot( getName() == agentId)
+ 	$obj: AsignarRobots(state == Objetivo.SOLVING)
  	$fc : Focus(foco == $obj)
  	$mo : MisObjetivos()
- 	$obj: AsignarRobots(state == Objetivo.SOLVING)
 
     robots: ListaIds()
      	
