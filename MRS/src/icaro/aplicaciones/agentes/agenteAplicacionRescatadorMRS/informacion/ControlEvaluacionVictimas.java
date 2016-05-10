@@ -1,15 +1,37 @@
 package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.TreeSet;
 
 public class ControlEvaluacionVictimas {
+	//Control de las victimas evaluadas y asignadas
 	public String proximaVictima;
 	private int victimasEvaluadas = 0;
 	public TreeSet<String> victimasArescatar;
 	public boolean finalizadaTodasEvaluaciones;
 	
-
+	//Control de los robots ya asignados
+	public Map<String, Boolean> robotsAsignados;
+	
+	
+	
+	public ControlEvaluacionVictimas(List<String> robots){
+		//mineros
+		this.victimasArescatar = new TreeSet<String>();
+		this.proximaVictima = null;
+		victimasEvaluadas=0;
+		finalizadaTodasEvaluaciones=false;
+		
+		//robots
+		this.robotsAsignados = new HashMap<String, Boolean>();
+		for(String s: robots){
+			this.robotsAsignados.put(s, new Boolean(false));
+		}
+	}
+	
 	
 	public boolean isFinalizadaTodasEvaluaciones() {
 		return finalizadaTodasEvaluaciones;
@@ -22,18 +44,7 @@ public class ControlEvaluacionVictimas {
 
 	public String getProximaVictima() {
 		return proximaVictima;
-	}
-
-	
-	
-	
-	public ControlEvaluacionVictimas(){
-		this.victimasArescatar = new TreeSet<String>();
-		this.proximaVictima = null;
-		victimasEvaluadas=0;
-		finalizadaTodasEvaluaciones=false;
-	}
-	
+	}	
 	
 	public void addVictima(String s){
 		this.victimasArescatar.add(s);
@@ -58,10 +69,19 @@ public class ControlEvaluacionVictimas {
 	}
 	
 	
+	
+	public boolean isRobotAsigned(String s){
+		Boolean b = this.robotsAsignados.get(s);
+		
+		return (b==null || b.booleanValue());
+
+	}
+	
+	
 	//--------------------------------------------------------------------------
 
 	public static void main(String args[]){
-		ControlEvaluacionVictimas aa = new ControlEvaluacionVictimas();
+		ControlEvaluacionVictimas aa = new ControlEvaluacionVictimas(null);
 		
 		aa.addVictima("HOLA");
 		System.out.println(aa.proximaVictima);

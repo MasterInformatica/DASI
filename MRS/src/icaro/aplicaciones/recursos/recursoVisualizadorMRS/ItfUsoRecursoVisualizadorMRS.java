@@ -4,7 +4,6 @@ import java.io.File;
 
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
-import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.NotificadorEventos;
 import icaro.infraestructura.patronRecursoSimple.ItfUsoRecursoSimple;
 
@@ -76,7 +75,7 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	 * @param coordActuales coordenadas donde se quiere mover
 	 * @return Devuelve un boolean indicando si ha podido realizar el movimiento.
 	 */
-	public boolean mueveAgente(String idAgente, Coordinate coordActuales) throws Exception;
+	public boolean mueveAgente(String idAgente, Coordenada coordActuales) throws Exception;
 	
 	
 	
@@ -85,7 +84,7 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	// Cuando un robot se le asigna un objetivo, se llama a ete método para informar a la interfaz.
 	// A lo mejor no queremos que se muestre la decisión por pantalla, o a lo mejor si.
 	//Según lo que se quiera, dejar el cuerpo vacío o no.
-	public void inicializarDestinoRobot(String id, Coordinate coordsAct, String idDest, Coordinate coordsDestino, double VelocidadRobot) throws Exception;
+	public void inicializarDestinoRobot(String id, Coordenada coordsAct, String idDest, Coordenada coordsDestino, double VelocidadRobot) throws Exception;
 	 
 	
 	public void setMapa(Mapa mapa) throws Exception;

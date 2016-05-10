@@ -1,7 +1,5 @@
 package icaro.aplicaciones.MRS.informacion;
 
-import icaro.aplicaciones.Rosace.informacion.Coordinate;
-
 public class Coordenada {
 	public int x;
 	public int y;
@@ -21,11 +19,11 @@ public class Coordenada {
 		this.x = c.x;
 		this.y = c.y;
 	}
-	
+	/*
 	public Coordenada(Coordinate c) {
 		this.x = (int) c.getX();
 		this.y = (int) c.getY();
-	}
+	}*/
 	
 	public int getX() {
 		return x;

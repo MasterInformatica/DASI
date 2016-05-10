@@ -2,7 +2,6 @@ package icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp;
 
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
-import icaro.aplicaciones.Rosace.informacion.Coordinate;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
 import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
@@ -51,7 +50,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	}
 	
 	@Override
-	public boolean mueveAgente(String idAgente, Coordinate coord) throws Exception{
+	public boolean mueveAgente(String idAgente, Coordenada coord) throws Exception{
 		return controladorUI.mueveRobot(idAgente,coord);
 		
 	}
@@ -65,10 +64,10 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	}
 
 	@Override
-	public void inicializarDestinoRobot(String id, Coordinate coordsAct, String idDest, Coordinate coordsDestino,
+	public void inicializarDestinoRobot(String id, Coordenada coordsAct, String idDest, Coordenada coordsDestino,
 			double VelocidadRobot) {	
-		controladorUI.mueveVictima(id,new Coordinate(coordsDestino));	
-		controladorUI.mueveRobot(idDest,new Coordinate(coordsAct));	
+		controladorUI.mueveVictima(id,new Coordenada(coordsDestino));	
+		controladorUI.mueveRobot(idDest,new Coordenada(coordsAct));	
 	}
 
 	@Override

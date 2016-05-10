@@ -50,7 +50,7 @@ public class ProcesarNombreEquipo extends TareaSincrona {
 		
 		
 		//Creamos la bbdd vacia para ir insertando solicitudes
-		ControlEvaluacionVictimas ce = new ControlEvaluacionVictimas();
+		ControlEvaluacionVictimas ce = new ControlEvaluacionVictimas(lr.getNames());
 		this.getEnvioHechos().insertarHecho(ce);
 	}	
 }

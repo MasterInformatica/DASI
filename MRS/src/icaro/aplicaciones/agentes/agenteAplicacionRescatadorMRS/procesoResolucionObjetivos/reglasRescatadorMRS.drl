@@ -115,9 +115,9 @@ end
 //----------------------------------//
 
 //----------- Desplazar objetivo actual -----------------------
+
 rule "Se han evaluado todas las victimas por todos los robots"
-salience( -10 )
-timer( expr: 2000 )  //CHAPUZA, pero se adelantaba esta regla
+timer( expr: 2 )  //CHAPUZA, pero se adelantaba esta regla
  when
   	$yo : Robot( getName() == agentId)
  	$obj: EvaluarSolicitudes(state == Objetivo.SOLVING)
@@ -128,14 +128,28 @@ timer( expr: 2000 )  //CHAPUZA, pero se adelantaba esta regla
 	not(  SolicitudAyuda() )  //No quedan solicitudes por evaluar por nosotros
 	not( MsgEvaluacionRobot() )
  then
-	TareaSincrona t1 = gestorTareas.crearTareaSincrona(TodasVictimasEvaluadas.class);
- 	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, ce);
+	$obj.setSolved();
+	update($obj);
+		
+
+	Objetivo o2 = new AsignarRobots();
+	o2.setSolving();
+	$mo.addObjetivo(o2);
+	$fc.setFoco(o2);
+
+	update($mo);
+	update($fc);
+	insert(o2); 
+ 
+//	TareaSincrona t1 = gestorTareas.crearTareaSincrona(TodasVictimasEvaluadas.class);
+// 	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, ce);
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end	
 
 
+
 //---- Objetivo de procesar asignaciones -----
-rule "Se ha recibido todas las evaluaciones del objetivo"
+rule "Comprobar si asignar victima o esperar"
  when
  	$yo : Robot( getName() == agentId)
  	$obj: AsignarRobots(state == Objetivo.SOLVING)
@@ -147,7 +161,7 @@ rule "Se ha recibido todas las evaluaciones del objetivo"
     ce : ControlEvaluacionVictimas($v: proximaVictima)
     eo : EvaluacionObjetivo(victimaName == $v, finalizadaEvaluacion == true)
  then
- 	TareaSincrona t1 = gestorTareas.crearTareaSincrona(RecibidasTodasEvaluaciones.class);
+ 	TareaSincrona t1 = gestorTareas.crearTareaSincrona(AsignarRobotVictima.class);
  	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, robots, ce, eo);
 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName()+" " + $v);
 end

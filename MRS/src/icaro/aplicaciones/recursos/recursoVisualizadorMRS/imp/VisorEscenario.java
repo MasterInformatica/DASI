@@ -7,7 +7,6 @@ import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.MRS.informacion.TipoCelda;
 import icaro.aplicaciones.MRS.informacion.VocabularioMRS;
-import icaro.aplicaciones.Rosace.informacion.Coordinate;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,7 +29,7 @@ public class VisorEscenario extends JFrame {
 	private File filechoosed;
 	//private boolean[][] Map;
 	private Mapa Map;
-	private HashMap<String, Coordinate> posicionAgentes;
+	private HashMap<String, Coordenada> posicionAgentes;
 
 	private int cols;// = 25;
 	private int rows;// = 25;
@@ -51,10 +50,10 @@ public class VisorEscenario extends JFrame {
 		build();
 	}
 
-	public boolean mueveAgente(String idAgente, Coordinate coord, String tipo) {
+	public boolean mueveAgente(String idAgente, Coordenada coord, String tipo) {
 		// Get y remove Current position
 		if(posicionAgentes.containsKey(idAgente)){
-			Coordinate org_coord = posicionAgentes.get(idAgente);
+			Coordenada org_coord = posicionAgentes.get(idAgente);
 			eliminaAgente(idAgente,org_coord);
 		}
 		// Set y draw new position
@@ -108,22 +107,22 @@ public class VisorEscenario extends JFrame {
 	private void build(){
 		isVisible = false;
 		setTitle("MRS - Simulator");
-		posicionAgentes = new HashMap<String,Coordinate>();
+		posicionAgentes = new HashMap<String,Coordenada>();
 		initComponentes();
 	}
 	
-	private boolean dibujaAgente(String idAgente, Coordinate coord, String tipo){
+	private boolean dibujaAgente(String idAgente, Coordenada coord, String tipo){
 		int x = (int) coord.getX();
 		int y = (int) coord.getY();
 		if( x < 0 || y < 0 || x >= rows || y >= cols)
 			return false;
 		botonesMapa[x][y].dibujaAgente(idAgente,tipo);
-		posicionAgentes.put(idAgente, new Coordinate(coord));
+		posicionAgentes.put(idAgente, new Coordenada(coord));
 		return true;
 	}
 	
 	
-	private void eliminaAgente(String idAgente, Coordinate coord){
+	private void eliminaAgente(String idAgente, Coordenada coord){
 		int x = (int) coord.getX();
 		int y = (int) coord.getY();
 		if( x < 0 || y < 0 || x >= rows || y >= cols)

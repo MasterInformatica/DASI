@@ -14,7 +14,7 @@ public class EvaluacionObjetivo extends Objetivo {
 
 	private int numeroEvaluacionesEsperadas;
 
-	
+	private int idxMejorRobot = 0;
 	
 	
 	public String getVictimaName() {
@@ -47,6 +47,8 @@ public class EvaluacionObjetivo extends Objetivo {
 		
 		this.finalizadaEvaluacion = false;
 		this.numeroEvaluacionesEsperadas = numVotosObjetivo;
+		
+		idxMejorRobot = 0;
 	}
 	
 	
@@ -60,7 +62,13 @@ public class EvaluacionObjetivo extends Objetivo {
 	}
 	
 	public String getMejorRobot(){
-		return this.evaluaciones.get(0).evaluador;
+		return this.evaluaciones.get(this.idxMejorRobot++).evaluador;
+	}
+	
+	public String getNextMejorRobot() {
+		if(this.idxMejorRobot >= this.evaluaciones.size()-1)
+			return null;
+		return this.evaluaciones.get(++this.idxMejorRobot).evaluador;
 	}
 	
 	protected class ParEvaluacion{
@@ -72,4 +80,6 @@ public class EvaluacionObjetivo extends Objetivo {
 			this.evaluacion = i;
 		}
 	}
+
+	
 }

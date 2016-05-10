@@ -68,8 +68,7 @@
 	<!--******************************************************************************************************
 	******************   Descripcion de los recursos de aplicacion                          ******************
 	********************************************************************************************************-->
-<icaro:DescRecursosAplicacion>
-	<icaro:DescRecursoAplicacion nombre="RecursoPersistenciaEntornosSimulacion" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPersistenciaEntornosSimulacion.imp.ClaseGeneradoraRecursoPersistenciaEntornosSimulacion"/>			            		
+<icaro:DescRecursosAplicacion>			            		
     <icaro:DescRecursoAplicacion nombre="RecursoVisualizadorMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.ClaseGeneradoraRecursoVisualizadorMRS"/>			            		
     <icaro:DescRecursoAplicacion nombre="RecursoPlanificadorRuta" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPlanificadorRuta.imp.ClaseGeneradoraRecursoPlanificadorRuta"/>
     <icaro:DescRecursoAplicacion nombre="RecursoPersistenciaMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPersistenciaMRS.imp.ClaseGeneradoraRecursoPersistenciaMRS"/>			            		
@@ -125,7 +124,6 @@
 	******************   Instancias de Recursos de aplicacion                               ******************
 	********************************************************************************************************-->        
         <icaro:RecursosAplicacion>
-                <icaro:Instancia id="RecursoEstadistica1" refDescripcion="RecursoEstadistica" xsi:type="icaro:Instancia"/>
                 <icaro:Instancia id="RecursoVisualizadorMRS1" refDescripcion="RecursoVisualizadorMRS" xsi:type="icaro:Instancia"/>
                 <icaro:Instancia id="RecursoPlanificadorRuta1" refDescripcion="RecursoPlanificadorRuta" xsi:type="icaro:Instancia"/>
                 <icaro:Instancia id="RecursoPersistenciaMRS1" refDescripcion="RecursoPersistenciaMRS" xsi:type="icaro:Instancia"/>

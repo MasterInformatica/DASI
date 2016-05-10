@@ -4,7 +4,6 @@ import java.io.File;
 
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
-import icaro.aplicaciones.Rosace.informacion.Coordinate;
 
 public class ControladorVisorSimulador {
 
@@ -20,15 +19,15 @@ public class ControladorVisorSimulador {
 			visorEscenario.mostrar();
 	}
 	
-	public boolean mueveRobot(String idAgente,Coordinate coord){
+	public boolean mueveRobot(String idAgente,Coordenada coord){
 		return mueveAgente(idAgente,coord,"Robot");
 	}
 	
-	public boolean mueveVictima(String idAgente,Coordinate coord){
+	public boolean mueveVictima(String idAgente,Coordenada coord){
 		return mueveAgente(idAgente,coord,"Miner");
 	}
 	
-	public boolean mueveAgente(String idAgente, Coordinate coord, String tipo) {
+	public boolean mueveAgente(String idAgente, Coordenada coord, String tipo) {
 		if(visorEscenario != null)
 			return visorEscenario.mueveAgente(idAgente,coord,tipo);	
 		return false;
