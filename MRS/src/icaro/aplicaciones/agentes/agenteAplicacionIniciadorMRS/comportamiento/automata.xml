@@ -9,7 +9,9 @@
     ******************     Declaracion del estado inicial y su transicion             	******************
     ******************************************************************************************************-->
   <estadoInicial idInicial="estadoInicial">
-     <transicion input="comenzar" accion="AccionComenzar" estadoSiguiente="esperandoEscenario" modoDeTransicion="bloqueante"/>
+     <transicion input="comenzar" accion="AccionComenzar" estadoSiguiente="estadoInicial" modoDeTransicion="bloqueante"/>
+     <transicion input="cambioFichero" accion="cambiarFichero"
+  					estadoSiguiente="esperandoEscenario" modoDeTransicion="bloqueante" />
   </estadoInicial>
 
 <!--******************************************************************************************************

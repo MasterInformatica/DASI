@@ -74,7 +74,7 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 				
 		
 		//Ejecutamos la accion de preguntar fichero en el siguiente estado
-		this.informaraMiAutomata("leerFicheroTimeOut", null);
+		//this.informaraMiAutomata("leerFicheroTimeOut", null);
 	}
 	
 	
@@ -91,13 +91,13 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 			e.printStackTrace();
 		}
 		
-		if(ficheroEscenario==null){
+	/*	if(ficheroEscenario==null){
 			this.generarTimeOutInterno(tEspera, "leerFicheroTimeOut", this.getNombreAgente(),
 			     					   this.itfUsoPropiadeEsteAgente);
-		}else{
+		}else{*/
 			trazas.trazar(this.getNombreAgente(),  "Fichero leido. Procediendo a validar", NivelTraza.debug);
 			this.informaraMiAutomata("validaFichero", null);
-		}
+	//	}
 	}
 
 	public void checkFile(){

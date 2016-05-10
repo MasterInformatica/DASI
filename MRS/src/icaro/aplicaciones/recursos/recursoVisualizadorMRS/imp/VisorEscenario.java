@@ -79,8 +79,8 @@ public class VisorEscenario extends JFrame {
 	}
 	
 	public File getFicheroEscenario(){
-		/*if (filechoosed == null)
-			filechoosed = solicitarSeleccionFichero();*/
+		if (filechoosed == null)
+			filechoosed = solicitarSeleccionFichero();
 		return filechoosed;
 	}
 	
@@ -246,9 +246,12 @@ public class VisorEscenario extends JFrame {
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		fileChooser.setCurrentDirectory(dir);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			return fileChooser.getSelectedFile();
-		} else
-			return null; // no ha seleccionado nada
+			filechoosed = fileChooser.getSelectedFile();
+			return filechoosed;
+		} else{
+			filechoosed = null;
+			return filechoosed; // no ha seleccionado nada
+		}
 	}
 
 	
