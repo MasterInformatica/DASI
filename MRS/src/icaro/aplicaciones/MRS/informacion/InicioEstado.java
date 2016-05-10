@@ -14,4 +14,9 @@ public class InicioEstado {
 	public String getEstadoIniciado() {
 		return estadoIniciado;
 	}
+	
+	@Override
+	public String toString() {
+		return "Iniciado:"+estadoIniciado;
+	}
 }

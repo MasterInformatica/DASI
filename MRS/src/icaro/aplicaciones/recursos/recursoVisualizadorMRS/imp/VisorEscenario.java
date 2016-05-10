@@ -79,8 +79,8 @@ public class VisorEscenario extends JFrame {
 	}
 	
 	public File getFicheroEscenario(){
-		if (filechoosed == null)
-			filechoosed = solicitarSeleccionFichero();
+		/*if (filechoosed == null)
+			filechoosed = solicitarSeleccionFichero();*/
 		return filechoosed;
 	}
 	
@@ -272,31 +272,8 @@ public class VisorEscenario extends JFrame {
 	}
 	
 
-	
-	//-----------------------------TEST--------------------------------
-	
-	public static void main(String args[]){
-		try {
-			VisorEscenario ve = new VisorEscenario();
-			ve.setVisible(true);
-			int j = 2;
-			for(int i = 0; i< 100000; i++) j = (j*j) %1000;
-			//ve.buildMap();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -418573958565443751L;
-
-
-
-
-
-
-
-
 }

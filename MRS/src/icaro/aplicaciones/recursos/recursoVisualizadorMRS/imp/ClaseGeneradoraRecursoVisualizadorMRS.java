@@ -17,7 +17,6 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 
 	private ControladorVisorSimulador controladorUI;
 		
-	//private NotificadorInfoUsuarioSimulador notifEvt;
 	private String recursoId;
 
 	private String identAgenteaReportar;
@@ -46,7 +45,6 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	@Override
 	public void mostrarVictimaRescatada(String VictimaId) throws Exception{
 		throw new Error("NO SE LLAMA A mostrarVictimaRescatada!");
-		
 	}
 	
 	@Override
