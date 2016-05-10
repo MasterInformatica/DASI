@@ -1,11 +1,11 @@
-package icaro.aplicaciones.recursos.recursoPlanificadorRuta.imp;
+package icaro.aplicaciones.recursos.recursoPlanificadorMRS.imp;
 
-import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
 import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.TipoCelda;
+import icaro.aplicaciones.recursos.recursoPlanificadorMRS.ItfUsoRecursoPlanificadorMRS;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,14 +18,14 @@ import java.util.Arrays;
  *
  */
 
-public class ClaseGeneradoraRecursoPlanificadorRuta extends ImplRecursoSimple
-		implements ItfUsoRecursoPlanificadorRuta {
+public class ClaseGeneradoraRecursoPlanificadorMRS extends ImplRecursoSimple
+		implements ItfUsoRecursoPlanificadorMRS {
 
 	private static final long serialVersionUID = -7272037961162939091L;
 	private String recursoId;
 	private Mapa mapaConocimiento;
 	
-	public ClaseGeneradoraRecursoPlanificadorRuta(String idRecurso) throws Exception {
+	public ClaseGeneradoraRecursoPlanificadorMRS(String idRecurso) throws Exception {
 		super(idRecurso);
 		recursoId = idRecurso;
 		try {

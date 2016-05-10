@@ -70,7 +70,7 @@
 	********************************************************************************************************-->
 <icaro:DescRecursosAplicacion>			            		
     <icaro:DescRecursoAplicacion nombre="RecursoVisualizadorMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.ClaseGeneradoraRecursoVisualizadorMRS"/>			            		
-    <icaro:DescRecursoAplicacion nombre="RecursoPlanificadorRuta" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPlanificadorRuta.imp.ClaseGeneradoraRecursoPlanificadorRuta"/>
+    <icaro:DescRecursoAplicacion nombre="RecursoPlanificadorMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPlanificadorMRS.imp.ClaseGeneradoraRecursoPlanificadorMRS"/>
     <icaro:DescRecursoAplicacion nombre="RecursoPersistenciaMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPersistenciaMRS.imp.ClaseGeneradoraRecursoPersistenciaMRS"/>			            		
 </icaro:DescRecursosAplicacion>
 
@@ -100,7 +100,7 @@
                 <icaro:InstanciaGestor id="GestorRecursos" refDescripcion="GestorRecursos">
                     <icaro:componentesGestionados>
                     	<icaro:componenteGestionado refId="RecursoVisualizadorMRS1" tipoComponente="RecursoAplicacion"/>	    
-                    	<icaro:componenteGestionado refId="RecursoPlanificadorRuta1" tipoComponente="RecursoAplicacion"/>	    
+                    	<icaro:componenteGestionado refId="RecursoPlanificadorMRS1" tipoComponente="RecursoAplicacion"/>	    
                     	<icaro:componenteGestionado refId="RecursoPersistenciaMRS1" tipoComponente="RecursoAplicacion"/>
                     </icaro:componentesGestionados>
                 </icaro:InstanciaGestor>
@@ -125,7 +125,7 @@
 	********************************************************************************************************-->        
         <icaro:RecursosAplicacion>
                 <icaro:Instancia id="RecursoVisualizadorMRS1" refDescripcion="RecursoVisualizadorMRS" xsi:type="icaro:Instancia"/>
-                <icaro:Instancia id="RecursoPlanificadorRuta1" refDescripcion="RecursoPlanificadorRuta" xsi:type="icaro:Instancia"/>
+                <icaro:Instancia id="RecursoPlanificadorMRS1" refDescripcion="RecursoPlanificadorMRS" xsi:type="icaro:Instancia"/>
                 <icaro:Instancia id="RecursoPersistenciaMRS1" refDescripcion="RecursoPersistenciaMRS" xsi:type="icaro:Instancia"/>
         </icaro:RecursosAplicacion>
 

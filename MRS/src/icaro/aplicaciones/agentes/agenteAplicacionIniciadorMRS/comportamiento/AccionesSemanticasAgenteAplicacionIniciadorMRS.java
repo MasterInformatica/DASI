@@ -13,7 +13,7 @@ import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.MRS.informacion.Victima;
 import icaro.aplicaciones.MRS.informacion.ListaIds;
 import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
-import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
+import icaro.aplicaciones.recursos.recursoPlanificadorMRS.ItfUsoRecursoPlanificadorMRS;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.factoriaEInterfacesPrObj.ItfProcesadorObjetivos;
@@ -33,7 +33,7 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 
 	private ItfUsoConfiguracion           itfconfig;
 	private ItfUsoRecursoVisualizadorMRS  itfVisualizadorMRS;
-	private ItfUsoRecursoPlanificadorRuta itfPlanificadorRuta;
+	private ItfUsoRecursoPlanificadorMRS itfPlanificadorMRS;
 	private ItfUsoRecursoPersistenciaMRS  itfPersistenciaMRS;
 	
 	private ItfProcesadorObjetivos        itfProcObjetivos;
@@ -56,8 +56,8 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 					.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoVisualizadorMRS1");
 			this.itfVisualizadorMRS.setAgenteIniciador(this.nombreAgente);
 			
-			this.itfPlanificadorRuta = (ItfUsoRecursoPlanificadorRuta) this.itfUsoRepositorio
-					.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoPlanificadorRuta1");
+			this.itfPlanificadorMRS = (ItfUsoRecursoPlanificadorMRS) this.itfUsoRepositorio
+					.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoPlanificadorMRS1");
 			
 			this.itfPersistenciaMRS = (ItfUsoRecursoPersistenciaMRS) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoPersistenciaMRS1");
@@ -128,7 +128,7 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		try {
 			this.itfVisualizadorMRS.escenarioElegidoValido();
 
-			this.itfPlanificadorRuta.setMapa(this.escenario.getMapa());
+			this.itfPlanificadorMRS.setMapa(this.escenario.getMapa());
 			this.itfVisualizadorMRS.setMapa(this.escenario.getMapa());
 			/* Informamos a todos los robots del nombre del resto (incluidos ellos mismos) */
 			comunicator = this.getComunicator();

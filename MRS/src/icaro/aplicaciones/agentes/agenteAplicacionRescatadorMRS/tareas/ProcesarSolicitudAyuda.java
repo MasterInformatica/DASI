@@ -8,7 +8,7 @@ import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.Cont
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.EvaluacionObjetivo;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.MsgEvaluacionRobot;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.ConocerEquipo;
-import icaro.aplicaciones.recursos.recursoPlanificadorRuta.ItfUsoRecursoPlanificadorRuta;
+import icaro.aplicaciones.recursos.recursoPlanificadorMRS.ItfUsoRecursoPlanificadorMRS;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.MisObjetivos;
@@ -65,11 +65,11 @@ public class ProcesarSolicitudAyuda extends TareaSincrona {
 		EvaluacionObjetivo eo = new EvaluacionObjetivo(minero, lr.size()+1);
 
 		//Actualizamos la información propia del propio robot
-		ItfUsoRecursoPlanificadorRuta pr = null;
+		ItfUsoRecursoPlanificadorMRS pr = null;
 		List<Coordenada> l = null;
 		try {
-			pr = (ItfUsoRecursoPlanificadorRuta)
-					this.repoInterfaces.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoPlanificadorRuta1");
+			pr = (ItfUsoRecursoPlanificadorMRS)
+					this.repoInterfaces.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoPlanificadorMRS1");
 			l = pr.getRuta(yo.getCoordenadasIniciales(), minero.getPosicion());
 		} catch (Exception e) {
 			e.printStackTrace();
