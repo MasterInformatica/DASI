@@ -55,7 +55,7 @@ public class ProcesarMsgAsignacionRobot extends TareaSincrona {
 		
 		//Eliminamos la victima de la lista de victimas a rescatar
 		ce.eliminaVictima(msg.getMinero());
-		ce.setRobotAsignado(msg.getMinero());
+		ce.setRobotAsignado(msg.getRobot());
 		this.getEnvioHechos().actualizarHechoWithoutFireRules(ce);
 
 		//Eliminamos el mensaje para que no se repita.

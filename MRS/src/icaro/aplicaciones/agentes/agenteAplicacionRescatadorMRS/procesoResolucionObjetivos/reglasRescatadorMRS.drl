@@ -140,6 +140,8 @@ timer( expr: 2 )  //CHAPUZA, pero se adelantaba esta regla
 	update($mo);
 	update($fc);
 	insert(o2); 
+	
+	System.err.println(ce.proximaVictima);
  
 //	TareaSincrona t1 = gestorTareas.crearTareaSincrona(TodasVictimasEvaluadas.class);
 // 	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, ce);

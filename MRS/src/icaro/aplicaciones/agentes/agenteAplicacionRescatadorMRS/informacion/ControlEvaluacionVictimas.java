@@ -1,5 +1,7 @@
 package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -10,7 +12,7 @@ public class ControlEvaluacionVictimas {
 	//Control de las victimas evaluadas y asignadas
 	public String proximaVictima;
 	private int victimasEvaluadas = 0;
-	public TreeSet<String> victimasArescatar;
+	public List<String> victimasArescatar;
 	public boolean finalizadaTodasEvaluaciones;
 	
 	//Control de los robots ya asignados
@@ -20,7 +22,7 @@ public class ControlEvaluacionVictimas {
 	
 	public ControlEvaluacionVictimas(List<String> robots){
 		//mineros
-		this.victimasArescatar = new TreeSet<String>();
+		this.victimasArescatar = new ArrayList<String>();
 		this.proximaVictima = null;
 		victimasEvaluadas=0;
 		finalizadaTodasEvaluaciones=false;
@@ -48,23 +50,22 @@ public class ControlEvaluacionVictimas {
 	
 	public void addVictima(String s){
 		this.victimasArescatar.add(s);
-		
-		Iterator<String> it = this.victimasArescatar.iterator();
-		this.proximaVictima = it.next();
+			
 		finalizadaTodasEvaluaciones = false;
+		Collections.sort(this.victimasArescatar);
+		
+		this.proximaVictima = this.victimasArescatar.get(0);
 	}
 	
 	public void eliminaVictima(String s){
-		String v = this.victimasArescatar.pollFirst();
-		assert(v == s);
-		victimasEvaluadas--;
-		finalizadaTodasEvaluaciones = victimasEvaluadas == this.victimasArescatar.size();
+		this.victimasArescatar.remove(s);
+		if(this.victimasArescatar.size() != 0)
+			this.proximaVictima = victimasArescatar.get(0);
 	}
 	
 
 	public void informarEvaluacionFinalizada(String minero) {
 		victimasEvaluadas ++;
-		
 		finalizadaTodasEvaluaciones = victimasEvaluadas == this.victimasArescatar.size();
 	}
 	
