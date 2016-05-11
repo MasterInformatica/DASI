@@ -3,6 +3,7 @@ package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas;
 import java.util.List;
 
 import icaro.aplicaciones.MRS.informacion.ListaIds;
+import icaro.aplicaciones.MRS.informacion.Rescatador;
 import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ControlEvaluacionVictimas;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.EvaluacionObjetivo;
@@ -27,6 +28,7 @@ public class InformarAutoasignacionVictima extends TareaSincrona {
 		Objetivo obj = (Objetivo) params[5];
 		ControlEvaluacionVictimas ce = (ControlEvaluacionVictimas) params[6];
 		EvaluacionObjetivo eo = (EvaluacionObjetivo) params[7];
+		Objetivo obj2 = (Objetivo) params[8];
 		//----------------------------------------------------------------------
 		
 		
@@ -45,7 +47,10 @@ public class InformarAutoasignacionVictima extends TareaSincrona {
 		this.getEnvioHechos().eliminarHechoWithoutFireRules(eo);
 		ce.eliminaVictima(eo.getVictimaName());
 		this.getEnvioHechos().actualizarHecho(ce);
+		fc.setFoco(obj2);
+		this.getEnvioHechos().actualizarHecho(fc);
 		
+		((Rescatador)yo).compInternoMovimineto.setDestino(eo.victimaObjetivo.getPosicion());
 		
 		
 		//----------------------------------------------------------------------

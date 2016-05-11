@@ -193,6 +193,7 @@ rule "Informar que soy el mejor robot"
   	fc : Focus()
   	mo : MisObjetivos()
   	lr : ListaIds()
+  	$obj2: AsignarRobots(state == Objetivo.SOLVING)
   	
   	obj : InformarSoyElMejorRobot($v: minero)
   	
@@ -200,6 +201,6 @@ rule "Informar que soy el mejor robot"
   	eo : EvaluacionObjetivo(victimaName == $v, finalizadaEvaluacion == true)
   then
   	TareaSincrona t1 = gestorTareas.crearTareaSincrona(InformarAutoasignacionVictima.class);
-  	t1.ejecutar(agentId, yo, fc, mo, lr, obj, ce, eo);
+  	t1.ejecutar(agentId, yo, fc, mo, lr, obj, ce, eo, $obj2);
   	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end*/
