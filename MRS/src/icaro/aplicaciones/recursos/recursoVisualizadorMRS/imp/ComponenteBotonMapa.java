@@ -83,6 +83,7 @@ public class ComponenteBotonMapa extends JButton {
 			ci.addIcon("PIEDRA", new ImageIcon(rutaArteEscenario+rutaPie));
 			break;
 		}
+		ci.rescale(ci.getIconWidth(), ci.getIconHeight());
 		repaint();
 	}
 	public void rescale(int w, int h){
@@ -108,7 +109,7 @@ public class ComponenteBotonMapa extends JButton {
 	    public CombineIcon(){
 	    	list = new Vector<ImageIcon>();
 	    	listId = new Vector<String>();
-	    	lastSize = new Dimension(10,10);
+	    	lastSize = new Dimension(50,50);
 	    }
 	    public CombineIcon(String id, ImageIcon ic) {
 	    	this();
@@ -118,9 +119,9 @@ public class ComponenteBotonMapa extends JButton {
 	    public void rescale(int wd, int hg){
 	    	Image im;
 	    	int w=wd;
-	    	if ( list.size()>1){
+	    	/*if ( list.size()>1){
 	    		w = wd/list.size()-1;
-	    	}
+	    	}*/
 	    	im = list.get(0).getImage().getScaledInstance(wd,hg,Image.SCALE_FAST);
     		list.set(0, new ImageIcon(im));
 

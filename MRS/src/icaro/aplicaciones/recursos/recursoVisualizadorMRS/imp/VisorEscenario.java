@@ -73,13 +73,14 @@ public class VisorEscenario extends JFrame {
 	
 	public void setRobots(List<Robot> listaRobots) {
 		for(Robot r : listaRobots){
-			mueveAgente(r.getName(),r.getCoordenadasIniciales(),r.getTipo());
+			System.err.println("Print: "+r.getName());
+			mueveAgente(r.getName(),r.getCoordenadasIniciales(),"Robot");
 		}
 	}
 
 	public void setVictimas(List<Victima> listaVictimas) {
 		for(Victima v : listaVictimas){
-			mueveAgente(v.getName(),v.getCoordenadasIniciales(),v.getTipo());
+			mueveAgente(v.getName(),v.getCoordenadasIniciales(),"Miner");
 		}
 	}
 	
