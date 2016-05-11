@@ -1,6 +1,7 @@
 package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas;
 
 import icaro.aplicaciones.MRS.informacion.ListaIds;
+import icaro.aplicaciones.MRS.informacion.Rescatador;
 import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ControlEvaluacionVictimas;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.EvaluacionObjetivo;
@@ -68,6 +69,8 @@ public class AsignarRobotVictima extends TareaSincrona {
 		mo.addObjetivo(obj2);
 		this.getEnvioHechos().actualizarHecho(mo);
 		this.getEnvioHechos().insertarHecho(obj2);
+		
+		((Rescatador)yo).compInternoMovimineto.setDestino(eo.victimaObjetivo.getPosicion());
 		
 		
 		//----------------------------------------------------------------------

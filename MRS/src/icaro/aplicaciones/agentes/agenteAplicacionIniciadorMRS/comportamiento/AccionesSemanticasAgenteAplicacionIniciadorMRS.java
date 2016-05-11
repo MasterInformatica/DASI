@@ -9,6 +9,7 @@ import java.util.Random;
 import icaro.aplicaciones.MRS.informacion.Escenario;
 import icaro.aplicaciones.MRS.informacion.InicioEstado;
 import icaro.aplicaciones.MRS.informacion.Mapa;
+import icaro.aplicaciones.MRS.informacion.Rescatador;
 import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.MRS.informacion.Victima;
 import icaro.aplicaciones.MRS.informacion.ListaIds;
@@ -33,7 +34,7 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 
 	private ItfUsoConfiguracion           itfconfig;
 	private ItfUsoRecursoVisualizadorMRS  itfVisualizadorMRS;
-	private ItfUsoRecursoPlanificadorMRS itfPlanificadorMRS;
+	private ItfUsoRecursoPlanificadorMRS  itfPlanificadorMRS;
 	private ItfUsoRecursoPersistenciaMRS  itfPersistenciaMRS;
 	
 	private ItfProcesadorObjetivos        itfProcObjetivos;
@@ -104,6 +105,9 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		boolean error = false;
 		try{
 			this.escenario = this.itfPersistenciaMRS.parseEscenario(this.ficheroEscenario);
+			for(Robot robot : this.escenario.getListaRobotTipo("R")){
+				((Rescatador) robot).initCompIntMovimineto(itfPlanificadorMRS, itfVisualizadorMRS, itfPersistenciaMRS);
+			}
 			trazas.trazar(this.getNombreAgente(),  "Validación correcta", NivelTraza.debug);
 			this.informaraMiAutomata("generaSimulacion", null);			
 		} catch(Exception e){ 
