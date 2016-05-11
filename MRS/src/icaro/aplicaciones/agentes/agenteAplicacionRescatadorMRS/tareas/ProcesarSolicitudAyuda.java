@@ -70,7 +70,7 @@ public class ProcesarSolicitudAyuda extends TareaSincrona {
 		try {
 			pr = (ItfUsoRecursoPlanificadorMRS)
 					this.repoInterfaces.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoPlanificadorMRS1");
-			l = pr.getRuta(yo.getCoordenadasIniciales(), minero.getPosicion());
+			l = pr.getRuta(yo.getCoordenadasIniciales(), minero.getCoordenadasIniciales());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

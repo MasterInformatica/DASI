@@ -69,11 +69,14 @@ public class ControlEvaluacionVictimas {
 	}
 	
 	
+	public void setRobotAsignado(String robotId){
+		this.robotsAsignados.put(robotId, true);
+	}
 	
 	public boolean isRobotAsigned(String s){
 		Boolean b = this.robotsAsignados.get(s);
-		
-		return (b==null || b.booleanValue());
+		assert(b!=null);
+		return (b.booleanValue());
 
 	}
 	

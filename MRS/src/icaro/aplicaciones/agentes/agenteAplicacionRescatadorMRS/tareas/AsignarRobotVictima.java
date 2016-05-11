@@ -49,16 +49,17 @@ public class AsignarRobotVictima extends TareaSincrona {
 		//----------------------------------------------------------------------
 		
 		String mejorRobot = eo.getMejorRobot();
-	/*	while(ce.isRobotAsigned(mejorRobot)){
+		System.err.println(agentId + "Hola Mundo....");
+		while(ce.isRobotAsigned(mejorRobot)){
 			mejorRobot = eo.getNextMejorRobot();
 		}
-	*/	
-		System.err.println(agentId + " " + mejorRobot);
+	
+		System.err.println(agentId + " " + mejorRobot + " para minero: "+ eo.victimaName);
 		System.err.println(eo);
 		if(mejorRobot == yo.getName())
 			this.soyElMejorRobot(obj, f, lr, yo, ce, mo, eo);
 		else
-			this.noSoyElMejorRobot(obj, f, lr, yo, ce, mo, eo);	
+			this.noSoyElMejorRobot(obj, f, lr, yo, ce, mo, eo);
 	}
 
 	
@@ -91,12 +92,13 @@ public class AsignarRobotVictima extends TareaSincrona {
 			ControlEvaluacionVictimas ce, MisObjetivos mo,
 			EvaluacionObjetivo eo){
 		
-		System.err.println("Hi there!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		Objetivo obj2 = new EsperaRobotAsignado(eo.getVictimaName());
 		obj2.setSolving();
 		mo.addObjetivo(obj2);
+		f.setFoco(obj2);
 		this.getEnvioHechos().actualizarHecho(mo);
 		this.getEnvioHechos().insertarHecho(obj2);
+		this.getEnvioHechos().actualizarHecho(f);
 		
 		
 		
@@ -105,8 +107,8 @@ public class AsignarRobotVictima extends TareaSincrona {
 		trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
 
 		trazas.aceptaNuevaTraza(new InfoTraza(this.identAgente,
-				"Recibida la evaluación de todos los robots. Soy el mejor robot"
-				+ ". Generando objetivo de informar. Victima: " + eo.getVictimaName(),
+				"Recibida la evaluación de todos los robots. NO soy el mejor robot"
+				+ " Victima: " + eo.getVictimaName(),
 				InfoTraza.NivelTraza.info));
 	}
 }

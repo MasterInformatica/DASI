@@ -19,31 +19,33 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
 
 
 public class ProcesarMsgAsignacionRobot extends TareaSincrona {
-
-	/*
-	 * Inicializa las estructuras necesarias para procesar la petición de ayuda
-	 * 
-	 * 0: Mensaje de ayuda
-	 * 1: control evaluacion
-	 * 2: lista de robots
-	 * 3: Robot yo
-	 */
 	
 	@Override
 	public void ejecutar(Object... params) {
-		//AgentId, yo, fc, mo, obj, msg, ce, eo
+		//t1.ejecutar(agentId, $yo, $fc, $mo, $obj, obj2, msg, ce, eo);
+		/* 
+		 * params[0] -> nombre del agente
+		 * params[1] -> yo
+		 * params[2] -> fc
+		 * params[3] -> MisObjetivos
+		 * --------------------------------
+		 * params[4] -> Objetivo Actual
+		 * params[5] -> Objetivo que focalizar al salir.
+		 * params[6] -> Mensaje de asignación
+		 * params[7] -> controlEvaluacionVictimas
+		 * params[8] -> evaluacionObjetivo
+		 */
+		String agentId 	= (String) params[0];
+		Robot yo 		= (Robot) params[1];
+		Focus fc 		= (Focus) params[2];
+		MisObjetivos mo = (MisObjetivos) params[3];
 		
-		String       agentId = (String) params[0];
-		Robot        yo      = (Robot) params[1];
-		Focus        f       = (Focus) params[2];
-		MisObjetivos mo      = (MisObjetivos) params[3];
+		Objetivo obj				= (Objetivo) params[4];
+		Objetivo obj2	 			= (Objetivo) params[5];
+		MsgAsignacionObjetivo msg	= (MsgAsignacionObjetivo) params[6];
 		
-		Objetivo              obj = (Objetivo) params[4];
-		MsgAsignacionObjetivo msg = (MsgAsignacionObjetivo) params[5];
-		
-		ControlEvaluacionVictimas ce = (ControlEvaluacionVictimas) params[6];
-		EvaluacionObjetivo        eo = (EvaluacionObjetivo) params[7];
-		//----------------------------------------------------------------------		
+		ControlEvaluacionVictimas ce = (ControlEvaluacionVictimas) params[7];
+		EvaluacionObjetivo eo 		 = (EvaluacionObjetivo) params[8];
 		
 		assert(msg.getMinero() == eo.getVictimaName());
 		assert(msg.getRobot() == eo.getMejorRobot());
@@ -53,6 +55,7 @@ public class ProcesarMsgAsignacionRobot extends TareaSincrona {
 		
 		//Eliminamos la victima de la lista de victimas a rescatar
 		ce.eliminaVictima(msg.getMinero());
+		ce.setRobotAsignado(msg.getMinero());
 		this.getEnvioHechos().actualizarHechoWithoutFireRules(ce);
 
 		//Eliminamos el mensaje para que no se repita.
@@ -61,6 +64,8 @@ public class ProcesarMsgAsignacionRobot extends TareaSincrona {
 		//Marcamos el objetivo como resuelto y lo eliminamos.
 		obj.setSolved();
 		this.getEnvioHechos().eliminarHecho(obj);
+		fc.setFoco(obj2);
+		this.getEnvioHechos().actualizarHecho(fc);
 		
 		
 		//----------------------------------------------------------------------

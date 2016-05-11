@@ -55,8 +55,8 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	public void setAgenteIniciador(String nombreAgente) throws Exception;
 
 
-	public void setRobots(List<Robot> listaRobots);
+	public void setRobots(List<Robot> listaRobots) throws Exception;
 
 
-	public void setVictimas(List<Victima> listaVictimas);
+	public void setVictimas(List<Victima> listaVictimas) throws Exception;
 }

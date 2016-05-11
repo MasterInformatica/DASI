@@ -30,12 +30,12 @@ public class Movimiento extends Thread{
 	@Override
 	public synchronized void run() {
 		while(true){
-			try{ Thread.sleep((long) (0.2*1e4));
+			try{ Thread.sleep((long) (0.2*1e3));
 			}catch (InterruptedException e) {e.printStackTrace();}
 			
 			if (destino != null){
 				if ((destino.getX() != yo.getCoordenadasActuales().getX()) ||
-						(destino.getX() != yo.getCoordenadasActuales().getX())){
+						(destino.getY() != yo.getCoordenadasActuales().getY())){
 					
 					ArrayList <Coordenada> ruta = null;
 					try{
@@ -43,9 +43,10 @@ public class Movimiento extends Thread{
 					}catch (Exception e){ e.printStackTrace();}
 					
 					Coordenada siguientePaso = null;
+					
 					try{
 						siguientePaso = ruta.get(1);
-					}catch(Exception e){/*TODO no hay ruta*/}
+					}catch(Exception e){e.printStackTrace();}
 					
 					if(siguientePaso != null){
 						yo.move(siguientePaso);
@@ -57,7 +58,7 @@ public class Movimiento extends Thread{
 					this.checkBloqueos();
 					
 					if ((destino.getX() == yo.getCoordenadasActuales().getX()) &&
-							(destino.getX() == yo.getCoordenadasActuales().getX()))
+							(destino.getY() == yo.getCoordenadasActuales().getY()))
 						alcanzarDestino();
 				}else{
 					alcanzarDestino();

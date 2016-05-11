@@ -30,6 +30,8 @@ public class ProcesarNombreEquipo extends TareaSincrona {
 		Objetivo o = (Objetivo) params[4];
 		ListaIds lr = (ListaIds) params[5];
 		
+		ControlEvaluacionVictimas ce = new ControlEvaluacionVictimas(lr.getNames());
+		
 		lr.deleteRobot(name);
 		this.getEnvioHechos().actualizarHechoWithoutFireRules(lr);
 		
@@ -50,7 +52,6 @@ public class ProcesarNombreEquipo extends TareaSincrona {
 		
 		
 		//Creamos la bbdd vacia para ir insertando solicitudes
-		ControlEvaluacionVictimas ce = new ControlEvaluacionVictimas(lr.getNames());
 		this.getEnvioHechos().insertarHecho(ce);
 	}	
 }

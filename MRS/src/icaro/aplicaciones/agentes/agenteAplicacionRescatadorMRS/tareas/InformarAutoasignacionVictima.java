@@ -18,19 +18,30 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
 public class InformarAutoasignacionVictima extends TareaSincrona {
 
 	@Override
-	public void ejecutar(Object... params) {
-		//agentIs, yo, fc, mo, lr, obj, ce, eo);
-		String agentId = (String) params[0];
-		Robot yo = (Robot) params[1];
-		Focus fc = (Focus) params[2];
+	public void ejecutar(Object... params) {	
+		/* 
+		 * params[0] -> nombre del agente
+		 * params[1] -> yo
+		 * params[2] -> fc
+		 * params[3] -> MisObjetivos
+		 * --------------------------------
+		 * params[4] -> Objetivo Actual
+		 * params[5] -> Objetivo que focalizar al salir.
+		 * params[6] -> robots
+		 * params[7] -> controlEvaluacionVictimas
+		 * params[8] -> evaluacionObjetivo
+		 */
+		String agentId 	= (String) params[0];
+		Robot yo 		= (Robot) params[1];
+		Focus fc 		= (Focus) params[2];
 		MisObjetivos mo = (MisObjetivos) params[3];
-		ListaIds lr = (ListaIds) params[4];
-		Objetivo obj = (Objetivo) params[5];
-		ControlEvaluacionVictimas ce = (ControlEvaluacionVictimas) params[6];
-		EvaluacionObjetivo eo = (EvaluacionObjetivo) params[7];
-		Objetivo obj2 = (Objetivo) params[8];
-		//----------------------------------------------------------------------
 		
+		Objetivo obj	 = (Objetivo) params[4];
+		Objetivo obj2	 = (Objetivo) params[5];
+		ListaIds lr 	 = (ListaIds) params[6];
+		
+		ControlEvaluacionVictimas ce = (ControlEvaluacionVictimas) params[7];
+		EvaluacionObjetivo eo 		 = (EvaluacionObjetivo) params[8];
 		
 		//Enviar mensaje de que soy el mejor al resto de robots
 		List<String> agtes = lr.getNames();
@@ -46,12 +57,12 @@ public class InformarAutoasignacionVictima extends TareaSincrona {
 		this.getEnvioHechos().eliminarHechoWithoutFireRules(obj);
 		this.getEnvioHechos().eliminarHechoWithoutFireRules(eo);
 		ce.eliminaVictima(eo.getVictimaName());
+		ce.setRobotAsignado(agentId);
 		this.getEnvioHechos().actualizarHecho(ce);
 		fc.setFoco(obj2);
 		this.getEnvioHechos().actualizarHecho(fc);
 		
-		((Rescatador)yo).compInternoMovimineto.setDestino(eo.victimaObjetivo.getPosicion());
-		
+		((Rescatador)yo).compInternoMovimineto.setDestino(eo.victimaObjetivo.getCoordenadasIniciales());
 		
 		//----------------------------------------------------------------------
 		// Informar mediante trazas
