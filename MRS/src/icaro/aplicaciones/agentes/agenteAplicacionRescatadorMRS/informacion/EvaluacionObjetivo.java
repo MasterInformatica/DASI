@@ -1,6 +1,7 @@
 package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import icaro.aplicaciones.MRS.informacion.Victima;
@@ -62,7 +63,8 @@ public class EvaluacionObjetivo extends Objetivo {
 	}
 	
 	public String getMejorRobot(){
-		return this.evaluaciones.get(this.idxMejorRobot++).evaluador;
+		Collections.sort(this.evaluaciones);
+		return this.evaluaciones.get(this.idxMejorRobot).evaluador;
 	}
 	
 	public String getNextMejorRobot() {
@@ -71,7 +73,7 @@ public class EvaluacionObjetivo extends Objetivo {
 		return this.evaluaciones.get(++this.idxMejorRobot).evaluador;
 	}
 	
-	protected class ParEvaluacion{
+	protected class ParEvaluacion implements Comparable<ParEvaluacion>{
 		private String evaluador;
 		private int evaluacion;
 		
@@ -79,7 +81,30 @@ public class EvaluacionObjetivo extends Objetivo {
 			this.evaluador = s;
 			this.evaluacion = i;
 		}
+		
+		@Override
+		public String toString(){
+			return "(" + evaluador + " --> " + evaluacion + ")" + "\n";
+		}
+		
+		@Override
+	    public int compareTo(ParEvaluacion another) {
+	        if (this.evaluacion == another.evaluacion){
+	        	return this.evaluador.compareTo(another.evaluador);
+	        }else if (this.evaluacion < another.evaluacion){
+	            return -1;
+	        }else{
+	        	return 1;
+	        }
+	    }
 	}
-
+	
+	@Override
+	public String toString(){
+		String aux = this.victimaName + ":\n";
+		for (ParEvaluacion a1 : this.evaluaciones)
+			aux += "\t" + a1.toString();
+		return aux;
+	}
 	
 }

@@ -1,6 +1,7 @@
 package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas;
 
 import icaro.aplicaciones.MRS.informacion.ListaIds;
+import icaro.aplicaciones.MRS.informacion.Rescatador;
 import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ControlEvaluacionVictimas;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.EvaluacionObjetivo;
@@ -48,10 +49,12 @@ public class AsignarRobotVictima extends TareaSincrona {
 		//----------------------------------------------------------------------
 		
 		String mejorRobot = eo.getMejorRobot();
-		while(ce.isRobotAsigned(mejorRobot)){
+	/*	while(ce.isRobotAsigned(mejorRobot)){
 			mejorRobot = eo.getNextMejorRobot();
 		}
-		
+	*/	
+		System.err.println(agentId + " " + mejorRobot);
+		System.err.println(eo);
 		if(mejorRobot == yo.getName())
 			this.soyElMejorRobot(obj, f, lr, yo, ce, mo, eo);
 		else
@@ -66,9 +69,10 @@ public class AsignarRobotVictima extends TareaSincrona {
 		Objetivo obj2 = new InformarSoyElMejorRobot(eo.getVictimaName());
 		obj2.setSolving();
 		mo.addObjetivo(obj2);
+		f.setFoco(obj2);
+		this.getEnvioHechos().actualizarHecho(f);
 		this.getEnvioHechos().actualizarHecho(mo);
 		this.getEnvioHechos().insertarHecho(obj2);
-		
 		
 		//----------------------------------------------------------------------
 		// Informar mediante trazas
@@ -87,6 +91,7 @@ public class AsignarRobotVictima extends TareaSincrona {
 			ControlEvaluacionVictimas ce, MisObjetivos mo,
 			EvaluacionObjetivo eo){
 		
+		System.err.println("Hi there!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		Objetivo obj2 = new EsperaRobotAsignado(eo.getVictimaName());
 		obj2.setSolving();
 		mo.addObjetivo(obj2);
