@@ -123,10 +123,22 @@ public class VisorEscenario extends JFrame {
 	 */
 	private void build(){
 		isVisible = false;
+		
 		setTitle("MRS - Simulator");
 		posicionAgentes = new HashMap<String,Coordenada>();
 		initComponentes();
+		centerFrame();
 	}
+	private void centerFrame() {
+
+        Dimension windowSize = getSize();
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        Point centerPoint = ge.getCenterPoint();
+
+        int dx = centerPoint.x - windowSize.width / 2;
+        int dy = centerPoint.y - windowSize.height / 2;    
+        setLocation(dx, dy);
+}
 	
 	private boolean dibujaAgente(String idAgente, Coordenada coord, String tipo){
 		int x = (int) coord.getX();
