@@ -90,14 +90,9 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-	/*	if(ficheroEscenario==null){
-			this.generarTimeOutInterno(tEspera, "leerFicheroTimeOut", this.getNombreAgente(),
-			     					   this.itfUsoPropiadeEsteAgente);
-		}else{*/
+
 			trazas.trazar(this.getNombreAgente(),  "Fichero leido. Procediendo a validar", NivelTraza.debug);
 			this.informaraMiAutomata("validaFichero", null);
-	//	}
 	}
 
 	public void checkFile(){
@@ -130,6 +125,8 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 
 			this.itfPlanificadorMRS.setMapa(this.escenario.getMapa());
 			this.itfVisualizadorMRS.setMapa(this.escenario.getMapa());
+			this.itfVisualizadorMRS.setRobots(this.escenario.getListaRobots());
+			this.itfVisualizadorMRS.setVictimas(this.escenario.getListaVictimas());
 			/* Informamos a todos los robots del nombre del resto (incluidos ellos mismos) */
 			comunicator = this.getComunicator();
 			assert(comunicator != null);

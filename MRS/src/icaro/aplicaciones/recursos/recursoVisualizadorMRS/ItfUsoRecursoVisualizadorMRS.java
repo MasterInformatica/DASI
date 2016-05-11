@@ -1,9 +1,12 @@
 package icaro.aplicaciones.recursos.recursoVisualizadorMRS;
 
 import java.io.File;
+import java.util.List;
 
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
+import icaro.aplicaciones.MRS.informacion.Robot;
+import icaro.aplicaciones.MRS.informacion.Victima;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.NotificadorEventos;
 import icaro.infraestructura.patronRecursoSimple.ItfUsoRecursoSimple;
 
@@ -50,4 +53,10 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	
 	// El agante iniciador se registra a si mismo (lo llamo con this.nombreAgente)
 	public void setAgenteIniciador(String nombreAgente) throws Exception;
+
+
+	public void setRobots(List<Robot> listaRobots);
+
+
+	public void setVictimas(List<Victima> listaVictimas);
 }

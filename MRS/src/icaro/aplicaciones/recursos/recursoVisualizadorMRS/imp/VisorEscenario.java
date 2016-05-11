@@ -1,11 +1,15 @@
 package icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp;
 import java.util.HashMap;
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
+import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.MRS.informacion.TipoCelda;
+import icaro.aplicaciones.MRS.informacion.Victima;
 import icaro.aplicaciones.MRS.informacion.VocabularioMRS;
 
 import java.awt.*;
@@ -65,6 +69,18 @@ public class VisorEscenario extends JFrame {
 		rows = Map.getNumRows();
 		cols = Map.getNumCols();
 		buildMap();
+	}
+	
+	public void setRobots(List<Robot> listaRobots) {
+		for(Robot r : listaRobots){
+			mueveAgente(r.getName(),r.getCoordenadasIniciales(),r.getTipo());
+		}
+	}
+
+	public void setVictimas(List<Victima> listaVictimas) {
+		for(Victima v : listaVictimas){
+			mueveAgente(v.getName(),v.getCoordenadasIniciales(),v.getTipo());
+		}
 	}
 	
 	public void mostrar(){
@@ -279,4 +295,7 @@ public class VisorEscenario extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -418573958565443751L;
+
+
+
 }

@@ -1,9 +1,12 @@
 package icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp;
 
 import java.io.File;
+import java.util.List;
 
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
+import icaro.aplicaciones.MRS.informacion.Robot;
+import icaro.aplicaciones.MRS.informacion.Victima;
 
 public class ControladorVisorSimulador {
 
@@ -43,6 +46,16 @@ public class ControladorVisorSimulador {
 			visorEscenario.setMapa(mapa);
 	}
 
+	public void setRobots(List<Robot> listaRobots) {
+		if ( visorEscenario != null )
+			visorEscenario.setRobots(listaRobots);
+	}
+	
+	public void setVictimas(List<Victima> listaVictimas) {
+		if ( visorEscenario != null )
+			visorEscenario.setVictimas(listaVictimas);
+	}
+	
 	public File getFicheroEscenario() {
 		return visorEscenario.getFicheroEscenario();
 	}
@@ -70,5 +83,9 @@ public class ControladorVisorSimulador {
 	public void notificar(String event,String s) {
 		outPoint.notificar(event,s);
 	}
+
+
+
+
 
 }

@@ -37,8 +37,4 @@ public class Minero implements Victima {
 		return this.nombre;
 	}
 
-	@Override
-	public Coordenada getPosicion() {
-		return this.getCoordenadasIniciales();
-	}
 }

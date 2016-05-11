@@ -2,10 +2,13 @@ package icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp;
 
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
+import icaro.aplicaciones.MRS.informacion.Robot;
+import icaro.aplicaciones.MRS.informacion.Victima;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
 import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 import java.io.File;
+import java.util.List;
 
 /**
  * 
@@ -75,6 +78,21 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 				"Escenario (Mapa) añadido al visor",InfoTraza.NivelTraza.debug));
 	}
 
+	@Override
+	public void setRobots(List<Robot> listaRobots) {
+		controladorUI.setRobots(listaRobots);
+		trazas.aceptaNuevaTraza(new InfoTraza(this.recursoId,
+				"Robots añadido al visor",InfoTraza.NivelTraza.debug));
+		
+	}
+
+	@Override
+	public void setVictimas(List<Victima> listaVictimas) {
+		controladorUI.setVictimas(listaVictimas);
+		trazas.aceptaNuevaTraza(new InfoTraza(this.recursoId,
+				"Victimas añadido al visor",InfoTraza.NivelTraza.debug));
+		
+	}
 	
 	//*************************************************************
 	//*** : *******************************************************
@@ -145,6 +163,8 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	public void setAgenteIniciador(String nombreAgente) {
 		notificador.setAgente(nombreAgente);
 	}
+
+
 	
 }
 
