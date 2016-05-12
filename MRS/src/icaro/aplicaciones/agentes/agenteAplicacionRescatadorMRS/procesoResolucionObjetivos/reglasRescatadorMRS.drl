@@ -117,7 +117,7 @@ end
 //----------- Desplazar objetivo actual -----------------------
 
 rule "Se han evaluado todas las victimas por todos los robots"
-timer( expr: 2 )  //CHAPUZA, pero se adelantaba esta regla
+timer( expr: 2000 )  //CHAPUZA, pero se adelantaba esta regla
  when
   	$yo : Robot( getName() == agentId)
  	$obj: EvaluarSolicitudes(state == Objetivo.SOLVING)
