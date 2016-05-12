@@ -77,7 +77,7 @@ public class ControlEvaluacionVictimas {
 	public boolean isRobotAsigned(String s){
 		Boolean b = this.robotsAsignados.get(s);
 		assert(b!=null);
-		return (b.booleanValue());
+		return (b);
 
 	}
 	
