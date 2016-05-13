@@ -73,6 +73,11 @@ public class ControlEvaluacionVictimas {
 		this.robotsAsignados.put(robotId, true);
 	}
 	
+	public void unsetRobotAsignado(String robotId){
+		this.robotsAsignados.put(robotId, false);
+	}
+	
+	
 	public boolean isRobotAsigned(String s){
 		Boolean b = this.robotsAsignados.get(s);
 		if(b== null)

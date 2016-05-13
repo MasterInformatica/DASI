@@ -70,8 +70,8 @@ public class AsignarRobotVictima extends TareaSincrona {
 		trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
 
 		trazas.aceptaNuevaTraza(new InfoTraza(this.identAgente,
-						"Recibida la evaluación de todos los robots. Informando de que no"
-						+ " hay rescatadores para la victima " + eo.getVictimaName(),
+						"Recibida la evaluación de todos los robots. Por el momento no hay robots disponibles para esta"
+						+ "v�ctima. Esperando a finalizar" + eo.getVictimaName(),
 						InfoTraza.NivelTraza.info));
 		
 	}

@@ -63,7 +63,7 @@ rule "Solicitar Ayuda"
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end
 
-//------------ EL robot está con nosotros ----------------------
+//------------ EL robot esta con nosotros ----------------------
 rule "El robot me ha alcanzado"
  when
  	obj: EsperarAuxilio(state == Objetivo.SOLVING);

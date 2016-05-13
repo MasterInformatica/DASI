@@ -113,7 +113,7 @@
 	   <Celda tipo="PASILLO" x="10" y="22" />
 	
 	   <Celda tipo="PASILLO" x="11" y="2" />
-	   <Celda tipo="PASILLO" x="11" y="8" />
+	   <Celda tipo="ESCOMBRO" x="11" y="8" />
 	   <Celda tipo="PASILLO" x="11" y="16" />
 	   <Celda tipo="PASILLO" x="11" y="20" />
 	   <Celda tipo="PASILLO" x="11" y="22" />
