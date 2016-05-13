@@ -8,6 +8,7 @@ import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ControlEvaluacionVictimas;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.EvaluacionObjetivo;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.MsgAsignacionObjetivo;
+import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.AlcanzarVictima;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.MisObjetivos;
@@ -19,6 +20,8 @@ public class InformarAutoasignacionVictima extends TareaSincrona {
 
 	@Override
 	public void ejecutar(Object... params) {	
+		
+
 		/* 
 		 * params[0] -> nombre del agente
 		 * params[1] -> yo
@@ -58,11 +61,23 @@ public class InformarAutoasignacionVictima extends TareaSincrona {
 		this.getEnvioHechos().eliminarHechoWithoutFireRules(eo);
 		ce.eliminaVictima(eo.getVictimaName());
 		ce.setRobotAsignado(agentId);
-		this.getEnvioHechos().actualizarHecho(ce);
+		this.getEnvioHechos().actualizarHechoWithoutFireRules(ce);
 		fc.setFoco(obj2);
-		this.getEnvioHechos().actualizarHecho(fc);
+		this.getEnvioHechos().actualizarHechoWithoutFireRules(fc);
 		
+		
+		//Mando mover a mi componente de movimiento
+		((Rescatador)yo).compInternoMovimineto.setItHechos(this.getEnvioHechos());
 		((Rescatador)yo).compInternoMovimineto.setDestino(eo.victimaObjetivo.getCoordenadasIniciales());
+		
+		//Creo lel objetivo de alcanzar a la victima
+		Objetivo obj3 = new AlcanzarVictima(eo.victimaName);
+		obj3.setSolving();
+		mo.addObjetivo(obj3);
+		
+		this.getEnvioHechos().actualizarHechoWithoutFireRules(mo);
+		this.getEnvioHechos().insertarHecho(obj3);
+		
 		
 		//----------------------------------------------------------------------
 		// Informar mediante trazas

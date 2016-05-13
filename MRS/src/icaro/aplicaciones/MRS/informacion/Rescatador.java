@@ -11,6 +11,7 @@ public class Rescatador implements Robot {
 	private Coordenada coordenadasActuales;
 	private String tipo;
 	private String nombre;
+	private int estado;
 	
 	public Movimiento compInternoMovimineto;
 	
@@ -19,6 +20,8 @@ public class Rescatador implements Robot {
 		this.coordenadasIniciales = coordenadasIniciales;
 		this.coordenadasActuales = this.coordenadasIniciales;
 		this.nombre = name;
+		
+		this.estado = RobotStatus.PARADO;
 		
 		this.compInternoMovimineto = null;
 	}
@@ -50,6 +53,11 @@ public class Rescatador implements Robot {
 	}
 
 	public void move(Coordenada coordenadasActuales) {
+		if(this.estado == RobotStatus.PARADO)
+			this.estado = RobotStatus.HACIA_MINERO;
+		else if(this.estado == RobotStatus.CON_MINERO)
+			this.estado = RobotStatus.HACIA_SALIDA;
+		
 		this.coordenadasActuales = coordenadasActuales;
 	}
 	
@@ -68,5 +76,16 @@ public class Rescatador implements Robot {
 	
 	public String getName(){
 		return this.nombre;
+	}
+
+	@Override
+	public void SetStatus(int st) {
+		this.estado = st;	
+	}
+	
+	@Override
+	public int getStatus() {
+		System.err.println(this.estado);
+		return this.estado;
 	}
 }

@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Rescatador;
+import icaro.aplicaciones.MRS.informacion.RobotStatus;
 import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
 import icaro.aplicaciones.recursos.recursoPlanificadorMRS.ItfUsoRecursoPlanificadorMRS;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
+import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.factoriaEInterfacesPrObj.ItfProcesadorObjetivos;
 
 public class Movimiento extends Thread{
 	public Coordenada destino;
@@ -15,6 +17,8 @@ public class Movimiento extends Thread{
 	public ItfUsoRecursoPlanificadorMRS itfusoRecPlanRuta;
 	public ItfUsoRecursoVisualizadorMRS itfusoRecVisualizador;
 	public ItfUsoRecursoPersistenciaMRS itfusoRecPersistencia;
+	
+	public ItfProcesadorObjetivos itfHechos;
 	
 	public Movimiento(	Rescatador yo,
 						ItfUsoRecursoPlanificadorMRS itfusoRecPlanRuta,
@@ -72,6 +76,14 @@ public class Movimiento extends Thread{
 	}
 	
 	private void alcanzarDestino(){
+		int st = this.yo.getStatus();
+		if(st == RobotStatus.HACIA_MINERO)
+			this.yo.SetStatus(RobotStatus.CON_MINERO);
+		else if(st==RobotStatus.HACIA_SALIDA)
+			this.yo.SetStatus(RobotStatus.HACIA_SALIDA);
+		
+		this.itfHechos.actualizarHecho(this.yo);
+		
 		this.destino = null;
 	}
 	
@@ -93,6 +105,10 @@ public class Movimiento extends Thread{
 				}catch(Exception e){e.printStackTrace();}
 			}
 		}
+	}
+
+	public void setItHechos(ItfProcesadorObjetivos envioHechos) {
+		this.itfHechos = envioHechos;
 	}
 
 }

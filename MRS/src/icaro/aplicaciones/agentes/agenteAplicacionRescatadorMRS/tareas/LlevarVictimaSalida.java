@@ -1,12 +1,14 @@
 package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas;
 
 import icaro.aplicaciones.MRS.informacion.ListaIds;
+import icaro.aplicaciones.MRS.informacion.MsgVictimaAlcanzada;
 import icaro.aplicaciones.MRS.informacion.Rescatador;
 import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ControlEvaluacionVictimas;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.EvaluacionObjetivo;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.EsperaRobotAsignado;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.InformarSoyElMejorRobot;
+import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.SacarVictima;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.MisObjetivos;
@@ -22,82 +24,43 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
  *   b) En caso contrario, se genera el objetivo de esperar al mejro robot que nos
  * informe
  */
-public class AsignarRobotVictima extends TareaSincrona {
+public class LlevarVictimaSalida extends TareaSincrona {
 	@Override
 	public void ejecutar(Object... params) {
+		//t1.ejecutar(agentId, $yo, $fc, $mo, $obj, $v);
 		/* 
 		 * params[0] -> nombre del agente
 		 * params[1] -> yo
 		 * params[2] -> fc
 		 * params[3] -> MisObjetivos
 		 * --------------------------------
-		 * params[4] -> Objetivo Actual
-		 * params[5] -> robots
-		 * params[6] -> controlEvaluacionVictimas
-		 * params[7] -> evaluacionObjetivo
+		 * params[4] -> Objetivo actual
+		 * params[5] -> Nombre del minero
 		 */
+
 		String agentId 	= (String) params[0];
 		Robot yo 		= (Robot) params[1];
 		Focus f 		= (Focus) params[2];
 		MisObjetivos mo = (MisObjetivos) params[3];
 		
-		Objetivo obj	 = (Objetivo) params[4];
-		ListaIds lr 	 = (ListaIds) params[5];
-		
-		ControlEvaluacionVictimas ce = (ControlEvaluacionVictimas) params[6];
-		EvaluacionObjetivo eo 		 = (EvaluacionObjetivo) params[7];
+		Objetivo obj	= (Objetivo) params[4];
+		String mineroName = (String) params[5];
 		//----------------------------------------------------------------------
+	
+		//Informamos al minero de que le hemos alcanzado (aunque no haga nada con el mensaje)
+		MsgVictimaAlcanzada msg = new MsgVictimaAlcanzada(yo.getName(), mineroName);
+		this.comunicator = this.getComunicator();
+		this.comunicator.enviarInfoAotroAgente(msg, mineroName);
 		
-		String mejorRobot = eo.getMejorRobot();
-	
-		while(ce.isRobotAsigned(mejorRobot)){
-			mejorRobot = eo.getNextMejorRobot();
-		}
-	
-		if(mejorRobot == yo.getName())
-			this.soyElMejorRobot(obj, f, lr, yo, ce, mo, eo);
-		else
-			this.noSoyElMejorRobot(obj, f, lr, yo, ce, mo, eo);
-	}
-
-	
-	public void soyElMejorRobot(Objetivo obj, Focus f, ListaIds lr, Robot yo,
-								ControlEvaluacionVictimas ce, MisObjetivos mo,
-								EvaluacionObjetivo eo){
-
-		Objetivo obj2 = new InformarSoyElMejorRobot(eo.getVictimaName());
-		obj2.setSolving();
-		mo.addObjetivo(obj2);
-		f.setFoco(obj2);
-		this.getEnvioHechos().actualizarHecho(f);
-		this.getEnvioHechos().actualizarHecho(mo);
+		
+		//Eliminamos el objetivo actual, creamos el de llevar a la salida
+		obj.setSolved();
+		this.getEnvioHechos().actualizarHechoWithoutFireRules(obj);
+		Objetivo obj2 = new SacarVictima(mineroName);
 		this.getEnvioHechos().insertarHecho(obj2);
 		
-		//----------------------------------------------------------------------
-		// Informar mediante trazas
-		trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
-
-		trazas.aceptaNuevaTraza(new InfoTraza(this.identAgente,
-				"Recibida la evaluación de todos los robots. Informando de que soy"
-				+ " el mejor para la victima " + eo.getVictimaName(),
-				InfoTraza.NivelTraza.info));
-	}
-
-	
-	
-	
-	public void noSoyElMejorRobot(Objetivo obj, Focus f, ListaIds lr, Robot yo,
-			ControlEvaluacionVictimas ce, MisObjetivos mo,
-			EvaluacionObjetivo eo){
-		
-		Objetivo obj2 = new EsperaRobotAsignado(eo.getVictimaName());
-		obj2.setSolving();
-		mo.addObjetivo(obj2);
-		f.setFoco(obj2);
-		this.getEnvioHechos().actualizarHecho(mo);
-		this.getEnvioHechos().insertarHecho(obj2);
-		this.getEnvioHechos().actualizarHecho(f);
-		
+		//Movemos al robot hacia la salida
+		((Rescatador)yo).move(yo.getCoordenadasIniciales());
 		
 		
 		//----------------------------------------------------------------------
@@ -105,8 +68,7 @@ public class AsignarRobotVictima extends TareaSincrona {
 		trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
 
 		trazas.aceptaNuevaTraza(new InfoTraza(this.identAgente,
-				"Recibida la evaluación de todos los robots. NO soy el mejor robot"
-				+ " Victima: " + eo.getVictimaName(),
+				"Se ha alcanzado al minero " + mineroName + ". Llevandolo a la salida",
 				InfoTraza.NivelTraza.info));
 	}
 }

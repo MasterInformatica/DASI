@@ -8,4 +8,7 @@ public interface Robot {
 	public void setTipo(String tipo) ;
 	
 	public String getName();
+	
+	public void SetStatus(int st);
+	public int getStatus();
 }
