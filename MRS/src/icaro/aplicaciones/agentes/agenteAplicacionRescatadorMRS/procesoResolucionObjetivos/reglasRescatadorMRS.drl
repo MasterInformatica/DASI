@@ -228,7 +228,7 @@ end
 /*
 rule "Victima salvada"
   when
-    $yo : Robot( getName() == agentId, getStatus() == RobotStatus.CON_MINERO_SALVADO)
+    $yo : Robot( getName() == agentId, getStatus() == RobotStatus.PARADO)
  	$obj: SacarVictima($v: minero, state == Objetivo.SOLVING)
  	$fc : Focus()
  	$mo : MisObjetivos()

@@ -11,12 +11,12 @@ public class SacarVictima extends Objetivo {
 	public String minero;
 	
 	public SacarVictima() {
-		super.setgoalId("AlcanzarVictima");
+		super.setgoalId("SacarVictima");
 		this.setSolving();
 	}
 	
 	public SacarVictima(String m){
-		super.setgoalId("AlcanzarVictima");
+		super.setgoalId("SacarVictima");
 		this.minero = m;
 		this.setSolving();
 	}
