@@ -13,6 +13,8 @@ import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.factoriaE
 public class Movimiento extends Thread{
 	public Coordenada destino;
 	public Rescatador yo;
+	public boolean alcanzado;
+	public String mineroMvto = null;
 	
 	public ItfUsoRecursoPlanificadorMRS itfusoRecPlanRuta;
 	public ItfUsoRecursoVisualizadorMRS itfusoRecVisualizador;
@@ -29,6 +31,8 @@ public class Movimiento extends Thread{
 		this.itfusoRecPlanRuta = itfusoRecPlanRuta;
 		this.itfusoRecVisualizador = itfusoRecVisualizador;
 		this.itfusoRecPersistencia = itfusoRecPersistencia;
+		
+		this.alcanzado = true;
 	}
 	
 	@Override
@@ -37,7 +41,7 @@ public class Movimiento extends Thread{
 			try{ Thread.sleep((long) (0.2*1e3));
 			}catch (InterruptedException e) {e.printStackTrace();}
 			
-			if (destino != null){
+			if (!alcanzado){//destino != null){
 				if ((destino.getX() != yo.getCoordenadasActuales().getX()) ||
 						(destino.getY() != yo.getCoordenadasActuales().getY())){
 					
@@ -56,6 +60,10 @@ public class Movimiento extends Thread{
 						yo.move(siguientePaso);
 						try {
 							itfusoRecVisualizador.mueveAgente(yo.getName(), yo.getCoordenadasActuales());
+						
+							if(mineroMvto != null)
+								itfusoRecVisualizador.mueveAgente(mineroMvto, yo.getCoordenadasActuales());
+							
 						}catch(Exception e){e.printStackTrace();}
 					}
 					
@@ -72,19 +80,44 @@ public class Movimiento extends Thread{
 	}
 	
 	public void setDestino(Coordenada destino){
+		int st = this.yo.getStatus();
+		if(st == RobotStatus.PARADO){
+			this.yo.SetStatus(RobotStatus.HACIA_MINERO);
+			mineroMvto = null;
+		}else if(st==RobotStatus.CON_MINERO)
+			this.yo.SetStatus(RobotStatus.HACIA_SALIDA);
+			
 		this.destino = destino;
+		this.alcanzado = false;
 	}
 	
+	public void setMinero(String m){
+		this.mineroMvto = m;
+/*		try {
+			this.itfusoRecVisualizador.mostrarVictimaRescatada(m);1
+		} catch (Exception e) {
+			e.printStackTrace();
+		} */
+	}
+	
+	
 	private void alcanzarDestino(){
+		this.alcanzado = true;
+		
+		
 		int st = this.yo.getStatus();
-		if(st == RobotStatus.HACIA_MINERO)
+		if(st == RobotStatus.HACIA_MINERO){
 			this.yo.SetStatus(RobotStatus.CON_MINERO);
-		else if(st==RobotStatus.HACIA_SALIDA)
-			this.yo.SetStatus(RobotStatus.HACIA_SALIDA);
+		}
+		else if(st==RobotStatus.HACIA_SALIDA){
+			mineroMvto = null;
+			this.yo.SetStatus(RobotStatus.PARADO);
+		}
 		
 		this.itfHechos.actualizarHecho(this.yo);
 		
-		this.destino = null;
+		
+		//this.destino = null;
 	}
 	
 	private void checkBloqueos(){

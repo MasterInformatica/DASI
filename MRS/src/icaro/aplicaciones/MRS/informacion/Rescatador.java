@@ -53,11 +53,6 @@ public class Rescatador implements Robot {
 	}
 
 	public void move(Coordenada coordenadasActuales) {
-		if(this.estado == RobotStatus.PARADO)
-			this.estado = RobotStatus.HACIA_MINERO;
-		else if(this.estado == RobotStatus.CON_MINERO)
-			this.estado = RobotStatus.HACIA_SALIDA;
-		
 		this.coordenadasActuales = coordenadasActuales;
 	}
 	
@@ -85,7 +80,6 @@ public class Rescatador implements Robot {
 	
 	@Override
 	public int getStatus() {
-		System.err.println(this.estado);
 		return this.estado;
 	}
 }

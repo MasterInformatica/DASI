@@ -60,8 +60,8 @@ public class LlevarVictimaSalida extends TareaSincrona {
 		this.getEnvioHechos().insertarHecho(obj2);
 		
 		//Movemos al robot hacia la salida
-		((Rescatador)yo).move(yo.getCoordenadasIniciales());
-		
+		((Rescatador)yo).compInternoMovimineto.setMinero(mineroName);
+		((Rescatador)yo).compInternoMovimineto.setDestino(yo.getCoordenadasIniciales());
 		
 		//----------------------------------------------------------------------
 		// Informar mediante trazas

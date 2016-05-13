@@ -211,6 +211,8 @@ end
 
 //--------------------------------------------------------------------------------------------
 // El robot ya esta en movimiento. Reglas para gestionar la llegada/parada de los robots.
+//--------------------------------------------------------------------------------------------
+
 //Soy el mejor robot, tengo que informar a todos
 rule "Victima alcanzada"
   when

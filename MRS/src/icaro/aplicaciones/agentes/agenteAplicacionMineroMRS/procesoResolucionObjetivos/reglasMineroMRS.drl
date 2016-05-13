@@ -56,8 +56,23 @@ rule "Solicitar Ayuda"
     fc : Focus(foco == obj)
     robots : ListaIds()
     yo : Victima(getName() == agentId)
+    $mo : MisObjetivos()
  then
  	TareaSincrona t1 = gestorTareas.crearTareaSincrona(EnviarPeticionAyuda.class);
- 	t1.ejecutar(agentId, robots, obj, fc, yo);
+ 	t1.ejecutar(agentId, robots, obj, fc, yo, $mo);
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end
+
+//------------ EL robot está con nosotros ----------------------
+rule "El robot me ha alcanzado"
+ when
+ 	obj: EsperarAuxilio(state == Objetivo.SOLVING);
+ 	msg: MsgVictimaAlcanzada(victima == agentId)
+
+    yo : Victima(getName() == agentId)
+    $mo : MisObjetivos()
+ then
+ 	//No creo tarea porque de momento no se hace nada. En un futuro quizás es interesantre convertir esto a tarea.
+ 	retract(msg);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
+ end
