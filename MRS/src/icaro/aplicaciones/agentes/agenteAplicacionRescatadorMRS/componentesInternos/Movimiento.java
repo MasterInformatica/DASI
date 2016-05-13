@@ -59,10 +59,10 @@ public class Movimiento extends Thread{
 					if(siguientePaso != null){
 						yo.move(siguientePaso);
 						try {
-							itfusoRecVisualizador.mueveAgente(yo.getName(), yo.getCoordenadasActuales());
+							itfusoRecVisualizador.mueveRobot(yo.getName(), yo.getCoordenadasActuales());
 						
 							if(mineroMvto != null)
-								itfusoRecVisualizador.mueveAgente(mineroMvto, yo.getCoordenadasActuales());
+								itfusoRecVisualizador.mueveVictima(mineroMvto, yo.getCoordenadasActuales());
 							
 						}catch(Exception e){e.printStackTrace();}
 					}

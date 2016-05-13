@@ -213,7 +213,6 @@ end
 // El robot ya esta en movimiento. Reglas para gestionar la llegada/parada de los robots.
 //--------------------------------------------------------------------------------------------
 
-//Soy el mejor robot, tengo que informar a todos
 rule "Victima alcanzada"
   when
     $yo : Robot( getName() == agentId, getStatus() == RobotStatus.CON_MINERO)
@@ -226,3 +225,16 @@ rule "Victima alcanzada"
   	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, $v);
   	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end
+/*
+rule "Victima salvada"
+  when
+    $yo : Robot( getName() == agentId, getStatus() == RobotStatus.CON_MINERO_SALVADO)
+ 	$obj: SacarVictima($v: minero, state == Objetivo.SOLVING)
+ 	$fc : Focus()
+ 	$mo : MisObjetivos()
+  
+  then
+  	TareaSincrona t1 = gestorTareas.crearTareaSincrona(AsignarRobotVictima.class);
+	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, robots, ce, eo);
+  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
+end*/

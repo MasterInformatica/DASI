@@ -93,8 +93,12 @@
                             <icaro:componenteGestionado refId="AgenteAplicacionIniciadorMRS1"  tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="AgenteAplicacionRescatadorMRS1" tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="AgenteAplicacionRescatadorMRS2" tipoComponente="AgenteAplicacion"/>
+                            <icaro:componenteGestionado refId="AgenteAplicacionRescatadorMRS3" tipoComponente="AgenteAplicacion"/>
+                            <icaro:componenteGestionado refId="AgenteAplicacionRescatadorMRS4" tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="AgenteAplicacionMineroMRS1" tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="AgenteAplicacionMineroMRS2" tipoComponente="AgenteAplicacion"/>
+                   			<icaro:componenteGestionado refId="AgenteAplicacionMineroMRS3" tipoComponente="AgenteAplicacion"/>
+                            <icaro:componenteGestionado refId="AgenteAplicacionMineroMRS4" tipoComponente="AgenteAplicacion"/>
                    </icaro:componentesGestionados>
                 </icaro:InstanciaGestor>
                 <icaro:InstanciaGestor id="GestorRecursos" refDescripcion="GestorRecursos">
@@ -109,16 +113,15 @@
 	******************   Instancias de Agentes de aplicacion                                ******************
 	*******************************************************************************************************-->            
         <icaro:AgentesAplicacion>
-                <icaro:Instancia id="AgenteAplicacionIniciadorMRS1" refDescripcion="AgenteAplicacionIniciadorMRS">
-                </icaro:Instancia>
-                <icaro:Instancia id="AgenteAplicacionRescatadorMRS1" refDescripcion="AgenteAplicacionRescatadorMRS">
-                </icaro:Instancia>
-                <icaro:Instancia id="AgenteAplicacionRescatadorMRS2" refDescripcion="AgenteAplicacionRescatadorMRS">
-                </icaro:Instancia>
-                <icaro:Instancia id="AgenteAplicacionMineroMRS1" refDescripcion="AgenteAplicacionMineroMRS">
-                </icaro:Instancia>
-                <icaro:Instancia id="AgenteAplicacionMineroMRS2" refDescripcion="AgenteAplicacionMineroMRS">
-                </icaro:Instancia>
+                <icaro:Instancia id="AgenteAplicacionIniciadorMRS1" refDescripcion="AgenteAplicacionIniciadorMRS"/>
+                <icaro:Instancia id="AgenteAplicacionRescatadorMRS1" refDescripcion="AgenteAplicacionRescatadorMRS"/>
+                <icaro:Instancia id="AgenteAplicacionRescatadorMRS2" refDescripcion="AgenteAplicacionRescatadorMRS"/>
+                <icaro:Instancia id="AgenteAplicacionRescatadorMRS3" refDescripcion="AgenteAplicacionRescatadorMRS"/>
+                <icaro:Instancia id="AgenteAplicacionRescatadorMRS4" refDescripcion="AgenteAplicacionRescatadorMRS"/>
+                <icaro:Instancia id="AgenteAplicacionMineroMRS1" refDescripcion="AgenteAplicacionMineroMRS"/>
+                <icaro:Instancia id="AgenteAplicacionMineroMRS2" refDescripcion="AgenteAplicacionMineroMRS"/>
+       			<icaro:Instancia id="AgenteAplicacionMineroMRS3" refDescripcion="AgenteAplicacionMineroMRS"/>
+                <icaro:Instancia id="AgenteAplicacionMineroMRS4" refDescripcion="AgenteAplicacionMineroMRS"/>
        </icaro:AgentesAplicacion>
 	<!--******************************************************************************************************
 	******************   Instancias de Recursos de aplicacion                               ******************

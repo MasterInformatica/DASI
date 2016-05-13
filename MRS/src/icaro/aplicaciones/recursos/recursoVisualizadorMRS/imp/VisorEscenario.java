@@ -310,5 +310,11 @@ public class VisorEscenario extends JFrame {
 	private static final long serialVersionUID = -418573958565443751L;
 
 
+	public boolean mueveRobotConVictima(String idRobot, String idVictima, Coordenada coordActuales) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 
 }

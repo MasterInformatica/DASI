@@ -18,13 +18,16 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 
 
 	/**
-	 * Intenta mover un agente desde donde este hasta la posicion indicada,
+	 * Intenta mover un robot desde donde este hasta la posicion indicada,
 	 * devuelve false si no puede moverse ahi ¿Eso me toca a mi o al controlador? 
 	 * @param idAgente id del agente a mover
 	 * @param coordActuales coordenadas donde se quiere mover
 	 * @return Devuelve un boolean indicando si ha podido realizar el movimiento.
 	 */
-	public boolean mueveAgente(String idAgente, Coordenada coordActuales) throws Exception;
+	public boolean mueveRobot(String idAgente, Coordenada coordActuales) throws Exception;
+	
+
+	public boolean mueveVictima(String idVictima, Coordenada coordActuales) throws Exception;
 	
 	// Cuando un robot se le asigna un objetivo, se llama a ete método para informar a la interfaz.
 	// A lo mejor no queremos que se muestre la decisión por pantalla, o a lo mejor si.

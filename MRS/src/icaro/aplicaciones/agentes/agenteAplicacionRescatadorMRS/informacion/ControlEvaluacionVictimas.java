@@ -17,8 +17,7 @@ public class ControlEvaluacionVictimas {
 	
 	//Control de los robots ya asignados
 	public Map<String, Boolean> robotsAsignados;
-	
-	
+
 	
 	public ControlEvaluacionVictimas(List<String> robots){
 		//mineros
@@ -76,24 +75,11 @@ public class ControlEvaluacionVictimas {
 	
 	public boolean isRobotAsigned(String s){
 		Boolean b = this.robotsAsignados.get(s);
+		if(b== null)
+			System.err.println(s+"\n"+this.proximaVictima+" "+this.victimasEvaluadas+"\n"+this.robotsAsignados);
 		assert(b!=null);
 		return (b);
 
 	}
-	
-	
-	//--------------------------------------------------------------------------
-
-	public static void main(String args[]){
-		ControlEvaluacionVictimas aa = new ControlEvaluacionVictimas(null);
-		
-		aa.addVictima("HOLA");
-		System.out.println(aa.proximaVictima);
-		aa.addVictima("BB");
-		System.out.println(aa.proximaVictima);
-		aa.addVictima("DD");
-		System.out.println(aa.proximaVictima);
-	}
-
 
 }

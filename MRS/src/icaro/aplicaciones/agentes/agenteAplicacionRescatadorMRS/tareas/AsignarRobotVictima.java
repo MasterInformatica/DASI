@@ -49,18 +49,33 @@ public class AsignarRobotVictima extends TareaSincrona {
 		//----------------------------------------------------------------------
 		
 		String mejorRobot = eo.getMejorRobot();
-	
-		while(ce.isRobotAsigned(mejorRobot)){
+		
+		while(mejorRobot != null && ce.isRobotAsigned(mejorRobot)){
 			mejorRobot = eo.getNextMejorRobot();
 		}
-	
-		if(mejorRobot == yo.getName())
+		if(mejorRobot == null)
+			this.noHayRobotDisponible(obj,f,lr,yo,ce,mo,eo);
+		else if(mejorRobot == yo.getName())
 			this.soyElMejorRobot(obj, f, lr, yo, ce, mo, eo);
 		else
 			this.noSoyElMejorRobot(obj, f, lr, yo, ce, mo, eo);
+		
+	}
+	
+	private void noHayRobotDisponible(Objetivo obj, Focus f, ListaIds lr, Robot yo,
+									  ControlEvaluacionVictimas ce, MisObjetivos mo,
+									  EvaluacionObjetivo eo){
+		//----------------------------------------------------------------------
+		// Informar mediante trazas
+		trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
+
+		trazas.aceptaNuevaTraza(new InfoTraza(this.identAgente,
+						"Recibida la evaluación de todos los robots. Informando de que no"
+						+ " hay rescatadores para la victima " + eo.getVictimaName(),
+						InfoTraza.NivelTraza.info));
+		
 	}
 
-	
 	public void soyElMejorRobot(Objetivo obj, Focus f, ListaIds lr, Robot yo,
 								ControlEvaluacionVictimas ce, MisObjetivos mo,
 								EvaluacionObjetivo eo){

@@ -27,7 +27,6 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
 public class LlevarVictimaSalida extends TareaSincrona {
 	@Override
 	public void ejecutar(Object... params) {
-		//t1.ejecutar(agentId, $yo, $fc, $mo, $obj, $v);
 		/* 
 		 * params[0] -> nombre del agente
 		 * params[1] -> yo
