@@ -31,6 +31,7 @@ public class VisorEscenario extends JFrame {
 	private JMenu MenuFile;
 	// Logica (Modelo)
 	private File filechoosed;
+	final private JPopupMenu popup;
 	//private boolean[][] Map;
 	private Mapa Map;
 	private HashMap<String, Coordenada> posicionAgentes;
@@ -43,13 +44,17 @@ public class VisorEscenario extends JFrame {
 	private ControladorVisorSimulador controlador;
 	private JFileChooser fileChooser;
 	private JMenuItem menu_Load;
-	
+	private final JFrame me;
 	
 	public VisorEscenario() throws Exception{
+		me = this;
+		popup =  initPopUp();
 		build();
 	}
 	
 	public VisorEscenario(ControladorVisorSimulador control) throws Exception{
+		me = this;
+		popup =  initPopUp();
 		controlador = control;
 		build();
 	}
@@ -129,6 +134,25 @@ public class VisorEscenario extends JFrame {
 		initComponentes();
 		centerFrame();
 	}
+	
+	private JPopupMenu initPopUp(){
+		
+		JPopupMenu ppp = new JPopupMenu();
+		ppp.add(new JMenuItem(new AbstractAction("Option 1") {
+			 @Override
+		        public void actionPerformed(ActionEvent e) {
+		            JOptionPane.showMessageDialog(me, "Option 1 selected");
+		        }
+
+		    }));
+		   ppp.add(new JMenuItem(new AbstractAction("Option 2") {
+		        public void actionPerformed(ActionEvent e) {
+		            JOptionPane.showMessageDialog(me, "Option 2 selected");
+		        }
+		    }));
+		   return ppp;
+	}
+	
 	private void centerFrame() {
 
         Dimension windowSize = getSize();
@@ -255,7 +279,7 @@ public class VisorEscenario extends JFrame {
 		botonesMapa = new ComponenteBotonMapa[rows][cols];
 		for (int i =  0; i < rows; i++){
 			for (int j = 0; j < cols; j++){
-				botonesMapa[i][j] = new ComponenteBotonMapa(getType(i,j));
+				botonesMapa[i][j] = new ComponenteBotonMapa(getType(i,j),popup);
 				if(TipoCelda.ESCOMBRO ==Map.getCoord(i,j))
 					botonesMapa[i][j].addElement("escombro", "NOPiedra");
 				mapita.add(botonesMapa[i][j]);

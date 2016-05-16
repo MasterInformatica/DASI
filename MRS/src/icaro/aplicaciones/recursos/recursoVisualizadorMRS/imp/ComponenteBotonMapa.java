@@ -5,14 +5,21 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Iterator;
 import java.util.Vector;
 
+import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 
 import icaro.aplicaciones.MRS.informacion.VocabularioMRS;
@@ -25,20 +32,20 @@ public class ComponenteBotonMapa extends JButton {
 	private static String rutaMin ="miner.png";
 	private static String rutaRob ="robot.png";
 	private static String rutaPie ="piedra.png";
-	
+	final JButton me;
 	private ImageIcon bg;
 	private CombineIcon ci;
-	
-	public ComponenteBotonMapa(int type) {
+   
+	public ComponenteBotonMapa(int type, final JPopupMenu popup) {
 		super();
 		bg = new ImageIcon(getIcono(type));
 		ci = new CombineIcon("background",bg);
 		setIcon(ci);
-		
+		 me = this;
 		
 		setMargin(new Insets(0, 0, 0, 0));
 		setBorder(new EmptyBorder(0,0,0,0));
-
+		 
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
@@ -48,6 +55,11 @@ public class ComponenteBotonMapa extends JButton {
 			}
 
 		});
+		addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                popup.show(e.getComponent(), e.getX(), e.getY());
+            }
+        });
 	}
 	
 	private String getIcono(int type){

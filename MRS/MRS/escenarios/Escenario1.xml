@@ -158,12 +158,12 @@
 	   <Celda tipo="PASILLO" x="16" y="22" />
    </Mapa>
    
-   <Rescatadores id="Rescatadores" key="Rescatador" numRes="2">
+   <Rescatadores numRes="2">
       <Rescatador tipo="R" startX="16" startY="22" name="AgenteAplicacionRescatadorMRS1"/>
       <Rescatador tipo="R" startX="15" startY="22" name="AgenteAplicacionRescatadorMRS2"/>
    </Rescatadores>
    
-   <Mineros id="Mineros" key="Mineros" numMin="2">
+   <Mineros numMin="2">
      <Minero tipo="M" startX="6" startY="18" name="AgenteAplicacionMineroMRS1"/>  
      <Minero tipo="M" startX="6" startY="10" name="AgenteAplicacionMineroMRS2"/>
    </Mineros>   
