@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import icaro.aplicaciones.MRS.informacion.Coordenada;
+import icaro.aplicaciones.MRS.informacion.Escenario;
+import icaro.aplicaciones.MRS.informacion.InicioEstado;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.MRS.informacion.TipoCelda;
@@ -31,8 +33,7 @@ public class VisorEscenario extends JFrame {
 	private JMenu MenuFile;
 	// Logica (Modelo)
 	private File filechoosed;
-	final private JPopupMenu popup;
-	//private boolean[][] Map;
+	private Escenario esc;
 	private Mapa Map;
 	private HashMap<String, Coordenada> posicionAgentes;
 
@@ -44,17 +45,15 @@ public class VisorEscenario extends JFrame {
 	private ControladorVisorSimulador controlador;
 	private JFileChooser fileChooser;
 	private JMenuItem menu_Load;
-	private final JFrame me;
+	public static VisorEscenario me;
 	
 	public VisorEscenario() throws Exception{
 		me = this;
-		popup =  initPopUp();
 		build();
 	}
 	
 	public VisorEscenario(ControladorVisorSimulador control) throws Exception{
 		me = this;
-		popup =  initPopUp();
 		controlador = control;
 		build();
 	}
@@ -70,6 +69,7 @@ public class VisorEscenario extends JFrame {
 	}
 	
 	public void setMapa(Mapa mapa) {
+		esc.setMapa(mapa);
 		Map = mapa;
 		rows = Map.getNumRows();
 		cols = Map.getNumCols();
@@ -77,6 +77,7 @@ public class VisorEscenario extends JFrame {
 	}
 	
 	public void setRobots(List<Robot> listaRobots) {
+		esc.setListR(listaRobots);
 		for(Robot r : listaRobots){
 			System.err.println("Print: "+r.getName());
 			mueveAgente(r.getName(),r.getCoordenadasIniciales(),"Robot");
@@ -84,6 +85,7 @@ public class VisorEscenario extends JFrame {
 	}
 
 	public void setVictimas(List<Victima> listaVictimas) {
+		esc.setListV(listaVictimas);
 		for(Victima v : listaVictimas){
 			mueveAgente(v.getName(),v.getCoordenadasIniciales(),"Miner");
 		}
@@ -118,6 +120,15 @@ public class VisorEscenario extends JFrame {
 		botonesMapa[c.getX()][c.getY()].addElement("escombro","Piedra");
 	}
 	
+	
+	public void cambioEstado(String st) {
+		for(ComponenteBotonMapa[] barr : botonesMapa){
+			for(ComponenteBotonMapa b : barr){
+				b.cambioEstado(st);
+			}
+		}
+	}
+	
 	//-----------------------------PRIVATE--------------------------------
 	
 	/**
@@ -128,30 +139,14 @@ public class VisorEscenario extends JFrame {
 	 */
 	private void build(){
 		isVisible = false;
-		
+		esc = new Escenario();
 		setTitle("MRS - Simulator");
 		posicionAgentes = new HashMap<String,Coordenada>();
 		initComponentes();
 		centerFrame();
 	}
 	
-	private JPopupMenu initPopUp(){
-		
-		JPopupMenu ppp = new JPopupMenu();
-		ppp.add(new JMenuItem(new AbstractAction("Option 1") {
-			 @Override
-		        public void actionPerformed(ActionEvent e) {
-		            JOptionPane.showMessageDialog(me, "Option 1 selected");
-		        }
-
-		    }));
-		   ppp.add(new JMenuItem(new AbstractAction("Option 2") {
-		        public void actionPerformed(ActionEvent e) {
-		            JOptionPane.showMessageDialog(me, "Option 2 selected");
-		        }
-		    }));
-		   return ppp;
-	}
+	
 	
 	private void centerFrame() {
 
@@ -244,7 +239,15 @@ public class VisorEscenario extends JFrame {
 		menu_save.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controlador.notificar(VocabularioMRS.InputIniciaSimulacion);
+				File f = solicitarFicheroSalvar();
+				if(f != null){
+					try {
+						controlador.saveMap(VisorEscenario.me.esc,f);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
 		JMenuItem menu_exit = new JMenuItem("Exit",KeyEvent.VK_E);
@@ -279,9 +282,10 @@ public class VisorEscenario extends JFrame {
 		botonesMapa = new ComponenteBotonMapa[rows][cols];
 		for (int i =  0; i < rows; i++){
 			for (int j = 0; j < cols; j++){
-				botonesMapa[i][j] = new ComponenteBotonMapa(getType(i,j),popup);
-				if(TipoCelda.ESCOMBRO ==Map.getCoord(i,j))
-					botonesMapa[i][j].addElement("escombro", "NOPiedra");
+				botonesMapa[i][j] = new ComponenteBotonMapa(i,j,getType(i,j));
+				botonesMapa[i][j].setOutPoint(this);
+				if(TipoCelda.ESCOMBRO_UNK ==Map.getCoord(i,j))
+					botonesMapa[i][j].addElement("PIEDRA", "NOPiedra");
 				mapita.add(botonesMapa[i][j]);
 			}
 		}
@@ -306,9 +310,24 @@ public class VisorEscenario extends JFrame {
 			return filechoosed; // no ha seleccionado nada
 		}
 	}
+	
+	private File solicitarFicheroSalvar() {
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(
+				"ficheros xml", "xml", "txt");
+		fileChooser.setFileFilter(filter);
+		File dir = fileChooser.getCurrentDirectory();
+		int returnVal = fileChooser.showSaveDialog(this);
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		fileChooser.setCurrentDirectory(dir);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			return fileChooser.getSelectedFile();
+		} else{
+			return null; // no ha seleccionado nada
+		}
+	}
 
 	
-	private int getType(int i, int j){
+	public int getType(int i, int j){
 		int t = 0b0000;	
 		if(Map.getCoord(i,j)==TipoCelda.PARED)
 			return t;
@@ -327,18 +346,31 @@ public class VisorEscenario extends JFrame {
 		return t;
 	}
 	
+	public void changeCelda(int x, int y, TipoCelda t) throws Exception{
+		Map.getMapa()[x][y]=t;
+		controlador.changeMap(x,y,t);
+		botonesMapa[x][y].changeTo(t, getType(x,y));
+		updateCelda(x-1,y-1);
+		updateCelda(x  ,y-1);
+		updateCelda(x+1,y-1);
+		updateCelda(x-1,y);
+		updateCelda(x+1,y);
+		updateCelda(x-1,y+1);
+		updateCelda(x  ,y+1);
+		updateCelda(x+1,y+1);
+	}
+	
+	public void updateCelda(int x, int y){
+		if(x < 0 || y < 0 || y >= Map.getNumCols() || x >= Map.getNumRows())
+			return;
+		botonesMapa[x][y].changeTo(Map.getCoord(x, y), getType(x,y));
+		
+	}
+	
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -418573958565443751L;
-
-
-	public boolean mueveRobotConVictima(String idRobot, String idVictima, Coordenada coordActuales) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
 
 }

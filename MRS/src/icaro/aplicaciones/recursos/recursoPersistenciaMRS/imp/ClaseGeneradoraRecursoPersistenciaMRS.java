@@ -19,6 +19,7 @@ import org.w3c.dom.NodeList;
 
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Escenario;
+import icaro.aplicaciones.MRS.informacion.InicioEstado;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.MRS.informacion.Minero;
 import icaro.aplicaciones.MRS.informacion.Rescatador;
@@ -151,7 +152,7 @@ implements ItfUsoRecursoPersistenciaMRS{
 		if(str.toUpperCase().equals("PASILLO"))
 			return TipoCelda.PASILLO;
 		if(str.toUpperCase().equals("ESCOMBRO"))
-			return TipoCelda.ESCOMBRO;
+			return TipoCelda.ESCOMBRO_UNK;
 		return TipoCelda.PARED;	
 	}
 
@@ -219,6 +220,21 @@ implements ItfUsoRecursoPersistenciaMRS{
         transformer.transform(source, result);
 	}
 	
+	@Override
+	public void cambioEstado(String st) {
+		switch(st){
+		case InicioEstado.ST_NuevoEscenario:
+			break;
+		case InicioEstado.ST_Inicio:
+			break;
+		case InicioEstado.ST_Fin:
+			break;
+		default: 
+			break;	
+		}
+	}
+
+	
 	// TEST
 	public static void main(String[] args) {
 		try {
@@ -233,4 +249,6 @@ implements ItfUsoRecursoPersistenciaMRS{
 			e.printStackTrace();
 		}
 	}
+
+
 }

@@ -7,6 +7,8 @@ import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.MRS.informacion.Victima;
+import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
+import icaro.aplicaciones.recursos.recursoPlanificadorMRS.ItfUsoRecursoPlanificadorMRS;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.NotificadorEventos;
 import icaro.infraestructura.patronRecursoSimple.ItfUsoRecursoSimple;
 
@@ -62,4 +64,10 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 
 
 	public void setVictimas(List<Victima> listaVictimas) throws Exception;
+
+
+	public void cambioEstado(String st) throws Exception;
+
+
+	void setItf(ItfUsoRecursoPersistenciaMRS persi, ItfUsoRecursoPlanificadorMRS plan) throws Exception;
 }

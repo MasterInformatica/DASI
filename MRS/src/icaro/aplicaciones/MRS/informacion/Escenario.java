@@ -79,4 +79,14 @@ public class Escenario {
 		return null;
 	}
 
+
+	public void setListR(List<Robot> listaRobots2) {
+		this.listaRobots = listaRobots2;
+		
+	}
+	
+	public void setListV(List<Victima> listaVictimas2) {
+		this.listaVictimas = listaVictimas2;
+		
+	}
 }

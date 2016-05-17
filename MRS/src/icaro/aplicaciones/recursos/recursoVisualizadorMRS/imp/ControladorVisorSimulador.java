@@ -4,14 +4,20 @@ import java.io.File;
 import java.util.List;
 
 import icaro.aplicaciones.MRS.informacion.Coordenada;
+import icaro.aplicaciones.MRS.informacion.Escenario;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.MRS.informacion.Robot;
+import icaro.aplicaciones.MRS.informacion.TipoCelda;
 import icaro.aplicaciones.MRS.informacion.Victima;
+import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
+import icaro.aplicaciones.recursos.recursoPlanificadorMRS.ItfUsoRecursoPlanificadorMRS;
 
 public class ControladorVisorSimulador {
 
 	private VisorEscenario visorEscenario;
 	private ClaseGeneradoraRecursoVisualizadorMRS outPoint;
+	private ItfUsoRecursoPersistenciaMRS itfPersistenciaMRS;
+	private ItfUsoRecursoPlanificadorMRS itfPlanificadorMRS;
 	public ControladorVisorSimulador(ClaseGeneradoraRecursoVisualizadorMRS cgrvm ) throws Exception{
 		outPoint = cgrvm;
 		visorEscenario = new VisorEscenario(this);
@@ -82,6 +88,25 @@ public class ControladorVisorSimulador {
 	}
 	public void notificar(String event,String s) {
 		outPoint.notificar(event,s);
+	}
+
+	public void cambioEstado(String st) {
+		visorEscenario.cambioEstado(st);
+	}
+
+	public void changeMap(int x, int y, TipoCelda t) throws Exception {
+		this.itfPlanificadorMRS.changeMap(x,y,t);
+	}
+
+	public void setItf(ItfUsoRecursoPersistenciaMRS persi,
+			ItfUsoRecursoPlanificadorMRS plan) {
+		this.itfPersistenciaMRS = persi;
+		this.itfPlanificadorMRS = plan;
+		
+	}
+
+	 void saveMap(Escenario esc,File f) throws Exception {
+		this.itfPersistenciaMRS.escenarioToXML(esc, f);
 	}
 
 

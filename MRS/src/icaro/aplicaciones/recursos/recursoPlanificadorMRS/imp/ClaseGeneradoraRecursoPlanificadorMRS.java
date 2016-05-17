@@ -4,6 +4,7 @@ import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.MRS.informacion.Coordenada;
+import icaro.aplicaciones.MRS.informacion.InicioEstado;
 import icaro.aplicaciones.MRS.informacion.TipoCelda;
 import icaro.aplicaciones.recursos.recursoPlanificadorMRS.ItfUsoRecursoPlanificadorMRS;
 
@@ -41,7 +42,7 @@ public class ClaseGeneradoraRecursoPlanificadorMRS extends ImplRecursoSimple
 	
 	@Override
 	public void setMapa(Mapa mapa) throws Exception{
-		this.mapaConocimiento = new Mapa(mapa, true);
+		this.mapaConocimiento = new Mapa(mapa);
 	}
 	
 	@Override
@@ -123,5 +124,27 @@ public class ClaseGeneradoraRecursoPlanificadorMRS extends ImplRecursoSimple
 	@Override
 	public void informarBloqueo(Coordenada c) {
 		this.mapaConocimiento.getMapa()[c.getX()][c.getY()] = TipoCelda.ESCOMBRO;
+	}
+	
+	@Override
+	public void cambioEstado(String st) {
+		switch(st){
+		case InicioEstado.ST_NuevoEscenario:
+			break;
+		case InicioEstado.ST_Inicio:
+			break;
+		case InicioEstado.ST_Fin:
+			break;
+		default: 
+			break;	
+		}
+	}
+
+	@Override
+	public void changeMap(int x, int y, TipoCelda t)  {
+		if(t == TipoCelda.ESCOMBRO_UNK)
+			mapaConocimiento.getMapa()[x][y] = TipoCelda.PASILLO;
+		else
+			mapaConocimiento.getMapa()[x][y] = t;
 	}
 }

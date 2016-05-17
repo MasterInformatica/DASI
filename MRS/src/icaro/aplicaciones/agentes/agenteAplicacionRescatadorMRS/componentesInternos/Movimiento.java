@@ -54,7 +54,10 @@ public class Movimiento extends Thread{
 					
 					try{
 						siguientePaso = ruta.get(1);
-					}catch(Exception e){e.printStackTrace();}
+					}catch(Exception e){
+						System.err.println("Víctima Inalcanzable: "+mineroMvto);
+						
+					}
 					
 					if(siguientePaso != null){
 						yo.move(siguientePaso);

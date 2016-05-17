@@ -22,6 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 
+import icaro.aplicaciones.MRS.informacion.InicioEstado;
+import icaro.aplicaciones.MRS.informacion.TipoCelda;
 import icaro.aplicaciones.MRS.informacion.VocabularioMRS;
 
 public class ComponenteBotonMapa extends JButton {
@@ -35,9 +37,14 @@ public class ComponenteBotonMapa extends JButton {
 	final JButton me;
 	private ImageIcon bg;
 	private CombineIcon ci;
-   
-	public ComponenteBotonMapa(int type, final JPopupMenu popup) {
+    private MouseMenu mm;
+    private String st;
+	private VisorEscenario ve;
+    private int _x,_y;
+	public ComponenteBotonMapa( int x, int y,int type) {
 		super();
+		_x = x;
+		_y = y;
 		bg = new ImageIcon(getIcono(type));
 		ci = new CombineIcon("background",bg);
 		setIcon(ci);
@@ -55,11 +62,16 @@ public class ComponenteBotonMapa extends JButton {
 			}
 
 		});
-		addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-                popup.show(e.getComponent(), e.getX(), e.getY());
-            }
-        });
+		mm = new MouseMenu(InicioEstado.ST_NuevoEscenario,this);
+		addMouseListener(mm);
+	}
+	
+	public void cambioEstado(String n_st){
+		st = n_st;
+		mm.setEstado(n_st);
+	}
+	public void setOutPoint(VisorEscenario ve){
+		this.ve = ve;
 	}
 	
 	private String getIcono(int type){
@@ -131,17 +143,24 @@ public class ComponenteBotonMapa extends JButton {
 	    public void rescale(int wd, int hg){
 	    	Image im;
 	    	int w=wd;
-	    	/*if ( list.size()>1){
-	    		w = wd/list.size()-1;
-	    	}*/
-	    	im = list.get(0).getImage().getScaledInstance(wd,hg,Image.SCALE_FAST);
-    		list.set(0, new ImageIcon(im));
+	    	try{
+	    		im = list.get(0).getImage().getScaledInstance(wd,hg,Image.SCALE_FAST);
+	    		list.set(0, new ImageIcon(im));
 
-	    	for(int i = 1; i < list.size(); i++){
-	    		im = list.get(i).getImage().getScaledInstance(w,hg,Image.SCALE_FAST);
-	    		list.set(i, new ImageIcon(im));
+		    	for(int i = 1; i < list.size(); i++){
+		    		im = list.get(i).getImage().getScaledInstance(w,hg,Image.SCALE_FAST);
+		    		list.set(i, new ImageIcon(im));
+		    	}
+		    	lastSize = new Dimension(wd,hg);
+	    	}catch(ArrayIndexOutOfBoundsException e){
+	    		System.err.println("Error: Intento de solucion ejecutado");
+	    		ImageIcon bg = list.get(0);
+	    		list = new Vector<ImageIcon>();
+	    		list.add(bg);
+	    		listId = new Vector<String>();
+	    		listId.add("backgroud");
+	    		rescale(wd,hg);
 	    	}
-	    	lastSize = new Dimension(wd,hg);
 	    	
 	    }
 	    
@@ -158,8 +177,12 @@ public class ComponenteBotonMapa extends JButton {
 	    }
 	    
 	    public void removeIcon(int idx){
-	    	list.remove(idx);
-	    	listId.remove(idx);
+	    	try{
+	    		list.remove(idx);
+	    		listId.remove(idx);
+	    	}catch(Exception e){
+	    		
+	    	}
 	    }
 	    
 	    public void removeIcon(String id){
@@ -207,9 +230,7 @@ public class ComponenteBotonMapa extends JButton {
 	    		list.get(i).paintIcon(c,g,inc,y);
 	    		inc += 10;
 	    	}
-	    }
-
-		
+	    }	
 	}
 	
 	/**
@@ -217,5 +238,40 @@ public class ComponenteBotonMapa extends JButton {
 	 */
 	private static final long serialVersionUID = -6020843624647630830L;
 
+	
+	/*
+	 * Le piden cambiar y notificar
+	 */
+	public void changeToAndNotify(TipoCelda tipo) {
+		try{
+			ve.changeCelda(_x, _y, tipo);	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * @param tipo
+	 * @param tipo_pasillo
+	 */
+	public void changeTo(TipoCelda tipo, int tipo_pasillo){
+		bg = new ImageIcon(getIcono(tipo_pasillo));
+		ci = new CombineIcon("background",bg);
+		setIcon(ci);
+		ci.rescale(this.getSize().width, this.getSize().height);
+		switch(tipo){
+		case ESCOMBRO:
+			addElement("PIEDRA","Piedra");
+			break;
+		case ESCOMBRO_UNK:
+			addElement("PIEDRA","NOPiedra");
+			break;
+		default:
+			break;
+		}
+	}
+	
 	
 }

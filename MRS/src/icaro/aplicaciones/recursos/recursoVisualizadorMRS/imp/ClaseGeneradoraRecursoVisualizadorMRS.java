@@ -4,7 +4,10 @@ import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.MRS.informacion.Victima;
+import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
+import icaro.aplicaciones.recursos.recursoPlanificadorMRS.ItfUsoRecursoPlanificadorMRS;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
+import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 import java.io.File;
@@ -24,6 +27,9 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 
 	private String identAgenteaReportar;
 	private NotificadorEventos notificador;
+
+	private ItfUsoRecursoPlanificadorMRS itfPlanificadorMRS;
+	private ItfUsoRecursoPersistenciaMRS itfPersistenciaMRS;
 	
 	public ClaseGeneradoraRecursoVisualizadorMRS(String idRecurso) throws Exception {
 
@@ -34,6 +40,7 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 			notificador = new NotificadorEventos(recursoId, null);
 			
 			controladorUI = new ControladorVisorSimulador(this);
+
 			trazas.aceptaNuevaTraza(new InfoTraza(idRecurso, "El constructor de la clase generadora del recurso "
 					+ idRecurso + " ha completado su ejecucion ....", InfoTraza.NivelTraza.debug));
 
@@ -44,7 +51,12 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 			throw e;
 		}
 	}
-	
+	@Override
+	public void setItf(ItfUsoRecursoPersistenciaMRS persi, ItfUsoRecursoPlanificadorMRS plan){
+		itfPersistenciaMRS = persi;
+		itfPlanificadorMRS = plan;
+		controladorUI.setItf(itfPersistenciaMRS,itfPlanificadorMRS);
+	}
 	@Override
 	public void mostrarVictimaRescatada(String VictimaId) throws Exception{
 		throw new Error("NO SE LLAMA A mostrarVictimaRescatada!");
@@ -156,6 +168,12 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	@Override
 	public void setAgenteIniciador(String nombreAgente) {
 		notificador.setAgente(nombreAgente);
+	}
+
+	@Override
+	public void cambioEstado(String st) throws Exception {
+		controladorUI.cambioEstado(st);
+		
 	}
 
 

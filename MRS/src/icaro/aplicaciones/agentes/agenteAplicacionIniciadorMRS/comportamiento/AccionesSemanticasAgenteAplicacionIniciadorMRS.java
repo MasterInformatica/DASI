@@ -63,6 +63,7 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 			this.itfPersistenciaMRS = (ItfUsoRecursoPersistenciaMRS) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoPersistenciaMRS1");
 			
+			this.itfVisualizadorMRS.setItf(itfPersistenciaMRS, itfPlanificadorMRS);
 			//Comienzo ventana gráfica
 			this.itfVisualizadorMRS.muestraVentana();
 
@@ -210,6 +211,14 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		
 		for(Victima v: this.escenario.getListaVictimas()){
 			comunicator.enviarInfoAotroAgente(ie, v.getName());
+		}
+		try {
+			this.itfVisualizadorMRS.cambioEstado(st);
+			this.itfPersistenciaMRS.cambioEstado(st);
+			this.itfPlanificadorMRS.cambioEstado(st);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}

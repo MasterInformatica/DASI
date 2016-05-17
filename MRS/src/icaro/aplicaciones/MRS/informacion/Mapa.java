@@ -17,7 +17,7 @@ public class Mapa {
 				mapa[i][j] = TipoCelda.PARED;
 	}
 	
-	public Mapa(Mapa toCopy, boolean olvidarEscombros){
+	public Mapa(Mapa toCopy){
 		this.cols = toCopy.getNumCols();
 		this.rows = toCopy.getNumRows();
 		
@@ -26,7 +26,7 @@ public class Mapa {
 		
 		for(int i=0; i<rows; i++)
 			for(int j=0; j<cols; j++){
-				if ((map[i][j] == TipoCelda.ESCOMBRO) && (olvidarEscombros))
+				if (map[i][j] == TipoCelda.ESCOMBRO_UNK )
 					mapa[i][j] = TipoCelda.PASILLO;
 				else
 					mapa[i][j] = map[i][j];
@@ -43,13 +43,13 @@ public class Mapa {
 	public ArrayList<Coordenada> getObstaculos(int x, int y){
 		ArrayList<Coordenada> ret = new ArrayList<Coordenada>();
 		
-		if(x>0 && this.mapa[x-1][y] == TipoCelda.ESCOMBRO)
+		if(x>0 && this.mapa[x-1][y] == TipoCelda.ESCOMBRO_UNK)
 			ret.add(new Coordenada(x-1, y));
-		if(x+1<rows && this.mapa[x+1][y] == TipoCelda.ESCOMBRO)
+		if(x+1<rows && this.mapa[x+1][y] == TipoCelda.ESCOMBRO_UNK)
 			ret.add(new Coordenada(x+1, y));
-		if(y>0 && this.mapa[x][y-1] == TipoCelda.ESCOMBRO)
+		if(y>0 && this.mapa[x][y-1] == TipoCelda.ESCOMBRO_UNK)
 			ret.add(new Coordenada(x, y-1));
-		if(y+1<cols && this.mapa[x][y+1] == TipoCelda.ESCOMBRO)
+		if(y+1<cols && this.mapa[x][y+1] == TipoCelda.ESCOMBRO_UNK)
 			ret.add(new Coordenada(x, y+1));
 		
 		return ret;
@@ -78,7 +78,7 @@ public class Mapa {
 	
 	private String tipocelda2str(TipoCelda t){
 		switch(t){
-		case ESCOMBRO:
+		case ESCOMBRO_UNK:
 			return "^";
 		case PARED:
 			return "#";
