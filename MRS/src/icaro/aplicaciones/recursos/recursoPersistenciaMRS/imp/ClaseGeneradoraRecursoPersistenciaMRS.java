@@ -151,8 +151,10 @@ implements ItfUsoRecursoPersistenciaMRS{
 	private TipoCelda str2tipocelda(String str){
 		if(str.toUpperCase().equals("PASILLO"))
 			return TipoCelda.PASILLO;
-		if(str.toUpperCase().equals("ESCOMBRO"))
+		if(str.toUpperCase().equals("ESCOMBRO_UNK"))
 			return TipoCelda.ESCOMBRO_UNK;
+		if(str.toUpperCase().equals("ESCOMBRO"))
+			return TipoCelda.ESCOMBRO;
 		return TipoCelda.PARED;	
 	}
 
@@ -177,7 +179,7 @@ implements ItfUsoRecursoPersistenciaMRS{
         for(int i = 0; i < m.getNumRows(); i++){
         	for(int j = 0; j < m.getNumCols(); j++){
         		Element celda = doc1.createElement(TAG_CELDA);
-                celda.setAttribute(ATTR_tipoCelda, m.getCoord(i, j).name());
+                celda.setAttribute(ATTR_tipoCelda, m.getCoord(i, j).toString());
                 celda.setAttribute("x", ""+i);
                 celda.setAttribute("y", ""+j);
                 esce.appendChild(celda);

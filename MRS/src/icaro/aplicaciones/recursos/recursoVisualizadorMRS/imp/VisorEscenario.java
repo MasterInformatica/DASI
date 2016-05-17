@@ -286,6 +286,8 @@ public class VisorEscenario extends JFrame {
 				botonesMapa[i][j].setOutPoint(this);
 				if(TipoCelda.ESCOMBRO_UNK ==Map.getCoord(i,j))
 					botonesMapa[i][j].addElement("PIEDRA", "NOPiedra");
+				else if(TipoCelda.ESCOMBRO ==Map.getCoord(i,j))
+					botonesMapa[i][j].addElement("PIEDRA", "Piedra");
 				mapita.add(botonesMapa[i][j]);
 			}
 		}
