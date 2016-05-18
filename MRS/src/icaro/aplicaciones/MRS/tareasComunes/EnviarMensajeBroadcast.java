@@ -11,6 +11,7 @@ public class EnviarMensajeBroadcast extends TareaSincrona {
 	 *   1: List<String> con el nombre de todos los agentes a los que enviar el mensaje
 	 *   2: Object con el mensaje a enviar
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void ejecutar(Object... params) {
 		List<String> agtes = (List<String>)params[1];

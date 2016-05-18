@@ -1,43 +1,77 @@
 package icaro.aplicaciones.MRS.informacion;
 
+/**
+ * Coordenadas de tipo entero
+ * 
+ * @author Hristo Ivanov
+ */
 public class Coordenada {
+	/**
+	 * Posicion x
+	 */
 	public int x;
+
+	/**
+	 * Posicion y
+	 */
 	public int y;
-	
-	
-	public String toString(){
+
+	@Override
+	public String toString() {
 		return "( " + x + " , " + y + " )";
 	}
-	
-	
-	public Coordenada(int x, int y){
+
+	/**
+	 * Constructora
+	 * 
+	 * @param x
+	 * @param y
+	 */
+	public Coordenada(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
-	
-	public Coordenada(Coordenada c){
+
+	/**
+	 * Constructor copia
+	 * 
+	 * @param c
+	 */
+	public Coordenada(Coordenada c) {
 		this.x = c.x;
 		this.y = c.y;
 	}
-	/*
-	public Coordenada(Coordinate c) {
-		this.x = (int) c.getX();
-		this.y = (int) c.getY();
-	}*/
-	
+
+	/**
+	 * Devuelve la coordenada x
+	 * 
+	 * @return
+	 */
 	public int getX() {
 		return x;
 	}
+
+	/**
+	 * Cambia la coordenada x
+	 */
 	public void setX(int x) {
 		this.x = x;
 	}
-	
+
+	/**
+	 * Devuelve la coordenada y
+	 * 
+	 * @return
+	 */
 	public int getY() {
 		return y;
 	}
+
+	/**
+	 * Cambia la coordenada y
+	 */
 	public void setY(int y) {
 		this.y = y;
 	}
-	
-	
+
 }

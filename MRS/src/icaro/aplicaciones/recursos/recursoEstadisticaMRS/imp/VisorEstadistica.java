@@ -1,8 +1,6 @@
 package icaro.aplicaciones.recursos.recursoEstadisticaMRS.imp;
 
-import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.LayoutManager;
 import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -10,10 +8,28 @@ import java.util.Map.Entry;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+/**
+ * Ventana de Estadisticas
+ * @author Hristo Ivanov
+ */
 public class VisorEstadistica extends JFrame{
 
-	//private static final long serialVersionUID = 4843580013703665703L;
+	private static final long serialVersionUID = 4843580013703665703L;
 
+	/**
+	 * Constructor de la ventana de Estadisticas
+	 * @param inicioDeRescate
+	 * @param finDeRescate
+	 * @param numeroDeRescatadores
+	 * @param numeroDeVictimas
+	 * @param numeroDeVictimasRescatadas
+	 * @param movimientosPorRescatador
+	 * @param tiempoMaximoDeRecate
+	 * @param tiempoMinimoDeRecate
+	 * @param timepoMedioDeRecate
+	 * @param numeroDeObstaculosEncontrados
+	 * @throws Exception
+	 */
 	public VisorEstadistica(
 			long inicioDeRescate,
 			long finDeRescate,
@@ -37,8 +53,8 @@ public class VisorEstadistica extends JFrame{
 			dateInicioDeRescate 		= new Date(inicioDeRescate);
 			dateFinDeRescate 			= new Date(finDeRescate);
 		}catch(Exception e){e.printStackTrace();}
-		JLabel labelInicioDeRescate		= new JLabel("Inicio de la simulación: " + dateInicioDeRescate.toString());
-		JLabel labelFinDeRescate		= new JLabel("Fin de la simulación: " + dateFinDeRescate.toString());
+		JLabel labelInicioDeRescate		= new JLabel("Inicio de la simulaciï¿½n: " + dateInicioDeRescate.toString());
+		JLabel labelFinDeRescate		= new JLabel("Fin de la simulaciï¿½n: " + dateFinDeRescate.toString());
 		labelInicioDeRescate.setLocation(0, cont * labelInicioDeRescate.getHeight());
 		cont += 1;
 		labelFinDeRescate.setLocation(0, cont * labelInicioDeRescate.getHeight());
@@ -69,7 +85,7 @@ public class VisorEstadistica extends JFrame{
 			cont += 1;
 		}
 		
-		JLabel labelTiempoMaximoDeRecate = new JLabel("Tiempo máximo de rescate: " + tiempoMaximoDeRecate + "                                            ");
+		JLabel labelTiempoMaximoDeRecate = new JLabel("Tiempo mï¿½ximo de rescate: " + tiempoMaximoDeRecate + "                                            ");
 		labelTiempoMaximoDeRecate.setLocation(0, cont * labelInicioDeRescate.getHeight());
 		this.add(labelTiempoMaximoDeRecate);
 		cont += 1;

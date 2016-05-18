@@ -1,42 +1,78 @@
 package icaro.aplicaciones.recursos.recursoEstadisticaMRS.imp;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JPanel;
-import javax.swing.JRootPane;
-
 import icaro.aplicaciones.recursos.recursoEstadisticaMRS.ItfUsoRecursoEstadisticaMRS;
 import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
-
+/**
+ * Clase Generadora del Recurso EstadisticaMRS
+ * @author Hristo Ivanov
+ */
 public class ClaseGeneradoraRecursoEstadisticaMRS extends ImplRecursoSimple
 		implements ItfUsoRecursoEstadisticaMRS {
 
 	private static final long serialVersionUID = -3439155811399562462L;
 	
-	private long inicioDeRescate;//
-	private long finDeRescate;//
+	/**
+	 * Hora del Incio del rescate
+	 */
+	private long inicioDeRescate;
+	/**
+	 * Hora del Fin del rescate
+	 */
+	private long finDeRescate;
 	
-	private int numeroDeRescatadores;//
-	private int numeroDeVictimas;//
-	private int numeroDeVictimasRescatadas;//
+	/**
+	 * Numero de Rescatadores
+	 */
+	private int numeroDeRescatadores;
+	/**
+	 * Numero de Victimas
+	 */
+	private int numeroDeVictimas;
+	/**
+	 * Numero de Victimas Rescatadas
+	 */
+	private int numeroDeVictimasRescatadas;
 	
-	private Map<String, Integer>movimientosPorRescatador;//
+	/**
+	 * Cantidad de movimientos de cada rescatador
+	 */
+	private Map<String, Integer>movimientosPorRescatador;
 	
-	private long tiempoMaximoDeRecate;//
-	private long tiempoMinimoDeRecate;//
-	private float timepoMedioDeRecate;//
+	/**
+	 * Tiempo Maximo que ha tardado un rescate
+	 */
+	private long tiempoMaximoDeRecate;
+	/**
+	 * Tiempo Minimo que ha tardado un rescate
+	 */
+	private long tiempoMinimoDeRecate;
+	/**
+	 * Tiempo Medio que ha tardado un rescate
+	 */
+	private float timepoMedioDeRecate;
+	/**
+	 * Tiempo Total que ha tardado todo el rescate
+	 */
 	private long tiempoDeRecateAcumulado;
 	
-	private int numeroDeObstaculosEncontrados;//
+	/**
+	 * Numero de obstaculos descubiertos
+	 */
+	private int numeroDeObstaculosEncontrados;
 	
+	/**
+	 * Constructora del recurso EstadisticasMRS
+	 * @param idRecurso nombre del recurso
+	 * @throws RemoteException
+	 */
 	public ClaseGeneradoraRecursoEstadisticaMRS(String idRecurso) throws RemoteException {
 		super(idRecurso);
 	}
-
 
 	@Override
 	public void iniciarRecate(
@@ -84,6 +120,7 @@ public class ClaseGeneradoraRecursoEstadisticaMRS extends ImplRecursoSimple
 		
 	@Override
 	public void mostrarEstadisticas() throws Exception {
+		@SuppressWarnings("unused")
 		VisorEstadistica visor 
 			= new VisorEstadistica(
 					inicioDeRescate,

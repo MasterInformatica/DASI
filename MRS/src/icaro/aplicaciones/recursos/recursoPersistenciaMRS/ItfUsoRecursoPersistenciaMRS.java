@@ -1,10 +1,8 @@
 package icaro.aplicaciones.recursos.recursoPersistenciaMRS;
 
 import icaro.aplicaciones.MRS.informacion.Escenario;
-import icaro.aplicaciones.MRS.informacion.TipoCelda;
 
 import java.io.File;
-//import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.infraestructura.patronRecursoSimple.ItfUsoRecursoSimple;
 
 /**

@@ -2,21 +2,25 @@ package icaro.aplicaciones.MRS.informacion;
 
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 
-public class VocabularioMRS extends NombresPredefinidos{
+/**
+ * Vocabulario de todo el Sistema MRS
+ * 
+ * @author Luis Costero
+ * @author Jesus Domenech
+ */
+public class VocabularioMRS extends NombresPredefinidos {
 	// RUTAS de directorios
 	public static String RutaArte = "MRS/images";
 	public static String RutaArteBG = "MRS/images/mapa";
 	public static String RutaEscenarioCableado = "MRS/escenarios/Escenario1.xml";
-	
-	
+
 	// Inputs del automata Iniciador
 	public static String InputIniciaSimulacion = "iniciaSimulacion";
 	public static String InputCambioFicheroEscenario = "cambioFichero";
 
-	
 	// Mensajes
 	public static String MensajeAyuda = "ayuda";
-	
+
 	// TAGs y ATTRs XML
 	public static String TAG_PERSISTENCIA = "PersistenciaMRS";
 	public static String TAG_MAPA = "Mapa";

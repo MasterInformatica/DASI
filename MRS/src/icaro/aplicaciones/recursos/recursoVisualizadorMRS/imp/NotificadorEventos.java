@@ -11,6 +11,7 @@ public class NotificadorEventos extends ComunicacionAgentes{
 	/**
 	 * Id del recurso
 	 */
+	@SuppressWarnings("unused")
 	private String recurso;
 	/**
 	 * Id del agente a notificar
