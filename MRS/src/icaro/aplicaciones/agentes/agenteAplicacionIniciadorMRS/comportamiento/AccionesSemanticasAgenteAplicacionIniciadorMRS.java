@@ -194,6 +194,8 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		try {
 			this.itfEstadisticaMRS.finalizarRescate();
 			this.itfEstadisticaMRS.mostrarEstadisticas();
+			
+			this.itfVisualizadorMRS.cambioEstado(InicioEstado.ST_Fin);
 		}catch(Exception e){e.printStackTrace();}
 		
 		informarTodosNuevoEstado(InicioEstado.ST_Fin);

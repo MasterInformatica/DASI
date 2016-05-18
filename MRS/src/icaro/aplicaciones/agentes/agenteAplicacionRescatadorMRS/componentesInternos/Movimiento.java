@@ -141,15 +141,10 @@ public class Movimiento extends Thread{
 		if(bloqueos != null && bloqueos.size()>0){
 			for(Coordenada cc : bloqueos){
 				try {
-					this.itfusoRecPlanRuta.informarBloqueo(cc);
-				}catch(Exception e){e.printStackTrace();}
-				try {
+					if(this.itfusoRecPlanRuta.informarBloqueo(cc))
+						this.itfusoRecEstadistica.notificarObstaculo();
+					
 					this.itfusoRecVisualizador.informarBloqueo(cc);
-				}catch(Exception e){e.printStackTrace();}
-				
-				// Notificar al recurso de estadistica del bloqueo.
-				try {
-					this.itfusoRecEstadistica.notificarObstaculo();
 				}catch(Exception e){e.printStackTrace();}
 			}
 		}

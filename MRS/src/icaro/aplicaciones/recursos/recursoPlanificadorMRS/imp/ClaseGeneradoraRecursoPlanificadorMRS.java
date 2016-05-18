@@ -122,8 +122,12 @@ public class ClaseGeneradoraRecursoPlanificadorMRS extends ImplRecursoSimple
 	}
 
 	@Override
-	public void informarBloqueo(Coordenada c) {
+	//Devuelve true si no se conocia el obstaculo
+	public boolean informarBloqueo(Coordenada c) {
+		boolean ret = (this.mapaConocimiento.getMapa()[c.getX()][c.getY()] == TipoCelda.PASILLO);
 		this.mapaConocimiento.getMapa()[c.getX()][c.getY()] = TipoCelda.ESCOMBRO;
+		
+		return ret;
 	}
 	
 	@Override

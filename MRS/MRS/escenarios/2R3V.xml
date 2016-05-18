@@ -11,7 +11,7 @@
 	   <Celda tipo="PASILLO" x="2" y="4" />
 	   <Celda tipo="PASILLO" x="2" y="5" />
 	   <Celda tipo="PASILLO" x="2" y="6" />
-	   <Celda tipo="ESCOMBRO" x="2" y="10" />
+	   <Celda tipo="ESCOMBRO_UNK" x="2" y="10" />
 	   <Celda tipo="PASILLO" x="2" y="11" />
 	   <Celda tipo="PASILLO" x="2" y="12" />
 	   <Celda tipo="PASILLO" x="2" y="13" />
@@ -113,7 +113,7 @@
 	   <Celda tipo="PASILLO" x="10" y="22" />
 	
 	   <Celda tipo="PASILLO" x="11" y="2" />
-	   <Celda tipo="ESCOMBRO" x="11" y="8" />
+	   <Celda tipo="ESCOMBRO_UNK" x="11" y="8" />
 	   <Celda tipo="PASILLO" x="11" y="16" />
 	   <Celda tipo="PASILLO" x="11" y="20" />
 	   <Celda tipo="PASILLO" x="11" y="22" />

@@ -68,13 +68,6 @@ public class ClaseGeneradoraRecursoEstadisticaMRS extends ImplRecursoSimple
 		this.tiempoMaximoDeRecate = tiempoDeRescateActual;
 		if(this.tiempoMinimoDeRecate == 0)
 			this.tiempoMinimoDeRecate = tiempoDeRescateActual;
-		
-		// TODO remove Hack
-		try {
-			this.finalizarRescate();
-			this.mostrarEstadisticas();
-		}catch(Exception e){e.printStackTrace();}
-		// TODO remove Hack
 	}
 
 
