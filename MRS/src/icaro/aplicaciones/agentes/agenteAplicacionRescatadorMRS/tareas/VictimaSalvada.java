@@ -1,10 +1,13 @@
 package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas;
 
 
+import java.util.List;
+
 import icaro.aplicaciones.MRS.informacion.*;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ControlEvaluacionVictimas;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.EvaluacionObjetivo;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.MsgAsignacionObjetivo;
+import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.MsgRobotLibre;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.MisObjetivos;
@@ -13,11 +16,11 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
 
-public class ProcesarMsgAsignacionRobot extends TareaSincrona {
+public class VictimaSalvada extends TareaSincrona {
 	
 	@Override
 	public void ejecutar(Object... params) {
-		//t1.ejecutar(agentId, $yo, $fc, $mo, $obj, obj2, msg, ce, eo);
+		//	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, $lr, $o2, $ce, $eo);
 		/* 
 		 * params[0] -> nombre del agente
 		 * params[1] -> yo
@@ -25,8 +28,8 @@ public class ProcesarMsgAsignacionRobot extends TareaSincrona {
 		 * params[3] -> MisObjetivos
 		 * --------------------------------
 		 * params[4] -> Objetivo Actual
-		 * params[5] -> Objetivo que focalizar al salir.
-		 * params[6] -> Mensaje de asignación
+		 * params[5] -> Lista de robots
+		 * params[6] -> Objetivo a focalizar al salir
 		 * params[7] -> controlEvaluacionVictimas
 		 * params[8] -> evaluacionObjetivo
 		 */
@@ -36,39 +39,42 @@ public class ProcesarMsgAsignacionRobot extends TareaSincrona {
 		MisObjetivos mo = (MisObjetivos) params[3];
 		
 		Objetivo obj				= (Objetivo) params[4];
-		Objetivo obj2	 			= (Objetivo) params[5];
-		MsgAsignacionObjetivo msg	= (MsgAsignacionObjetivo) params[6];
+		ListaIds lr 				= (ListaIds) params[5];
+		Objetivo obj2	 			= (Objetivo) params[6];
 		
 		ControlEvaluacionVictimas ce = (ControlEvaluacionVictimas) params[7];
 		EvaluacionObjetivo eo 		 = (EvaluacionObjetivo) params[8];
 		//----------------------------------------------------------------------
-		assert(msg.getMinero() == eo.getVictimaName());
-		assert(msg.getRobot() == eo.getMejorRobot());
 		
-		//Eliminamos la lista de evaluaciones de la victima. Ya está resuelto
-		this.getEnvioHechos().eliminarHechoWithoutFireRules(eo);
-		
-		//Eliminamos la victima de la lista de victimas a rescatar
-		ce.eliminaVictima(msg.getMinero());
-		ce.setRobotAsignado(msg.getRobot());
-		this.getEnvioHechos().actualizarHechoWithoutFireRules(ce);
-
-		//Eliminamos el mensaje para que no se repita.
-		this.getEnvioHechos().eliminarHechoWithoutFireRules(msg);
-		
-		//Marcamos el objetivo como resuelto y lo eliminamos.
 		obj.setSolved();
-		this.getEnvioHechos().eliminarHecho(obj);
+		this.getEnvioHechos().actualizarHechoWithoutFireRules(obj);
+
 		fc.setFoco(obj2);
-		this.getEnvioHechos().actualizarHecho(fc);
+		obj2.setSolving();
+		this.getEnvioHechos().actualizarHechoWithoutFireRules(fc);
+		this.getEnvioHechos().actualizarHechoWithoutFireRules(obj2);
+
+		List<String> l = lr.getNames();
+		this.comunicator = this.getComunicator();
+		for(String s : l){
+			MsgRobotLibre msg = new MsgRobotLibre(agentId);
+			this.comunicator.enviarInfoAotroAgente(msg, s);
+		}
 		
+		ce.unsetRobotAsignado(agentId);
+		this.getEnvioHechos().actualizarHecho(ce);
+		//----------------------------------------------------------------------
+		System.out.println("------------------------------------------------------------------");
+		System.out.println("Quedan: " + ce.victimasArescatar.size() + " victimas a rescatar");
+		System.out.println("Soy el robot: " + identAgente);
+		System.out.println("La proxima victima a rescatar sería: " + ce.getProximaVictima());
+		System.out.println("------------------------------------------------------------------");
 		
 		//----------------------------------------------------------------------
 		// Informar mediante trazas
 		trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
 		trazas.aceptaNuevaTraza(new InfoTraza(this.identAgente,
-				"Recibido el mensaje del robot: " + msg.getRobot() + ", como el "
-				+ "mejor candidato para salvar a la victima " + msg.getMinero(),
+				"Yo, robot: " + agentId + " me he quedado libre",
 				InfoTraza.NivelTraza.info));
 		
 	}	

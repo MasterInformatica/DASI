@@ -47,7 +47,7 @@ public class ProcesarInicioFase extends TareaSincrona{
 
 			this.getEnvioHechos().insertarHechoWithoutFireRules(o);
 			this.getEnvioHechos().actualizarHechoWithoutFireRules(mo);
-			this.getEnvioHechos().actualizarHechoWithoutFireRules(f);
+			this.getEnvioHechos().actualizarHecho(f);
 			break;
 		case InicioEstado.ST_Inicio:
 			// LUISMA JESUS Robots Cambio de Fase a Inicio 

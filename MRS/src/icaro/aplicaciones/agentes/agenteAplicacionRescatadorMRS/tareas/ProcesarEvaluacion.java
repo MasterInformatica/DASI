@@ -17,7 +17,7 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
 public class ProcesarEvaluacion extends TareaSincrona {
 
 	/*
- 	 * PRocesa la evaluación de otro robot recibida por mensaje 	
+ 	 * Procesa la evaluación de otro robot recibida por mensaje 	
 	 */
 	
 	@Override
@@ -53,10 +53,10 @@ public class ProcesarEvaluacion extends TareaSincrona {
 		eo.addEvaluacion(msg.getRobot(), msg.getPuntuacion());
 		if( eo.getFinalizadaEvaluacion() ){
 			ce.informarEvaluacionFinalizada(msg.getMinero());
-			this.getEnvioHechos().actualizarHecho(ce);
+			this.getEnvioHechos().actualizarHechoWithoutFireRules(ce);
 		}
 		
-		this.getEnvioHechos().actualizarHecho(eo);
+		this.getEnvioHechos().actualizarHechoWithoutFireRules(eo);
 		this.getEnvioHechos().eliminarHecho(msg);
 		
 		//----------------------------------------------------------------------

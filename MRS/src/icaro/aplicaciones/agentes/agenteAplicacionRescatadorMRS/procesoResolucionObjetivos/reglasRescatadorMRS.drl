@@ -36,8 +36,8 @@ rule "Acciones Iniciales Rescatador MRS "
    TareaSincrona tarea1 = gestorTareas.crearTareaSincrona(InicializarRobot.class);
    tarea1.ejecutar(agentId);
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
-   //TODO: Crear los componentes internos aqui (mvto, ..., ...)
 end
+
 
 //------------  ProcesarInicioFase ---------------------
 rule "Nueva Fase"
@@ -115,8 +115,7 @@ end
 // OJO: Revisar la chapuza de timer //
 //----------------------------------//
 
-//----------- Desplazar objetivo actual -----------------------
-
+//----------- Todas victimas evaluadas objetivo actual -----------------------
 rule "Se han evaluado todas las victimas por todos los robots"
 timer( expr: 2000 )  //CHAPUZA, pero se adelantaba esta regla
  when
@@ -127,34 +126,33 @@ timer( expr: 2000 )  //CHAPUZA, pero se adelantaba esta regla
 
 	ce : ControlEvaluacionVictimas(finalizadaTodasEvaluaciones == true)
 	not(  SolicitudAyuda() )  //No quedan solicitudes por evaluar por nosotros
-	not( MsgEvaluacionRobot() )
+	not( MsgEvaluacionRobot() ) //Ni evaluaciones de otros robots que procesar
  then
-	$obj.setSolved();
-	update($obj);
+	//$obj.setSolved();
+	//update($obj);
 		
 
-	Objetivo o2 = new AsignarRobots();
-	o2.setSolving();
-	$mo.addObjetivo(o2);
-	$fc.setFoco(o2);
+	//Objetivo o2 = new AsignarRobots();
+	//o2.setSolving();
+	//$mo.addObjetivo(o2);
+	//$fc.setFoco(o2);
 
-	update($mo);
-	update($fc);
-	insert(o2); 
-	
+	//update($mo);
+	//update($fc);
+	//insert(o2); 	
 
-//	TareaSincrona t1 = gestorTareas.crearTareaSincrona(TodasVictimasEvaluadas.class);
-// 	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, ce);
+	TareaSincrona t1 = gestorTareas.crearTareaSincrona(TodasVictimasEvaluadas.class);
+ 	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, ce);
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end	
 
 
-
-//---- Objetivo de procesar asignaciones -----
+//----------- Intentar asignar víctima a mi mismo (en orden) -----------------------
 rule "Comprobar si asignar victima o esperar"
 salience(50)
  when
  	$yo : Robot( getName() == agentId, getStatus() == RobotStatus.PARADO)
+ 			
  	$obj: AsignarRobots(state == Objetivo.SOLVING)
  	$fc : Focus(foco == $obj)
  	$mo : MisObjetivos()
@@ -164,8 +162,11 @@ salience(50)
     ce : ControlEvaluacionVictimas($v: proximaVictima)
     eo : EvaluacionObjetivo(victimaName == $v, finalizadaEvaluacion == true)
     
+ 
     not ( MsgAsignacionObjetivo(minero == $v) )
  then
+ 	if(ce.isRobotAsigned(agentId))
+ 		return;
  	TareaSincrona t1 = gestorTareas.crearTareaSincrona(AsignarRobotVictima.class);
  	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, robots, ce, eo);
 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName()+" " + $v);
@@ -177,19 +178,29 @@ rule "Esperar confirmacion de robot asignado a objetivo"
 salience(80)
   when 
     $yo : Robot( getName() == agentId)
- 	$obj: EsperaRobotAsignado($v: minero, state == Objetivo.SOLVING)
- 	$fc : Focus(foco == $obj)
- 	$mo : MisObjetivos()
+// 	$obj: EsperaRobotAsignado($v: minero, state == Objetivo.SOLVING)
+// 	$fc : Focus(foco == $obj)
+// 	$mo : MisObjetivos()
   	
-  	obj2 : AsignarRobots()
-  	msg : MsgAsignacionObjetivo(minero == $v)
-  	
+//  	obj2 : AsignarRobots()
+//  	msg : MsgAsignacionObjetivo(minero == $v)
+    	msg : MsgAsignacionObjetivo($v:minero)	
   	ce : ControlEvaluacionVictimas()
   	eo : EvaluacionObjetivo(victimaName == $v, finalizadaEvaluacion == true)
   then
-  	TareaSincrona t1 = gestorTareas.crearTareaSincrona(ProcesarMsgAsignacionRobot.class);
-  	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, obj2, msg, ce, eo);
-  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
+	//Eliminamos la lista de evaluaciones de la victima. Ya está resuelto
+    retract(eo);
+ 
+    //Eliminamos la victima de la lista de victimas a rescatar
+  	ce.eliminaVictima(msg.getMinero());
+  	ce.setRobotAsignado(msg.getRobot());
+	update(ce);
+
+	retract(msg)
+		
+//  	TareaSincrona t1 = gestorTareas.crearTareaSincrona(ProcesarMsgAsignacionRobot.class);
+//  	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, obj2, msg, ce, eo);
+//  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end
 
 //Soy el mejor robot, tengo que informar a todos
@@ -211,6 +222,7 @@ rule "Informar que soy el mejor robot"
   	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, obj2, lr, ce, eo);
   	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end
+
 
 //--------------------------------------------------------------------------------------------
 // El robot ya esta en movimiento. Reglas para gestionar la llegada/parada de los robots.
@@ -243,15 +255,30 @@ rule "Victima salvada"
  	$ce : ControlEvaluacionVictimas($vv: proximaVictima)
  	$eo : EvaluacionObjetivo(victimaName == $vv, finalizadaEvaluacion == true) 
   then
-  	$obj.setSolved();
-  	$fc.setFoco($o2);
-  	update($obj);
-  	update($fc);	
-  
-  	$ce.unsetRobotAsignado(agentId);
-	update($ce);  	
-  	
-  	TareaSincrona t1 = gestorTareas.crearTareaSincrona(AsignarRobotVictima.class);
-	t1.ejecutar(agentId, $yo, $fc, $mo, $o2, $lr, $ce, $eo);
+ 	TareaSincrona t1 = gestorTareas.crearTareaSincrona(VictimaSalvada.class);
+  	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, $lr, $o2, $ce, $eo);
+	//.................................................................................................
+  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
+end
+
+
+//-----------------------------------------------------
+//-- Robtos se quedan libres, recibir msg y procesar --
+rule "Detectas robots inactivos"
+ salience(999)
+ when
+ 	$yo : Robot( getName() == agentId)
+ 	$fc : Focus()
+ 	$mo : MisObjetivos()
+
+    $lr: ListaIds()
+ 	
+ 	$msg: MsgRobotLibre()
+ 
+ 	$ce : ControlEvaluacionVictimas()
+ then
+ 	TareaSincrona t1 = gestorTareas.crearTareaSincrona(ProcesarRobotInactivo.class);
+  	t1.ejecutar(agentId, $yo, $fc, $mo, $lr, $msg, $ce);
+ 	//.................................................................................................
   	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," :REGLA " + drools.getRule().getName());
 end

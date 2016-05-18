@@ -21,8 +21,6 @@ public class TodasVictimasEvaluadas extends TareaSincrona {
 		 * params[4] -> Objetivo Actual
 		 * params[5] -> ControlEvaluacionVictimas
 		 */
-		
-		
 		String name 		= (String) params[0];
 		Robot yo 			= (Robot) params[1];
 		Focus f 			= (Focus) params[2];
@@ -31,8 +29,7 @@ public class TodasVictimasEvaluadas extends TareaSincrona {
 		Objetivo o			= (Objetivo) params[4];
 		
 		ControlEvaluacionVictimas ce 	= (ControlEvaluacionVictimas)params[5];
-		
-	
+		//----------------------------------------------------
 		
 		o.setSolved();
 		this.getEnvioHechos().actualizarHechoWithoutFireRules(o);
@@ -44,10 +41,9 @@ public class TodasVictimasEvaluadas extends TareaSincrona {
 		f.setFoco(o2);
 
 		
-
+		this.getEnvioHechos().actualizarHechoWithoutFireRules(mo);
+		this.getEnvioHechos().actualizarHechoWithoutFireRules(f);
 		this.getEnvioHechos().insertarHecho(o2);
-		this.getEnvioHechos().actualizarHecho(mo);
-		this.getEnvioHechos().actualizarHecho(f);
 		
 		
 		//----------------------------------------------------------------------

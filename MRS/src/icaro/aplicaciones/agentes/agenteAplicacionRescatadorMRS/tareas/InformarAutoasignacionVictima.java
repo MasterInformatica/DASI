@@ -45,6 +45,7 @@ public class InformarAutoasignacionVictima extends TareaSincrona {
 		
 		ControlEvaluacionVictimas ce = (ControlEvaluacionVictimas) params[7];
 		EvaluacionObjetivo eo 		 = (EvaluacionObjetivo) params[8];
+		//----------------------------------------------------------------------
 		
 		//Enviar mensaje de que soy el mejor al resto de robots
 		List<String> agtes = lr.getNames();

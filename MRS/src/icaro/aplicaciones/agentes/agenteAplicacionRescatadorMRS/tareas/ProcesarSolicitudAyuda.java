@@ -74,9 +74,12 @@ public class ProcesarSolicitudAyuda extends TareaSincrona {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assert(pr != null);
-	
-		eo.addEvaluacion(yo.getName(), l.size());
+		
+		if(l==null || l.size()<=0)
+			eo.addEvaluacion(yo.getName(), 1000000);
+		else
+			eo.addEvaluacion(yo.getName(), l.size());
+		
 		
 		this.getEnvioHechos().insertarHecho(eo);
 		

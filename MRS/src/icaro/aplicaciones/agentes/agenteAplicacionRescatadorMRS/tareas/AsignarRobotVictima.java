@@ -53,6 +53,7 @@ public class AsignarRobotVictima extends TareaSincrona {
 		while(mejorRobot != null && ce.isRobotAsigned(mejorRobot)){
 			mejorRobot = eo.getNextMejorRobot();
 		}
+		
 		if(mejorRobot == null)
 			this.noHayRobotDisponible(obj,f,lr,yo,ce,mo,eo);
 		else if(mejorRobot == yo.getName())
@@ -66,16 +67,22 @@ public class AsignarRobotVictima extends TareaSincrona {
 									  ControlEvaluacionVictimas ce, MisObjetivos mo,
 									  EvaluacionObjetivo eo){
 		//----------------------------------------------------------------------
+		//OJO: AQUI NUNCA SE DEBERÍA ENTRAR, YA QUE AL MENOS VOY A ESTAR YO DISPONIBLE
+		System.err.println("OJO: AQUI NO DEBERÍA ESTAR. Al menos debería estar yo disponbible (AsignarRobotVictima.java: l71");
+		//----------------------------------------------------------------------
+		
+		
 		// Informar mediante trazas
 		trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
 
 		trazas.aceptaNuevaTraza(new InfoTraza(this.identAgente,
 						"Recibida la evaluación de todos los robots. Por el momento no hay robots disponibles para esta"
-						+ "v�ctima. Esperando a finalizar" + eo.getVictimaName(),
+						+ "v�ctima. Esperando a finalizar" + eo.getVictimaName(),
 						InfoTraza.NivelTraza.info));
 		
 	}
 
+	
 	public void soyElMejorRobot(Objetivo obj, Focus f, ListaIds lr, Robot yo,
 								ControlEvaluacionVictimas ce, MisObjetivos mo,
 								EvaluacionObjetivo eo){
@@ -104,7 +111,8 @@ public class AsignarRobotVictima extends TareaSincrona {
 	public void noSoyElMejorRobot(Objetivo obj, Focus f, ListaIds lr, Robot yo,
 			ControlEvaluacionVictimas ce, MisObjetivos mo,
 			EvaluacionObjetivo eo){
-		
+	
+/*		
 		Objetivo obj2 = new EsperaRobotAsignado(eo.getVictimaName());
 		obj2.setSolving();
 		mo.addObjetivo(obj2);
@@ -112,8 +120,8 @@ public class AsignarRobotVictima extends TareaSincrona {
 		this.getEnvioHechos().actualizarHecho(mo);
 		this.getEnvioHechos().insertarHecho(obj2);
 		this.getEnvioHechos().actualizarHecho(f);
-		
-		
+*/		
+
 		
 		//----------------------------------------------------------------------
 		// Informar mediante trazas
