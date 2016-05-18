@@ -96,6 +96,9 @@
                             <icaro:componenteGestionado refId="AgenteAplicacionRescatadorMRS2" tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="AgenteAplicacionRescatadorMRS3" tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="AgenteAplicacionRescatadorMRS4" tipoComponente="AgenteAplicacion"/>
+                            <icaro:componenteGestionado refId="AgenteAplicacionRescatadorMRS5" tipoComponente="AgenteAplicacion"/>
+                            <icaro:componenteGestionado refId="AgenteAplicacionRescatadorMRS6" tipoComponente="AgenteAplicacion"/>
+                            
                             <icaro:componenteGestionado refId="AgenteAplicacionMineroMRS1" tipoComponente="AgenteAplicacion"/>
                             <icaro:componenteGestionado refId="AgenteAplicacionMineroMRS2" tipoComponente="AgenteAplicacion"/>
                    			<icaro:componenteGestionado refId="AgenteAplicacionMineroMRS3" tipoComponente="AgenteAplicacion"/>
@@ -123,6 +126,9 @@
                 <icaro:Instancia id="AgenteAplicacionRescatadorMRS2" refDescripcion="AgenteAplicacionRescatadorMRS"/>
                 <icaro:Instancia id="AgenteAplicacionRescatadorMRS3" refDescripcion="AgenteAplicacionRescatadorMRS"/>
                 <icaro:Instancia id="AgenteAplicacionRescatadorMRS4" refDescripcion="AgenteAplicacionRescatadorMRS"/>
+                <icaro:Instancia id="AgenteAplicacionRescatadorMRS5" refDescripcion="AgenteAplicacionRescatadorMRS"/>
+                <icaro:Instancia id="AgenteAplicacionRescatadorMRS6" refDescripcion="AgenteAplicacionRescatadorMRS"/>
+                
                 <icaro:Instancia id="AgenteAplicacionMineroMRS1" refDescripcion="AgenteAplicacionMineroMRS"/>
                 <icaro:Instancia id="AgenteAplicacionMineroMRS2" refDescripcion="AgenteAplicacionMineroMRS"/>
        			<icaro:Instancia id="AgenteAplicacionMineroMRS3" refDescripcion="AgenteAplicacionMineroMRS"/>
