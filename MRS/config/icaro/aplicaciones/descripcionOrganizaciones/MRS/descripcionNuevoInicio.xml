@@ -72,6 +72,7 @@
     <icaro:DescRecursoAplicacion nombre="RecursoVisualizadorMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.ClaseGeneradoraRecursoVisualizadorMRS"/>			            		
     <icaro:DescRecursoAplicacion nombre="RecursoPlanificadorMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPlanificadorMRS.imp.ClaseGeneradoraRecursoPlanificadorMRS"/>
     <icaro:DescRecursoAplicacion nombre="RecursoPersistenciaMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPersistenciaMRS.imp.ClaseGeneradoraRecursoPersistenciaMRS"/>			            		
+    <icaro:DescRecursoAplicacion nombre="RecursoEstadisticaMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoEstadisticaMRS.imp.ClaseGeneradoraRecursoEstadisticaMRS"/>			            		
 </icaro:DescRecursosAplicacion>
 
 </icaro:DescripcionComponentes>
@@ -106,6 +107,7 @@
                     	<icaro:componenteGestionado refId="RecursoVisualizadorMRS1" tipoComponente="RecursoAplicacion"/>	    
                     	<icaro:componenteGestionado refId="RecursoPlanificadorMRS1" tipoComponente="RecursoAplicacion"/>	    
                     	<icaro:componenteGestionado refId="RecursoPersistenciaMRS1" tipoComponente="RecursoAplicacion"/>
+                    	<icaro:componenteGestionado refId="RecursoEstadisticaMRS1" tipoComponente="RecursoAplicacion"/>
                     </icaro:componentesGestionados>
                 </icaro:InstanciaGestor>
             </icaro:Gestores>
@@ -130,6 +132,7 @@
                 <icaro:Instancia id="RecursoVisualizadorMRS1" refDescripcion="RecursoVisualizadorMRS" xsi:type="icaro:Instancia"/>
                 <icaro:Instancia id="RecursoPlanificadorMRS1" refDescripcion="RecursoPlanificadorMRS" xsi:type="icaro:Instancia"/>
                 <icaro:Instancia id="RecursoPersistenciaMRS1" refDescripcion="RecursoPersistenciaMRS" xsi:type="icaro:Instancia"/>
+                <icaro:Instancia id="RecursoEstadisticaMRS1" refDescripcion="RecursoEstadisticaMRS" xsi:type="icaro:Instancia"/>
         </icaro:RecursosAplicacion>
 
 	<!--******************************************************************************************************

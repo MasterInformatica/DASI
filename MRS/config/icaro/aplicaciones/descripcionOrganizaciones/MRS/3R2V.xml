@@ -72,6 +72,7 @@
     <icaro:DescRecursoAplicacion nombre="RecursoVisualizadorMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoVisualizadorMRS.imp.ClaseGeneradoraRecursoVisualizadorMRS"/>			            		
     <icaro:DescRecursoAplicacion nombre="RecursoPlanificadorMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPlanificadorMRS.imp.ClaseGeneradoraRecursoPlanificadorMRS"/>
     <icaro:DescRecursoAplicacion nombre="RecursoPersistenciaMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoPersistenciaMRS.imp.ClaseGeneradoraRecursoPersistenciaMRS"/>			            		
+    <icaro:DescRecursoAplicacion nombre="RecursoEstadisticaMRS" localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoEstadisticaMRS.imp.ClaseGeneradoraRecursoEstadisticaMRS"/>			            		
 </icaro:DescRecursosAplicacion>
 
 </icaro:DescripcionComponentes>
