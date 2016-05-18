@@ -56,8 +56,11 @@ public class EvaluacionObjetivo extends Objetivo {
 	public void addEvaluacion(String evaluador, int puntuacion){
 		assert(finalizadaEvaluacion==false);
 		
-		this.evaluaciones.add(new ParEvaluacion(evaluador, puntuacion));
-		
+		if (puntuacion != 0)
+			this.evaluaciones.add(new ParEvaluacion(evaluador, puntuacion));
+		else
+			this.evaluaciones.add(new ParEvaluacion(evaluador, Integer.MAX_VALUE));
+
 		if(this.evaluaciones.size() == this.numeroEvaluacionesEsperadas)
 			this.finalizadaEvaluacion = true;
 	}
