@@ -7,38 +7,52 @@ import icaro.aplicaciones.MRS.informacion.Victima;
 import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
 import icaro.aplicaciones.recursos.recursoPlanificadorMRS.ItfUsoRecursoPlanificadorMRS;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
-import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 import java.io.File;
 import java.util.List;
 
 /**
- * 
- * @author friker
- *
+ * Clase Generadora del Recurso VisualizadorMRS
+ * @author Jesus Domenech
  */
 public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		implements ItfUsoRecursoVisualizadorMRS {
-
+	/**
+	 * controlador de todo el sistema UI
+	 */
 	private ControladorVisorSimulador controladorUI;
 		
+	/**
+	 * Id del recurso Visualizador
+	 */
 	private String recursoId;
-
-	private String identAgenteaReportar;
+	
+	/**
+	 * Notificador de Eventos al Agente Iniciador
+	 */
 	private NotificadorEventos notificador;
 
+	/**
+	 * Interfaz del Recurso PlanificadorMRS
+	 */
 	private ItfUsoRecursoPlanificadorMRS itfPlanificadorMRS;
+
+	/**
+	 * Interfaz del Recurso PersistenciaMRS
+	 */
 	private ItfUsoRecursoPersistenciaMRS itfPersistenciaMRS;
 	
+	/**
+	 * Constructora, recibe el id del recurso
+	 * @param idRecurso nombre del recurso que se va a crear.
+	 * @throws Exception
+	 */
 	public ClaseGeneradoraRecursoVisualizadorMRS(String idRecurso) throws Exception {
-
 		super(idRecurso);
 		recursoId = idRecurso;
 		try {
-			
 			notificador = new NotificadorEventos(recursoId, null);
-			
 			controladorUI = new ControladorVisorSimulador(this);
 
 			trazas.aceptaNuevaTraza(new InfoTraza(idRecurso, "El constructor de la clase generadora del recurso "
@@ -51,12 +65,14 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 			throw e;
 		}
 	}
+	
 	@Override
 	public void setItf(ItfUsoRecursoPersistenciaMRS persi, ItfUsoRecursoPlanificadorMRS plan){
 		itfPersistenciaMRS = persi;
 		itfPlanificadorMRS = plan;
 		controladorUI.setItf(itfPersistenciaMRS,itfPlanificadorMRS);
 	}
+	
 	@Override
 	public void mostrarVictimaRescatada(String VictimaId) throws Exception{
 		throw new Error("NO SE LLAMA A mostrarVictimaRescatada!");
@@ -66,12 +82,12 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	public boolean mueveRobot(String idAgente, Coordenada coordActuales) throws Exception{
 		return controladorUI.mueveRobot(idAgente,coordActuales);
 	}
+	
 	@Override
 	public boolean mueveVictima(String idAgente, Coordenada coordActuales) throws Exception {
 		return controladorUI.mueveVictima(idAgente,coordActuales);
 	}
 
-	
 	@Override
 	public void termina() {
 		trazas.aceptaNuevaTraza(
@@ -110,9 +126,6 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		
 	}
 	
-	//*************************************************************
-	//*** : *******************************************************
-	//*************************************************************
 	@Override
 	public void muestraVentana()  throws Exception {
 		controladorUI.mostrarEscenario();
@@ -126,15 +139,11 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 	@Override
 	public void informaErrorEscenario(String string) throws Exception {
 		controladorUI.muestaError("Error al mostrar escenario",string);
-		controladorUI.errorFileEscenario();
-		
+		controladorUI.errorFileEscenario();		
 	}
 
 	@Override
 	public void escenarioElegidoValido()  throws Exception{
-		// TODO JESUS bloquear seleccion de escenario
-		//La idea de este método es que te llamo cuando el esenario es valido, y 
-		//tu bloquees de alguna manera para que no pueda cambiarlo durante la ejecucion.
 		trazas.aceptaNuevaTraza(new InfoTraza(this.recursoId,
 				"Informe de Escenario valido recibido",InfoTraza.NivelTraza.info));
 	}
@@ -144,10 +153,19 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		return notificador;
 	}
 	
+	/**
+	 * Abstraccion de la notificacion al agente inciciador
+	 * @param event tipo de evento
+	 */
 	public void notificar(String event) {
 		notificador.notificar(event);
 	}
 	
+	/**
+	 * Abstraccion de la notificacion al agente inciciador con informacion adicional
+	 * @param event tipo de evento
+	 * @param s informacion adicional al evento
+	 */
 	public void notificar(String event,String s) {
 		notificador.notificar(event,s);
 	}
@@ -159,12 +177,6 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		controladorUI.informarBloqueo(c);
 	}	
 
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5349292996954794349L;
-
 	@Override
 	public void setAgenteIniciador(String nombreAgente) {
 		notificador.setAgente(nombreAgente);
@@ -175,9 +187,10 @@ public class ClaseGeneradoraRecursoVisualizadorMRS extends ImplRecursoSimple
 		controladorUI.cambioEstado(st);
 		
 	}
-
-
-
 	
+	/**
+	 * serial Identificador del componente GUI
+	 */
+	private static final long serialVersionUID = -5349292996954794349L;
 }
 
