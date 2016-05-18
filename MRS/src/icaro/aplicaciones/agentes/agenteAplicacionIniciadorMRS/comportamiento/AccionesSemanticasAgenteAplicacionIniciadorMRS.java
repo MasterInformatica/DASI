@@ -29,25 +29,61 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
 //#end_nodespecialImports:specialImports <--specialImports-- DO NOT REMOVE THIS
 
 
-
+/**
+ * Agente Iniciador del Simulador
+ * @author Luis Costero
+ */
 public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		extends AccionesSemanticasAgenteReactivo {
 
+	/**
+	 * Interfaz de uso de la Configuracion de Icaro
+	 */
 	private ItfUsoConfiguracion           itfconfig;
+	
+	/**
+	 * Interfaz del Recurso VisualizadorMRS
+	 */
 	private ItfUsoRecursoVisualizadorMRS  itfVisualizadorMRS;
+	
+	/**
+	 * Interfaz del Recurso PlanificadorMRS
+	 */
 	private ItfUsoRecursoPlanificadorMRS  itfPlanificadorMRS;
+	
+	/**
+	 * Interfaz del Recurso PersistenciaMRS
+	 */
 	private ItfUsoRecursoPersistenciaMRS  itfPersistenciaMRS;
+	
+	/**
+	 * Interfaz del Recurso EstadisticaMRS
+	 */
 	private ItfUsoRecursoEstadisticaMRS   itfEstadisticaMRS;
 	
+	/**
+	 * Interfaz del Procesador de Objetivos
+	 */
 	private ItfProcesadorObjetivos        itfProcObjetivos;
 	
+	/**
+	 * Fichero que contiene el escenario
+	 */
 	private File ficheroEscenario;
+	
+	/**
+	 * Escenario de la simulacion
+	 */
 	private Escenario escenario;
 
 	
 	//--------------------------------------------------------------------------
 	// Estado inicial 
 	//--------------------------------------------------------------------------
+	/**
+	 * Transicion que se realiza al principio, obtiene todas las interfaces
+	 * y prepara el entorno de simulacion
+	 */
 	public void AccionComenzar(){
 		try{
 			//Referencias a las interfaces de icaro
@@ -78,17 +114,15 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 				
 		trazas.trazar(this.getNombreAgente(),
 					  "Accion AccionComenzar completada", NivelTraza.debug);
-				
-		
-		//Ejecutamos la accion de preguntar fichero en el siguiente estado
-		//this.informaraMiAutomata("leerFicheroTimeOut", null);
 	}
 	
 	
 	//--------------------------------------------------------------------------
 	// Estado esperandoEscenario 
 	//--------------------------------------------------------------------------
-
+	/**
+	 * Transicion que pide un archivo cada cierto tiempo
+	 */
 	public void getFicheroTimeOut(){
 		int tEspera = 1000; //milisegundos
 		
@@ -102,6 +136,9 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 			this.informaraMiAutomata("validaFichero", null);
 	}
 
+	/**
+	 * Transicion que comprueba un archivo
+	 */
 	public void checkFile(){
 		boolean error = false;
 		try{
@@ -129,6 +166,9 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		
 	}
 	
+	/**
+	 * Transicion que genera el entorno a la espera de iniciar la simulacion
+	 */
 	public void generarSimulacion(){ //input=generaSimulacion --> esperandoPlay
 		try {
 			this.itfVisualizadorMRS.escenarioElegidoValido();
