@@ -9,6 +9,7 @@ import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.Eval
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.MsgAsignacionObjetivo;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.MsgRobotLibre;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
+import icaro.infraestructura.entidadesBasicas.comunicacion.InfoContEvtMsgAgteReactivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.MisObjetivos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
@@ -33,6 +34,7 @@ public class VictimaSalvada extends TareaSincrona {
 		 * params[7] -> controlEvaluacionVictimas
 		 * params[8] -> evaluacionObjetivo
 		 */
+		
 		String agentId 	= (String) params[0];
 		Robot yo 		= (Robot) params[1];
 		Focus fc 		= (Focus) params[2];
@@ -69,6 +71,14 @@ public class VictimaSalvada extends TareaSincrona {
 		System.out.println("Soy el robot: " + identAgente);
 		System.out.println("La proxima victima a rescatar serÃ­a: " + ce.getProximaVictima());
 		System.out.println("------------------------------------------------------------------");
+		
+		
+		// Si no quedan más victimas que salvar, y todos los robots están libres, es que se ha acabado la simulación.
+		// Informo al agente Reactivo para que pase de estado y avise a quien tenga que avisar.
+		if(ce.getNumVictimasARescatar()==0 && ce.getNumRobotsOcupados()==0)
+			this.comunicator.informaraOtroAgenteReactivo(new InfoContEvtMsgAgteReactivo("finSimulacion"), "AgenteAplicacionIniciadorMRS1");
+		
+		
 		
 		//----------------------------------------------------------------------
 		// Informar mediante trazas
