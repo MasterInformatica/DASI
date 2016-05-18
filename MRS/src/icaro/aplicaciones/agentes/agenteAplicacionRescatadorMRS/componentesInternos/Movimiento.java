@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import icaro.aplicaciones.MRS.informacion.Coordenada;
 import icaro.aplicaciones.MRS.informacion.Rescatador;
 import icaro.aplicaciones.MRS.informacion.RobotStatus;
+import icaro.aplicaciones.recursos.recursoEstadisticaMRS.ItfUsoRecursoEstadisticaMRS;
 import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
 import icaro.aplicaciones.recursos.recursoPlanificadorMRS.ItfUsoRecursoPlanificadorMRS;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
@@ -19,18 +20,21 @@ public class Movimiento extends Thread{
 	public ItfUsoRecursoPlanificadorMRS itfusoRecPlanRuta;
 	public ItfUsoRecursoVisualizadorMRS itfusoRecVisualizador;
 	public ItfUsoRecursoPersistenciaMRS itfusoRecPersistencia;
+	public ItfUsoRecursoEstadisticaMRS  itfusoRecEstadistica;
 	
 	public ItfProcesadorObjetivos itfHechos;
 	
 	public Movimiento(	Rescatador yo,
 						ItfUsoRecursoPlanificadorMRS itfusoRecPlanRuta,
 						ItfUsoRecursoVisualizadorMRS itfusoRecVisualizador,
-						ItfUsoRecursoPersistenciaMRS itfusoRecPersistencia
+						ItfUsoRecursoPersistenciaMRS itfusoRecPersistencia,
+						ItfUsoRecursoEstadisticaMRS  itfusoRecEstadistica
 	){
 		this. yo = yo;
 		this.itfusoRecPlanRuta = itfusoRecPlanRuta;
 		this.itfusoRecVisualizador = itfusoRecVisualizador;
 		this.itfusoRecPersistencia = itfusoRecPersistencia;
+		this.itfusoRecEstadistica = itfusoRecEstadistica;
 		
 		this.alcanzado = true;
 	}
@@ -63,10 +67,13 @@ public class Movimiento extends Thread{
 						yo.move(siguientePaso);
 						try {
 							itfusoRecVisualizador.mueveRobot(yo.getName(), yo.getCoordenadasActuales());
-						
 							if(mineroMvto != null)
 								itfusoRecVisualizador.mueveVictima(mineroMvto, yo.getCoordenadasActuales());
-							
+						}catch(Exception e){e.printStackTrace();}
+						
+						// Notificar al recurso de estadistica del movimiento.
+						try {
+							this.itfusoRecEstadistica.notificarMovimineto(this.yo.getName());
 						}catch(Exception e){e.printStackTrace();}
 					}
 					
@@ -138,6 +145,11 @@ public class Movimiento extends Thread{
 				}catch(Exception e){e.printStackTrace();}
 				try {
 					this.itfusoRecVisualizador.informarBloqueo(cc);
+				}catch(Exception e){e.printStackTrace();}
+				
+				// Notificar al recurso de estadistica del bloqueo.
+				try {
+					this.itfusoRecEstadistica.notificarObstaculo();
 				}catch(Exception e){e.printStackTrace();}
 			}
 		}
