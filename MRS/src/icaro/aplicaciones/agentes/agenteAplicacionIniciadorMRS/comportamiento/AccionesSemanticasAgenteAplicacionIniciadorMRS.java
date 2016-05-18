@@ -13,6 +13,7 @@ import icaro.aplicaciones.MRS.informacion.Rescatador;
 import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.MRS.informacion.Victima;
 import icaro.aplicaciones.MRS.informacion.ListaIds;
+import icaro.aplicaciones.recursos.recursoEstadisticaMRS.ItfUsoRecursoEstadisticaMRS;
 import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
 import icaro.aplicaciones.recursos.recursoPlanificadorMRS.ItfUsoRecursoPlanificadorMRS;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
@@ -36,6 +37,7 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	private ItfUsoRecursoVisualizadorMRS  itfVisualizadorMRS;
 	private ItfUsoRecursoPlanificadorMRS  itfPlanificadorMRS;
 	private ItfUsoRecursoPersistenciaMRS  itfPersistenciaMRS;
+	private ItfUsoRecursoEstadisticaMRS   itfEstadisticaMRS;
 	
 	private ItfProcesadorObjetivos        itfProcObjetivos;
 	
@@ -62,6 +64,9 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 			
 			this.itfPersistenciaMRS = (ItfUsoRecursoPersistenciaMRS) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoPersistenciaMRS1");
+			
+			this.itfEstadisticaMRS = (ItfUsoRecursoEstadisticaMRS) this.itfUsoRepositorio
+					.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoEstadisticaMRS1");
 			
 			this.itfVisualizadorMRS.setItf(itfPersistenciaMRS, itfPlanificadorMRS);
 			//Comienzo ventana gráfica
@@ -102,7 +107,7 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		try{
 			this.escenario = this.itfPersistenciaMRS.parseEscenario(this.ficheroEscenario);
 			for(Robot robot : this.escenario.getListaRobotTipo("R")){
-				((Rescatador) robot).initCompIntMovimineto(itfPlanificadorMRS, itfVisualizadorMRS, itfPersistenciaMRS);
+				((Rescatador) robot).initCompIntMovimineto(itfPlanificadorMRS, itfVisualizadorMRS, itfPersistenciaMRS, itfEstadisticaMRS);
 			}
 			trazas.trazar(this.getNombreAgente(),  "Validación correcta", NivelTraza.debug);
 			this.informaraMiAutomata("generaSimulacion", null);			
@@ -164,6 +169,12 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	public void iniciarSimulacion(){ //input=iniciaSimulacion --> enEjecucion
 		//AQUI HABRIA QUE ENVIAR LAS ORDENES A LOS ROBOTS. EN EL AGENTE
 		//ORIGINAL LO HACE EN EL MÉTODO sendSequenceOfSimulatedVictimsToRobotTeam
+		ListaIds lr = new ListaIds(this.escenario.getListaRobots());
+		ListaIds lm = new ListaIds(this.escenario.getListaVictimas());
+		try {
+			this.itfEstadisticaMRS.iniciarRecate(lr.size(), lm.size(), lr.nombres);
+		}catch(Exception e){e.printStackTrace();}
+		
 		informarTodosNuevoEstado(InicioEstado.ST_Inicio);
 	}
 	
@@ -180,8 +191,12 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	//--------------------------------------------------------------------------
 	public void FinSimulacion(){ //input=finSimulacion --> finalizandoSimulacion
 		//AQUI HABRIA QUE ENVIAR LA SEÑAL DE FIN A LOS ROBOTS.
+		try {
+			this.itfEstadisticaMRS.finalizarRescate();
+			this.itfEstadisticaMRS.mostrarEstadisticas();
+		}catch(Exception e){e.printStackTrace();}
+		
 		informarTodosNuevoEstado(InicioEstado.ST_Fin);
-	
 	}
 	
 	//--------------------------------------------------------------------------

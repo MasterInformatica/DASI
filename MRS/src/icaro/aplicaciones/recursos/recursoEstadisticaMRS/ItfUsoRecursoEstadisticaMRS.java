@@ -4,7 +4,7 @@ import java.util.List;
 
 import icaro.infraestructura.patronRecursoSimple.ItfUsoRecursoSimple;
 
-public interface ItUsoRecursoEstadisticaMRS extends ItfUsoRecursoSimple{
+public interface ItfUsoRecursoEstadisticaMRS extends ItfUsoRecursoSimple{
 	// Al empezar el recate.
 	public void iniciarRecate(int numeroDeRescatadores, int numeroDeVictimas, List<String> listaDeRecadatore) throws Exception;
 	// Al finalizar el rescate.
@@ -12,7 +12,7 @@ public interface ItUsoRecursoEstadisticaMRS extends ItfUsoRecursoSimple{
 	// Al rescatar una victima.
 	public void notificarRescate() throws Exception;
 	// Al encontrarse con un obstaculo.
-	public void nitificarObstaculo() throws Exception;
+	public void notificarObstaculo() throws Exception;
 	// Al moverse.
 	public void notificarMovimineto(String rescatador) throws Exception;
 	

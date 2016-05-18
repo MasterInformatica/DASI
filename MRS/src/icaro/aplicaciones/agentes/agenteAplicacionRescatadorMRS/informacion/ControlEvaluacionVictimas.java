@@ -1,6 +1,7 @@
 package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,6 +18,7 @@ public class ControlEvaluacionVictimas {
 	
 	//Control de los robots ya asignados
 	public Map<String, Boolean> robotsAsignados;
+
 
 	
 	public ControlEvaluacionVictimas(List<String> robots){
@@ -86,5 +88,22 @@ public class ControlEvaluacionVictimas {
 		return (b);
 
 	}
+
+	public int getNumVictimasARescatar(){
+		return this.victimasArescatar.size();
+	}
+
+
+	public int getNumRobotsOcupados() {
+		int total = 0;
+		
+		Collection<Boolean> c = this.robotsAsignados.values();
+		for(Boolean b: c){
+			if(b) total++;
+		}
+		
+		return total;
+	}
+	
 
 }

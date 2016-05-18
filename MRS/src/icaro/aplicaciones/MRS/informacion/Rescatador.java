@@ -1,6 +1,7 @@
 package icaro.aplicaciones.MRS.informacion;
 
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.componentesInternos.Movimiento;
+import icaro.aplicaciones.recursos.recursoEstadisticaMRS.ItfUsoRecursoEstadisticaMRS;
 import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersistenciaMRS;
 import icaro.aplicaciones.recursos.recursoPlanificadorMRS.ItfUsoRecursoPlanificadorMRS;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
@@ -29,13 +30,15 @@ public class Rescatador implements Robot {
 	public void initCompIntMovimineto(
 			ItfUsoRecursoPlanificadorMRS itfusoRecPlanRuta,
 			ItfUsoRecursoVisualizadorMRS itfusoRecVisualizador,
-			ItfUsoRecursoPersistenciaMRS itfusoRecPersistencia
+			ItfUsoRecursoPersistenciaMRS itfusoRecPersistencia,
+			ItfUsoRecursoEstadisticaMRS  itfusoRecEstadistica
 	){
 		this.compInternoMovimineto = new Movimiento(
 				this,
 				itfusoRecPlanRuta,
 				itfusoRecVisualizador,
-				itfusoRecPersistencia
+				itfusoRecPersistencia,
+				itfusoRecEstadistica
 		);
 		this.compInternoMovimineto.start();
 	}

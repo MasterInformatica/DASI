@@ -9,11 +9,11 @@ import java.util.Map;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
 
-import icaro.aplicaciones.recursos.recursoEstadisticaMRS.ItUsoRecursoEstadisticaMRS;
+import icaro.aplicaciones.recursos.recursoEstadisticaMRS.ItfUsoRecursoEstadisticaMRS;
 import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
 
 public class ClaseGeneradoraRecursoEstadisticaMRS extends ImplRecursoSimple
-		implements ItUsoRecursoEstadisticaMRS {
+		implements ItfUsoRecursoEstadisticaMRS {
 
 	private static final long serialVersionUID = -3439155811399562462L;
 	
@@ -35,17 +35,6 @@ public class ClaseGeneradoraRecursoEstadisticaMRS extends ImplRecursoSimple
 	
 	public ClaseGeneradoraRecursoEstadisticaMRS(String idRecurso) throws RemoteException {
 		super(idRecurso);
-	
-		// TODO remove Hack
-		try {
-			ArrayList aux = new ArrayList<String>();
-			aux.add("Rescatador1"); aux.add("Rescatador2"); aux.add("Rescatador3");
-			this.iniciarRecate(3, 3, aux);
-			this.finalizarRescate();
-			
-			this.mostrarEstadisticas();
-		}catch(Exception e){e.printStackTrace();}
-		// TODO remove Hack
 	}
 
 
@@ -79,11 +68,18 @@ public class ClaseGeneradoraRecursoEstadisticaMRS extends ImplRecursoSimple
 		this.tiempoMaximoDeRecate = tiempoDeRescateActual;
 		if(this.tiempoMinimoDeRecate == 0)
 			this.tiempoMinimoDeRecate = tiempoDeRescateActual;
+		
+		// TODO remove Hack
+		try {
+			this.finalizarRescate();
+			this.mostrarEstadisticas();
+		}catch(Exception e){e.printStackTrace();}
+		// TODO remove Hack
 	}
 
 
 	@Override
-	public void nitificarObstaculo() throws Exception {
+	public void notificarObstaculo() throws Exception {
 		this.numeroDeObstaculosEncontrados += 1;}
 
 

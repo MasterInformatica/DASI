@@ -8,6 +8,8 @@ import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.Cont
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.EvaluacionObjetivo;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.MsgAsignacionObjetivo;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.MsgRobotLibre;
+import icaro.aplicaciones.recursos.recursoEstadisticaMRS.ItfUsoRecursoEstadisticaMRS;
+import icaro.aplicaciones.recursos.recursoPlanificadorMRS.ItfUsoRecursoPlanificadorMRS;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.comunicacion.InfoContEvtMsgAgteReactivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
@@ -45,7 +47,6 @@ public class VictimaSalvada extends TareaSincrona {
 		Objetivo obj2	 			= (Objetivo) params[6];
 		
 		ControlEvaluacionVictimas ce = (ControlEvaluacionVictimas) params[7];
-		EvaluacionObjetivo eo 		 = (EvaluacionObjetivo) params[8];
 		//----------------------------------------------------------------------
 		
 		obj.setSolved();
@@ -65,27 +66,27 @@ public class VictimaSalvada extends TareaSincrona {
 		
 		ce.unsetRobotAsignado(agentId);
 		this.getEnvioHechos().actualizarHecho(ce);
-		//----------------------------------------------------------------------
-		System.out.println("------------------------------------------------------------------");
-		System.out.println("Quedan: " + ce.victimasArescatar.size() + " victimas a rescatar");
-		System.out.println("Soy el robot: " + identAgente);
-		System.out.println("La proxima victima a rescatar serÃ­a: " + ce.getProximaVictima());
-		System.out.println("------------------------------------------------------------------");
-		
-		
+
 		// Si no quedan más victimas que salvar, y todos los robots están libres, es que se ha acabado la simulación.
 		// Informo al agente Reactivo para que pase de estado y avise a quien tenga que avisar.
 		if(ce.getNumVictimasARescatar()==0 && ce.getNumRobotsOcupados()==0)
 			this.comunicator.informaraOtroAgenteReactivo(new InfoContEvtMsgAgteReactivo("finSimulacion"), "AgenteAplicacionIniciadorMRS1");
 		
-		
-		
-		//----------------------------------------------------------------------
+
 		// Informar mediante trazas
 		trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
 		trazas.aceptaNuevaTraza(new InfoTraza(this.identAgente,
 				"Yo, robot: " + agentId + " me he quedado libre",
 				InfoTraza.NivelTraza.info));
 		
+		// Informar al recurso de estadistica.
+		ItfUsoRecursoEstadisticaMRS est = null;
+		try {
+			est = (ItfUsoRecursoEstadisticaMRS)
+					this.repoInterfaces.obtenerInterfaz(NombresPredefinidos.ITF_USO + "RecursoEstadisticaMRS1");
+			est.notificarRescate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}	
 }
