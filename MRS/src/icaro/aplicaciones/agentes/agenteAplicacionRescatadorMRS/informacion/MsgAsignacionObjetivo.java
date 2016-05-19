@@ -6,14 +6,14 @@ package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion;
  */
 public class MsgAsignacionObjetivo {
 	
-    /**
-	* Identificador del agente victima.
-    */
+	/**
+	 * Identificador del agente victima.
+	 */
 	public String minero;
 
-    /**
+	/**
 	* Identificador del agente rescatador.
-    */
+	*/
 	public String robot;
 	
 	/**
@@ -27,7 +27,7 @@ public class MsgAsignacionObjetivo {
 	}
 
 	/**
-	 * Funcion que nos consultar el identificador del agente victima.
+	 * Funcion que nos permite consultar el identificador del agente victima.
 	 * @return Identificador del agente victima.
 	 */
 	public String getMinero() {
@@ -35,7 +35,7 @@ public class MsgAsignacionObjetivo {
 	}
 
 	/**
-	 * Funcion que nos consultar el identificador del agente rescatdor.
+	 * Funcion que nos permite consultar el identificador del agente rescatdor.
 	 * @return Identificador del agente rescatdor.
 	 */
 	public String getRobot() {
