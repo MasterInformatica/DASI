@@ -7,9 +7,25 @@ import java.util.List;
 import icaro.aplicaciones.MRS.informacion.Victima;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 
+/**
+ * Clase que respresenta la evaluacion de una victima por parte de los rescatadores. 
+ * @author Luis Maria Costero Valero
+ */
 public class EvaluacionObjetivo extends Objetivo {
+	
+	/**
+	 * El identificador del agente victima.
+	 */
 	public String victimaName = null;
+	
+	/**
+	 * Referencia al objeto que representa la victima.
+	 */
 	public Victima victimaObjetivo = null;	
+	
+	/**
+	 * Valor booleano que indica si la.
+	 */
 	public boolean finalizadaEvaluacion = false;
 	public List<ParEvaluacion> evaluaciones = null;
 

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Clase que controla la evaluacion y asignacion de las victimas por parte de los rescatadores
+ * Clase que controla la evaluacion y asignacion de las victimas por parte de los rescatadores.
  * @author Luis Maria Costero Valero
  */
 public class ControlEvaluacionVictimas {
