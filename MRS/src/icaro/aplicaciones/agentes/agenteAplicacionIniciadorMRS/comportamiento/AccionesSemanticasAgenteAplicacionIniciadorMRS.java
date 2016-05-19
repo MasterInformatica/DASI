@@ -2,13 +2,8 @@ package icaro.aplicaciones.agentes.agenteAplicacionIniciadorMRS.comportamiento;
 
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import icaro.aplicaciones.MRS.informacion.Escenario;
 import icaro.aplicaciones.MRS.informacion.InicioEstado;
-import icaro.aplicaciones.MRS.informacion.Mapa;
 import icaro.aplicaciones.MRS.informacion.Rescatador;
 import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.MRS.informacion.Victima;
@@ -18,10 +13,7 @@ import icaro.aplicaciones.recursos.recursoPersistenciaMRS.ItfUsoRecursoPersisten
 import icaro.aplicaciones.recursos.recursoPlanificadorMRS.ItfUsoRecursoPlanificadorMRS;
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
-import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.factoriaEInterfacesPrObj.ItfProcesadorObjetivos;
 import icaro.infraestructura.patronAgenteReactivo.control.acciones.AccionesSemanticasAgenteReactivo;
-import icaro.infraestructura.recursosOrganizacion.configuracion.ItfUsoConfiguracion;
-import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza.NivelTraza;
 
 //Other imports used by this Agent
@@ -46,11 +38,7 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
 public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		extends AccionesSemanticasAgenteReactivo {
 
-	/**
-	 * Interfaz de uso de la Configuracion de Icaro
-	 */
-	private ItfUsoConfiguracion           itfconfig;
-	
+
 	/**
 	 * Interfaz del Recurso VisualizadorMRS
 	 */
@@ -72,11 +60,6 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	private ItfUsoRecursoEstadisticaMRS   itfEstadisticaMRS;
 	
 	/**
-	 * Interfaz del Procesador de Objetivos
-	 */
-	private ItfProcesadorObjetivos        itfProcObjetivos;
-	
-	/**
 	 * Fichero que contiene el escenario
 	 */
 	private File ficheroEscenario;
@@ -96,9 +79,6 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	 */
 	public void AccionComenzar(){
 		try{
-			//Referencias a las interfaces de icaro
-			this.itfconfig = (ItfUsoConfiguracion) this.itfUsoRepositorio
-					.obtenerInterfaz(NombresPredefinidos.NOMBRE_ITF_USO_CONFIGURACION);
 			
 			// Referencias a las interfaces de los recursos
 			this.itfVisualizadorMRS = (ItfUsoRecursoVisualizadorMRS) this.itfUsoRepositorio
@@ -134,7 +114,7 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	 * Transicion que pide un archivo cada cierto tiempo
 	 */
 	public void getFicheroTimeOut(){
-		int tEspera = 1000; //milisegundos
+		
 		
 		try {
 			this.ficheroEscenario = this.itfVisualizadorMRS.getFicheroEscenario();

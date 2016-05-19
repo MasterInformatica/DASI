@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.9" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <package id="1" language="java" name="icaro.aplicaciones.agentes.agenteAplicacionMineroMRS.objetivos" project="MRS" 
+    file="/MRS/src/icaro/aplicaciones/agentes/agenteAplicacionMineroMRS/objetivos" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="440" width="400" x="43" y="131"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="2" language="java" name="icaro.aplicaciones.agentes.agenteAplicacionMineroMRS.tareas" project="MRS" 
+    file="/MRS/src/icaro/aplicaciones/agentes/agenteAplicacionMineroMRS/tareas" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="431" width="385" x="465" y="143"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="3" language="java" name="icaro.aplicaciones.agentes.agenteAplicacionMineroMRS.objetivos.PedirAyuda" 
+    project="MRS" file="/MRS/src/icaro/aplicaciones/agentes/agenteAplicacionMineroMRS/objetivos/PedirAyuda.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="237" y="270"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="icaro.aplicaciones.agentes.agenteAplicacionMineroMRS.objetivos.EsperarAuxilio" 
+    project="MRS" file="/MRS/src/icaro/aplicaciones/agentes/agenteAplicacionMineroMRS/objetivos/EsperarAuxilio.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="232" y="439"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="icaro.aplicaciones.agentes.agenteAplicacionMineroMRS.tareas.ProcesarInicioFase" 
+    project="MRS" file="/MRS/src/icaro/aplicaciones/agentes/agenteAplicacionMineroMRS/tareas/ProcesarInicioFase.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="630" y="379"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="icaro.aplicaciones.agentes.agenteAplicacionMineroMRS.tareas.InicializarVictima" 
+    project="MRS" file="/MRS/src/icaro/aplicaciones/agentes/agenteAplicacionMineroMRS/tareas/InicializarVictima.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="629" y="266"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="icaro.aplicaciones.agentes.agenteAplicacionMineroMRS.tareas.EnviarPeticionAyuda" 
+    project="MRS" file="/MRS/src/icaro/aplicaciones/agentes/agenteAplicacionMineroMRS/tareas/EnviarPeticionAyuda.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="631" y="500"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="8" language="java" name="icaro.aplicaciones.agentes.agenteAplicacionMineroMRS.procesoResolucionObjetivos" 
+    project="MRS" file="/MRS/src/icaro/aplicaciones/agentes/agenteAplicacionMineroMRS/procesoResolucionObjetivos" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="298" y="75"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <dependency id="9">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="10">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

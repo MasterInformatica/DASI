@@ -3,7 +3,6 @@ package icaro.aplicaciones.agentes.agenteAplicacionMineroMRS.tareas;
 
 import icaro.aplicaciones.MRS.informacion.*;
 import icaro.aplicaciones.agentes.agenteAplicacionMineroMRS.objetivos.EsperarAuxilio;
-import icaro.aplicaciones.agentes.agenteAplicacionMineroMRS.objetivos.PedirAyuda;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.MisObjetivos;
@@ -18,6 +17,7 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
  */
 public class EnviarPeticionAyuda extends TareaSincrona {
 
+	@SuppressWarnings("unused")
 	@Override
 	public void ejecutar(Object... params) {
 		/* params[0] -> nombre del agente
