@@ -30,7 +30,17 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
 
 
 /**
- * Agente Iniciador del Simulador
+ * Agente Iniciador del Simulador <br/>
+ * Se trata de un Agente Reactivo, basado en un automata (<code>automata.xml</code>)
+ * las operaciones se realizan en las transiciones del automata. <br/>
+ * 
+ * Tiene 6 estados:<br/>
+ * - estadoInicial: comunica los recursos y agentes entre si. E inicializa todos los componentes<br/>
+ * - esperandoEscenario: obtiene el escenario de la simulacion, lo valida y notifica a los componentes<br/>
+ * - esperandoPlay: espera el evento de comienzo de la simulacion, admite cambiar de escenario <br/>
+ * - enEjecucion: espera el evento de fin de la simulacion <br/>
+ * - finalizandoSimulacion: finaliza la simulacion mostrando estadisticas y parando los componentes internos de los agentes<br/>
+ * - estadoFinal: ultimo estado del automata se considera acabado el simulador<br/>
  * @author Luis Costero
  */
 public class AccionesSemanticasAgenteAplicacionIniciadorMRS
@@ -206,9 +216,11 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	//--------------------------------------------------------------------------
 	// Estado esperandoPlay 
 	//--------------------------------------------------------------------------
+	/**
+	 * Transicion que se realiza al recibir el evento de inicio de la simulacion, nos 
+	 * lleva estado del automata enEjecucion. Y notifica el inicio de la simulacion. 
+	 */
 	public void iniciarSimulacion(){ //input=iniciaSimulacion --> enEjecucion
-		//AQUI HABRIA QUE ENVIAR LAS ORDENES A LOS ROBOTS. EN EL AGENTE
-		//ORIGINAL LO HACE EN EL MÉTODO sendSequenceOfSimulatedVictimsToRobotTeam
 		ListaIds lr = new ListaIds(this.escenario.getListaRobots());
 		ListaIds lm = new ListaIds(this.escenario.getListaVictimas());
 		try {
@@ -218,6 +230,9 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 		informarTodosNuevoEstado(InicioEstado.ST_Inicio);
 	}
 	
+	/**
+	 * Transicion que surge al recibir un cambio de fichero antes de comenzar la simulacion.
+	 */
 	public void cambiarFichero(){ //input=cambioFichero --> esperandoEscenario
 		// NO HACE NADA solo va al otro estado.
 		// si se add a mas estados podria tener que parar la ejecucion
@@ -229,8 +244,11 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	//--------------------------------------------------------------------------
 	// Estado enEjecucion 
 	//--------------------------------------------------------------------------
+	/**
+	 * Transicion realizada al recibir el evento de fin de simulacion. Notifica a todos
+	 * el cambio de estado de la simulacion y muestra las estadisticas.
+	 */
 	public void FinSimulacion(){ //input=finSimulacion --> finalizandoSimulacion
-		//AQUI HABRIA QUE ENVIAR LA SEÑAL DE FIN A LOS ROBOTS.
 		try {
 			this.itfEstadisticaMRS.finalizarRescate();
 			this.itfEstadisticaMRS.mostrarEstadisticas();
@@ -244,10 +262,11 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	//--------------------------------------------------------------------------
 	// Estado finalizandoSimulacion 
 	//--------------------------------------------------------------------------
+	/**
+	 * Transicion para finalizar el agente.
+	 */
 	public void AcabarDelTodo(){ //input=acabarDelTodo --> estadoFinal
-		//Este estado representa un momento en el que el sistema ha acabado de simular,
-		//pero no está en el estado final. Se podría utilizar para mostrar estadísticas
-		//y ese tipo de cosas.
+		
 	}
 	
 
@@ -257,9 +276,15 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 	  --------------------------*/ 
 	@Override
 	public void clasificaError() {
-		// TODO Auto-generated method stub
+		// TODO LUISMA Auto-generated method stub
 	}
 
+	/**
+	 * Envia un mensaje broadcast a todos los agentes y recursos notificando 
+	 * un cambio de estado de la simulacion. Es diferente a los cambios de 
+	 * estado del automata de este agente.
+	 * @param st nuevo estado definido en <code>InicioEstado</code>
+	 */
 	private void informarTodosNuevoEstado(String st){
 		InicioEstado ie = new InicioEstado(st);
 		for(Robot r : this.escenario.getListaRobots()){
@@ -274,7 +299,6 @@ public class AccionesSemanticasAgenteAplicacionIniciadorMRS
 			this.itfPersistenciaMRS.cambioEstado(st);
 			this.itfPlanificadorMRS.cambioEstado(st);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

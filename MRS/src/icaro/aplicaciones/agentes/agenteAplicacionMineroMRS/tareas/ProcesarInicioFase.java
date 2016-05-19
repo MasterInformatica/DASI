@@ -10,6 +10,13 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.MisObjetivos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 
+/**
+ * Tarea que procesa un cambio en las fases de la simulacion.
+ * En el caso de haber un nuevo escenario reinicia la victima. Si 
+ * comienza la simulacion pide ayuda. Y cuando termina la simulacion
+ * no necesita hacer nada.
+ * @author Jesus Domenech
+ */
 public class ProcesarInicioFase extends TareaSincrona{
 
 	@Override
@@ -53,7 +60,6 @@ public class ProcesarInicioFase extends TareaSincrona{
 			this.getEnvioHechos().actualizarHechoWithoutFireRules(mo);
 			this.getEnvioHechos().actualizarHechoWithoutFireRules(f);
 		case InicioEstado.ST_Fin:
-			// LUISMA JESUS Victimas Cambio de Fase a Fin
 		default:
 			break;
 		}

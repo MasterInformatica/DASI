@@ -11,7 +11,11 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
-
+/**
+ * Tarea para notificar la necesidad de ayuda de un minero.
+ * @author Jesus Domenech
+ *
+ */
 public class EnviarPeticionAyuda extends TareaSincrona {
 
 	@Override
@@ -54,6 +58,11 @@ public class EnviarPeticionAyuda extends TareaSincrona {
 		
 	}
 	
+	/**
+	 * Encapsulado del envio de mensajes a todos los robots
+	 * @param lr listado de robots
+	 * @param msj mensaje a enviar
+	 */
 	private void sendBroadcast(ListaIds lr, Object msj){
 		for(String name : lr.getNames()){
 			comunicator.enviarInfoAotroAgente(msj,name);

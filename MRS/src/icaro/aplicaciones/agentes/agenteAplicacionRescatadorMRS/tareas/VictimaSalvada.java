@@ -67,7 +67,7 @@ public class VictimaSalvada extends TareaSincrona {
 		ce.unsetRobotAsignado(agentId);
 		this.getEnvioHechos().actualizarHecho(ce);
 
-		// Si no quedan más victimas que salvar, y todos los robots están libres, es que se ha acabado la simulación.
+		// Si no quedan mas victimas que salvar, y todos los robots esten libres, es que se ha acabado la simulacion.
 		// Informo al agente Reactivo para que pase de estado y avise a quien tenga que avisar.
 		if(ce.getNumVictimasARescatar()==0 && ce.getNumRobotsOcupados()==0)
 			this.comunicator.informaraOtroAgenteReactivo(new InfoContEvtMsgAgteReactivo("finSimulacion"), "AgenteAplicacionIniciadorMRS1");
