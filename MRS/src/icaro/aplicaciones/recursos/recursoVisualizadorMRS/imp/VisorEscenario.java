@@ -105,7 +105,7 @@ public class VisorEscenario extends JFrame {
 	 * @param idAgente nombre del agente
 	 * @param coord posicion donde se quiere dibujar
 	 * @param tipo tipo de agente (Victima o Robot) (Minero o Rescatador)
-	 * @return
+	 * @return devuelve <code>true</code> si lo ha podido mover
 	 */
 	public boolean mueveAgente(String idAgente, Coordenada coord, String tipo) {
 		// Get y remove Current position

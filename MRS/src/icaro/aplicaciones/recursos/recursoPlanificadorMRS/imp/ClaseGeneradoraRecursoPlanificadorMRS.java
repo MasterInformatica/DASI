@@ -14,18 +14,28 @@ import java.util.Arrays;
 
 
 /**
- * 
+ * Clase Generadora del Recurso PlanificadorMRS
  * @author Hristo
- *
  */
-
 public class ClaseGeneradoraRecursoPlanificadorMRS extends ImplRecursoSimple
 		implements ItfUsoRecursoPlanificadorMRS {
 
-	private static final long serialVersionUID = -7272037961162939091L;
+	/**
+	 * Id del recurso
+	 */
 	private String recursoId;
+	
+	/**
+	 * Mapa sobre el que se calculan las rutas
+	 */
 	private Mapa mapaConocimiento;
 	
+	
+	/**
+	 * Constructora recibe su id
+	 * @param idRecurso id del recurso
+	 * @throws Exception
+	 */
 	public ClaseGeneradoraRecursoPlanificadorMRS(String idRecurso) throws Exception {
 		super(idRecurso);
 		recursoId = idRecurso;
@@ -58,6 +68,16 @@ public class ClaseGeneradoraRecursoPlanificadorMRS extends ImplRecursoSimple
 		return this._getRuta(map, start, finish, visited, 0, new int[]{-1});
 	}
 
+	/**
+	 * Metodo privado para la recursion del calculo de ruta
+	 * @param map Mapa en formato array TipoCelda
+	 * @param start punto de inicio
+	 * @param finish punto de fin
+	 * @param visited array de coordenadas visitadas
+	 * @param count numero de pasos
+	 * @param minRuta ruta mas corta hasta el momento
+	 * @return
+	 */
 	private ArrayList<Coordenada> _getRuta(TipoCelda[][] map, Coordenada start, Coordenada finish, boolean[][] visited, int count, int[] minRuta){
 		if(minRuta[0] != -1)
 			if(minRuta[0] < count)
@@ -122,7 +142,6 @@ public class ClaseGeneradoraRecursoPlanificadorMRS extends ImplRecursoSimple
 	}
 
 	@Override
-	//Devuelve true si no se conocia el obstaculo
 	public boolean informarBloqueo(Coordenada c) {
 		boolean ret = (this.mapaConocimiento.getMapa()[c.getX()][c.getY()] == TipoCelda.PASILLO);
 		this.mapaConocimiento.getMapa()[c.getX()][c.getY()] = TipoCelda.ESCOMBRO;
@@ -151,4 +170,7 @@ public class ClaseGeneradoraRecursoPlanificadorMRS extends ImplRecursoSimple
 		else
 			mapaConocimiento.getMapa()[x][y] = t;
 	}
+	
+	private static final long serialVersionUID = -7272037961162939091L;
+	
 }

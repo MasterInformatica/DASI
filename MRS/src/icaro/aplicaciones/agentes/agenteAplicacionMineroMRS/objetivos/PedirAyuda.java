@@ -10,6 +10,9 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
  */
 public class PedirAyuda extends Objetivo {
 	
+	/**
+	 * Constructora del objetivo, lo pone en estado resolviendo
+	 */
 	public PedirAyuda(){
 		super.setgoalId("PedirAyuda");
 		

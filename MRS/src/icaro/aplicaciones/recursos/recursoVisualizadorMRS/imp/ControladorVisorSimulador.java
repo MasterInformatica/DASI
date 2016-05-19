@@ -116,7 +116,7 @@ public class ControladorVisorSimulador {
 	
 	/**
 	 * Manda cambiar la lista de victimas
-	 * @param listaRobots nueva lista de victimas
+	 * @param listaVictimas nueva lista de victimas
 	 */
 	public void setVictimas(List<Victima> listaVictimas) {
 		if ( visorEscenario != null )
