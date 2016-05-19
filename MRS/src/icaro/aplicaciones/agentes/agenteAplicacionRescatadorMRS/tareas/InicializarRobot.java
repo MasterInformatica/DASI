@@ -9,15 +9,12 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
-
+/** 
+ * Encargada de:
+ *   - Inicializar foco.
+ *   - Inicializa componentes internos.
+ */
 public class InicializarRobot extends TareaSincrona {
-
-	/** 
-	 * Encargada de:
-	 *   - Inicializar foco
-	 *   - Inicializa componentes internos (??)
-	 *   - Crear primer objetivo
-	 */
 	
 	@Override
 	public void ejecutar(Object... params) {

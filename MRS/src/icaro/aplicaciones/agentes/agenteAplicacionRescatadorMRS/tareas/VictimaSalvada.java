@@ -18,7 +18,12 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
-
+/**
+ * Tarea que se dispara al salvar a una victima.
+ * Avisa a los demás robots de que la victima ha sido rescatada con exito.
+ * Resuelve el objetivo 'SacarVictima'.
+ * El objetivo que fija es 'AsignarRobots'.
+ */
 public class VictimaSalvada extends TareaSincrona {
 	
 	@Override

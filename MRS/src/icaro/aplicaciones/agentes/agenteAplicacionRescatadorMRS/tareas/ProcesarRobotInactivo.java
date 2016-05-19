@@ -15,7 +15,9 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
-
+/**
+ * Procesar un mensaje de robot libre, 'MsgRobotLibre'.
+ */
 public class ProcesarRobotInactivo extends TareaSincrona {
 	@Override
 	public void ejecutar(Object... params) {

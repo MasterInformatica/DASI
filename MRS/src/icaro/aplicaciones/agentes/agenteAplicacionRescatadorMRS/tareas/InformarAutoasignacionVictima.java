@@ -16,6 +16,12 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
+/**
+ * Esta tarea resuelve el objetivo 'InformarSoyElMejorRobot',
+ * enviando un mensaje al resto de agentes rescatadores.
+ * Seguidamente se inicializa el componente de movimiento hacia la victima asignada.
+ * El siguiente objetivo que se fija es 'AlcanzarVictima'.
+ */
 public class InformarAutoasignacionVictima extends TareaSincrona {
 
 	@Override

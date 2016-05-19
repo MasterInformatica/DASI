@@ -7,7 +7,11 @@ import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.*;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
-
+/**
+ * Tarea que se dispara una vez recibidas todas las evaluaciones
+ * por parte de los agentes rescatadores.
+ * Resuelve el objetivo 'EvaluarSolicitudes' y fija el nuevo como 'AsignarRobots'.
+ */
 public class TodasVictimasEvaluadas extends TareaSincrona {
 
 	@Override

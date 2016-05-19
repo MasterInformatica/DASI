@@ -10,6 +10,9 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.MisObjetivos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 
+/**
+ * Controlar los cambios de fase de la simulacion, [ST_Inicio, ST_Fin, ST_NuevoEscenario].
+ */
 public class ProcesarInicioFase extends TareaSincrona{
 
 	@Override

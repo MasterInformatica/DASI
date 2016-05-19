@@ -19,7 +19,7 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
  * nuevos objetivos según el caso:
  *   a) Si yo soy el mejor robot para el minero, se genera el objetivo de informar
  * al resto de robots.
- *   b) En caso contrario, se genera el objetivo de esperar al mejro robot que nos
+ *   b) En caso contrario, se genera el objetivo de esperar al mejor robot que nos
  * informe
  */
 public class AsignarRobotVictima extends TareaSincrona {

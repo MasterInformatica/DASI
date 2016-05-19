@@ -16,17 +16,10 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
-
+/**
+ * Procesar un mensaje de auxilio, 'PedirAyuda'.
+ */
 public class ProcesarSolicitudAyuda extends TareaSincrona {
-
-	/*
-	 * Inicializa las estructuras necesarias para procesar la petición de ayuda
-	 * 
-	 * 0: Mensaje de ayuda
-	 * 1: control evaluacion
-	 * 2: lista de robots
-	 * 3: Robot yo
-	 */
 	
 	@Override
 	public void ejecutar(Object... params) {

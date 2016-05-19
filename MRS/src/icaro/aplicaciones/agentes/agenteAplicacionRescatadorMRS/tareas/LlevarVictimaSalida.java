@@ -17,12 +17,10 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
 /**
- * Cuando se reciben todas las evaluaciones de un minero, se procesan generando
- * nuevos objetivos según el caso:
- *   a) Si yo soy el mejor robot para el minero, se genera el objetivo de informar
- * al resto de robots.
- *   b) En caso contrario, se genera el objetivo de esperar al mejro robot que nos
- * informe
+ * Al alcanzar al minero que tenemos que rescatar se dispara esta tarea.
+ * Primero se informa al minero de que acabamos de alcanzarle.
+ * Seguidamente se inicializa el componente de movimiento hacia la salida de la mina.
+ * Finalmente se fija el nuevo objetivo 'SacarVictima'. 
  */
 public class LlevarVictimaSalida extends TareaSincrona {
 	@Override

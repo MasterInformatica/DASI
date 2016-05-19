@@ -9,6 +9,13 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.MisObjetivos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 
+/** 
+ * Encargada de:
+ *   - Conocer el equipo.
+ *   - Inicializa componentes internos.
+ *   
+ * El siguiente objtivo es 'EvaluarSolicitudes'. 
+ */
 public class ProcesarNombreEquipo extends TareaSincrona {
 
 	@Override

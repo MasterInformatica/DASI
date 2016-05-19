@@ -12,7 +12,9 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
-
+/**
+ * Procesar un mensaje de asignacion, 'MsgAsignacionObjetivo'.
+ */
 public class ProcesarMsgAsignacionRobot extends TareaSincrona {
 	
 	@Override

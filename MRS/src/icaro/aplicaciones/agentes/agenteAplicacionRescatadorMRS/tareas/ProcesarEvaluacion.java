@@ -13,13 +13,11 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
-
+/**
+ * Procesar un mensaje de evaluacion, 'MsgEvaluacionRobot'.
+ */
 public class ProcesarEvaluacion extends TareaSincrona {
 
-	/*
- 	 * Procesa la evaluación de otro robot recibida por mensaje 	
-	 */
-	
 	@Override
 	public void ejecutar(Object... params) {
 		/* 
