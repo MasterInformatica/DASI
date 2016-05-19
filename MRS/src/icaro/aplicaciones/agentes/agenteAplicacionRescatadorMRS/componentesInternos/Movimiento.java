@@ -11,19 +11,68 @@ import icaro.aplicaciones.recursos.recursoPlanificadorMRS.ItfUsoRecursoPlanifica
 import icaro.aplicaciones.recursos.recursoVisualizadorMRS.ItfUsoRecursoVisualizadorMRS;
 import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.factoriaEInterfacesPrObj.ItfProcesadorObjetivos;
 
+/**
+ * Componente interno de movimiento del agente rescatados
+ * @author Hristo Ivanov
+ * @author Luis Maria Costero Valero
+ */
 public class Movimiento extends Thread{
+	
+	/**
+	 * Coordena destino que el agente debe alcanzar.
+	 */
 	public Coordenada destino;
+	
+	/**
+	 * Referencia a si mismo, al objeto que representa el rescatador.
+	 */
 	public Rescatador yo;
+	
+	/**
+	 * Valor booleano que indica si hemos o no alcanado el objetivo.
+	 */
 	public boolean alcanzado;
+	
+	/**
+	 * Identificador del agente minero que estamos guiando hacia la salida.
+	 * Al alcanzar el minero objetivo, el robot se dispone a llevar a este hacia
+	 * la salida. Este identificador es utilizado para mover al agente minero.
+	 */
 	public String mineroMvto = null;
 	
+	/**
+	 * Referencia al recurso de planificación de rutas.
+	 */
 	public ItfUsoRecursoPlanificadorMRS itfusoRecPlanRuta;
+	
+	/**
+	 * Referencia al recurso de visualizacion.
+	 */
 	public ItfUsoRecursoVisualizadorMRS itfusoRecVisualizador;
+	
+	/**
+	 * Referencia al recurso de persistencia.
+	 */
 	public ItfUsoRecursoPersistenciaMRS itfusoRecPersistencia;
+	
+	/**
+	 * Referencia al recurso de estadistica.
+	 */
 	public ItfUsoRecursoEstadisticaMRS  itfusoRecEstadistica;
 	
+	/**
+	 * Referencia a la base de conocimiento del agente. 
+	 */
 	public ItfProcesadorObjetivos itfHechos;
 	
+	/**
+	 * Constructora del componente interno Movimiento
+	 * @param yo Referencia a si mismo, al objeto que representa el rescatador.
+	 * @param itfusoRecPlanRuta Referencia al recurso de planificación de rutas.
+	 * @param itfusoRecVisualizador Referencia al recurso de visualizacion.
+	 * @param itfusoRecPersistencia Referencia al recurso de persistencia.
+	 * @param itfusoRecEstadistica Referencia al recurso de estadistica.
+	 */
 	public Movimiento(	Rescatador yo,
 						ItfUsoRecursoPlanificadorMRS itfusoRecPlanRuta,
 						ItfUsoRecursoVisualizadorMRS itfusoRecVisualizador,
@@ -89,6 +138,11 @@ public class Movimiento extends Thread{
 		}
 	}
 	
+	/**
+	 * Fija el objeto al que el robot debe dirigirse.
+	 * Fijado el nuevo destino el agente se pone en movimiento automaticamente.
+	 * @param destino La coordenada de destino.
+	 */
 	public void setDestino(Coordenada destino){
 		int st = this.yo.getStatus();
 		if(st == RobotStatus.PARADO){
@@ -101,16 +155,17 @@ public class Movimiento extends Thread{
 		this.alcanzado = false;
 	}
 	
+	/**
+	 * Fija el agente minero que estamos guiando hacia la salida.
+	 * @param m Identificador del agente minero que estamos guiando hacia la salida.
+	 */
 	public void setMinero(String m){
 		this.mineroMvto = m;
-/*		try {
-			this.itfusoRecVisualizador.mostrarVictimaRescatada(m);1
-		} catch (Exception e) {
-			e.printStackTrace();
-		} */
 	}
 	
-	
+	/**
+	 * Funcion que se invoca al alcanzar el destino.
+	 */
 	private void alcanzarDestino(){
 		this.alcanzado = true;
 		
@@ -125,11 +180,11 @@ public class Movimiento extends Thread{
 		}
 		
 		this.itfHechos.actualizarHecho(this.yo);
-		
-		
-		//this.destino = null;
 	}
 	
+	/**
+	 * El agente rescatador comprueba la presencia de derrumbes.
+	 */
 	private void checkBloqueos(){
 		Coordenada c = new Coordenada(yo.getCoordenadasActuales());
 		ArrayList<Coordenada> bloqueos = null;
@@ -150,8 +205,11 @@ public class Movimiento extends Thread{
 		}
 	}
 
+	/**
+	 * Fija la referencia a la base de conocimiento del agente.
+	 * @param envioHechos Referencia a la base de conocimiento del agente.
+	 */
 	public void setItHechos(ItfProcesadorObjetivos envioHechos) {
 		this.itfHechos = envioHechos;
 	}
-
 }
