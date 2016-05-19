@@ -24,39 +24,67 @@ public class EvaluacionObjetivo extends Objetivo {
 	public Victima victimaObjetivo = null;	
 	
 	/**
-	 * Valor booleano que indica si la.
+	 * Valor booleano que indica si la evaluacion de la victima ha terminado.
 	 */
 	public boolean finalizadaEvaluacion = false;
+
+	/**
+	 * Lista con las evaluaciones de los agentes rescatadores.
+	 */
 	public List<ParEvaluacion> evaluaciones = null;
 
+	/**
+	 * Entero que especifica el numero de evaluaciones que deben recibirse.
+	 */
 	private int numeroEvaluacionesEsperadas;
 
+	/**
+	 * Entero que especifica el indice del rescatador que esta mas cerca de la victima,
+     * el rescatador tambien debe estar libre.
+	 */
 	private int idxMejorRobot = 0;
 	
 	
+	/**
+	 * Funcion que nos permite consultar el identificador del agente victima asociado a este objeto.
+     * @return El identificador del agente victima.
+	 */
 	public String getVictimaName() {
 		return victimaName;
 	}
 
 
+	/**
+	 * Funcion que nos permite consultar el objeto Victima asociado a este objeto.
+     * @return El objeto Victima.
+	 */
 	public Victima getVictimaObjetivo() {
 		return victimaObjetivo;
 	}
 
 
-	public boolean isFinalizadaEvaluacion() {
-		return finalizadaEvaluacion;
-	}
-
+	/**
+	 * Funcion que nos permite consultar el estado de la evaluacion.
+     * @return Verdadero en caso de haber terminado la evaluacion. Falso en caso contrario.
+	 */
 	public boolean getFinalizadaEvaluacion(){
 		return finalizadaEvaluacion;
 	}
 
+	/**
+	 * Funcion que nos permite consultar el numero de evaluaciones esperadas.
+     * @return Entero que indica el numero numero de evaluaciones esperadas.
+	 */
 	public int getNumeroEvaluacionesEsperadas() {
 		return numeroEvaluacionesEsperadas;
 	}
 
 
+	/**
+	 * Constructora de la clase.
+	 * @param v Referencia al objeto Victima.
+	 * @param numVotosObjetivo Numero de evaluaciones esperadas.
+	 */
 	public EvaluacionObjetivo(Victima v, int numVotosObjetivo){
 		this.victimaObjetivo = v;
 		this.victimaName = v.getName();
@@ -69,6 +97,11 @@ public class EvaluacionObjetivo extends Objetivo {
 	}
 	
 	
+	/**
+	 * Funcion que nos permite añadir una evaluacion a la lista de evaluaciones.
+     * @param evaluador El identificador del agente rescatador al que pertenece la evaluacion.
+     * @param puntuacion El valor numerico de la puntuacion.
+	 */
 	public void addEvaluacion(String evaluador, int puntuacion){
 		assert(finalizadaEvaluacion==false);
 		
@@ -81,21 +114,48 @@ public class EvaluacionObjetivo extends Objetivo {
 			this.finalizadaEvaluacion = true;
 	}
 	
+
+	/**
+	 * Funcion que nos permite consultar el mejor robot para rescatar a la victima.
+     * return El identificador del agente rescatador que esta mas cerca de la victima.
+	 */
 	public String getMejorRobot(){
 		Collections.sort(this.evaluaciones);
 		return this.evaluaciones.get(this.idxMejorRobot).evaluador;
 	}
 	
+	/**
+	 * Funcion que nos permite consultar el siguiente mejor robot para rescatar a la victima.
+	 * Esta funcion es util porque el rescatador optimo puede ya estar ocuppado rescatando una victima. 
+     * return El identificador del siguiente agente rescatador que esta mas cerca de la victima.
+	 */
 	public String getNextMejorRobot() {
 		if(this.idxMejorRobot >= this.evaluaciones.size()-1)
 			return null;
 		return this.evaluaciones.get(++this.idxMejorRobot).evaluador;
 	}
 	
+    /**
+     * Clase que respresenta un par <(agente rescatador), (evaluacion)>
+     * @author Luis Maria Costero Valero
+     */
 	protected class ParEvaluacion implements Comparable<ParEvaluacion>{
+
+        /**
+         * Identificador del agente rescatador.
+         */
 		private String evaluador;
+
+        /**
+         * Valor numerico de la evaluacion realizada por el agente rescatador.
+         */
 		private int evaluacion;
 		
+        /**
+         * Constructora de la clase.
+         * @param s Identificador del agente rescatador.
+         * @param i Valor numerico de la evaluacion realizada por el agente rescatador.
+         */
 		public ParEvaluacion(String s, int i){
 			this.evaluador = s;
 			this.evaluacion = i;
