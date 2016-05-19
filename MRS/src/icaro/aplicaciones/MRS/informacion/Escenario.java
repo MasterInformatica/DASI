@@ -109,13 +109,6 @@ public class Escenario {
 		this.mapa = mapa;
 	}
 
-	@Override
-	public String toString() {
-		return "Escenario\n MAPA:\n" + mapa + "\n\nRobots:\n" + listaRobots + "\n\nVictimas:\n" + listaVictimas
-				+ "\nSonr�e!!!";
-
-	}
-
 	/**
 	 * Devuelve un robot segun su id
 	 * 

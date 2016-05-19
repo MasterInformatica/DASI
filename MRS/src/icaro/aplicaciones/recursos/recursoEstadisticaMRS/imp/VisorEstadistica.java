@@ -18,16 +18,16 @@ public class VisorEstadistica extends JFrame{
 
 	/**
 	 * Constructor de la ventana de Estadisticas
-	 * @param inicioDeRescate
-	 * @param finDeRescate
-	 * @param numeroDeRescatadores
-	 * @param numeroDeVictimas
-	 * @param numeroDeVictimasRescatadas
-	 * @param movimientosPorRescatador
-	 * @param tiempoMaximoDeRecate
-	 * @param tiempoMinimoDeRecate
-	 * @param timepoMedioDeRecate
-	 * @param numeroDeObstaculosEncontrados
+	 * @param inicioDeRescate  tiempo de inicio del Rescate
+	 * @param finDeRescate tiempo de fin del Rescate
+	 * @param numeroDeRescatadores numero De Rescatadores
+	 * @param numeroDeVictimas numero De Victimas
+	 * @param numeroDeVictimasRescatadas numero De Victimas Rescatadas
+	 * @param movimientosPorRescatador map con el numero de movimientos Por Rescatador
+	 * @param tiempoMaximoDeRecate tiempo Maximo De Recate
+	 * @param tiempoMinimoDeRecate tiempo Minimo De Recate
+	 * @param timepoMedioDeRecate timepo Medio De todos los Recates
+	 * @param numeroDeObstaculosEncontrados numero De Obstaculos Encontrados
 	 * @throws Exception
 	 */
 	public VisorEstadistica(

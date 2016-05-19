@@ -38,7 +38,7 @@ public interface ItfUsoRecursoVisualizadorMRS extends ItfUsoRecursoSimple{
 	/**
 	 * Mueve visualmente una victima desde donde este hasta la posicion indicada,
 	 * devuelve false si no se ha movido 
-	 * @param idAgente id del agente a mover
+	 * @param idVictima id del agente a mover
 	 * @param coordActuales coordenadas donde se quiere mover
 	 * @return Devuelve un boolean indicando si ha realizado el movimiento.
 	 */
