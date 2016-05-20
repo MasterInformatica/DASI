@@ -305,15 +305,7 @@ public class VisorEscenario extends JFrame {
 				controlador.notificar(VocabularioMRS.InputIniciaSimulacion);
 			}
 		});
-		JButton restart = new JButton("reinicializar");
-		restart.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				controlador.notificar(VocabularioMRS.InputIniciaSimulacion);
-			}
-		});
 		ControlButtons.add(start_stop);
-		ControlButtons.add(restart);
 		add(ControlButtons,BorderLayout.SOUTH);
 	}
 	
@@ -351,17 +343,9 @@ public class VisorEscenario extends JFrame {
 				}
 			}
 		});
-		JMenuItem menu_exit = new JMenuItem("Exit",KeyEvent.VK_E);
-		menu_exit.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				controlador.notificar(VocabularioMRS.InputIniciaSimulacion);
-			}
-		});
+
 		MenuFile.add(menu_Load);
 		MenuFile.add(menu_save);
-		MenuFile.addSeparator();
-		MenuFile.add(menu_exit);
 		setJMenuBar(menuBar);
 	}
 
