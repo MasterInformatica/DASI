@@ -26,7 +26,7 @@ proyecto cuando se solicite.
 Al importarse el proyecto, el árbol de directorios deberá quedar como se
 muestra en las siguiente imágen:
 
-![arbol_cerrado.png](doc/images/arbol_cerrado.png "Árbol de directorios del proyecto cerrado")
+![arbol_cerrado.png](https://raw.githubusercontent.com/lcosteroucm/DASI/master/doc/images/arbol_cerrado.png "Árbol de directorios del proyecto cerrado")
 
 
 Para lanzar el proyecto, primero es necesario elegir la organización con la
@@ -52,8 +52,8 @@ no debe incluir la extensión .xml a la hora de configurar el
 proyecto). Esto se puede ver de manera resumida en los siguientes recortes
 de pantalla:
 
-![run_conf_1.png](doc/images/image09.png)
-![run_conf_2.png](doc/images/image14.png "Muestra de cómo configurar el proyecto en eclipse.")
+![altText](/doc/images/image09.png?raw=true "A")
+![run_conf_2.png](/doc/images/image14.png?raw=true "Muestra de cómo configurar el proyecto en eclipse.")
 
 
 Al finalizar de configurar el proyecto, se procederá pulsando el botón de
@@ -68,14 +68,14 @@ archivo XML con el escenario que queremos cargar en la aplicación
 (compuesto por el mapa, los mineros con su nombre y posición, y los
 rescatadores con los mismos datos)
 
-![as](doc/images/image01.png " Pasos necesarios para cargar un nuevo escenario en el simulador")
+![as](/doc/images/image01.png?raw=true " Pasos necesarios para cargar un nuevo escenario en el simulador")
 
 Para nuestro ejemplo se utilizará el archivo 2R3V.xml, es cual tiene el
 detalle de 2 rescatadores y 3 víctimas. El resto de escenarios válidos
 pueden encontrarse en la ruta `MRS/escenarios`, aunque por
 defecto la aplicación debería mostrar seleccionada esa ruta.
 
-![as](doc/images/image06.png "Selección de un fichero de escenarios")
+![as](/doc/images/image06.png?raw=true "Selección de un fichero de escenarios")
 
 Una vez cargado el escenario, este se puede modificar pulsando con el botón
 sobre las distintas casillas que se desea cambiar. Las opciones de
@@ -86,7 +86,7 @@ muestra el cuadro de diálogo que se muestra cuando se desea modificar el
 mapa cargado previamente. Una vez que el escenario es modificado, se puede
 almacenar en un fichero en un fichero xml a través del menú de la ventana.
 
-![modificarEscenario.jpg](doc/images/image05.png "Proceso de modificación de un escenario previo a la simulación.")
+![modificarEscenario.jpg](/doc/images/image05.png?raw=true "Proceso de modificación de un escenario previo a la simulación.")
 
 Una vez que se dispone del escenario deseado, se procede pulsando el botón
 Start para comenzar la simulación.Los rescatadores buscan el camino más
@@ -101,4 +101,4 @@ salida.
 Al finalizar la simulación, se muestra una ventana de estadísticas con los
 datos generados durante la simulación.
 
-![as](images/image00.png "Ventana de estadísticas mostradas al finalizar el sistema.")
+![as](/doc/images/image00.png?raw=true "Ventana de estadísticas mostradas al finalizar el sistema.")
