@@ -68,14 +68,14 @@ archivo XML con el escenario que queremos cargar en la aplicación
 (compuesto por el mapa, los mineros con su nombre y posición, y los
 rescatadores con los mismos datos)
 
-![](doc/images/image01.png " Pasos necesarios para cargar un nuevo escenario en el simulador")
+![as](doc/images/image01.png " Pasos necesarios para cargar un nuevo escenario en el simulador")
 
 Para nuestro ejemplo se utilizará el archivo 2R3V.xml, es cual tiene el
 detalle de 2 rescatadores y 3 víctimas. El resto de escenarios válidos
 pueden encontrarse en la ruta `MRS/escenarios`, aunque por
 defecto la aplicación debería mostrar seleccionada esa ruta.
 
-![](doc/images/image06.png "Selección de un fichero de escenarios")
+![as](doc/images/image06.png "Selección de un fichero de escenarios")
 
 Una vez cargado el escenario, este se puede modificar pulsando con el botón
 sobre las distintas casillas que se desea cambiar. Las opciones de
@@ -101,4 +101,4 @@ salida.
 Al finalizar la simulación, se muestra una ventana de estadísticas con los
 datos generados durante la simulación.
 
-![](images/image00.png "Ventana de estadísticas mostradas al finalizar el sistema.")
+![as](images/image00.png "Ventana de estadísticas mostradas al finalizar el sistema.")
