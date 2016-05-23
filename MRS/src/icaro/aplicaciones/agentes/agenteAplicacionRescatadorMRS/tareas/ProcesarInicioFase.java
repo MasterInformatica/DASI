@@ -15,6 +15,7 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
  */
 public class ProcesarInicioFase extends TareaSincrona{
 
+	@SuppressWarnings("unused")
 	@Override
 	public void ejecutar(Object... params) {
 		/* 

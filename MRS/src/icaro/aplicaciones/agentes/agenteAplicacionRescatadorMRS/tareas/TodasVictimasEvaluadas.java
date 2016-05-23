@@ -14,6 +14,7 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
  */
 public class TodasVictimasEvaluadas extends TareaSincrona {
 
+	@SuppressWarnings("unused")
 	@Override
 	public void ejecutar(Object... params) {
 		/* 

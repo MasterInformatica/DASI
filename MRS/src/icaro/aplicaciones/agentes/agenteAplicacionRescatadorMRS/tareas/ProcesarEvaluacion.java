@@ -18,6 +18,7 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
  */
 public class ProcesarEvaluacion extends TareaSincrona {
 
+	@SuppressWarnings("unused")
 	@Override
 	public void ejecutar(Object... params) {
 		/* 

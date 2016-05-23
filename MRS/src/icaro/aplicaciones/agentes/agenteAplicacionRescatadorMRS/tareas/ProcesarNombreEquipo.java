@@ -18,6 +18,7 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
  */
 public class ProcesarNombreEquipo extends TareaSincrona {
 
+	@SuppressWarnings("unused")
 	@Override
 	public void ejecutar(Object... params) {
 		/* 

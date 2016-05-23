@@ -1,17 +1,11 @@
 package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas;
 
 import icaro.aplicaciones.MRS.informacion.ListaIds;
-import icaro.aplicaciones.MRS.informacion.Rescatador;
 import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ControlEvaluacionVictimas;
-import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.EvaluacionObjetivo;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.MsgRobotLibre;
-import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.EsperaRobotAsignado;
-import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.InformarSoyElMejorRobot;
-import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.MisObjetivos;
-import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
@@ -19,6 +13,7 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
  * Procesar un mensaje de robot libre, 'MsgRobotLibre'.
  */
 public class ProcesarRobotInactivo extends TareaSincrona {
+	@SuppressWarnings("unused")
 	@Override
 	public void ejecutar(Object... params) {
 		//t1.ejecutar(agentId, $yo, $fc, $mo, $lr, $msg, $ce);

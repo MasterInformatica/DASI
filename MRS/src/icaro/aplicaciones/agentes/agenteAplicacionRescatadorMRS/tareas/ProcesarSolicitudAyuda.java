@@ -7,7 +7,6 @@ import icaro.aplicaciones.MRS.informacion.*;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ControlEvaluacionVictimas;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.EvaluacionObjetivo;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.MsgEvaluacionRobot;
-import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.ConocerEquipo;
 import icaro.aplicaciones.recursos.recursoPlanificadorMRS.ItfUsoRecursoPlanificadorMRS;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
@@ -21,6 +20,7 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
  */
 public class ProcesarSolicitudAyuda extends TareaSincrona {
 	
+	@SuppressWarnings("unused")
 	@Override
 	public void ejecutar(Object... params) {
 		/* 

@@ -5,11 +5,8 @@ import java.util.List;
 
 import icaro.aplicaciones.MRS.informacion.*;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ControlEvaluacionVictimas;
-import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.EvaluacionObjetivo;
-import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.MsgAsignacionObjetivo;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.MsgRobotLibre;
 import icaro.aplicaciones.recursos.recursoEstadisticaMRS.ItfUsoRecursoEstadisticaMRS;
-import icaro.aplicaciones.recursos.recursoPlanificadorMRS.ItfUsoRecursoPlanificadorMRS;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.comunicacion.InfoContEvtMsgAgteReactivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
@@ -26,6 +23,7 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
  */
 public class VictimaSalvada extends TareaSincrona {
 	
+	@SuppressWarnings("unused")
 	@Override
 	public void ejecutar(Object... params) {
 		//	t1.ejecutar(agentId, $yo, $fc, $mo, $obj, $lr, $o2, $ce, $eo);

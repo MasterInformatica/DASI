@@ -17,6 +17,7 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
  */
 public class ProcesarMsgAsignacionRobot extends TareaSincrona {
 	
+	@SuppressWarnings("unused")
 	@Override
 	public void ejecutar(Object... params) {
 		//t1.ejecutar(agentId, $yo, $fc, $mo, $obj, obj2, msg, ce, eo);

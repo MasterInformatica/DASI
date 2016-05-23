@@ -1,13 +1,8 @@
 package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas;
 
-import icaro.aplicaciones.MRS.informacion.ListaIds;
 import icaro.aplicaciones.MRS.informacion.MsgVictimaAlcanzada;
 import icaro.aplicaciones.MRS.informacion.Rescatador;
 import icaro.aplicaciones.MRS.informacion.Robot;
-import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ControlEvaluacionVictimas;
-import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.EvaluacionObjetivo;
-import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.EsperaRobotAsignado;
-import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.InformarSoyElMejorRobot;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.SacarVictima;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
@@ -23,6 +18,7 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
  * Finalmente se fija el nuevo objetivo 'SacarVictima'. 
  */
 public class LlevarVictimaSalida extends TareaSincrona {
+	@SuppressWarnings("unused")
 	@Override
 	public void ejecutar(Object... params) {
 		/* 

@@ -1,11 +1,9 @@
 package icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.tareas;
 
 import icaro.aplicaciones.MRS.informacion.ListaIds;
-import icaro.aplicaciones.MRS.informacion.Rescatador;
 import icaro.aplicaciones.MRS.informacion.Robot;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.ControlEvaluacionVictimas;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.informacion.EvaluacionObjetivo;
-import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.EsperaRobotAsignado;
 import icaro.aplicaciones.agentes.agenteAplicacionRescatadorMRS.objetivos.InformarSoyElMejorRobot;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
@@ -36,6 +34,7 @@ public class AsignarRobotVictima extends TareaSincrona {
 		 * params[6] -> controlEvaluacionVictimas
 		 * params[7] -> evaluacionObjetivo
 		 */
+		@SuppressWarnings("unused")
 		String agentId 	= (String) params[0];
 		Robot yo 		= (Robot) params[1];
 		Focus f 		= (Focus) params[2];
