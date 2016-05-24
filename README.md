@@ -52,8 +52,8 @@ no debe incluir la extensión .xml a la hora de configurar el
 proyecto). Esto se puede ver de manera resumida en los siguientes recortes
 de pantalla:
 
-![altText](/doc/images/image09.png?raw=true "A")
-![run_conf_2.png](/doc/images/image14.png?raw=true "Muestra de cómo configurar el proyecto en eclipse.")
+![altText](/doc/image/image09.png?raw=true "A")
+![run_conf_2.png](/doc/image/image14.png?raw=true "Muestra de cómo configurar el proyecto en eclipse.")
 
 
 Al finalizar de configurar el proyecto, se procederá pulsando el botón de
@@ -68,14 +68,14 @@ archivo XML con el escenario que queremos cargar en la aplicación
 (compuesto por el mapa, los mineros con su nombre y posición, y los
 rescatadores con los mismos datos)
 
-![as](/doc/images/image01.png?raw=true " Pasos necesarios para cargar un nuevo escenario en el simulador")
+![as](/doc/image/image01.png?raw=true " Pasos necesarios para cargar un nuevo escenario en el simulador")
 
 Para nuestro ejemplo se utilizará el archivo 2R3V.xml, es cual tiene el
 detalle de 2 rescatadores y 3 víctimas. El resto de escenarios válidos
 pueden encontrarse en la ruta `MRS/escenarios`, aunque por
 defecto la aplicación debería mostrar seleccionada esa ruta.
 
-![as](/doc/images/image06.png?raw=true "Selección de un fichero de escenarios")
+![as](/doc/image/image06.png?raw=true "Selección de un fichero de escenarios")
 
 Una vez cargado el escenario, este se puede modificar pulsando con el botón
 sobre las distintas casillas que se desea cambiar. Las opciones de
@@ -101,4 +101,4 @@ salida.
 Al finalizar la simulación, se muestra una ventana de estadísticas con los
 datos generados durante la simulación.
 
-![as](/doc/images/image00.png?raw=true "Ventana de estadísticas mostradas al finalizar el sistema.")
+![as](/doc/image/image00.png?raw=true "Ventana de estadísticas mostradas al finalizar el sistema.")
