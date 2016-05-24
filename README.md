@@ -86,7 +86,7 @@ muestra el cuadro de diálogo que se muestra cuando se desea modificar el
 mapa cargado previamente. Una vez que el escenario es modificado, se puede
 almacenar en un fichero en un fichero xml a través del menú de la ventana.
 
-![modificarEscenario.jpg](/doc/images/image05.png?raw=true "Proceso de modificación de un escenario previo a la simulación.")
+![modificarEscenario.jpg](/doc/image/image05.png?raw=true "Proceso de modificación de un escenario previo a la simulación.")
 
 Una vez que se dispone del escenario deseado, se procede pulsando el botón
 Start para comenzar la simulación.Los rescatadores buscan el camino más
