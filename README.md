@@ -101,4 +101,4 @@ salida.
 Al finalizar la simulación, se muestra una ventana de estadísticas con los
 datos generados durante la simulación.
 
-![as](/doc/image/image00.png?raw=true "Ventana de estadísticas mostradas al finalizar el sistema.")
+![imagen](/doc/image/image00.png?raw=true "Ventana de estadísticas mostradas al finalizar el sistema.")
