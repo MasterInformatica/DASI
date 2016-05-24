@@ -26,7 +26,7 @@ proyecto cuando se solicite.
 Al importarse el proyecto, el árbol de directorios deberá quedar como se
 muestra en las siguiente imágen:
 
-![arbol_cerrado.png](https://raw.githubusercontent.com/lcosteroucm/DASI/master/doc/images/arbol_cerrado.png "Árbol de directorios del proyecto cerrado")
+![imagen](https://raw.githubusercontent.com/lcosteroucm/DASI/master/doc/images/arbol_cerrado.png "Árbol de directorios del proyecto cerrado")
 
 
 Para lanzar el proyecto, primero es necesario elegir la organización con la
