@@ -9,13 +9,13 @@ tener como mínimo los siguientes requisitos:
 
 La instalación se hará a través del repositorio del proyecto alojado en
 github, en la siguiente url:
-         `https://github.com/lcosteroucm/dasi`
+         `https://github.com/MasterInformatica/dasi`
 
 Para ello, se descargará el proyecto en una carpeta del sistema de la
 manera más sencilla para el usuario:
 
 * A través de un cliente en línea de órdenes:
-          `git clone https://github.com/lcosteroucm/dasi`
+          `git clone https://github.com/MasterInformatica/dasi`
 * A través de un cliente gráfico instalado en el equipo.
 * A través del propio eclipse con algún plugin de gestión de repositorios git.
 
@@ -26,7 +26,7 @@ proyecto cuando se solicite.
 Al importarse el proyecto, el árbol de directorios deberá quedar como se
 muestra en las siguiente imágen:
 
-![imagen](https://raw.githubusercontent.com/lcosteroucm/DASI/master/doc/image/arbol_cerrado.png "Árbol de directorios del proyecto cerrado")
+![imagen](https://raw.githubusercontent.com/MasterInformatica/DASI/master/doc/image/arbol_cerrado.png "Árbol de directorios del proyecto cerrado")
 
 
 Para lanzar el proyecto, primero es necesario elegir la organización con la
